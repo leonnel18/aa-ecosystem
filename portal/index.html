@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AktivAsia Team Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="index">
+
+  <header class="site-header">
+    <div class="container">
+      <span class="logo">Aktiv<span>Asia</span></span>
+      <span class="header-meta" id="generated-at"></span>
+    </div>
+  </header>
+
+  <section class="impact-hero">
+    <div class="container" style="text-align:center">
+      <h1>Total Impact</h1>
+      <p class="subtitle">AktivAsia training programs across all countries and the regional backbone</p>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <!-- At A Glance header -->
+    <div class="section-header" style="text-align:center;justify-content:center;margin-bottom:16px">
+      <h2>At A Glance</h2>
+    </div>
+
+    <!-- Grand total KPI row -->
+    <div class="kpi-grid kpi-glance" id="grand-kpi" style="margin-top:0;margin-bottom:32px">
+      <div class="card">
+        <div class="kpi-icon">👥</div>
+        <div class="card-value" id="grand-applicants">—</div>
+        <div class="card-label">Total Applicants</div>
+        <div class="card-sub">All programs, all portals</div>
+      </div>
+      <div class="card">
+        <div class="kpi-icon">🎓</div>
+        <div class="card-value" id="grand-graduates">—</div>
+        <div class="card-label">Total Graduates</div>
+        <div class="card-sub">Graduated or post-eval complete</div>
+      </div>
+      <div class="card">
+        <div class="kpi-icon">🌱</div>
+        <div class="card-value" id="grand-community-impact">—</div>
+        <div class="card-label">Community Impact</div>
+        <div class="card-sub">People reached via shared learnings</div>
+      </div>
+      <div class="card">
+        <div class="kpi-icon">🏢</div>
+        <div class="card-value" id="grand-touched-orgs">—</div>
+        <div class="card-label">Touched Organizations</div>
+        <div class="card-sub">Unique organizations represented</div>
+      </div>
+    </div>
+
+    <!-- Country grid -->
+    <div class="section-header">
+      <h2>Country Portals</h2>
+      <span class="section-badge">5 Portals</span>
+    </div>
+
+    <div class="country-grid" id="country-grid">
+      <div class="loading"><div class="spinner"></div> Loading data…</div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <strong>AktivAsia</strong> · Team Portal · Read-only data from Zoho CRM
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

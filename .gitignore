@@ -1,0 +1,20 @@
+# Secrets & credentials
+.env
+data/token_*.json
+
+# Intermediate workbench
+.tmp/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Data files (may contain PII)
+data/*.json
+data/*.csv
+
+# OS
+.DS_Store
+Thumbs.db

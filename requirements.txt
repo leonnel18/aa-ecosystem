@@ -1,0 +1,4 @@
+zohocrmsdk8_0
+requests
+python-dotenv
+pandas

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backbone — AktivAsia Team Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="backbone">
+
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html">Aktiv<span>Asia</span></a>
+    </div>
+  </header>
+
+  <div class="portal-header">
+    <div class="container">
+      <a class="back-link" href="index.html">← All Portals</a>
+      <h1>🌏 Backbone — Regional Overview</h1>
+      <p class="subtitle">Regional programs (Organised_By = Regional)</p>
+    </div>
+  </div>
+
+  <nav class="portal-nav">
+    <div class="container">
+      <a class="nav-tab" data-tab="section-r1">Overview</a>
+      <a class="nav-tab" data-tab="section-r2">Training Report</a>
+      <a class="nav-tab" data-tab="section-r3">Qualitative Insights</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ── Report 1: Overview ───────────────────────────────────────────── -->
+    <section class="report-section" id="section-r1">
+
+      <div class="section-header">
+        <h2>Overview Training Report</h2>
+        <span class="section-badge">Backbone · Report 1</span>
+      </div>
+
+      <div class="kpi-grid kpi-glance">
+        <div class="card">
+          <div class="kpi-icon">👥</div>
+          <div class="card-value" id="r1-total-applicants">—</div>
+          <div class="card-label">Total Applicants</div>
+          <div class="card-sub">All applications</div>
+        </div>
+        <div class="card">
+          <div class="kpi-icon">🎓</div>
+          <div class="card-value" id="r1-total-graduates">—</div>
+          <div class="card-label">Graduates</div>
+          <div class="card-sub" id="r1-grad-pct">— graduated</div>
+        </div>
+        <div class="card">
+          <div class="kpi-icon">📋</div>
+          <div class="card-value" id="r1-total-ongoing">—</div>
+          <div class="card-label">Currently Selected</div>
+          <div class="card-sub">In pipeline</div>
+        </div>
+      </div>
+
+      <!-- Community impact row -->
+      <div class="impact-row kpi-glance">
+        <div class="card">
+          <div class="kpi-icon">🌱</div>
+          <div class="card-value" id="r1-community-impact">—</div>
+          <div class="card-label">Community Impact</div>
+          <div class="card-sub">People reached</div>
+        </div>
+        <div class="card">
+          <div class="kpi-icon">🏢</div>
+          <div class="card-value" id="r1-touched-orgs">—</div>
+          <div class="card-label">Organizations</div>
+          <div class="card-sub">Unique organizations</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="chart-card">
+          <h3>Application Funnel</h3>
+          <div class="funnel">
+            <div class="funnel-row">
+              <span class="funnel-label">Total Applicants</span>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" id="bar-applicants" style="width:100%"><span>—</span></div></div>
+              <span class="funnel-pct" id="pct-applicants">100%</span>
+            </div>
+            <div class="funnel-row">
+              <span class="funnel-label">Attended Training</span>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" id="bar-attended" style="width:0%"><span>—</span></div></div>
+              <span class="funnel-pct" id="pct-attended">—</span>
+            </div>
+            <div class="funnel-row">
+              <span class="funnel-label">Graduated</span>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" id="bar-graduated" style="width:0%"><span>—</span></div></div>
+              <span class="funnel-pct" id="pct-graduated">—</span>
+            </div>
+            <div class="funnel-row">
+              <span class="funnel-label">6M Eval Complete</span>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" id="bar-6m" style="width:0%"><span>—</span></div></div>
+              <span class="funnel-pct" id="pct-6m">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Year-on-Year Trend</h3>
+          <div class="chart-wrap"><canvas id="chart-yoy"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Training categories -->
+      <div class="section-header" style="margin-top:32px">
+        <h2>Training Status</h2>
+      </div>
+      <div class="training-categories">
+        <div class="tc-card completed">
+          <div class="tc-header">Recently Completed</div>
+          <div id="tc-completed"></div>
+        </div>
+        <div class="tc-card ongoing">
+          <div class="tc-header">Ongoing</div>
+          <div id="tc-ongoing"></div>
+        </div>
+        <div class="tc-card upcoming">
+          <div class="tc-header">Upcoming (90+ days)</div>
+          <div id="tc-upcoming"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── Report 2: Training Report ────────────────────────────────────── -->
+    <section class="report-section" id="section-r2">
+
+      <div class="section-header">
+        <h2>Training Report</h2>
+        <span class="section-badge">Backbone · Report 2</span>
+      </div>
+
+      <!-- Gender + Age demographics -->
+      <div class="two-col" style="margin-bottom:24px">
+        <div class="chart-card">
+          <h3>Gender Distribution</h3>
+          <div class="chart-wrap"><canvas id="chart-gender"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Age Groups</h3>
+          <div class="chart-wrap"><canvas id="chart-age"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Speedometer grid -->
+      <div class="speedometer-grid" id="r2-speedometers"></div>
+
+      <!-- Stacked bar only -->
+      <div class="chart-card" style="margin-bottom:24px">
+        <h3>Trainings by Type by Year</h3>
+        <div class="chart-wrap"><canvas id="chart-type-year"></canvas></div>
+      </div>
+
+      <!-- Practice Sessions with year filter -->
+      <div class="chart-card" style="margin-bottom:24px">
+        <h3>Practice Sessions</h3>
+        <div class="filter-row" style="margin-bottom:8px">
+          <select class="filter" id="r2-ps-year-filter"><option value="">All Years</option></select>
+        </div>
+        <div id="r2-practice-sessions"><div class="loading"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Completed / Planned card -->
+      <div class="chart-card" style="margin-bottom:24px">
+        <h3>Trainings Completed / Planned</h3>
+        <div class="year-tabs" id="r2-cpby-tabs"></div>
+        <div id="r2-cpby-grid" style="margin-top:12px"></div>
+      </div>
+
+      <!-- Training Plans list -->
+      <div class="chart-card" style="margin-bottom:24px">
+        <h3>Training Plans</h3>
+        <div class="filter-row">
+          <select class="filter" id="r2-plan-year"><option value="">All Years</option></select>
+          <select class="filter" id="r2-plan-quarter"><option value="">All Quarters</option><option value="Q1">Q1 (Jan–Mar)</option><option value="Q2">Q2 (Apr–Jun)</option><option value="Q3">Q3 (Jul–Sep)</option><option value="Q4">Q4 (Oct–Dec)</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Training Name</th><th>Type</th><th>Start Date</th><th>End Date</th><th>Status</th></tr></thead>
+            <tbody id="r2-plans-body"><tr><td colspan="5" class="empty">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- All Trainings -->
+      <div class="chart-card">
+        <h3>All Trainings</h3>
+        <div class="year-tabs" id="r2-year-tabs"></div>
+        <div class="filter-row">
+          <select class="filter" id="r2-type-filter">
+            <option value="">All Types</option>
+          </select>
+          <select class="filter" id="r2-status-filter">
+            <option value="">All Statuses</option>
+            <option value="Completed">Completed</option>
+            <option value="Upcoming">Upcoming</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Training Name</th><th>Type</th><th>Start Date</th><th>End Date</th>
+                <th style="text-align:right">Applicants</th>
+                <th style="text-align:right">Graduates</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="r2-trainings-body"><tr><td colspan="7" class="empty">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Organizations -->
+      <div class="chart-card" style="margin-top:24px">
+        <h3>Organizations</h3>
+        <div class="filter-row">
+          <select class="filter" id="r2-org-year"><option value="">All Years</option></select>
+          <select class="filter" id="r2-org-training"><option value="">All Trainings</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Organization</th><th>Training</th><th>Year</th></tr></thead>
+            <tbody id="r2-orgs-body"><tr><td colspan="3" class="empty">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── Report 3: Qualitative Insights ──────────────────────────────── -->
+    <section class="report-section" id="section-r3">
+
+      <div class="section-header">
+        <h2>Qualitative Insights</h2>
+        <span class="section-badge">Backbone · Report 3</span>
+      </div>
+
+      <div class="chart-card" style="margin-bottom:24px">
+        <h3>Competency Scores — Pre / Post / 6M (avg. 1–7 scale)</h3>
+        <div class="filter-row" style="margin-bottom:12px">
+          <select class="filter" id="r3-training-filter" style="margin-bottom:0">
+            <option value="">All Trainings</option>
+          </select>
+          <label style="font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:6px">
+            <input type="checkbox" id="r3-has-6m"> Has 6M data
+          </label>
+          <label style="font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:6px">
+            <input type="checkbox" id="r3-has-post"> Has Post data
+          </label>
+        </div>
+        <div class="chart-wrap" style="margin-bottom:24px"><canvas id="chart-likert"></canvas></div>
+        <div class="table-wrap">
+          <table class="likert-table">
+            <thead>
+              <tr>
+                <th>Competency</th><th>Pre</th><th>Post</th><th>6 Month</th>
+              </tr>
+            </thead>
+            <tbody id="r3-likert-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:32px"><h2>Post-Training Survey</h2></div>
+      <div class="filter-row" style="margin-bottom:8px">
+        <select class="filter" id="r3-post-filter" style="margin-bottom:0"><option value="">All Trainings</option></select>
+      </div>
+      <div id="r3-post-feedback"></div>
+
+      <div class="section-header" style="margin-top:32px"><h2>6-Month Impact Evaluation</h2></div>
+      <div class="filter-row" style="margin-bottom:8px">
+        <select class="filter" id="r3-impact-filter" style="margin-bottom:0"><option value="">All Trainings</option></select>
+      </div>
+      <div id="r3-impact-feedback"></div>
+
+      <div class="section-header" style="margin-top:32px"><h2>Testimonials</h2></div>
+      <div class="filter-row" style="margin-bottom:8px">
+        <select class="filter" id="r3-test-filter" style="margin-bottom:0"><option value="">All Trainings</option></select>
+      </div>
+      <div id="r3-testimonials"></div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <strong>AktivAsia</strong> · Team Portal · Read-only data from Zoho CRM
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
