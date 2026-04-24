@@ -371,28 +371,67 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
         by_gender_r2[gender] += 1
         by_age_r2[_age_group(deal.get("Date_of_Birth"))] += 1
 
-    # Build solution lookup: sol_id -> (title, year)
+    # Build solution lookup: sol_id -> (title, year, training_type)
     sol_info = {}
     for sol in portal_solutions:
         yr = (sol.get("End_Date") or sol.get("Start_Date") or "")[:4]
-        sol_info[sol.get("id")] = {"title": sol.get("Solution_Title", ""), "year": yr}
+        type_id = _lookup_id(sol.get("Training_Type"))
+        type_name = products_by_id.get(type_id, "") if type_id else ""
+        sol_info[sol.get("id")] = {"title": sol.get("Solution_Title", ""), "year": yr, "training_type": type_name}
 
-    org_list = []
-    seen = set()
+    org_map = {}
+    unattributed_applicants = 0
+    unattributed_impact = 0
     for deal in portal_deals:
         acct = deal.get("Account_Name")
-        if not isinstance(acct, dict):
+        if not isinstance(acct, dict) or not acct.get("name", ""):
+            unattributed_applicants += 1
+            shared = deal.get("Shared_learnings_with_how_many_people")
+            if shared is not None:
+                try:
+                    unattributed_impact += int(shared)
+                except (ValueError, TypeError):
+                    pass
             continue
         name = acct.get("name", "")
         if not name:
             continue
+            
+        # Parse shared learnings
+        shared = deal.get("Shared_learnings_with_how_many_people")
+        impact_val = 0
+        if shared is not None:
+            try:
+                impact_val = int(shared)
+            except (ValueError, TypeError):
+                pass
+
         sol_id = _lookup_id(deal.get("Training_Applied"))
         info = sol_info.get(sol_id, {})
-        key = (name, info.get("title", ""), info.get("year", ""))
-        if key not in seen:
-            seen.add(key)
-            org_list.append({"name": name, "training": info.get("title", ""), "year": info.get("year", "")})
-    organizations = sorted(org_list, key=lambda x: (x["name"], x["year"]))[:500]
+        title = info.get("title", "")
+        year = info.get("year", "")
+        training_type = info.get("training_type", "")
+        is_graduated = deal.get("Stage") == "Graduated or Post Evaluation Completed"
+
+        key = (name, title, year)
+        if key not in org_map:
+            org_map[key] = {
+                "name": name,
+                "training": title,
+                "training_type": training_type,
+                "year": year,
+                "total_impact": 0,
+                "applicant_count": 0,
+                "graduate_count": 0
+            }
+
+        org_map[key]["total_impact"] += impact_val
+        org_map[key]["applicant_count"] += 1
+        if is_graduated:
+            org_map[key]["graduate_count"] += 1
+
+    org_list = list(org_map.values())
+    organizations = sorted(org_list, key=lambda x: (x["name"], x["year"]))
 
     # Trainings by type
     type_counts = defaultdict(lambda: {"conducted": 0, "total_planned": 0})
@@ -458,6 +497,8 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
         "completed_vs_planned_by_year": cpby,
         "actual_trainings": sorted(actual_trainings, key=lambda x: x["date"] or "", reverse=True),
         "organizations": organizations,
+        "unattributed_applicants": unattributed_applicants,
+        "unattributed_impact": unattributed_impact,
         "demographics": {
             "by_gender": dict(by_gender_r2),
             "by_age_group": dict(by_age_r2),

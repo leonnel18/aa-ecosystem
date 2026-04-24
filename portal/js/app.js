@@ -184,7 +184,7 @@ async function initPortal() {
   const meta = PORTAL_META[code];
   document.title = `${meta.name} — AktivAsia Team Portal`;
   setText('portal-flag', meta.flag);
-  setText('portal-name', meta.name);
+  setText('portal-name', `${meta.name} — Country Portal`);
   const r1 = portal.report_1_overview || {};
   setText('portal-subtitle',
     `${fmt(r1.total_applicants)} applicants · ${fmt(r1.total_graduates)} graduates`);
@@ -197,6 +197,7 @@ async function initPortal() {
 
   tryRender('Report 1', () => renderReport1(r1));
   tryRender('Report 2', () => renderReport2(portal.report_2_training_plan || {}));
+  tryRender('Organization Stats', () => renderReportOrgs(portal));
   tryRender('Report 3', () => renderReport3(portal.report_3_impact_qualitative || {}));
 }
 
@@ -217,6 +218,7 @@ async function initBackbone() {
 
   tryRender('Report 1', () => renderReport1(bbR1));
   tryRender('Report 2', () => renderReport2(bb.report_2_training_plan || {}));
+  tryRender('Organization Stats', () => renderReportOrgs(bb));
   tryRender('Report 3', () => renderReport3(bb.report_3_impact_qualitative || {}));
 }
 
@@ -293,28 +295,50 @@ function renderTrainingCategories(containerId, trainings) {
 // ── Report 2 — Training Report ────────────────────────────────────────────────
 
 function renderReport2(r2) {
-  const types = r2.trainings_by_type || [];
+  const isExcluded = t => {
+    if (!t) return false;
+    const lower = t.toLowerCase();
+    return lower.includes('feminist') || lower.includes('foundational');
+  };
+  
+  const types = (r2.trainings_by_type || []).filter(t => !isExcluded(t.type));
   const trainings = r2.actual_trainings || [];
-  const typesByYear = r2.trainings_by_type_by_year || {};
+  
+  const typesByYearRaw = r2.trainings_by_type_by_year || {};
+  const typesByYear = {};
+  for (const yr in typesByYearRaw) {
+    typesByYear[yr] = typesByYearRaw[yr] || [];
+  }
 
   // Gender / Age charts (demographics from r2)
   const demo = r2.demographics || {};
   if (window.Charts) {
-    try { Charts.pie('chart-gender', demo.by_gender || {}); } catch(e) { console.warn('pie gender:', e); }
-    try { Charts.bar('chart-age', sortAge(demo.by_age_group || {}), 'Participants'); } catch(e) { console.warn('age bar:', e); }
-  }
+    const genderData = { ...(demo.by_gender || {}) };
+    const ageData = sortAge({ ...(demo.by_age_group || {}) });
+    
+    let unknownGender = 0, unknownAge = 0;
+    
+    Object.keys(genderData).forEach(k => {
+      const clean = k.trim().toLowerCase();
+      if (clean === 'unknown' || clean === 'not specified' || clean === '') {
+        unknownGender += genderData[k];
+        delete genderData[k];
+      }
+    });
+    
+    Object.keys(ageData).forEach(k => {
+      const clean = k.trim().toLowerCase();
+      if (clean === 'unknown' || clean === 'not specified' || clean === '') {
+        unknownAge += ageData[k];
+        delete ageData[k];
+      }
+    });
 
-  // Speedometers: overall completion % per type
-  const speedEl = document.getElementById('r2-speedometers');
-  if (speedEl) {
-    speedEl.innerHTML = types.map(t => {
-      const pct = t.total_planned ? Math.round(t.conducted / t.total_planned * 100) : 0;
-      return `<div class="speedometer-card">
-        <div class="sp-label">${t.type}</div>
-        <div class="sp-pct">${pct}%</div>
-        <div class="sp-sub">${t.conducted} / ${t.total_planned} conducted</div>
-      </div>`;
-    }).join('') || '';
+    try { Charts.pie('chart-gender', genderData); } catch(e) { console.warn('pie gender:', e); }
+    try { Charts.bar('chart-age', ageData, 'Participants'); } catch(e) { console.warn('age bar:', e); }
+
+    setText('r2-gender-note', `Note: ${fmt(unknownGender)} has no Gender from our system.`);
+    setText('r2-age-note', `Note: ${fmt(unknownAge)} has no DOB from our system.`);
   }
 
   // Stacked bar deferred — set module-scope render fn
@@ -348,8 +372,14 @@ function renderReport2(r2) {
     } else {
       psEl.innerHTML = `<div class="table-wrap"><table>
         <thead><tr><th>Session Name</th><th>Date</th></tr></thead>
-        <tbody>${filtered.map(s => `<tr><td>${s.name}</td><td>${s.date || '—'}</td></tr>`).join('')}</tbody>
-      </table></div>`;
+        <tbody id="r2-ps-body"></tbody>
+      </table></div><div id="r2-ps-pg" class="pagination-controls"></div>`;
+      renderPaginatedTable({
+        tbodyEl: document.getElementById('r2-ps-body'),
+        pgElId: 'r2-ps-pg',
+        items: filtered,
+        renderRowFn: s => `<tr><td>${s.name}</td><td>${s.date || '—'}</td></tr>`
+      });
     }
   }
   renderSessionsTable('');
@@ -409,13 +439,21 @@ function renderReport2(r2) {
       if (selQtr  && getQuarter(p.start_date) !== selQtr) return false;
       return true;
     });
-    plansBody.innerHTML = filtered.length ? filtered.map(p => `<tr>
-      <td>${p.name}</td>
-      <td>${p.type}</td>
-      <td>${p.start_date || '—'}</td>
-      <td>${p.end_date || '—'}</td>
-      <td>${p.status || '—'}</td>
-    </tr>`).join('') : '<tr><td colspan="5" class="empty">No training plans match filters</td></tr>';
+    renderPaginatedTable({
+      tbodyEl: plansBody,
+      pgElId: 'pg-r2-plans',
+      items: filtered,
+      renderRowFn: p => {
+        const sClass = (p.status||'').toLowerCase().replace(/\s+/g, '-');
+        return `<tr>
+          <td>${p.name}</td>
+          <td>${p.type}</td>
+          <td>${p.start_date || '—'}</td>
+          <td>${p.end_date || '—'}</td>
+          <td><span class="badge badge-${sClass}">${p.status || '—'}</span></td>
+        </tr>`;
+      }
+    });
   }
 
   if (planYearSel) planYearSel.addEventListener('change', renderPlansTable);
@@ -479,16 +517,23 @@ function renderReport2(r2) {
       return true;
     });
 
-    tbody.innerHTML = filtered.length ? filtered.map(t => `
-      <tr>
-        <td>${t.name}</td>
-        <td>${t.type}</td>
-        <td>${t.date || '—'}</td>
-        <td>${t.end_date || '—'}</td>
-        <td style="text-align:right">${t.applicants}</td>
-        <td style="text-align:right">${t.graduates}</td>
-        <td><span class="badge badge-${(t.status||'').toLowerCase()}">${t.status}</span></td>
-      </tr>`).join('') : '<tr><td colspan="7" class="empty">No trainings match the selected filters</td></tr>';
+    renderPaginatedTable({
+      tbodyEl: tbody,
+      pgElId: 'pg-r2-trainings',
+      items: filtered,
+      renderRowFn: t => {
+        const sClass = (t.status||'').toLowerCase().replace(/\s+/g, '-');
+        return `<tr>
+          <td>${t.name}</td>
+          <td>${t.type}</td>
+          <td>${t.date || '—'}</td>
+          <td>${t.end_date || '—'}</td>
+          <td style="text-align:right">${t.applicants}</td>
+          <td style="text-align:right">${t.graduates}</td>
+          <td><span class="badge badge-${sClass}">${t.status || '—'}</span></td>
+        </tr>`;
+      }
+    });
   }
 
   renderTrainingsTable(trainings);
@@ -532,6 +577,195 @@ function renderReport2(r2) {
   renderOrgsTable();
 }
 
+// ── Organization Stats (Tab 3) ────────────────────────────────────────────────
+
+function renderReportOrgs(portal) {
+  const r1 = portal.report_1_overview || {};
+  const r2 = portal.report_2_training_plan || {};
+  const r3 = portal.report_3_impact_qualitative || {};
+  const orgs = r2.organizations || [];
+  const unattribApplicants = r2.unattributed_applicants || 0;
+  const unattribImpact     = r2.unattributed_impact     || 0;
+
+  const touchedOrgsCnt = r1.touched_organizations || 0;
+  setText('ro-total-orgs', fmt(touchedOrgsCnt));
+
+  const trendYoY = {};
+  orgs.forEach(o => {
+    if (!o.year) return;
+    trendYoY[o.year] = trendYoY[o.year] || new Set();
+    trendYoY[o.year].add(o.name);
+  });
+  const trendData = Object.keys(trendYoY).sort().map(yr => ({
+    year: yr,
+    Total: trendYoY[yr].size
+  }));
+  
+  if (window.Charts && trendData.length) {
+    try { Charts.bar('chart-orgs-yoy', Object.fromEntries(trendData.map(d => [d.year, d.Total])), 'Organizations'); } catch(e) { console.warn('org trend:', e); }
+  } else {
+    const orgsCnv = document.getElementById('chart-orgs-yoy');
+    if (orgsCnv) orgsCnv.parentNode.innerHTML = '<div class="empty">Trend data waiting on backend mapping</div>';
+  }
+
+  // ── Community Impact per Organization ────────────────────────────────────
+  // Filters: Year tabs · Training Name (dependent on year)
+  const impactYearTabsEl  = document.getElementById('ro-impact-year-tabs');
+  const impactTrainingSel = document.getElementById('ro-impact-training');
+  const impactTbody       = document.getElementById('ro-impact-body');
+
+  const orgYears = [...new Set(orgs.map(o => o.year).filter(Boolean))].sort();
+
+  if (impactYearTabsEl) {
+    impactYearTabsEl.innerHTML =
+      ['', ...orgYears].map(y =>
+        `<button class="year-tab${y === '' ? ' active' : ''}" data-year="${y}">${y || 'All'}</button>`
+      ).join('');
+    impactYearTabsEl.addEventListener('click', e => {
+      const btn = e.target.closest('.year-tab');
+      if (!btn) return;
+      impactYearTabsEl.querySelectorAll('.year-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      updateImpactTrainingOptions();
+      renderImpactTable();
+    });
+  }
+
+  function updateImpactTrainingOptions() {
+    if (!impactTrainingSel) return;
+    const selYear = impactYearTabsEl ? (impactYearTabsEl.querySelector('.year-tab.active')?.dataset.year || '') : '';
+    const names = [...new Set(
+      orgs.filter(o => !selYear || o.year === selYear).map(o => o.training).filter(Boolean)
+    )].sort();
+    const prev = impactTrainingSel.value;
+    impactTrainingSel.innerHTML = '<option value="">All Trainings</option>' +
+      names.map(n => `<option${n === prev ? ' selected' : ''}>${n}</option>`).join('');
+  }
+
+  if (impactTrainingSel) impactTrainingSel.addEventListener('change', renderImpactTable);
+  updateImpactTrainingOptions();
+
+  function renderImpactTable() {
+    const selYear     = impactYearTabsEl ? (impactYearTabsEl.querySelector('.year-tab.active')?.dataset.year || '') : '';
+    const selTraining = impactTrainingSel ? impactTrainingSel.value : '';
+    const filtered = orgs.filter(o =>
+      (!selYear     || o.year     === selYear)     &&
+      (!selTraining || o.training === selTraining)
+    );
+    const impactByOrg = {};
+    filtered.forEach(o => {
+      if (!o.name) return;
+      impactByOrg[o.name] = (impactByOrg[o.name] || 0) + (o.total_impact || 0);
+    });
+    // Sort by impact desc; orgs with 0 at the bottom
+    const impactRows = Object.entries(impactByOrg).sort((a, b) => b[1] - a[1]);
+    renderPaginatedTable({
+      tbodyEl: impactTbody,
+      pgElId: 'pg-ro-impact',
+      items: impactRows,
+      renderRowFn: ([name, impact]) =>
+        `<tr><td>${name}</td><td style="text-align:right">${fmt(impact)}</td></tr>`,
+      emptyHtml: '<tr><td colspan="2" class="empty">No organizations found</td></tr>'
+    });
+  }
+
+  renderImpactTable();
+
+  // Note: unattributed shared learnings (deals with no org in CRM)
+  const impactNoteEl = document.getElementById('pg-ro-impact');
+  if (impactNoteEl && unattribImpact > 0) {
+    let note = impactNoteEl.nextElementSibling;
+    if (!note || !note.classList.contains('table-note')) {
+      note = document.createElement('p');
+      note.className = 'table-note';
+      impactNoteEl.insertAdjacentElement('afterend', note);
+    }
+    note.textContent = `Note: ${fmt(unattribImpact)} shared learnings could not be attributed to any organization because ${fmt(unattribApplicants)} applicant${unattribApplicants !== 1 ? 's have' : ' has'} no organization assigned in the CRM.`;
+  }
+
+  // ── List of Organizations ─────────────────────────────────────────────────
+  // Filters: Year tabs · Training Name (dependent on year)
+  // Columns: Organization · Applicants · Total Graduates (%)
+  const yearTabsEl  = document.getElementById('ro-year-tabs');
+  const trainingSel = document.getElementById('ro-list-training');
+  const orgsTbody   = document.getElementById('ro-list-body');
+
+  if (yearTabsEl) {
+    yearTabsEl.innerHTML =
+      ['', ...orgYears].map(y =>
+        `<button class="year-tab${y === '' ? ' active' : ''}" data-year="${y}">${y || 'All'}</button>`
+      ).join('');
+    yearTabsEl.addEventListener('click', e => {
+      const btn = e.target.closest('.year-tab');
+      if (!btn) return;
+      yearTabsEl.querySelectorAll('.year-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      updateListTrainingOptions();
+      renderOrgsList();
+    });
+  }
+
+  function updateListTrainingOptions() {
+    if (!trainingSel) return;
+    const selYear = yearTabsEl ? (yearTabsEl.querySelector('.year-tab.active')?.dataset.year || '') : '';
+    const names = [...new Set(
+      orgs.filter(o => !selYear || o.year === selYear).map(o => o.training).filter(Boolean)
+    )].sort();
+    const prev = trainingSel.value;
+    trainingSel.innerHTML = '<option value="">All Trainings</option>' +
+      names.map(n => `<option${n === prev ? ' selected' : ''}>${n}</option>`).join('');
+  }
+
+  if (trainingSel) trainingSel.addEventListener('change', renderOrgsList);
+  updateListTrainingOptions();
+
+  function renderOrgsList() {
+    const selYear     = yearTabsEl  ? (yearTabsEl.querySelector('.year-tab.active')?.dataset.year || '') : '';
+    const selTraining = trainingSel ? trainingSel.value : '';
+    const filtered = orgs.filter(o =>
+      (!selYear     || o.year     === selYear)     &&
+      (!selTraining || o.training === selTraining)
+    );
+    const byOrg = {};
+    filtered.forEach(o => {
+      if (!o.name) return;
+      if (!byOrg[o.name]) byOrg[o.name] = { applicants: 0, graduates: 0 };
+      // fall back to 1/0 per entry when fields absent in older cached data
+      byOrg[o.name].applicants += o.applicant_count != null ? o.applicant_count : 1;
+      byOrg[o.name].graduates  += o.graduate_count  != null ? o.graduate_count  : 0;
+    });
+    const orgRows = Object.entries(byOrg).sort((a, b) => b[1].applicants - a[1].applicants);
+    renderPaginatedTable({
+      tbodyEl: orgsTbody,
+      pgElId: 'pg-ro-list',
+      items: orgRows,
+      renderRowFn: ([name, d]) => {
+        const pct = d.applicants > 0 ? Math.round((d.graduates / d.applicants) * 100) : 0;
+        return `<tr>
+          <td>${name}</td>
+          <td style="text-align:right">${fmt(d.applicants)}</td>
+          <td style="text-align:right">${fmt(d.graduates)} <span style="color:var(--text-meta);font-size:.8rem">(${pct}%)</span></td>
+        </tr>`;
+      },
+      emptyHtml: '<tr><td colspan="3" class="empty">No organizations found</td></tr>'
+    });
+  }
+
+  renderOrgsList();
+
+  // Note: unattributed applicants (deals with no org in CRM)
+  const listPgEl = document.getElementById('pg-ro-list');
+  if (listPgEl && unattribApplicants > 0) {
+    let note = listPgEl.nextElementSibling;
+    if (!note || !note.classList.contains('table-note')) {
+      note = document.createElement('p');
+      note.className = 'table-note';
+      listPgEl.insertAdjacentElement('afterend', note);
+    }
+    note.textContent = `Note: ${fmt(unattribApplicants)} applicant${unattribApplicants !== 1 ? 's are' : ' is'} not shown because they have no organization assigned in the CRM.`;
+  }
+}
+// Qualitative Insights
 // ── Report 3 — Qualitative Insights ──────────────────────────────────────────
 
 function renderReport3(r3) {
@@ -586,7 +820,14 @@ function renderReport3(r3) {
           <th>Applicant</th><th>Training</th><th>What Went Well</th><th>Key Learning</th>
           <th>Action Plan</th><th>Improvement</th><th>Next Workshop</th><th>Testimonial</th>
         </tr></thead>
-        <tbody>${filtered.map(r => `<tr>
+        <tbody id="r3-post-body"></tbody>
+      </table></div><div id="r3-post-pg" class="pagination-controls"></div>`;
+      
+      renderPaginatedTable({
+        tbodyEl: document.getElementById('r3-post-body'),
+        pgElId: 'pg-r3-post',
+        items: filtered,
+        renderRowFn: r => `<tr>
           <td style="font-size:.82rem">${r.applicant_name || '—'}</td>
           <td style="font-size:.82rem">${r._training}</td>
           <td style="font-size:.82rem;vertical-align:top">${r.what_went_well || '—'}</td>
@@ -595,8 +836,8 @@ function renderReport3(r3) {
           <td style="font-size:.82rem;vertical-align:top">${r.improvement_suggestion || '—'}</td>
           <td style="font-size:.82rem;vertical-align:top">${r.next_workshop_suggestion || '—'}</td>
           <td style="font-size:.82rem;vertical-align:top">${r.testimonial || '—'}</td>
-        </tr>`).join('')}</tbody>
-      </table></div>`;
+        </tr>`
+      });
     }
     renderPostTable('');
   }
@@ -622,6 +863,7 @@ function renderReport3(r3) {
       const filtered = filterVal ? allImpact.filter(r => r._training === filterVal) : allImpact;
       if (!filtered.length) {
         impactEl.innerHTML = '<div class="empty">No 6M impact data available</div>';
+        const pg = document.getElementById('pg-r3-impact'); if(pg) pg.style.display = 'none';
         return;
       }
       impactEl.innerHTML = `<div class="table-wrap"><table>
@@ -630,7 +872,14 @@ function renderReport3(r3) {
           <th>Done More Campaigning</th><th>Raised More Funds</th><th>Built Connections</th>
           <th>Achieved Objectives</th><th>What's Alive</th><th>Testimonial</th><th>Shared With How Many</th>
         </tr></thead>
-        <tbody>${filtered.map(r => `<tr>
+        <tbody id="r3-impact-body"></tbody>
+      </table></div><div id="r3-impact-pg" class="pagination-controls"></div>`;
+      
+      renderPaginatedTable({
+        tbodyEl: document.getElementById('r3-impact-body'),
+        pgElId: 'pg-r3-impact',
+        items: filtered,
+        renderRowFn: r => `<tr>
           <td style="font-size:.82rem">${r.applicant_name || '—'}</td>
           <td style="font-size:.82rem">${r._training}</td>
           <td style="font-size:.82rem;vertical-align:top">${r.training_influence || '—'}</td>
@@ -642,8 +891,8 @@ function renderReport3(r3) {
           <td style="font-size:.82rem;vertical-align:top">${r.whats_alive || '—'}</td>
           <td style="font-size:.82rem;vertical-align:top">${r.testimonial || '—'}</td>
           <td style="font-size:.82rem;vertical-align:top">${r.shared_with_how_many || '—'}</td>
-        </tr>`).join('')}</tbody>
-      </table></div>`;
+        </tr>`
+      });
     }
     renderImpactTable('');
   }
@@ -668,13 +917,20 @@ function renderReport3(r3) {
       }
       testEl.innerHTML = `<div class="table-wrap"><table>
         <thead><tr><th>Applicant</th><th>Training</th><th>Source</th><th>Testimonial</th></tr></thead>
-        <tbody>${filtered.map(t => `<tr>
+        <tbody id="r3-test-body"></tbody>
+      </table></div>`;
+      
+      renderPaginatedTable({
+        tbodyEl: document.getElementById('r3-test-body'),
+        pgElId: 'pg-r3-test',
+        items: filtered,
+        renderRowFn: t => `<tr>
           <td style="font-size:.82rem">${t.applicant_name || '—'}</td>
           <td style="font-size:.82rem">${t.training_name}</td>
           <td style="font-size:.82rem">${t.source}</td>
           <td style="font-size:.82rem;vertical-align:top">${t.testimonial}</td>
-        </tr>`).join('')}</tbody>
-      </table></div>`;
+        </tr>`
+      });
     }
     renderTestimonialsTable('');
   }
@@ -720,15 +976,15 @@ function renderLikert(r3, filterName, need6m, needPost) {
       // 6M change inline: 6m - post
       const sixm = agg[key]?.['6m'];
       const post = agg[key]?.post;
-      const sixmDelta = (sixm != null && post != null) ? (sixm - post) : null;
-      const sixmCell = sixm != null
-        ? `${sixm.toFixed(2)} <span class="delta ${sixmDelta >= 0 ? 'pos' : 'neg'}">(${sixmDelta >= 0 ? '+' : ''}${sixmDelta?.toFixed(2)})</span>`
-        : '—';
+      const sixmDelta = (sixm != null && post != null) ? (parseFloat(sixm) - parseFloat(post)) : null;
+      const sxClass = sixmDelta > 0 ? 'delta-pos' : sixmDelta < 0 ? 'delta-neg' : '';
+      const sxStr = sixmDelta !== null ? `<span class="likert-delta ${sxClass}">${sixmDelta > 0 ? '+' : ''}${sixmDelta.toFixed(2)}</span>` : '';
+      const sixmCell = sixm != null ? `${sixm.toFixed(2)} ${sxStr}` : '—';
 
       return `<tr>
         <td style="font-weight:700">${label}</td>
-        <td class="likert-val">${v.pre  != null ? v.pre  : '—'}</td>
-        <td class="likert-val">${v.post != null ? v.post : '—'} ${dStr}</td>
+        <td class="likert-val">${v.pre  != null ? v.pre.toFixed(2)  : '—'}</td>
+        <td class="likert-val">${v.post != null ? v.post.toFixed(2) : '—'} ${dStr}</td>
         <td class="likert-val">${sixmCell}</td>
       </tr>`;
     }).join('');
@@ -740,6 +996,43 @@ function renderLikert(r3, filterName, need6m, needPost) {
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
+
+function renderPaginatedTable({ tbodyEl, pgElId, items, renderRowFn, emptyHtml = '<tr><td colspan="100%" class="empty">No data available</td></tr>', itemsPerPage = 10 }) {
+  const pgEl = document.getElementById(pgElId);
+  if (!pgEl) {
+    if (tbodyEl) tbodyEl.innerHTML = items.length ? items.map(renderRowFn).join('') : emptyHtml;
+    return;
+  }
+  const total = items.length;
+  if (!total) {
+    pgEl.style.display = 'none';
+    if (tbodyEl) tbodyEl.innerHTML = emptyHtml;
+    return;
+  }
+  pgEl.style.display = 'flex';
+  const totalPages = Math.ceil(total / itemsPerPage);
+  let currentPage = 1;
+  
+  function renderPage(page) {
+    if (!tbodyEl) return;
+    const start = (page - 1) * itemsPerPage;
+    const end = Math.min(start + itemsPerPage, total);
+    
+    tbodyEl.innerHTML = items.slice(start, end).map(renderRowFn).join('');
+    pgEl.innerHTML = `
+      <div class="pg-total">Showing ${start + 1} to ${end} of ${fmt(total)}</div>
+      <div class="pg-btns">
+        <button class="pg-btn" ${page <= 1 ? 'disabled' : ''} data-dir="prev">Prev</button>
+        <button class="pg-btn" ${page >= totalPages ? 'disabled' : ''} data-dir="next">Next</button>
+      </div>
+    `;
+    const prev = pgEl.querySelector('[data-dir="prev"]');
+    const next = pgEl.querySelector('[data-dir="next"]');
+    if (prev) prev.addEventListener('click', () => { if (currentPage > 1) renderPage(--currentPage); });
+    if (next) next.addEventListener('click', () => { if (currentPage < totalPages) renderPage(++currentPage); });
+  }
+  renderPage(currentPage);
+}
 
 function fmt(n) { return n != null ? Number(n).toLocaleString() : '—'; }
 function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }

@@ -28,6 +28,7 @@
     <div class="container">
       <a class="nav-tab" data-tab="section-r1">Overview</a>
       <a class="nav-tab" data-tab="section-r2">Training Report</a>
+      <a class="nav-tab" data-tab="section-r-orgs">Organization Stats</a>
       <a class="nav-tab" data-tab="section-r3">Qualitative Insights</a>
     </div>
   </nav>
@@ -144,16 +145,22 @@
       <div class="two-col" style="margin-bottom:24px">
         <div class="chart-card">
           <h3>Gender Distribution</h3>
-          <div class="chart-wrap"><canvas id="chart-gender"></canvas></div>
+          <div class="chart-wrap" style="position:relative;height:300px">
+            <canvas id="chart-gender"></canvas>
+            <div id="r2-gender-note" class="chart-note" style="font-size:.8rem;color:var(--text-meta);margin-top:5px;padding-bottom:5px;text-align:center"></div>
+          </div>
         </div>
         <div class="chart-card">
           <h3>Age Groups</h3>
-          <div class="chart-wrap"><canvas id="chart-age"></canvas></div>
+          <div class="chart-wrap" style="position:relative;height:300px">
+            <canvas id="chart-age"></canvas>
+            <div id="r2-age-note" class="chart-note" style="font-size:.8rem;color:var(--text-meta);margin-top:5px;padding-bottom:5px;text-align:center"></div>
+          </div>
         </div>
       </div>
 
       <!-- Speedometer grid -->
-      <div class="speedometer-grid" id="r2-speedometers"></div>
+      <!-- Practice Sessions or other content follows -->
 
       <!-- Stacked bar only -->
       <div class="chart-card" style="margin-bottom:24px">
@@ -168,11 +175,12 @@
           <select class="filter" id="r2-ps-year-filter"><option value="">All Years</option></select>
         </div>
         <div id="r2-practice-sessions"><div class="loading"><div class="spinner"></div></div></div>
+        <div class="pagination-controls" id="pg-r2-ps"></div>
       </div>
 
       <!-- Completed / Planned card -->
       <div class="chart-card" style="margin-bottom:24px">
-        <h3>Trainings Completed / Planned</h3>
+        <h3>Training Type Per Year</h3>
         <div class="year-tabs" id="r2-cpby-tabs"></div>
         <div id="r2-cpby-grid" style="margin-top:12px"></div>
       </div>
@@ -190,6 +198,7 @@
             <tbody id="r2-plans-body"><tr><td colspan="5" class="empty">Loading…</td></tr></tbody>
           </table>
         </div>
+        <div class="pagination-controls" id="pg-r2-plans"></div>
       </div>
 
       <!-- All Trainings -->
@@ -219,23 +228,61 @@
             <tbody id="r2-trainings-body"><tr><td colspan="7" class="empty">Loading…</td></tr></tbody>
           </table>
         </div>
+        <div class="pagination-controls" id="pg-r2-trainings"></div>
       </div>
 
-      <!-- Organizations -->
+    </section>
+
+    <!-- ── Organization Stats ───────────────────────────────────────────── -->
+    <section class="report-section" id="section-r-orgs">
+      <div class="section-header">
+        <h2>Organization Stats</h2>
+        <span class="section-badge">Tab 3</span>
+      </div>
+
+      <div class="kpi-grid kpi-glance">
+        <div class="card">
+          <div class="kpi-icon">🏢</div>
+          <div class="card-value" id="ro-total-orgs">—</div>
+          <div class="card-label">Total Organizations</div>
+          <div class="card-sub">Organizations engaged</div>
+        </div>
+      </div>
+
       <div class="chart-card" style="margin-top:24px">
-        <h3>Organizations</h3>
+        <h3>Organization Trend YoY</h3>
+        <div class="chart-wrap"><canvas id="chart-orgs-yoy"></canvas></div>
+      </div>
+
+      <div class="chart-card" style="margin-top:24px">
+        <h3>Community Impact per Organization</h3>
+        <div class="year-tabs" id="ro-impact-year-tabs"></div>
         <div class="filter-row">
-          <select class="filter" id="r2-org-year"><option value="">All Years</option></select>
-          <select class="filter" id="r2-org-training"><option value="">All Trainings</option></select>
+          <select class="filter" id="ro-impact-training"><option value="">All Trainings</option></select>
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Organization</th><th>Training</th><th>Year</th></tr></thead>
-            <tbody id="r2-orgs-body"><tr><td colspan="3" class="empty">Loading…</td></tr></tbody>
+            <thead><tr><th>Organization</th><th style="text-align:right">Total Impact</th></tr></thead>
+            <tbody id="ro-impact-body"><tr><td colspan="2" class="empty">Loading…</td></tr></tbody>
           </table>
         </div>
+        <div class="pagination-controls" id="pg-ro-impact"></div>
       </div>
 
+      <div class="chart-card" style="margin-top:24px">
+        <h3>List of Organizations</h3>
+        <div class="year-tabs" id="ro-year-tabs"></div>
+        <div class="filter-row">
+          <select class="filter" id="ro-list-training"><option value="">All Trainings</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Organization</th><th style="text-align:right">Applicants</th><th style="text-align:right">Total Graduates</th></tr></thead>
+            <tbody id="ro-list-body"><tr><td colspan="3" class="empty">Loading…</td></tr></tbody>
+          </table>
+        </div>
+        <div class="pagination-controls" id="pg-ro-list"></div>
+      </div>
     </section>
 
     <!-- ── Report 3: Qualitative Insights ──────────────────────────────── -->
@@ -272,23 +319,32 @@
         </div>
       </div>
 
-      <div class="section-header" style="margin-top:32px"><h2>Post-Training Survey</h2></div>
-      <div class="filter-row" style="margin-bottom:8px">
-        <select class="filter" id="r3-post-filter" style="margin-bottom:0"><option value="">All Trainings</option></select>
+      <div class="chart-card" style="margin-bottom:24px">
+        <h3>Post-Training Survey</h3>
+        <div class="filter-row" style="margin-bottom:8px">
+          <select class="filter" id="r3-post-filter" style="margin-bottom:0"><option value="">All Trainings</option></select>
+        </div>
+        <div id="r3-post-feedback"></div>
+        <div class="pagination-controls" id="pg-r3-post"></div>
       </div>
-      <div id="r3-post-feedback"></div>
 
-      <div class="section-header" style="margin-top:32px"><h2>6-Month Impact Evaluation</h2></div>
-      <div class="filter-row" style="margin-bottom:8px">
-        <select class="filter" id="r3-impact-filter" style="margin-bottom:0"><option value="">All Trainings</option></select>
+      <div class="chart-card" style="margin-bottom:24px">
+        <h3>6-Month Impact Evaluation</h3>
+        <div class="filter-row" style="margin-bottom:8px">
+          <select class="filter" id="r3-impact-filter" style="margin-bottom:0"><option value="">All Trainings</option></select>
+        </div>
+        <div id="r3-impact-feedback"></div>
+        <div class="pagination-controls" id="pg-r3-impact"></div>
       </div>
-      <div id="r3-impact-feedback"></div>
 
-      <div class="section-header" style="margin-top:32px"><h2>Testimonials</h2></div>
-      <div class="filter-row" style="margin-bottom:8px">
-        <select class="filter" id="r3-test-filter" style="margin-bottom:0"><option value="">All Trainings</option></select>
+      <div class="chart-card" style="margin-bottom:24px">
+        <h3>Testimonials</h3>
+        <div class="filter-row" style="margin-bottom:8px">
+          <select class="filter" id="r3-test-filter" style="margin-bottom:0"><option value="">All Trainings</option></select>
+        </div>
+        <div id="r3-testimonials"></div>
+        <div class="pagination-controls" id="pg-r3-test"></div>
       </div>
-      <div id="r3-testimonials"></div>
 
     </section>
 
