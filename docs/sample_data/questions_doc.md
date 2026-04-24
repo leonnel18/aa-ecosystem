@@ -151,10 +151,10 @@ All rating questions use a 1–7 scale. All are LOCKED.
 |-------|-----------|
 | 1. Gender Mainstreaming | Confident_Analysis_Pre |
 | 2. Gender Lens in Social Analysis | Strategic_Confidence_Pre |
-| 3. Intersectional Networking | Intersectional_Networking_Pre |
-| 4. Building Connections | F_Confident_in_building_Pre_connections |
+| 3. Gender & Climate Change | Intersectional_Networking_Pre |
+| 4. Strategic Gender Planning | F_Confident_in_building_Pre_connections |
 | 5. Self-Reflection & Leadership Bias | F_Gendered_Leadership_Pre |
-| F) Leadership Coaching | F_Leadership_Coaching_Pre |
+| 6. Network Building | G_confident_in_Building_Connection_Pre |
 
 #### Public Narrative
 
@@ -250,9 +250,10 @@ Maps to CRM fields `Rate_the_sessions_on_Topic_1_Campaign_Strategy` through `Rat
 |-------|-----------|
 | 1. Gender Mainstreaming | Confident_Analysis_Post |
 | 2. Gender Lens in Social Analysis | Strategic_Confidence_Post |
-| 3. Gender-Aware Leadership | Gender_Aware_Leadership_Post |
-| 4. Intersectional Networking | Intersectional_Networking_Post |
-| F) Leadership Coaching | F_Leadership_Coaching_Post |
+| 3. Gender & Climate Change | Gender_Aware_Leadership_Post |
+| 4. Strategic Gender Planning | Intersectional_Networking_Post |
+| 5. Self-Reflection & Leadership Bias | F_Confident_in_building_connections_Post |
+| 6. Network Building | Gender_Strategies_Post |
 
 #### Public Narrative
 
