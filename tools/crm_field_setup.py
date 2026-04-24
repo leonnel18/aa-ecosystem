@@ -72,14 +72,21 @@ MODULE_FIELDS = {
 
 
 def get_existing_fields(module: str) -> set:
-    """Return set of existing API names for a module."""
+    """Return set of existing API names for a module (all pages)."""
     url = f"{API_BASE}/settings/fields"
-    params = {"module": module}
-    resp = requests.get(url, headers=auth_headers(), params=params)
-    resp.raise_for_status()
-    data = resp.json()
-    fields = data.get("fields", [])
-    return {f["api_name"] for f in fields}
+    all_api_names: set = set()
+    page = 1
+    while True:
+        params = {"module": module, "per_page": 200, "page": page}
+        resp = requests.get(url, headers=auth_headers(), params=params)
+        resp.raise_for_status()
+        data = resp.json()
+        for f in data.get("fields", []):
+            all_api_names.add(f["api_name"])
+        if not data.get("info", {}).get("more_records", False):
+            break
+        page += 1
+    return all_api_names
 
 
 def create_field(module: str, field_def: dict) -> dict:
@@ -95,7 +102,7 @@ def create_field(module: str, field_def: dict) -> dict:
         "api_name":    field_def["api_name"],
         "data_type":   field_def["data_type"],
     }
-    if field_def.get("length"):
+    if field_def.get("length") is not None:
         payload_field["length"] = field_def["length"]
 
     payload = {"fields": [payload_field]}
@@ -110,7 +117,11 @@ def setup_module_fields(module: str, dry_run: bool = False) -> dict:
     Returns summary dict: {field_api_name: "created" | "exists" | "would_create" | "error: ..."}.
     """
     print(f"\n[{module}] Fetching existing fields...")
-    existing = get_existing_fields(module)
+    try:
+        existing = get_existing_fields(module)
+    except requests.HTTPError as e:
+        print(f"  [FAIL] Could not fetch fields: {e}")
+        return {f["api_name"]: f"error: fetch failed — {e}" for f in MODULE_FIELDS[module]}
     print(f"  {len(existing)} existing fields found")
 
     results = {}
@@ -143,10 +154,11 @@ def main():
     parser.add_argument("--module", choices=list(MODULE_FIELDS.keys()),
                         help="Run for a single module only")
     parser.add_argument("--dry-run", action="store_true",
-                        help="List fields that would be created without creating them")
+                        help="List fields that would be created without creating them "
+                             "(still queries CRM to check existing fields)")
     args = parser.parse_args()
 
-    load_dotenv()
+    load_dotenv()  # crm_auth.py also calls this at import time; kept here for explicit .env loading
 
     print("=" * 55)
     print("  crm_field_setup.py — CRM Field Scaffolding")
