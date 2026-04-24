@@ -2,6 +2,27 @@
 
 ---
 
+## [2026-04-24] Plan A — CRM Field Scaffolding: COMPLETE
+
+**Status:** COMPLETE
+
+Tools created:
+- `tools/crm_field_setup.py` — idempotent field creator (POST /settings/fields)
+
+New fields created:
+- Solutions: Application_Form_Open_Date, Application_Form_Close_Date,
+             Post_Survey_Open_Date, Post_Survey_Close_Date (all date type)
+- Deals: Year_of_Birth (integer), Custom_Responses (textarea large — repurposed from Comment field)
+
+Notes:
+- Zoho API requires `"textarea": {"type": "large"}` nested object for textarea field creation
+- Custom_Responses created by repurposing the unused `Comment` field (renamed via CRM UI)
+- Script must be run from main repo root (not worktree) to pick up correct crm_auth.py + .env
+
+Next: Plan B — Zoho Creator forms + Deluge scripts
+
+---
+
 ## [2026-03-18] Protocol 0 — Initialization
 
 **Status:** COMPLETE
