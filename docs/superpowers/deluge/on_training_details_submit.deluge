@@ -1,0 +1,102 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// on_training_details_submit.deluge
+// Trigger: Training Details Form → On Record Create
+//
+// What this does:
+//   1. Creates a Solutions (Training) record in Zoho CRM
+//   2. Clones Application_Form template → unique pre-app form per training
+//   3. Clones Post_Training_Survey template → unique post-survey per training
+//   4. Updates the CRM Solutions record with both form links + date windows
+//   5. Sends email to recipients with all links
+//
+// WRITE OPERATION — authorized by Gino 2026-04-24
+// POST/PUT to CRM Solutions only. DELETE requires explicit re-authorization.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── 1. Build form link names ──────────────────────────────────────────────────
+// Strip spaces and special chars from title + type for valid Creator link names
+rawTitle = input.Training_Title.replaceAll(" ", "_").replaceAll("[^A-Za-z0-9_]", "");
+rawType = input.Training_Type.replaceAll(" ", "_").replaceAll("[^A-Za-z0-9_]", "");
+
+preFormLinkName = rawTitle + "_" + rawType + "_Application";
+postFormLinkName = rawTitle + "_" + rawType + "_PostTraining";
+
+// ── 2. Create CRM Solutions (Training) record ─────────────────────────────────
+crmPayload = map();
+crmPayload.put("Solution_Title", input.Training_Title);
+crmPayload.put("Training_Type", map("name", input.Training_Type));
+crmPayload.put("Organised_By", input.Organised_By);
+crmPayload.put("Start_Date", input.Start_Date.toString("yyyy-MM-dd"));
+crmPayload.put("End_Date", input.End_Date.toString("yyyy-MM-dd"));
+crmPayload.put("Target_Participants", input.Target_Participants);
+crmPayload.put("Format", input.Training_Format);
+crmPayload.put("Application_Form_Open_Date", input.Application_Form_Open_Date.toString("yyyy-MM-dd"));
+crmPayload.put("Application_Form_Close_Date", input.Application_Form_Close_Date.toString("yyyy-MM-dd"));
+crmPayload.put("Post_Survey_Open_Date", input.Post_Survey_Open_Date.toString("yyyy-MM-dd"));
+crmPayload.put("Post_Survey_Close_Date", input.Post_Survey_Close_Date.toString("yyyy-MM-dd"));
+
+crmResponse = zoho.crm.createRecord("Solutions", crmPayload);
+solutionId = crmResponse.get("id");
+
+// ── 3. Clone Pre-Application form ─────────────────────────────────────────────
+preClonePayload = map();
+preClonePayload.put("form_link_name", preFormLinkName);
+preClonePayload.put("form_name", input.Training_Title + " - Application Form");
+
+preCloneResponse = invokeurl
+[
+    url: "https://creator.zoho.in/api/v2/aktivasia/aa-training-hub/form/Application_Form/clone"
+    type: POST
+    parameters: preClonePayload.toString()
+    connection: "zoho_creator_connection"
+];
+
+preFormLink = "https://creatorapp.zoho.in/aktivasia/aa-training-hub/form/" + preFormLinkName;
+
+// ── 4. Clone Post-Training Survey form ────────────────────────────────────────
+postClonePayload = map();
+postClonePayload.put("form_link_name", postFormLinkName);
+postClonePayload.put("form_name", input.Training_Title + " - Post Training Survey");
+
+postCloneResponse = invokeurl
+[
+    url: "https://creator.zoho.in/api/v2/aktivasia/aa-training-hub/form/Post_Training_Survey/clone"
+    type: POST
+    parameters: postClonePayload.toString()
+    connection: "zoho_creator_connection"
+];
+
+postFormLink = "https://creatorapp.zoho.in/aktivasia/aa-training-hub/form/" + postFormLinkName;
+
+// ── 5. Update CRM Solutions record with form links ────────────────────────────
+updatePayload = map();
+updatePayload.put("Application_Form", preFormLink);
+updatePayload.put("Evaluation_Form", postFormLink);
+
+zoho.crm.updateRecord("Solutions", solutionId, updatePayload);
+
+// ── 6. Send email to recipients ───────────────────────────────────────────────
+emailBody = "Hello,\n\n"
+    + "A new training has been created in AktivAsia CRM.\n\n"
+    + "Training: " + input.Training_Title + "\n"
+    + "Type: " + input.Training_Type + "\n"
+    + "Country: " + input.Organised_By + "\n"
+    + "Dates: " + input.Start_Date.toString("dd MMM yyyy") + " – " + input.End_Date.toString("dd MMM yyyy") + "\n\n"
+    + "── Application Form ─────────────────────────────\n"
+    + "Link: " + preFormLink + "\n"
+    + "Open: " + input.Application_Form_Open_Date.toString("dd MMM yyyy") + "\n"
+    + "Close: " + input.Application_Form_Close_Date.toString("dd MMM yyyy") + "\n\n"
+    + "── Post-Training Survey ─────────────────────────\n"
+    + "Link: " + postFormLink + "\n"
+    + "Open: " + input.Post_Survey_Open_Date.toString("dd MMM yyyy") + "\n"
+    + "Close: " + input.Post_Survey_Close_Date.toString("dd MMM yyyy") + "\n\n"
+    + "Please share the Application Form link with applicants once it opens.\n\n"
+    + "AktivAsia Team";
+
+sendmail
+[
+    from: zoho.adminuserid
+    to: input.Email_Recipients
+    subject: "[AktivAsia] New Training Created: " + input.Training_Title
+    message: emailBody
+];
