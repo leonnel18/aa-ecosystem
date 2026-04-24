@@ -11,9 +11,9 @@
 
 | Form | Link Name | Notes |
 |------|-----------|-------|
-| Training Details Form | `Training_Details_Form` | Confirmed from URL in Creator builder |
-| Pre-Application Template | `Pre_Application_Template` | Base template — cloned per training |
-| Post-Training Survey Template | `Post_Training_Survey_Template` | Base template — cloned per training |
+| Training Details Form | `Training_Details_Form` | Confirmed from URL |
+| Pre-Application Template | `Application_Form` | Confirmed from URL |
+| Post-Training Survey Template | `Post_Training_Survey` | Confirmed from URL |
 
 ---
 
@@ -25,6 +25,10 @@ When the Training Details Form is submitted, Deluge clones the templates with th
 |-------|------------------|---------|
 | Pre-Application (per training) | `{TrainingTitle}_{TrainingType}_Application` | `Pandayan_Foundational_Application` |
 | Post-Training Survey (per training) | `{TrainingTitle}_{TrainingType}_PostTraining` | `Pandayan_Foundational_PostTraining` |
+
+**Source templates:**
+- Pre: clone from `Application_Form`
+- Post: clone from `Post_Training_Survey`
 
 **Note:** Use the `Solution_Title` and `Training_Type` values from the Training Details Form submission to construct the link names. Strip spaces and special characters to ensure valid Creator link names.
 
@@ -45,6 +49,6 @@ response = zoho.creator.cloneForm("aktivasia", "aa-training-hub", "Pre_Applicati
 
 ## Status
 
-- [ ] Pre_Application_Template form created (Gino — manual setup)
-- [ ] Post_Training_Survey_Template form created (Gino — manual setup)
-- [ ] CRM integration connection added in Creator settings (Gino — manual setup)
+- [x] Application_Form created (confirmed 2026-04-24)
+- [x] Post_Training_Survey created (confirmed 2026-04-24)
+- [ ] CRM integration connection added in Creator settings (Gino — confirm)
