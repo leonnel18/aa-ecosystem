@@ -61,7 +61,7 @@ DEALS_NEW_FIELDS = [
         "field_label": "Custom Responses",
         "api_name":    "Custom_Responses",
         "data_type":   "textarea",
-        "length":      32000,
+        "textarea":    {"type": "large"},
     },
 ]
 
@@ -104,6 +104,8 @@ def create_field(module: str, field_def: dict) -> dict:
     }
     if field_def.get("length") is not None:
         payload_field["length"] = field_def["length"]
+    if field_def.get("textarea") is not None:
+        payload_field["textarea"] = field_def["textarea"]
 
     payload = {"fields": [payload_field]}
     resp = requests.post(url, headers=auth_headers(), params=params, json=payload)
