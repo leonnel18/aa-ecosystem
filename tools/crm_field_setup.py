@@ -15,17 +15,9 @@ Usage:
 # ══════════════════════════════════════════════════════════════════
 """
 
-import os
-import sys
-import json
 import argparse
 import requests
-from dotenv import load_dotenv
-
-sys.path.insert(0, os.path.dirname(__file__))
 from crm_auth import auth_headers, API_BASE
-
-load_dotenv()
 
 # ── New fields: Solutions module ────────────────────────────────────────────
 # 4 date fields for form availability windows
@@ -34,36 +26,32 @@ SOLUTIONS_NEW_FIELDS = [
         "field_label": "Application Form Open Date",
         "api_name":    "Application_Form_Open_Date",
         "data_type":   "date",
-        "length":      None,
     },
     {
         "field_label": "Application Form Close Date",
         "api_name":    "Application_Form_Close_Date",
         "data_type":   "date",
-        "length":      None,
     },
     {
         "field_label": "Post Survey Open Date",
         "api_name":    "Post_Survey_Open_Date",
         "data_type":   "date",
-        "length":      None,
     },
     {
         "field_label": "Post Survey Close Date",
         "api_name":    "Post_Survey_Close_Date",
         "data_type":   "date",
-        "length":      None,
     },
 ]
 
 # ── New fields: Deals module ────────────────────────────────────────────────
-# Year_of_Birth (integer) + Custom_Responses (long text JSON)
+# Year_of_Birth (integer, new field — stores year only, alongside existing Date_of_Birth)
+# Custom_Responses (long text, JSON array of custom Q&A per submission)
 DEALS_NEW_FIELDS = [
     {
         "field_label": "Year of Birth",
         "api_name":    "Year_of_Birth",
         "data_type":   "integer",
-        "length":      None,
     },
     {
         "field_label": "Custom Responses",
