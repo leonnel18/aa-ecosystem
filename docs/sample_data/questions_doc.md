@@ -155,6 +155,7 @@ All rating questions use a 1–7 scale. All are LOCKED.
 | 4. Strategic Gender Planning | F_Confident_in_building_Pre_connections |
 | 5. Self-Reflection & Leadership Bias | F_Gendered_Leadership_Pre |
 | 6. Network Building | G_confident_in_Building_Connection_Pre |
+| 7. Leadership Coaching | F_Leadership_Coaching_Pre |
 
 #### Public Narrative
 
@@ -254,6 +255,7 @@ Maps to CRM fields `Rate_the_sessions_on_Topic_1_Campaign_Strategy` through `Rat
 | 4. Strategic Gender Planning | Intersectional_Networking_Post |
 | 5. Self-Reflection & Leadership Bias | F_Confident_in_building_connections_Post |
 | 6. Network Building | Gender_Strategies_Post |
+| 7. Leadership Coaching | F_Leadership_Coaching_Post |
 
 #### Public Narrative
 
