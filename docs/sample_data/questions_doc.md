@@ -151,8 +151,8 @@ All rating questions use a 1–7 scale. All are LOCKED.
 |-------|-----------|
 | 1. Gender Mainstreaming | Confident_Analysis_Pre |
 | 2. Gender Lens in Social Analysis | Strategic_Confidence_Pre |
-| 3. Gender & Climate Change | (TBD — Post-only confirmed in prior research) |
-| 4. Gender Strategy Building | (TBD) |
+| 3. Intersectional Networking | Intersectional_Networking_Pre |
+| 4. Building Connections | F_Confident_in_building_Pre_connections |
 | 5. Self-Reflection & Leadership Bias | F_Gendered_Leadership_Pre |
 | F) Leadership Coaching | F_Leadership_Coaching_Pre |
 
@@ -251,7 +251,7 @@ Maps to CRM fields `Rate_the_sessions_on_Topic_1_Campaign_Strategy` through `Rat
 | 1. Gender Mainstreaming | Confident_Analysis_Post |
 | 2. Gender Lens in Social Analysis | Strategic_Confidence_Post |
 | 3. Gender-Aware Leadership | Gender_Aware_Leadership_Post |
-| 4. Building Connections | F_Confident_in_building_connections_Post |
+| 4. Intersectional Networking | Intersectional_Networking_Post |
 | F) Leadership Coaching | F_Leadership_Coaching_Post |
 
 #### Public Narrative
@@ -290,6 +290,5 @@ Integer-type answers (e.g. Rating fields) must be stored as integers, not string
 
 ## Open Items (TBD)
 
-- **Feminist Leadership Pre ratings 3 & 4**: CRM field mappings not yet confirmed (Gender & Climate Change, Gender Strategy Building)
-- **TOT Experience field**: Second Reason_for_Applying usage needs to be disambiguated — confirm with Gino whether it maps to a separate field
+- **TOT Experience field**: Second Reason_for_Applying usage needs to be disambiguated — confirm with Gino whether it maps to a separate field or the same field
 - **Other countries (PK, KR, ID)**: Question translations and country-specific options to be added after PH validation
