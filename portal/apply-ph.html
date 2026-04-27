@@ -313,31 +313,41 @@
     .check-label-fil { font-size: 12px; color: var(--meta); font-style: italic; margin-top: 2px; }
 
     /* ── Rating scale ── */
-    .rating-item { margin-bottom: 20px; }
-    .rating-question { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .rating-item { margin-bottom: 28px; }
+    .rating-question { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
     .rating-scale {
-      display: flex; gap: 6px; align-items: center;
-    }
-    .rating-scale-labels {
-      display: flex; justify-content: space-between;
-      font-size: 11px; color: var(--meta); margin-top: 4px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
     }
     .rating-btn {
       flex: 1;
       min-height: 44px;
+      min-width: 36px;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
+      border-radius: 9999px;
       background: var(--bg);
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
       color: var(--text);
     }
+    .rating-btn:hover {
+      border-color: var(--cta-start);
+      color: var(--cta-start);
+    }
     .rating-btn.selected {
-      background: var(--primary);
-      border-color: var(--primary);
+      background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+      border-color: transparent;
       color: var(--white);
+    }
+    .rating-scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--meta);
+      margin-top: 6px;
     }
 
     /* ── File upload ── */
