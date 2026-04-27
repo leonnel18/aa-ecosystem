@@ -107,36 +107,93 @@
     .closed-banner h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
     .closed-banner p { color: var(--meta); font-size: 14px; }
 
-    /* ── Progress bar ── */
+    /* ── Progress stepper ── */
     .progress-wrap {
       background: var(--white);
-      padding: 16px 20px 0;
+      padding: 16px 20px;
       position: sticky;
       top: 0;
       z-index: 10;
       border-bottom: 1px solid var(--border);
     }
-    .progress-steps {
+    .stepper-nav {
       display: flex;
-      gap: 4px;
-      margin-bottom: 12px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      align-items: center;
+      width: 100%;
+      gap: 0;
     }
-    .progress-steps::-webkit-scrollbar { display: none; }
-    .step-dot {
+    .stepper-item {
+      display: flex;
+      align-items: center;
       flex: 1;
-      min-width: 32px;
-      height: 4px;
-      border-radius: 2px;
-      background: var(--border);
-      transition: background 0.3s;
     }
-    .step-dot.done { background: var(--primary); }
-    .step-dot.active { background: var(--cta-start); }
-    .progress-label {
-      font-size: 12px; color: var(--meta); font-weight: 500;
-      padding-bottom: 12px;
+    .stepper-item:last-child { flex: 0 0 auto; }
+    .stepper-trigger {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: default;
+      text-align: left;
+    }
+    .stepper-indicator {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      border: 2px solid var(--border);
+      background: var(--white);
+      color: var(--meta);
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+    .stepper-item[data-state="completed"] .stepper-indicator {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--white);
+    }
+    .stepper-item[data-state="active"] .stepper-indicator {
+      background: var(--cta-start);
+      border-color: var(--cta-start);
+      color: var(--text);
+    }
+    .stepper-text { display: flex; flex-direction: column; gap: 1px; }
+    .stepper-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .stepper-desc {
+      font-size: 11px;
+      color: var(--meta);
+      line-height: 1.2;
+    }
+    .stepper-item[data-state="inactive"] .stepper-title,
+    .stepper-item[data-state="inactive"] .stepper-desc {
+      color: var(--meta);
+    }
+    .stepper-separator {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      margin: 0 8px;
+      border-radius: 1px;
+      transition: background 0.25s;
+    }
+    .stepper-item[data-state="completed"] + .stepper-separator {
+      background: var(--primary);
+    }
+    @media (max-width: 639px) {
+      .stepper-text { display: none; }
+      .stepper-item[data-state="active"] .stepper-text { display: flex; }
+      .stepper-separator { margin: 0 4px; }
     }
 
     /* ── Form container ── */
@@ -408,8 +465,7 @@
 
 <!-- Progress -->
 <div class="progress-wrap" id="progress-wrap">
-  <div class="progress-steps" id="progress-steps"></div>
-  <div class="progress-label" id="progress-label"></div>
+  <div class="stepper-nav" id="progress-steps"></div>
 </div>
 
 <!-- Main form -->
