@@ -34,6 +34,48 @@ function onOrganisedByChange(select) {
   }
 }
 
+// ── Language of Delivery tags ─────────────────────────────────────────────────
+function toggleLang(chip) {
+  chip.classList.toggle("selected");
+}
+
+function showLangOthers(btn) {
+  const row = document.getElementById("lang-others-row");
+  row.style.display = "flex";
+  document.getElementById("lang-others-input").focus();
+  btn.style.display = "none";
+}
+
+function addCustomLang() {
+  const input = document.getElementById("lang-others-input");
+  const text  = input.value.trim();
+  if (!text) return;
+  const container = document.getElementById("lang-custom-tags");
+  const tag = document.createElement("span");
+  tag.className = "lang-custom-tag";
+  tag.dataset.lang = text;
+  tag.innerHTML = `${escapeHtml(text)}<button type="button" onclick="this.parentElement.remove()" aria-label="Remove">×</button>`;
+  container.appendChild(tag);
+  input.value = "";
+  input.focus();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("lang-others-input")?.addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); addCustomLang(); }
+  });
+});
+
+function collectLanguages() {
+  const selected = [...document.querySelectorAll(".lang-chip.selected")].map(c => c.dataset.lang);
+  const custom   = [...document.querySelectorAll(".lang-custom-tag")].map(c => c.dataset.lang);
+  return [...selected, ...custom].join(", ");
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
 // ── Facilitators ──────────────────────────────────────────────────────────────
 const ROLE_OPTIONS = `
   <option value="">— Select role —</option>
@@ -287,7 +329,7 @@ async function submitTraining() {
         Venue:                       val("Venue") || undefined,
         Venue_Address:               val("Venue_Address") || undefined,
         // Section A extras
-        Language_of_Delivery:        val("Language_of_Delivery") || undefined,
+        Language_of_Delivery:        collectLanguages() || undefined,
         Co_host:                     val("Co_host") || undefined,
         Countries_Participated:      selectedCountries.length ? selectedCountries : undefined,
         // Section C
@@ -389,6 +431,13 @@ function resetForm() {
 
   // Reset Countries Participated visibility
   document.getElementById("countries-participated-field").style.display = "none";
+
+  // Reset language chips
+  document.querySelectorAll(".lang-chip").forEach(c => c.classList.remove("selected"));
+  document.getElementById("lang-custom-tags").innerHTML = "";
+  document.getElementById("lang-others-row").style.display = "none";
+  const othersBtn = document.querySelector(".lang-chip--others");
+  if (othersBtn) othersBtn.style.display = "";
 
   // Reset facilitators to single empty slot
   document.getElementById("facilitators-container").innerHTML = `

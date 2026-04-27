@@ -356,6 +356,50 @@
       text-align: right;
     }
     .status-msg.error { color: #e53e3e; }
+
+    /* ── Language chips ── */
+    .lang-chip {
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      line-height: 1.4;
+    }
+    .lang-chip.selected {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--white);
+    }
+    .lang-chip--others {
+      border-style: dashed;
+      color: var(--primary);
+    }
+    .lang-custom-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px 4px 12px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--primary-light);
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+    }
+    .lang-custom-tag button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1;
+      color: var(--primary);
+    }
   </style>
 </head>
 <body>
@@ -423,10 +467,22 @@
       <input type="number" id="Target_Participants" min="1" max="500" placeholder="e.g. 25" inputmode="numeric">
     </div>
 
-    <div class="field">
-      <label class="field-label" for="Language_of_Delivery">Language of Delivery</label>
-      <input type="text" id="Language_of_Delivery" placeholder="e.g. English, Filipino">
-      <div class="field-hint">Separate multiple languages with commas.</div>
+    <div class="field" id="lang-field">
+      <label class="field-label">Language of Delivery</label>
+      <div id="lang-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+        <button type="button" class="lang-chip" data-lang="Filipino" onclick="toggleLang(this)">Filipino</button>
+        <button type="button" class="lang-chip" data-lang="English" onclick="toggleLang(this)">English</button>
+        <button type="button" class="lang-chip" data-lang="Urdu" onclick="toggleLang(this)">Urdu</button>
+        <button type="button" class="lang-chip" data-lang="Bahasa Indonesia" onclick="toggleLang(this)">Bahasa Indonesia</button>
+        <button type="button" class="lang-chip" data-lang="한국어" onclick="toggleLang(this)">한국어</button>
+        <button type="button" class="lang-chip lang-chip--others" onclick="showLangOthers(this)">+ Others</button>
+      </div>
+      <div id="lang-others-row" style="display:none;gap:8px;align-items:center;margin-bottom:8px">
+        <input type="text" id="lang-others-input" placeholder="Type language, press Enter" style="flex:1;min-height:38px;font-size:14px">
+        <button type="button" class="btn-secondary btn" style="min-height:38px;padding:0 14px;font-size:13px" onclick="addCustomLang()">Add</button>
+      </div>
+      <div id="lang-custom-tags" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      <div class="field-hint">Select all that apply. Use "Others" to add unlisted languages.</div>
     </div>
 
     <div class="field">
