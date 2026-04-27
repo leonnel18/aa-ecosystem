@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Training — AktivAsia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #821545;
+      --primary-light: #f3e8ff;
+      --cta-start: #ff960b;
+      --cta-end: #f93a3a;
+      --bg: #f5f4ee;
+      --white: #ffffff;
+      --text: #131625;
+      --meta: #788099;
+      --border: #e2e0d8;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --input-h: 52px;
+      --success: #16a34a;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo { font-size: 20px; font-weight: 800; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--primary); }
+    .page-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--meta);
+      border-left: 1.5px solid var(--border);
+      padding-left: 12px;
+      margin-left: 4px;
+    }
+
+    /* ── Banner ── */
+    .admin-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, #5a0e30 100%);
+      color: var(--white);
+      padding: 24px 20px 20px;
+    }
+    .admin-banner h1 {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .admin-banner p {
+      font-size: 14px;
+      opacity: 0.75;
+    }
+    @media (min-width: 640px) {
+      .admin-banner { padding: 28px 40px 24px; }
+      .admin-banner h1 { font-size: 28px; }
+    }
+
+    /* ── Form container ── */
+    .form-wrap { padding: 20px 16px 80px; max-width: 760px; margin: 0 auto; }
+    @media (min-width: 640px) { .form-wrap { padding: 28px 24px 80px; } }
+
+    /* ── Section card ── */
+    .section-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      margin-bottom: 16px;
+    }
+    @media (min-width: 640px) { .section-card { padding: 28px 28px; } }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--meta);
+      margin-bottom: 20px;
+    }
+
+    /* ── Fields ── */
+    .field { margin-bottom: 20px; }
+    .field-label {
+      font-size: 14px; font-weight: 600; margin-bottom: 6px; display: block;
+    }
+    .field-hint { font-size: 12px; color: var(--meta); margin-top: 4px; }
+    .field-error { font-size: 12px; color: #e53e3e; margin-top: 4px; display: none; }
+    .field.has-error input,
+    .field.has-error select,
+    .field.has-error textarea { border-color: #e53e3e; }
+    .field.has-error .field-error { display: block; }
+    .req { color: var(--primary); margin-left: 2px; }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      min-height: var(--input-h);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--text);
+      background: var(--white);
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    textarea { min-height: 80px; resize: vertical; }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23788099' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    /* ── Two-column date grid ── */
+    .date-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .date-grid .field { margin-bottom: 0; }
+    @media (max-width: 480px) { .date-grid { grid-template-columns: 1fr; } }
+
+    .date-group { margin-bottom: 20px; }
+    .date-group-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--meta);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      min-height: 52px;
+      border-radius: 9999px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      padding: 0 28px;
+    }
+    .btn:active { opacity: 0.85; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+      color: var(--white);
+    }
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── Submit bar ── */
+    .submit-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    /* ── Question builder ── */
+    #questions-container { display: flex; flex-direction: column; gap: 16px; }
+
+    .question-card {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      background: var(--bg);
+      position: relative;
+    }
+    .question-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .question-card-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--meta);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .btn-remove-q {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #e53e3e;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+    .btn-remove-q:hover { background: #fff0f0; }
+
+    .q-field { margin-bottom: 12px; }
+    .q-field label { font-size: 13px; font-weight: 600; display: block; margin-bottom: 4px; }
+    .q-field input, .q-field select { min-height: 42px; font-size: 14px; }
+
+    .q-options-wrap { display: none; }
+    .q-options-wrap.visible { display: block; }
+
+    .q-required-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .q-required-row input[type="checkbox"] {
+      width: 18px; height: 18px; min-height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .q-required-row label { font-size: 13px; font-weight: 500; cursor: pointer; margin-bottom: 0; }
+
+    .btn-add-q {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      width: 100%;
+      transition: border-color 0.2s, background 0.2s;
+      margin-top: 8px;
+    }
+    .btn-add-q:hover { border-color: var(--primary); background: var(--primary-light); }
+
+    /* ── Result panel ── */
+    #result-panel { display: none; }
+    #result-panel.visible { display: block; }
+
+    .result-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      border: 2px solid var(--success);
+    }
+    .result-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--success);
+      margin-bottom: 4px;
+    }
+    .result-subtitle {
+      font-size: 14px;
+      color: var(--meta);
+      margin-bottom: 24px;
+    }
+    .result-id {
+      font-size: 12px;
+      color: var(--meta);
+      margin-bottom: 20px;
+      font-family: monospace;
+    }
+
+    .link-row {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .link-row input {
+      flex: 1;
+      min-height: 44px;
+      font-size: 13px;
+      color: var(--primary);
+      background: var(--bg);
+      border-color: var(--border);
+      font-family: monospace;
+    }
+    .btn-copy {
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      border: 1.5px solid var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+    .btn-copy:hover { background: #e8cff5; }
+    .btn-copy.copied { background: #dcfce7; border-color: var(--success); color: var(--success); }
+
+    /* ── Spinner ── */
+    .spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 3px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .status-msg {
+      font-size: 13px;
+      color: var(--meta);
+      margin-top: 12px;
+      min-height: 20px;
+      text-align: right;
+    }
+    .status-msg.error { color: #e53e3e; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="index.html">Aktiv<span>Asia</span></a>
+  <span class="page-label">Create Training</span>
+</header>
+
+<div class="admin-banner">
+  <h1>New Training</h1>
+  <p>Fill in the details below. The application form and post-survey links will be generated automatically.</p>
+</div>
+
+<div class="form-wrap">
+
+  <!-- Section A: Training Identity -->
+  <div class="section-card">
+    <div class="section-title">Training Identity</div>
+    <div class="section-subtitle">Core details that identify this training</div>
+
+    <div class="field">
+      <label class="field-label" for="Solution_Title">Training Title <span class="req">*</span></label>
+      <input type="text" id="Solution_Title" placeholder="e.g. Foundational Campaigning Training — Philippines 2026">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Training_Type">Training Type <span class="req">*</span></label>
+      <select id="Training_Type">
+        <option value="">— Select type —</option>
+        <option value="Foundational">Foundational</option>
+        <option value="Training of Trainers (TOT)">Training of Trainers (TOT)</option>
+        <option value="Feminist Leadership">Feminist Leadership</option>
+        <option value="Public Narrative">Public Narrative</option>
+      </select>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Organised_By">Country / Portal <span class="req">*</span></label>
+      <select id="Organised_By">
+        <option value="">— Select country —</option>
+        <option value="Philippines">Philippines</option>
+        <option value="Pakistan">Pakistan</option>
+        <option value="Korea">Korea</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Regional">Regional (Backbone)</option>
+      </select>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Format">Format</label>
+      <select id="Format">
+        <option value="">— Select format —</option>
+        <option value="In-person">In-person</option>
+        <option value="Hybrid">Hybrid</option>
+        <option value="Online">Online</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Target_Participants">Target Participants</label>
+      <input type="number" id="Target_Participants" min="1" max="500" placeholder="e.g. 25" inputmode="numeric">
+    </div>
+  </div>
+
+  <!-- Section B: Dates & Availability -->
+  <div class="section-card">
+    <div class="section-title">Dates &amp; Availability</div>
+    <div class="section-subtitle">Set the training period and form windows</div>
+
+    <div class="date-group">
+      <div class="date-group-label">Training Period</div>
+      <div class="date-grid">
+        <div class="field">
+          <label class="field-label" for="Start_Date">Start Date <span class="req">*</span></label>
+          <input type="date" id="Start_Date">
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="End_Date">End Date <span class="req">*</span></label>
+          <input type="date" id="End_Date">
+          <div class="field-error">This field is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="date-group">
+      <div class="date-group-label">Application Form Window</div>
+      <div class="date-grid">
+        <div class="field">
+          <label class="field-label" for="Application_Form_Open_Date">Opens <span class="req">*</span></label>
+          <input type="date" id="Application_Form_Open_Date">
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="Application_Form_Close_Date">Closes <span class="req">*</span></label>
+          <input type="date" id="Application_Form_Close_Date">
+          <div class="field-error">This field is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="date-group" style="margin-bottom:0">
+      <div class="date-group-label">Post-Training Survey Window</div>
+      <div class="date-grid">
+        <div class="field">
+          <label class="field-label" for="Post_Survey_Open_Date">Opens</label>
+          <input type="date" id="Post_Survey_Open_Date">
+        </div>
+        <div class="field">
+          <label class="field-label" for="Post_Survey_Close_Date">Closes</label>
+          <input type="date" id="Post_Survey_Close_Date">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section C: Venue & Details -->
+  <div class="section-card">
+    <div class="section-title">Venue &amp; Details</div>
+    <div class="section-subtitle">Shown in the application form banner</div>
+
+    <div class="field">
+      <label class="field-label" for="Venue">Venue Name</label>
+      <input type="text" id="Venue" placeholder="e.g. Bayanihan Center, Manila">
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Venue_Address">Venue Address</label>
+      <textarea id="Venue_Address" rows="2" placeholder="Full address shown to applicants on the form banner"></textarea>
+    </div>
+  </div>
+
+  <!-- Section D: Custom Questions Builder -->
+  <div class="section-card">
+    <div class="section-title">Custom Questions</div>
+    <div class="section-subtitle">Optional — these appear in both the application form and post-training survey</div>
+
+    <div id="questions-container"></div>
+
+    <button type="button" class="btn-add-q" onclick="addQuestion()">
+      <span style="font-size:18px;line-height:1">+</span> Add Question
+    </button>
+  </div>
+
+  <!-- Result Panel -->
+  <div id="result-panel">
+    <div class="result-card">
+      <div class="result-title">Training Created</div>
+      <div class="result-subtitle">Both links have been saved to the CRM record.</div>
+      <div class="result-id" id="result-id"></div>
+
+      <div class="field" style="margin-bottom:16px">
+        <label class="field-label">Application Form Link</label>
+        <div class="link-row">
+          <input type="text" id="result-apply-url" readonly>
+          <button type="button" class="btn-copy" onclick="copyLink('result-apply-url', this)">Copy</button>
+        </div>
+        <div class="field-hint">Share with applicants once the application window opens.</div>
+      </div>
+
+      <div class="field" style="margin-bottom:24px">
+        <label class="field-label">Post-Training Survey Link</label>
+        <div class="link-row">
+          <input type="text" id="result-survey-url" readonly>
+          <button type="button" class="btn-copy" onclick="copyLink('result-survey-url', this)">Copy</button>
+        </div>
+        <div class="field-hint">Share with participants after the training.</div>
+      </div>
+
+      <button type="button" class="btn btn-secondary" onclick="resetForm()">Create Another Training</button>
+    </div>
+  </div>
+
+</div><!-- /form-wrap -->
+
+<!-- Submit bar (hidden when result is showing) -->
+<div class="submit-bar" id="submit-bar">
+  <div class="status-msg" id="status-msg"></div>
+  <button type="button" class="btn btn-primary" id="btn-submit" onclick="submitTraining()">Create Training</button>
+</div>
+
+<script src="js/create-training.js"></script>
+</body>
+</html>

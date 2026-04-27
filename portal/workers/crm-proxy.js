@@ -2,9 +2,12 @@
 // Proxies Zoho CRM API calls from the browser. Keeps OAuth credentials server-side.
 //
 // Routes handled:
-//   GET  /solutions/:id?fields=...   → GET /crm/v2/Solutions/:id?fields=...
-//   POST /deals                      → POST /crm/v2/Deals  (creates application Deal)
-//   POST /deals/:id/files?field=...  → POST /crm/v2/Deals/:id/attachments (file upload)
+//   GET  /solutions                  → GET  /crm/v6/Solutions (list, admin)
+//   POST /solutions                  → POST /crm/v6/Solutions (create training, admin)
+//   PUT  /solutions/:id              → PUT  /crm/v6/Solutions/:id (write back links, admin)
+//   GET  /solutions/:id?fields=...   → GET  /crm/v6/Solutions/:id?fields=...
+//   POST /deals                      → POST /crm/v6/Deals  (creates application Deal)
+//   POST /deals/:id/files?field=...  → POST /crm/v6/Deals/:id/attachments (file upload)
 //
 // Required Worker Secrets (set via wrangler secret put):
 //   ZOHO_CLIENT_ID
@@ -15,7 +18,7 @@
 //   https://aktivasia-portal.pages.dev
 //   http://localhost:*  (local dev)
 
-const CRM_BASE    = "https://www.zohoapis.in/crm/v2";
+const CRM_BASE    = "https://www.zohoapis.in/crm/v6";
 const TOKEN_URL   = "https://accounts.zoho.in/oauth/v2/token";
 const ALLOWED_ORIGINS = ["https://aktivasia-portal.pages.dev", "https://crm-proxy.gideon-valera.workers.dev"];
 
@@ -51,7 +54,7 @@ function corsHeaders(origin) {
     || (origin && /^http:\/\/localhost(:\d+)?$/.test(origin));
   return {
     "Access-Control-Allow-Origin":  allowed ? origin : ALLOWED_ORIGINS[0],
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Max-Age":       "86400",
   };
@@ -81,6 +84,42 @@ export default {
     try {
       const token = await getAccessToken(env);
       const auth  = { Authorization: `Zoho-oauthtoken ${token}` };
+
+      // ── GET /solutions (list) ─────────────────────────────────────────────────
+      if (request.method === "GET" && path === "/solutions") {
+        const fields = url.searchParams.get("fields") ?? "id,Solution_Title,Organised_By,Start_Date,End_Date,Training_Type";
+        const page   = url.searchParams.get("page") ?? "1";
+        const crmUrl = `${CRM_BASE}/Solutions?fields=${fields}&per_page=50&page=${page}&sort_by=Modified_Time&sort_order=desc`;
+        const crmRes = await fetch(crmUrl, { headers: auth });
+        const body   = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      // ── POST /solutions ───────────────────────────────────────────────────────
+      if (request.method === "POST" && path === "/solutions") {
+        const payload = await request.json();
+        const crmRes  = await fetch(`${CRM_BASE}/Solutions`, {
+          method:  "POST",
+          headers: { ...auth, "Content-Type": "application/json" },
+          body:    JSON.stringify(payload),
+        });
+        const body = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      // ── PUT /solutions/:id ────────────────────────────────────────────────────
+      const solPutMatch = path.match(/^\/solutions\/([^/]+)$/);
+      if (request.method === "PUT" && solPutMatch) {
+        const id      = solPutMatch[1];
+        const payload = await request.json();
+        const crmRes  = await fetch(`${CRM_BASE}/Solutions/${id}`, {
+          method:  "PUT",
+          headers: { ...auth, "Content-Type": "application/json" },
+          body:    JSON.stringify(payload),
+        });
+        const body = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
 
       // ── GET /solutions/:id ────────────────────────────────────────────────────
       const solMatch = path.match(/^\/solutions\/([^/]+)$/);
