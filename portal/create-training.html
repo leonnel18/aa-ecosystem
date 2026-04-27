@@ -657,9 +657,13 @@
     <div class="section-subtitle">Optional — links this training to an existing plan record</div>
 
     <div class="field" style="margin-bottom:0">
-      <label class="field-label" for="Training_Title_Plan">Training Plan Name</label>
-      <input type="text" id="Training_Title_Plan" placeholder="e.g. PH Annual Plan 2026">
-      <div class="field-hint">Enter the exact name of the Training Plan record in the CRM.</div>
+      <label class="field-label">Training Plan Name</label>
+      <div class="fac-typeahead-wrap" id="plan-typeahead-wrap">
+        <input type="text" id="Training_Title_Plan" placeholder="Select country first, then search…" autocomplete="off" oninput="onPlanInput(this)" onfocus="onPlanInput(this)" disabled>
+        <input type="hidden" id="Training_Title_Plan_id">
+        <div class="fac-dropdown" id="plan-dropdown" style="display:none"></div>
+      </div>
+      <div class="field-hint" id="plan-hint">Select an Organised By country above to load plans.</div>
     </div>
   </div>
 

@@ -32,6 +32,83 @@ function onOrganisedByChange(select) {
   if (select.value !== "Regional") {
     document.getElementById("Countries_Participated").selectedIndex = -1;
   }
+  loadPlans(select.value);
+}
+
+async function loadPlans(organisedBy) {
+  const input    = document.getElementById("Training_Title_Plan");
+  const idInput  = document.getElementById("Training_Title_Plan_id");
+  const dropdown = document.getElementById("plan-dropdown");
+  const hint     = document.getElementById("plan-hint");
+
+  // Clear previous selection
+  input.value   = "";
+  idInput.value = "";
+  dropdown.style.display = "none";
+
+  if (!organisedBy) {
+    input.disabled = true;
+    input.placeholder = "Select country first, then search…";
+    hint.textContent = "Select an Organised By country above to load plans.";
+    return;
+  }
+
+  input.disabled = false;
+  input.placeholder = "Type to search training plans…";
+  hint.textContent = "Loading plans…";
+
+  try {
+    const res  = await fetch(`${PROXY_BASE}/training-plans/search?organised_by=${encodeURIComponent(organisedBy)}`);
+    const json = await res.json();
+    const plans = json.data ?? [];
+    if (plans.length === 0) {
+      hint.textContent = "No plans found for this country.";
+    } else {
+      hint.textContent = `${plans.length} plan(s) available — type to search.`;
+    }
+    // Cache the plans on the input element for filtering
+    input._plans = plans;
+    renderPlanDropdown(plans.slice(0, 10));
+  } catch (e) {
+    hint.textContent = "Could not load plans. Try again or type manually.";
+    input.disabled = false;
+    input._plans = [];
+  }
+}
+
+function onPlanInput(input) {
+  const q = input.value.trim().toLowerCase();
+  const plans = input._plans ?? [];
+  const filtered = q.length === 0
+    ? plans.slice(0, 10)
+    : plans.filter(p => p.Name?.toLowerCase().includes(q)).slice(0, 10);
+  renderPlanDropdown(filtered);
+}
+
+function renderPlanDropdown(plans) {
+  const dropdown = document.getElementById("plan-dropdown");
+  if (plans.length === 0) {
+    dropdown.style.display = "none";
+    return;
+  }
+  dropdown.innerHTML = "";
+  plans.forEach(plan => {
+    const item = document.createElement("div");
+    item.className = "fac-dropdown-item";
+    item.textContent = plan.Name;
+    item.addEventListener("mousedown", e => {
+      e.preventDefault();
+      selectPlan(plan.id, plan.Name);
+    });
+    dropdown.appendChild(item);
+  });
+  dropdown.style.display = "";
+}
+
+function selectPlan(id, name) {
+  document.getElementById("Training_Title_Plan").value    = name;
+  document.getElementById("Training_Title_Plan_id").value = id;
+  document.getElementById("plan-dropdown").style.display  = "none";
 }
 
 // ── Language of Delivery tags ─────────────────────────────────────────────────
@@ -272,10 +349,13 @@ async function saveNewContact() {
   }
 }
 
-// Close dropdown when clicking outside
+// Close dropdowns when clicking outside
 document.addEventListener("click", e => {
   if (!e.target.closest(".fac-typeahead-wrap")) {
     document.querySelectorAll(".fac-dropdown").forEach(d => d.style.display = "none");
+  }
+  if (!e.target.closest("#plan-typeahead-wrap")) {
+    document.getElementById("plan-dropdown").style.display = "none";
   }
 });
 
@@ -467,7 +547,7 @@ async function submitTraining() {
         Co_host:                     val("Co_host") || undefined,
         Countries_Participated:      selectedCountries.length ? selectedCountries : undefined,
         // Section C
-        Training_Title_Plan:         val("Training_Title_Plan") || undefined,
+        Training_Title_Plan:         val("Training_Title_Plan_id") ? { id: val("Training_Title_Plan_id") } : undefined,
         // Section D — update keys below to match confirmed CRM API names
         Who_is_this_training_for:    val("Who_is_this_training_for") || undefined,
         Training_Objectives:         val("Training_Objectives") || undefined,
@@ -565,6 +645,9 @@ function resetForm() {
 
   // Reset Countries Participated visibility
   document.getElementById("countries-participated-field").style.display = "none";
+
+  // Reset Training Plan typeahead
+  loadPlans("");
 
   // Reset language chips
   document.querySelectorAll(".lang-chip").forEach(c => c.classList.remove("selected"));
