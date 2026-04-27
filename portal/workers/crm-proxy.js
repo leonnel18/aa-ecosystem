@@ -224,6 +224,51 @@ export default {
         return jsonResponse(body, crmRes.status, origin);
       }
 
+      // ── GET /contacts/search?q= ──────────────────────────────────────────────
+      if (request.method === "GET" && path === "/contacts/search") {
+        const q = (url.searchParams.get("q") ?? "").trim();
+        if (q.length < 2) return jsonResponse({ data: [] }, 200, origin);
+        const searchUrl = `${CRM_BASE}/Contacts/search?word=${encodeURIComponent(q)}&fields=id,Full_Name,Email&per_page=10`;
+        const crmRes = await fetch(searchUrl, { headers: auth });
+        const body   = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      // ── POST /contacts ────────────────────────────────────────────────────────
+      if (request.method === "POST" && path === "/contacts") {
+        const payload = await request.json();
+        const crmRes  = await fetch(`${CRM_BASE}/Contacts`, {
+          method:  "POST",
+          headers: { ...auth, "Content-Type": "application/json" },
+          body:    JSON.stringify(payload),
+        });
+        const body = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      // ── GET /training-plans/search?organised_by= ─────────────────────────────
+      if (request.method === "GET" && path === "/training-plans/search") {
+        const organisedBy = (url.searchParams.get("organised_by") ?? "").trim();
+        const plansUrl = `${CRM_BASE}/Training_Plans?fields=id,Name,Organised_By&per_page=200`;
+        const crmRes   = await fetch(plansUrl, { headers: auth });
+        const body     = await crmRes.json();
+        const plans = (body.data ?? []).filter(p =>
+          !organisedBy || p.Organised_By === organisedBy
+        );
+        return jsonResponse({ data: plans }, 200, origin);
+      }
+
+      // ── GET /users/search?email= ──────────────────────────────────────────────
+      if (request.method === "GET" && path === "/users/search") {
+        const email = (url.searchParams.get("email") ?? "").trim();
+        if (!email) return jsonResponse({ users: [] }, 200, origin);
+        const usersUrl = `${CRM_BASE.replace("/crm/v6", "")}/crm/v2/users?type=AllUsers`;
+        const crmRes   = await fetch(usersUrl, { headers: auth });
+        const body     = await crmRes.json();
+        const match    = (body.users ?? []).find(u => u.email?.toLowerCase() === email.toLowerCase());
+        return jsonResponse(match ? { users: [match] } : { users: [] }, 200, origin);
+      }
+
       return jsonResponse({ error: "Not found" }, 404, origin);
 
     } catch (err) {
