@@ -715,6 +715,7 @@ function buildPayload() {
     Please_provide_a_100_word_bio_that_best_describes: val("Please_provide_a_100_word_bio_that_best_describes"),
     Training_Applied:       { id: trainingId },
     Training_Type_Applied:  TYPE_IDS[trainingType] ? { id: TYPE_IDS[trainingType] } : null,
+    Pipeline:               "Application Pipeline",
     Stage:                  "Still in Applied Stage",
   };
 
