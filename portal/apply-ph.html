@@ -48,15 +48,51 @@
     .training-banner {
       background: linear-gradient(135deg, var(--primary) 0%, #5a0e30 100%);
       color: var(--white);
-      padding: 24px 20px 20px;
+      padding: 28px 20px 24px;
     }
-    .training-banner .label {
-      font-size: 12px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; opacity: 0.75; margin-bottom: 6px;
+    .training-banner .type-pill {
+      display: inline-block;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      margin-bottom: 12px;
+      opacity: 0.9;
     }
-    .training-banner h1 { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 8px; }
-    .training-banner .meta { font-size: 13px; opacity: 0.85; display: flex; gap: 16px; flex-wrap: wrap; }
-    .training-banner .meta span { display: flex; align-items: center; gap: 4px; }
+    .training-banner h1 {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .banner-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 16px;
+    }
+    .banner-meta-col .meta-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 4px;
+    }
+    .banner-meta-col .meta-value {
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.95;
+      line-height: 1.4;
+    }
+    @media (min-width: 640px) {
+      .training-banner { padding: 36px 40px 28px; }
+      .training-banner h1 { font-size: 36px; }
+    }
 
     /* ── Closed state ── */
     .closed-banner {
@@ -326,8 +362,6 @@
     .hidden { display: none !important; }
 
     @media (min-width: 640px) {
-      .training-banner { padding: 32px 40px 28px; }
-      .training-banner h1 { font-size: 28px; }
       .form-wrap { padding: 24px 24px 100px; }
       .section-card { padding: 32px 28px; }
     }
@@ -341,12 +375,21 @@
 
 <!-- Training info loaded dynamically -->
 <div class="training-banner" id="training-banner">
-  <div class="label">Application Form / Form ng Aplikasyon</div>
+  <div class="type-pill" id="banner-type">Application Form</div>
   <h1 id="banner-title">Loading training…</h1>
-  <div class="meta">
-    <span id="banner-type"></span>
-    <span id="banner-dates"></span>
-    <span id="banner-country"></span>
+  <div class="banner-meta-grid">
+    <div class="banner-meta-col">
+      <div class="meta-label">Venue</div>
+      <div class="meta-value" id="banner-venue">—</div>
+    </div>
+    <div class="banner-meta-col">
+      <div class="meta-label">Time</div>
+      <div class="meta-value" id="banner-dates">—</div>
+    </div>
+    <div class="banner-meta-col">
+      <div class="meta-label">Apply Before</div>
+      <div class="meta-value" id="banner-deadline">—</div>
+    </div>
   </div>
 </div>
 
