@@ -148,10 +148,10 @@ function collectFacilitators() {
     if (!name && !id && !role) return;
     const nameKey = FAC_NAME_KEYS[i];
     const roleKey = i < 5 ? FAC_ROLE_KEYS_1_5[i] : FAC_ROLE_KEYS_6_10[i - 5];
-    // Slots 1–8 are CRM lookups → send {id}; slots 9–10 are plain text
+    // Slots 0–7 are CRM lookups → send {id} only; slots 8–9 are plain text
     if (i < 8) {
-      if (id)        result[nameKey] = { id };
-      else if (name) result[nameKey] = name;
+      if (id) result[nameKey] = { id };
+      // if no id selected, skip — CRM lookup fields require an object reference
     } else {
       if (name) result[nameKey] = name;
     }
