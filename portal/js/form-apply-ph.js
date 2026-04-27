@@ -26,11 +26,36 @@ const TYPE_IDS = {
 // Confidence rating definitions per training type (pre-training, 1-7 scale)
 const RATINGS_CONFIG = {
   Foundational: [
-    { id: "Campaigning_Experience_Pre",           renderKey: "rating_f_a", label: "A) Campaign Experience Assessment",         labelFil: "Karanasan sa Kampanya" },
-    { id: "A_Pre_Training_Strategy_Buildings",    renderKey: "rating_f_b", label: "B) Strategy & Tactics",                    labelFil: "Estratehiya at Taktika" },
-    { id: "B_Pre_Training_Building_Communication",renderKey: "rating_f_c", label: "C) Communication Strategy",                 labelFil: "Estratehiya sa Komunikasyon" },
-    { id: "C_Pre_Training_Confident_facilitator", renderKey: "rating_f_d", label: "D) Facilitating Workshops / Meetings",      labelFil: "Pagpapatakbo ng mga Workshop" },
-    { id: "D_Pre_Training_Confident_connector",   renderKey: "rating_f_e", label: "E) Building Connections",                   labelFil: "Pagbuo ng mga Koneksyon" },
+    {
+      id: "Campaigning_Experience_Pre",
+      renderKey: "rating_f_a",
+      label: "1) How would you rank your experience in campaigning? By a \"campaign\" we mean an organized course of action to achieve a social, environmental, or political goal. (1 being not at all confident and 7 being highly confident)",
+      labelFil: "Anong masasabi mo tungkol sa iyong karanasan sa pangangampaniya? Ang tinutukoy nating \"kampaniya\" ay ang organisadong pagkilos na may mga hakbangin o gawain para sa isang sosyal, environmental, o politikal na layunin.",
+    },
+    {
+      id: "A_Pre_Training_Strategy_Buildings",
+      renderKey: "rating_f_b",
+      label: "2) I feel confident building strategy and choosing tactics for a campaign. (1 being not at all confident and 7 being highly confident)",
+      labelFil: "Ako ay kumpiyansa sa paggawa o pagtukoy ng ng stratehiya at gawain para sa isang kampaniya.",
+    },
+    {
+      id: "B_Pre_Training_Building_Communication",
+      renderKey: "rating_f_c",
+      label: "3) I feel confident using stories to connect with others for campaigns OR starting a communication strategy or plan for a campaign. (1 being not at all confident and 7 being highly confident)",
+      labelFil: "Ako ay kumpiyansa sa paggamit ng aking kwento/karanasa sa pakikipag-ugnayan sa ibang tao na pwedeng makatutulong sa aking kampaniya o sa pagsisimula ng isang stratehiya o planong pangkomunikasyon para sa isang kampaniya.",
+    },
+    {
+      id: "C_Pre_Training_Confident_facilitator",
+      renderKey: "rating_f_d",
+      label: "4) I feel confident facilitating discussions or knowledge sharing activities for a campaign. (1 being not at all confident and 7 being highly confident)",
+      labelFil: "Ako ay kumpiyansang magpadaloy ng workshops at meetings para sa isang kampaniya.",
+    },
+    {
+      id: "D_Pre_Training_Confident_connector",
+      renderKey: "rating_f_e",
+      label: "5) I feel confident building connections with others to support a campaign. (1 being not at all confident and 7 being highly confident)",
+      labelFil: "Ako ay kumpiyansang makapagbuo ng mga ugnayan sa ibang tao upang masuportahan ang isang kampaniya.",
+    },
   ],
   Training_of_Trainers__TOT_: [
     { id: "A_Experience_in_Facilitating_Pre",         renderKey: "rating_tot_a", label: "A) Experience in Facilitating",             labelFil: "Karanasan sa Pagpapatakbo" },
@@ -680,8 +705,8 @@ function renderRatings() {
         ).join("")}
       </div>
       <div class="rating-scale-labels">
-        <span>1 — Not confident</span>
-        <span>7 — Very confident</span>
+        <span>1 — Not at all confident</span>
+        <span>7 — Highly confident</span>
       </div>
       <div class="field-error" style="display:none">Please rate this item.</div>
     </div>`;
