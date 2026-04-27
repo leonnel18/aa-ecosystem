@@ -199,6 +199,7 @@ async function initPortal() {
   tryRender('Report 2', () => renderReport2(portal.report_2_training_plan || {}));
   tryRender('Organization Stats', () => renderReportOrgs(portal));
   tryRender('Report 3', () => renderReport3(portal.report_3_impact_qualitative || {}));
+  tryRender('Training Forms', () => renderTrainingFormsTab(portal.report_2_training_plan || {}));
 }
 
 // ── Backbone page ─────────────────────────────────────────────────────────────
@@ -220,6 +221,7 @@ async function initBackbone() {
   tryRender('Report 2', () => renderReport2(bb.report_2_training_plan || {}));
   tryRender('Organization Stats', () => renderReportOrgs(bb));
   tryRender('Report 3', () => renderReport3(bb.report_3_impact_qualitative || {}));
+  tryRender('Training Forms', () => renderTrainingFormsTab(bb.report_2_training_plan || {}));
 }
 
 // ── tryRender: isolate errors per report ─────────────────────────────────────
@@ -993,6 +995,123 @@ function renderLikert(r3, filterName, need6m, needPost) {
   if (window.Charts) {
     try { Charts.likertBar('chart-likert', agg); } catch(e) { console.warn('likertBar:', e); }
   }
+}
+
+// ── Training Forms Tab ────────────────────────────────────────────────────────
+
+function renderTrainingFormsTab(r2) {
+  const container   = document.getElementById('training-forms-list');
+  const yearFilter  = document.getElementById('forms-year-filter');
+  const typeFilter  = document.getElementById('forms-type-filter');
+  if (!container) return;
+
+  const trainings = (r2.actual_trainings || []).filter(t =>
+    t.pre_app_link || t.post_app_link
+  );
+
+  if (!trainings.length) {
+    container.innerHTML = '<p style="color:var(--text-meta);padding:24px 0">No training forms available for this portal yet.</p>';
+    return;
+  }
+
+  // Populate year filter
+  const years = [...new Set(trainings.map(t => (t.date || '').slice(0,4)).filter(Boolean))].sort().reverse();
+  if (yearFilter) {
+    yearFilter.innerHTML = '<option value="">All Years</option>' +
+      years.map(y => `<option value="${y}">${y}</option>`).join('');
+  }
+
+  // Populate type filter
+  const types = [...new Set(trainings.map(t => t.type).filter(Boolean))].sort();
+  if (typeFilter) {
+    typeFilter.innerHTML = '<option value="">All Types</option>' +
+      types.map(tp => `<option value="${tp}">${tp}</option>`).join('');
+  }
+
+  function renderCards() {
+    const selYear = yearFilter ? yearFilter.value : '';
+    const selType = typeFilter ? typeFilter.value : '';
+    const today   = new Date().toISOString().slice(0,10);
+
+    const filtered = trainings.filter(t => {
+      if (selYear && !(t.date || '').startsWith(selYear)) return false;
+      if (selType && t.type !== selType) return false;
+      return true;
+    });
+
+    if (!filtered.length) {
+      container.innerHTML = '<p style="color:var(--text-meta);padding:16px 0">No trainings match this filter.</p>';
+      return;
+    }
+
+    container.innerHTML = filtered.map(t => {
+      const appState  = formLinkState(t.pre_app_link,  t.app_open_date,  t.app_close_date,  today);
+      const postState = formLinkState(t.post_app_link, t.post_open_date, t.post_close_date, today);
+
+      return `
+        <div class="chart-card" style="margin-bottom:16px;padding:20px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+            <div>
+              <div style="font-weight:700;font-size:16px;margin-bottom:4px">${esc(t.name)}</div>
+              <div style="font-size:13px;color:var(--text-meta)">${esc(t.type)} · ${fmtDateRange(t.date, t.end_date)}</div>
+            </div>
+            <span class="section-badge" style="flex-shrink:0">${t.status}</span>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+            ${formLinkCard('Application Form', appState)}
+            ${formLinkCard('Post-Training Survey', postState)}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  if (yearFilter) yearFilter.addEventListener('change', renderCards);
+  if (typeFilter) typeFilter.addEventListener('change', renderCards);
+  renderCards();
+}
+
+function formLinkState(link, openDate, closeDate, today) {
+  if (!link) return { state: 'unavailable', label: 'Not configured', link: null, dateHint: '' };
+  if (!openDate || !closeDate) return { state: 'active', label: 'Open', link, dateHint: '' };
+  if (today < openDate)  return { state: 'upcoming', label: `Opens ${fmtDateShort(openDate)}`, link: null, dateHint: openDate };
+  if (today > closeDate) return { state: 'closed',   label: `Closed ${fmtDateShort(closeDate)}`, link: null, dateHint: closeDate };
+  return { state: 'active', label: `Open until ${fmtDateShort(closeDate)}`, link, dateHint: closeDate };
+}
+
+function formLinkCard(title, st) {
+  const colors = {
+    active:      'background:#e8f5e9;border-color:#4caf50;color:#2e7d32',
+    upcoming:    'background:#fff8e1;border-color:#ffc107;color:#8b6914',
+    closed:      'background:#fce4ec;border-color:#e91e63;color:#880e4f',
+    unavailable: 'background:#f5f5f5;border-color:#e0e0e0;color:#9e9e9e',
+  };
+  const style = colors[st.state] || colors.unavailable;
+  const inner = st.state === 'active'
+    ? `<a href="${esc(st.link)}" target="_blank" rel="noopener" style="font-weight:700;color:inherit;text-decoration:none">
+         ${title} →
+       </a>
+       <div style="font-size:11px;margin-top:2px">${esc(st.label)}</div>`
+    : `<div style="font-weight:600">${title}</div>
+       <div style="font-size:12px;margin-top:2px">${esc(st.label)}</div>`;
+  return `<div style="flex:1;min-width:160px;border:1.5px solid;border-radius:10px;padding:12px 14px;${style}">${inner}</div>`;
+}
+
+function fmtDateShort(iso) {
+  if (!iso) return '';
+  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+}
+
+function fmtDateRange(start, end) {
+  if (!start) return '—';
+  const s = new Date(start).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  if (!end) return s;
+  const e = new Date(end).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  return `${s} – ${e}`;
+}
+
+function esc(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

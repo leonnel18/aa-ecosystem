@@ -74,6 +74,11 @@ SOLUTIONS_FIELDS = ",".join([
     "id", "Solution_Title", "Organised_By", "Training_Type",
     "Start_Date", "End_Date", "Countries_Participated",
     "Target_Participants", "Participants_Until_2023", "Training_Title_Plan",
+    # Form links + availability windows (Training Automation)
+    "Application_Form", "Evaluation_Form",
+    "Application_Form_Open_Date", "Application_Form_Close_Date",
+    "Post_Survey_Open_Date", "Post_Survey_Close_Date",
+    "Custom_Questions",
 ])
 
 PRODUCTS_FIELDS = ",".join([

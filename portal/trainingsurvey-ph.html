@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post-Training Survey — AktivAsia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #821545;
+      --primary-light: #f3e8ff;
+      --cta-start: #ff960b;
+      --cta-end: #f93a3a;
+      --bg: #f5f4ee;
+      --white: #ffffff;
+      --text: #131625;
+      --meta: #788099;
+      --border: #e2e0d8;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --input-h: 52px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo { font-size: 20px; font-weight: 800; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--primary); }
+
+    /* ── Training banner ── */
+    .training-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, #5a0e30 100%);
+      color: var(--white);
+      padding: 24px 20px 20px;
+    }
+    .training-banner .label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; opacity: 0.75; margin-bottom: 6px;
+    }
+    .training-banner h1 { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 8px; }
+    .training-banner .meta { font-size: 13px; opacity: 0.85; display: flex; gap: 16px; flex-wrap: wrap; }
+    .training-banner .meta span { display: flex; align-items: center; gap: 4px; }
+
+    /* ── Closed / error states ── */
+    .closed-banner {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      text-align: center;
+      margin: 24px 16px;
+    }
+    .closed-banner .icon { font-size: 40px; margin-bottom: 16px; }
+    .closed-banner h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .closed-banner p { color: var(--meta); font-size: 14px; }
+
+    /* ── Progress bar ── */
+    .progress-wrap {
+      background: var(--white);
+      padding: 16px 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--border);
+    }
+    .progress-steps {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .progress-steps::-webkit-scrollbar { display: none; }
+    .step-dot {
+      flex: 1;
+      min-width: 32px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+    .step-dot.done { background: var(--primary); }
+    .step-dot.active { background: var(--cta-start); }
+    .progress-label {
+      font-size: 12px; color: var(--meta); font-weight: 500;
+      padding-bottom: 12px;
+    }
+
+    /* ── Form container ── */
+    .form-wrap { padding: 20px 16px 100px; max-width: 640px; margin: 0 auto; }
+
+    /* ── Section card ── */
+    .section-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .section-card.active { display: block; }
+
+    .section-title {
+      font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--text);
+    }
+    .section-subtitle {
+      font-size: 13px; color: var(--meta); margin-bottom: 20px;
+    }
+
+    /* ── Fields ── */
+    .field { margin-bottom: 20px; }
+    .field-label {
+      font-size: 14px; font-weight: 600; margin-bottom: 2px; display: block;
+    }
+    .field-label-fil {
+      font-size: 12px; color: var(--meta); margin-bottom: 6px; display: block; font-style: italic;
+    }
+    .field-label .req { color: var(--primary); margin-left: 2px; }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      min-height: var(--input-h);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--text);
+      background: var(--white);
+      appearance: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23788099' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    .field-hint { font-size: 12px; color: var(--meta); margin-top: 4px; }
+    .field-error { font-size: 12px; color: #e53e3e; margin-top: 4px; display: none; }
+    .field.has-error input, .field.has-error select, .field.has-error textarea { border-color: #e53e3e; }
+    .field.has-error .field-error { display: block; }
+
+    /* ── Applicant search ── */
+    .search-result-card {
+      border: 1.5px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      background: var(--primary-light);
+      margin-top: 8px;
+    }
+    .search-result-card .name { font-weight: 700; font-size: 15px; }
+    .search-result-card .detail { font-size: 13px; color: var(--meta); margin-top: 2px; }
+
+    /* ── Rating scale ── */
+    .rating-item { margin-bottom: 24px; }
+    .rating-question { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+    .rating-scale {
+      display: flex; gap: 6px; align-items: center;
+    }
+    .rating-scale-labels {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--meta); margin-top: 4px;
+    }
+    .rating-btn {
+      flex: 1;
+      min-height: 44px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text);
+    }
+    .rating-btn.selected {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--white);
+    }
+
+    /* ── Radio group ── */
+    .radio-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+    .radio-opt {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 9999px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.2s;
+      min-height: 48px;
+    }
+    .radio-opt input { display: none; }
+    .radio-opt.selected {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* ── Navigation buttons ── */
+    .nav-buttons {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 16px 20px;
+      display: flex;
+      gap: 12px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .btn {
+      flex: 1;
+      min-height: 52px;
+      border-radius: 9999px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:active { opacity: 0.85; }
+    .btn-back {
+      background: var(--bg);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      flex: 0 0 auto;
+      padding: 0 24px;
+    }
+    .btn-next {
+      background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+      color: var(--white);
+    }
+    .btn-submit {
+      background: linear-gradient(135deg, var(--primary), #5a0e30);
+      color: var(--white);
+    }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── Success screen ── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .success-screen .icon { font-size: 56px; margin-bottom: 20px; }
+    .success-screen h2 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+    .success-screen p { color: var(--meta); font-size: 15px; line-height: 1.6; }
+
+    /* ── Loading spinner ── */
+    .spinner {
+      display: inline-block;
+      width: 20px; height: 20px;
+      border: 3px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hidden { display: none !important; }
+
+    @media (min-width: 640px) {
+      .training-banner { padding: 32px 40px 28px; }
+      .training-banner h1 { font-size: 28px; }
+      .form-wrap { padding: 24px 24px 100px; }
+      .section-card { padding: 32px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="index.html">Aktiv<span>Asia</span></a>
+</header>
+
+<!-- Training info loaded dynamically -->
+<div class="training-banner" id="training-banner">
+  <div class="label">Post-Training Survey / Survey Pagkatapos ng Training</div>
+  <h1 id="banner-title">Loading training…</h1>
+  <div class="meta">
+    <span id="banner-type"></span>
+    <span id="banner-dates"></span>
+    <span id="banner-country"></span>
+  </div>
+</div>
+
+<!-- Closed / error states -->
+<div class="closed-banner hidden" id="closed-banner">
+  <div class="icon">🔒</div>
+  <h2 id="closed-title">Survey Closed</h2>
+  <p id="closed-msg">This post-training survey is no longer accepting responses. Please contact your AktivAsia country team.</p>
+</div>
+
+<div class="closed-banner hidden" id="error-banner">
+  <div class="icon">⚠️</div>
+  <h2>Unable to load survey</h2>
+  <p>Please check your link or contact your AktivAsia country team.</p>
+</div>
+
+<!-- Progress -->
+<div class="progress-wrap" id="progress-wrap">
+  <div class="progress-steps" id="progress-steps"></div>
+  <div class="progress-label" id="progress-label"></div>
+</div>
+
+<!-- Main form -->
+<div class="form-wrap" id="form-wrap">
+
+  <!-- SECTION A: Applicant Lookup -->
+  <div class="section-card" id="sec-lookup">
+    <div class="section-title">Find Your Application</div>
+    <div class="section-subtitle">Hanapin ang iyong aplikasyon — Enter the name you used when you applied</div>
+
+    <div class="field">
+      <label class="field-label">First Name <span class="req">*</span></label>
+      <span class="field-label-fil">Pangalan</span>
+      <input type="text" id="lookup-first" autocomplete="given-name" placeholder="Enter your first name…">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Last Name <span class="req">*</span></label>
+      <span class="field-label-fil">Apelyido</span>
+      <input type="text" id="lookup-last" autocomplete="family-name" placeholder="Enter your last name…">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <button type="button" class="btn btn-next" id="btn-search" onclick="searchApplicant()"
+      style="position:static;border-radius:9999px;margin-top:4px">
+      Search / Hanapin
+    </button>
+
+    <div id="search-result" class="hidden" style="margin-top:16px">
+      <div class="search-result-card">
+        <div class="name" id="result-name"></div>
+        <div class="detail" id="result-detail"></div>
+      </div>
+      <div style="font-size:13px;color:var(--meta);margin-top:8px">Is this you? Continue to fill in the survey below.</div>
+    </div>
+
+    <div id="search-notfound" class="hidden" style="margin-top:16px;color:#e53e3e;font-size:14px">
+      No application found for that name in this training. Please check the spelling or contact your AktivAsia team.
+    </div>
+
+    <!-- Hidden fields populated after lookup -->
+    <input type="hidden" id="Deal_Id">
+    <input type="hidden" id="Training_Applied">
+  </div>
+
+  <!-- SECTION B: Training Feedback -->
+  <div class="section-card" id="sec-feedback">
+    <div class="section-title">Training Feedback</div>
+    <div class="section-subtitle">Puna sa Training</div>
+
+    <div class="field">
+      <label class="field-label">Overall, did the training meet your expectations? <span class="req">*</span></label>
+      <span class="field-label-fil">Sa kabuuan, natugunan ba ng training ang iyong mga inaasahan?</span>
+      <select id="Did_the_Training_meet_your_expectations">
+        <option value="">— Select / Pumili —</option>
+        <option value="1">1 — Not at all / Hindi talaga</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4 — Somewhat / Medyo</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7 — Completely / Ganap na oo</option>
+      </select>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">What was the best aspect of the training? <span class="req">*</span></label>
+      <span class="field-label-fil">Ano ang pinakamahusay na bahagi ng training?</span>
+      <textarea id="Best_aspect_of_the_workshop" rows="4" placeholder="What went well? What did you enjoy most?"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">What could be improved for next time?</label>
+      <span class="field-label-fil">Ano ang maaaring pagbutihin para sa susunod na beses? (opsyonal)</span>
+      <textarea id="Improvement_Suggestion_for_next_time" rows="4" placeholder="Your suggestions for improvement…"></textarea>
+    </div>
+  </div>
+
+  <!-- SECTION C: Session Topics (dynamic — injected per training) -->
+  <div class="section-card" id="sec-topics">
+    <div class="section-title">Session Ratings</div>
+    <div class="section-subtitle">Rate each session from 1 (not useful) to 7 (very useful) — I-rate ang bawat sesyon</div>
+    <div id="topics-container">
+      <!-- Rendered by JS from training record topic names -->
+    </div>
+  </div>
+
+  <!-- SECTION D: Logistics & Communication -->
+  <div class="section-card" id="sec-logistics">
+    <div class="section-title">Logistics &amp; Communication</div>
+    <div class="section-subtitle">Rate from 1 (poor) to 7 (excellent) — 1 (mahina) hanggang 7 (napakahusay)</div>
+
+    <div class="rating-item" id="rating-item-Venue_and_Location">
+      <div class="rating-question">Venue and Location <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Lugar ng Training</span></div>
+      <div class="rating-scale">
+        <button type="button" class="rating-btn" data-rk="Venue_and_Location" data-val="1" onclick="selectRating(this)">1</button>
+        <button type="button" class="rating-btn" data-rk="Venue_and_Location" data-val="2" onclick="selectRating(this)">2</button>
+        <button type="button" class="rating-btn" data-rk="Venue_and_Location" data-val="3" onclick="selectRating(this)">3</button>
+        <button type="button" class="rating-btn" data-rk="Venue_and_Location" data-val="4" onclick="selectRating(this)">4</button>
+        <button type="button" class="rating-btn" data-rk="Venue_and_Location" data-val="5" onclick="selectRating(this)">5</button>
+        <button type="button" class="rating-btn" data-rk="Venue_and_Location" data-val="6" onclick="selectRating(this)">6</button>
+        <button type="button" class="rating-btn" data-rk="Venue_and_Location" data-val="7" onclick="selectRating(this)">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>1 — Poor</span><span>7 — Excellent</span></div>
+      <div class="field-error" style="display:none">Please rate this item.</div>
+    </div>
+
+    <div class="rating-item" id="rating-item-Food_catering">
+      <div class="rating-question">Food / Catering <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Pagkain</span></div>
+      <div class="rating-scale">
+        <button type="button" class="rating-btn" data-rk="Food_catering" data-val="1" onclick="selectRating(this)">1</button>
+        <button type="button" class="rating-btn" data-rk="Food_catering" data-val="2" onclick="selectRating(this)">2</button>
+        <button type="button" class="rating-btn" data-rk="Food_catering" data-val="3" onclick="selectRating(this)">3</button>
+        <button type="button" class="rating-btn" data-rk="Food_catering" data-val="4" onclick="selectRating(this)">4</button>
+        <button type="button" class="rating-btn" data-rk="Food_catering" data-val="5" onclick="selectRating(this)">5</button>
+        <button type="button" class="rating-btn" data-rk="Food_catering" data-val="6" onclick="selectRating(this)">6</button>
+        <button type="button" class="rating-btn" data-rk="Food_catering" data-val="7" onclick="selectRating(this)">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>1 — Poor</span><span>7 — Excellent</span></div>
+      <div class="field-error" style="display:none">Please rate this item.</div>
+    </div>
+
+    <div class="rating-item" id="rating-item-Accessibility_of_Location">
+      <div class="rating-question">Accessibility of Location <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Accessibility ng Lugar</span></div>
+      <div class="rating-scale">
+        <button type="button" class="rating-btn" data-rk="Accessibility_of_Location" data-val="1" onclick="selectRating(this)">1</button>
+        <button type="button" class="rating-btn" data-rk="Accessibility_of_Location" data-val="2" onclick="selectRating(this)">2</button>
+        <button type="button" class="rating-btn" data-rk="Accessibility_of_Location" data-val="3" onclick="selectRating(this)">3</button>
+        <button type="button" class="rating-btn" data-rk="Accessibility_of_Location" data-val="4" onclick="selectRating(this)">4</button>
+        <button type="button" class="rating-btn" data-rk="Accessibility_of_Location" data-val="5" onclick="selectRating(this)">5</button>
+        <button type="button" class="rating-btn" data-rk="Accessibility_of_Location" data-val="6" onclick="selectRating(this)">6</button>
+        <button type="button" class="rating-btn" data-rk="Accessibility_of_Location" data-val="7" onclick="selectRating(this)">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>1 — Poor</span><span>7 — Excellent</span></div>
+      <div class="field-error" style="display:none">Please rate this item.</div>
+    </div>
+
+    <div class="rating-item" id="rating-item-Pre_workshop_Coordination_and_Communication">
+      <div class="rating-question">Pre-workshop Coordination &amp; Communication <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Koordinasyon bago ang Workshop</span></div>
+      <div class="rating-scale">
+        <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="1" onclick="selectRating(this)">1</button>
+        <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="2" onclick="selectRating(this)">2</button>
+        <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="3" onclick="selectRating(this)">3</button>
+        <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="4" onclick="selectRating(this)">4</button>
+        <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="5" onclick="selectRating(this)">5</button>
+        <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="6" onclick="selectRating(this)">6</button>
+        <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="7" onclick="selectRating(this)">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>1 — Poor</span><span>7 — Excellent</span></div>
+      <div class="field-error" style="display:none">Please rate this item.</div>
+    </div>
+  </div>
+
+  <!-- SECTION E: Instruction Quality -->
+  <div class="section-card" id="sec-instruction">
+    <div class="section-title">Instruction Quality</div>
+    <div class="section-subtitle">Rate from 1 (strongly disagree) to 7 (strongly agree) — 1 (lubos na hindi sumasang-ayon) hanggang 7 (lubos na sumasang-ayon)</div>
+
+    <div id="instruction-ratings">
+      <!-- Rendered by macro to avoid repetition -->
+    </div>
+  </div>
+
+  <!-- SECTION F: Confidence Post-Training (variable per type) -->
+  <div class="section-card" id="sec-confidence-post">
+    <div class="section-title">Confidence After Training</div>
+    <div class="section-subtitle">Rate your confidence now from 1 (not confident) to 7 (very confident) — Isulat ang iyong kumpiyansa ngayon</div>
+    <div id="confidence-post-container"></div>
+  </div>
+
+  <!-- SECTION G: Next Steps -->
+  <div class="section-card" id="sec-nextsteps">
+    <div class="section-title">Next Steps &amp; Reflections</div>
+    <div class="section-subtitle">Mga Susunod na Hakbang at Pagninilay</div>
+
+    <div class="field">
+      <label class="field-label">Sum up what you learned at this training</label>
+      <span class="field-label-fil">Ibuod ang iyong natutunan sa training na ito (opsyonal)</span>
+      <textarea id="Sum_up_what_you_learned_at_our_training" rows="4" placeholder="In your own words, what were the key lessons?"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label">What are your action plans for the next 3 months? <span class="req">*</span></label>
+      <span class="field-label-fil">Ano ang iyong mga plano sa susunod na 3 buwan?</span>
+      <textarea id="Action_Plans_in_the_next_3_months" rows="4" placeholder="List 1–3 concrete steps you plan to take…"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Suggestions for the next workshop</label>
+      <span class="field-label-fil">Mga mungkahi para sa susunod na workshop (opsyonal)</span>
+      <textarea id="Suggestions_in_the_next_workshop" rows="3" placeholder="Topics, format, logistics…"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Testimonial</label>
+      <span class="field-label-fil">Testimonya (opsyonal)</span>
+      <textarea id="Willingness_to_provide_a_testimonial" rows="3" placeholder="A quote we may use to share your experience…"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Additional comments</label>
+      <span class="field-label-fil">Karagdagang komento (opsyonal)</span>
+      <textarea id="Anything_else_you_d_like_to_share_or_ask" rows="3" placeholder="Anything else you'd like to share?"></textarea>
+    </div>
+  </div>
+
+  <!-- SECTION H: Custom Questions (if any) -->
+  <div class="section-card hidden" id="sec-custom">
+    <div class="section-title">Additional Questions</div>
+    <div class="section-subtitle">Karagdagang mga Katanungan</div>
+    <div id="custom-questions-container"></div>
+  </div>
+
+</div><!-- /form-wrap -->
+
+<!-- Navigation -->
+<div class="nav-buttons" id="nav-buttons">
+  <button class="btn btn-back hidden" id="btn-back" onclick="prevSection()">← Back</button>
+  <button class="btn btn-next" id="btn-next" onclick="nextSection()">Continue →</button>
+  <button class="btn btn-submit hidden" id="btn-submit" onclick="submitForm()">Submit Survey</button>
+</div>
+
+<!-- Success screen -->
+<div class="success-screen" id="success-screen">
+  <div class="icon">🌟</div>
+  <h2>Survey Submitted!</h2>
+  <p>Thank you for completing the post-training survey. Your feedback helps AktivAsia continuously improve its trainings.<br><br><em>Salamat sa pagkumpleto ng survey. Ang iyong puna ay tumutulong sa AktivAsia na patuloy na mapabuti ang mga training.</em></p>
+</div>
+
+<script src="js/form-survey-ph.js"></script>
+</body>
+</html>

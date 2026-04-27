@@ -459,6 +459,13 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
             "applicants": deal_counts[sol_id]["applicants"],
             "graduates":  deal_counts[sol_id]["graduates"],
             "status":     "Completed" if is_completed else "Upcoming",
+            # Training Automation form links + date windows
+            "pre_app_link":    sol.get("Application_Form") or "",
+            "post_app_link":   sol.get("Evaluation_Form") or "",
+            "app_open_date":   sol.get("Application_Form_Open_Date") or "",
+            "app_close_date":  sol.get("Application_Form_Close_Date") or "",
+            "post_open_date":  sol.get("Post_Survey_Open_Date") or "",
+            "post_close_date": sol.get("Post_Survey_Close_Date") or "",
         })
 
     trainings_by_type = [

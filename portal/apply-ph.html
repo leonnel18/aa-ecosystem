@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Form — AktivAsia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #821545;
+      --primary-light: #f3e8ff;
+      --cta-start: #ff960b;
+      --cta-end: #f93a3a;
+      --bg: #f5f4ee;
+      --white: #ffffff;
+      --text: #131625;
+      --meta: #788099;
+      --border: #e2e0d8;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --input-h: 52px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo { font-size: 20px; font-weight: 800; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--primary); }
+
+    /* ── Training banner ── */
+    .training-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, #5a0e30 100%);
+      color: var(--white);
+      padding: 24px 20px 20px;
+    }
+    .training-banner .label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; opacity: 0.75; margin-bottom: 6px;
+    }
+    .training-banner h1 { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 8px; }
+    .training-banner .meta { font-size: 13px; opacity: 0.85; display: flex; gap: 16px; flex-wrap: wrap; }
+    .training-banner .meta span { display: flex; align-items: center; gap: 4px; }
+
+    /* ── Closed state ── */
+    .closed-banner {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      text-align: center;
+      margin: 24px 16px;
+    }
+    .closed-banner .icon { font-size: 40px; margin-bottom: 16px; }
+    .closed-banner h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .closed-banner p { color: var(--meta); font-size: 14px; }
+
+    /* ── Progress bar ── */
+    .progress-wrap {
+      background: var(--white);
+      padding: 16px 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--border);
+    }
+    .progress-steps {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .progress-steps::-webkit-scrollbar { display: none; }
+    .step-dot {
+      flex: 1;
+      min-width: 32px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+    .step-dot.done { background: var(--primary); }
+    .step-dot.active { background: var(--cta-start); }
+    .progress-label {
+      font-size: 12px; color: var(--meta); font-weight: 500;
+      padding-bottom: 12px;
+    }
+
+    /* ── Form container ── */
+    .form-wrap { padding: 20px 16px 100px; max-width: 640px; margin: 0 auto; }
+
+    /* ── Section card ── */
+    .section-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .section-card.active { display: block; }
+
+    .section-title {
+      font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--text);
+    }
+    .section-subtitle {
+      font-size: 13px; color: var(--meta); margin-bottom: 20px;
+    }
+
+    /* ── Fields ── */
+    .field { margin-bottom: 20px; }
+    .field-label {
+      font-size: 14px; font-weight: 600; margin-bottom: 2px; display: block;
+    }
+    .field-label-fil {
+      font-size: 12px; color: var(--meta); margin-bottom: 6px; display: block; font-style: italic;
+    }
+    .field-label .req { color: var(--primary); margin-left: 2px; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      min-height: var(--input-h);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--text);
+      background: var(--white);
+      appearance: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23788099' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    .field-hint { font-size: 12px; color: var(--meta); margin-top: 4px; }
+    .field-error { font-size: 12px; color: #e53e3e; margin-top: 4px; display: none; }
+    .field.has-error input, .field.has-error select, .field.has-error textarea { border-color: #e53e3e; }
+    .field.has-error .field-error { display: block; }
+
+    /* ── Radio group ── */
+    .radio-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+    .radio-opt {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 9999px;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.2s;
+      min-height: 48px;
+    }
+    .radio-opt input { display: none; }
+    .radio-opt.selected {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* ── Checkbox group ── */
+    .check-group { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+    .check-opt {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-height: 48px;
+    }
+    .check-opt input[type="checkbox"] {
+      width: 20px; height: 20px; min-height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      margin-top: 1px;
+      flex-shrink: 0;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+    .check-opt.selected {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+    .check-label { font-size: 14px; line-height: 1.4; }
+    .check-label-fil { font-size: 12px; color: var(--meta); font-style: italic; margin-top: 2px; }
+
+    /* ── Rating scale ── */
+    .rating-item { margin-bottom: 20px; }
+    .rating-question { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .rating-scale {
+      display: flex; gap: 6px; align-items: center;
+    }
+    .rating-scale-labels {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--meta); margin-top: 4px;
+    }
+    .rating-btn {
+      flex: 1;
+      min-height: 44px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text);
+    }
+    .rating-btn.selected {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--white);
+    }
+
+    /* ── File upload ── */
+    .file-upload-btn {
+      display: flex; align-items: center; gap: 10px;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      cursor: pointer;
+      background: var(--bg);
+      transition: border-color 0.2s;
+      min-height: var(--input-h);
+    }
+    .file-upload-btn:hover { border-color: var(--primary); }
+    .file-upload-btn input { display: none; }
+    .file-upload-btn .upload-icon { font-size: 20px; }
+    .file-upload-btn .upload-text { font-size: 14px; color: var(--meta); }
+    .file-name { font-size: 13px; color: var(--primary); margin-top: 6px; font-weight: 500; }
+
+    /* ── Navigation buttons ── */
+    .nav-buttons {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 16px 20px;
+      display: flex;
+      gap: 12px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .btn {
+      flex: 1;
+      min-height: 52px;
+      border-radius: 9999px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:active { opacity: 0.85; }
+    .btn-back {
+      background: var(--bg);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      flex: 0 0 auto;
+      padding: 0 24px;
+    }
+    .btn-next {
+      background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+      color: var(--white);
+    }
+    .btn-submit {
+      background: linear-gradient(135deg, var(--primary), #5a0e30);
+      color: var(--white);
+    }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── Success screen ── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .success-screen .icon { font-size: 56px; margin-bottom: 20px; }
+    .success-screen h2 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+    .success-screen p { color: var(--meta); font-size: 15px; line-height: 1.6; }
+
+    /* ── Loading spinner ── */
+    .spinner {
+      display: inline-block;
+      width: 20px; height: 20px;
+      border: 3px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hidden { display: none !important; }
+
+    @media (min-width: 640px) {
+      .training-banner { padding: 32px 40px 28px; }
+      .training-banner h1 { font-size: 28px; }
+      .form-wrap { padding: 24px 24px 100px; }
+      .section-card { padding: 32px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="index.html">Aktiv<span>Asia</span></a>
+</header>
+
+<!-- Training info loaded dynamically -->
+<div class="training-banner" id="training-banner">
+  <div class="label">Application Form / Form ng Aplikasyon</div>
+  <h1 id="banner-title">Loading training…</h1>
+  <div class="meta">
+    <span id="banner-type"></span>
+    <span id="banner-dates"></span>
+    <span id="banner-country"></span>
+  </div>
+</div>
+
+<!-- Closed / error states -->
+<div class="closed-banner hidden" id="closed-banner">
+  <div class="icon">🔒</div>
+  <h2 id="closed-title">Application Closed</h2>
+  <p id="closed-msg">This application form is no longer accepting responses. Please contact your AktivAsia country team.</p>
+</div>
+
+<div class="closed-banner hidden" id="error-banner">
+  <div class="icon">⚠️</div>
+  <h2>Unable to load form</h2>
+  <p>Please check your link or contact your AktivAsia country team.</p>
+</div>
+
+<!-- Progress -->
+<div class="progress-wrap" id="progress-wrap">
+  <div class="progress-steps" id="progress-steps"></div>
+  <div class="progress-label" id="progress-label"></div>
+</div>
+
+<!-- Main form -->
+<div class="form-wrap" id="form-wrap">
+
+  <!-- SECTION A: Demographics -->
+  <div class="section-card" id="sec-demographics">
+    <div class="section-title">Personal Information</div>
+    <div class="section-subtitle">Impormasyon tungkol sa iyo</div>
+
+    <div class="field">
+      <label class="field-label">First Name <span class="req">*</span></label>
+      <span class="field-label-fil">Pangalan</span>
+      <input type="text" id="First_Name" autocomplete="given-name" inputmode="text">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Last Name <span class="req">*</span></label>
+      <span class="field-label-fil">Apelyido</span>
+      <input type="text" id="Last_Name" autocomplete="family-name">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Preferred Name / Nickname <span class="req">*</span></label>
+      <span class="field-label-fil">Palayaw — Ano ang gusto mong itawag sa iyo?</span>
+      <input type="text" id="Preferred_Name_Nick_Name">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Email <span class="req">*</span></label>
+      <input type="email" id="Email" autocomplete="email" inputmode="email">
+      <div class="field-error">Please enter a valid email address.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Phone / WhatsApp <span class="req">*</span></label>
+      <span class="field-label-fil">Numero ng Telepono / WhatsApp</span>
+      <input type="tel" id="Mobile" autocomplete="tel" inputmode="tel">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Street Address <span class="req">*</span></label>
+      <span class="field-label-fil">Address</span>
+      <textarea id="Address" rows="2" autocomplete="street-address"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">City / Province <span class="req">*</span></label>
+      <span class="field-label-fil">Lungsod / Probinsya</span>
+      <input type="text" id="City_Province" autocomplete="address-level2">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Country of Residence <span class="req">*</span></label>
+      <span class="field-label-fil">Bansa</span>
+      <select id="Country_of_Residence">
+        <option value="">— Select / Pumili —</option>
+        <option value="Philippines" selected>Philippines</option>
+        <option value="Pakistan">Pakistan</option>
+        <option value="South Korea">South Korea</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Other">Other</option>
+      </select>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Year of Birth <span class="req">*</span></label>
+      <span class="field-label-fil">Taon ng Kapanganakan (hal. 1995)</span>
+      <input type="number" id="Year_of_Birth" min="1940" max="2010" inputmode="numeric" placeholder="e.g. 1990">
+      <div class="field-error">Please enter a valid birth year (e.g. 1990).</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Gender <span class="req">*</span></label>
+      <span class="field-label-fil">Kasarian</span>
+      <select id="Gender">
+        <option value="">— Select / Pumili —</option>
+        <option value="Female">Female / Babae</option>
+        <option value="Male">Male / Lalaki</option>
+        <option value="Transgender">Transgender</option>
+        <option value="Non-Binary">Non-Binary</option>
+        <option value="Prefer not to answer">Prefer not to answer / Ayaw ko pong ipaalam</option>
+        <option value="Other">Other / Iba pa</option>
+      </select>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Pronoun <span class="req">*</span></label>
+      <div class="radio-group" id="pronoun-group">
+        <label class="radio-opt"><input type="radio" name="Pronoun" value="She/Her"> She/Her</label>
+        <label class="radio-opt"><input type="radio" name="Pronoun" value="He/Him"> He/Him</label>
+        <label class="radio-opt"><input type="radio" name="Pronoun" value="They/Them"> They/Them</label>
+        <label class="radio-opt"><input type="radio" name="Pronoun" value="Other"> Other / Iba pa</label>
+      </div>
+      <div class="field-error" id="pronoun-error">This field is required.</div>
+    </div>
+
+    <div class="field hidden" id="other-pronoun-field">
+      <label class="field-label">Please specify your pronoun</label>
+      <span class="field-label-fil">Iba pang Pronoun</span>
+      <input type="text" id="Preferred_Pronoun">
+    </div>
+
+    <div class="field">
+      <label class="field-label">Preferred Language <span class="req">*</span></label>
+      <span class="field-label-fil">Nais na Wika — maaaring pumili ng marami</span>
+      <div class="check-group">
+        <label class="check-opt"><input type="checkbox" name="Preferred_Language" value="Filipino"><div><div class="check-label">Filipino</div></div></label>
+        <label class="check-opt"><input type="checkbox" name="Preferred_Language" value="English"><div><div class="check-label">English</div></div></label>
+      </div>
+      <div class="field-error" id="lang-error">Please select at least one language.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Do you identify as <span class="req">*</span></label>
+      <span class="field-label-fil">Kabilang ka ba sa — maaaring pumili ng marami</span>
+      <div class="check-group">
+        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Person with disability"><div><div class="check-label">Person with disability</div><div class="check-label-fil">Taong may kapansanan</div></div></label>
+        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Indigenous / First Nations"><div><div class="check-label">Indigenous / First Nations</div><div class="check-label-fil">Katutubo</div></div></label>
+        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Frontline Community"><div><div class="check-label">Frontline Community</div></div></label>
+        <label class="check-opt"><input type="checkbox" name="Identify_as" value="LGBTIQ+ Person"><div><div class="check-label">LGBTIQ+ Person</div></div></label>
+        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Sole Parent"><div><div class="check-label">Sole Parent</div><div class="check-label-fil">Nag-iisang magulang</div></div></label>
+        <label class="check-opt"><input type="checkbox" name="Identify_as" value="None"><div><div class="check-label">None</div><div class="check-label-fil">Wala sa nabanggit</div></div></label>
+        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Other"><div><div class="check-label">Other / Iba pa</div></div></label>
+      </div>
+      <div class="field-error" id="identify-error">Please select at least one option.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Special Requirements / Accessibility Needs</label>
+      <span class="field-label-fil">Espesyal na Pangangailangan (opsyonal)</span>
+      <textarea id="Special_Requirements" rows="2" placeholder="e.g. wheelchair access, dietary needs…"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Recent Photo <span class="req">*</span></label>
+      <span class="field-label-fil">Kamakailang Larawan</span>
+      <label class="file-upload-btn">
+        <input type="file" id="Recent_Photo" accept="image/*">
+        <span class="upload-icon">📷</span>
+        <span class="upload-text">Tap to upload photo</span>
+      </label>
+      <div class="file-name hidden" id="photo-name"></div>
+      <div class="field-error" id="photo-error">Please upload a recent photo.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">CV / Resume <span style="font-weight:400;color:var(--meta)">(optional)</span></label>
+      <label class="file-upload-btn">
+        <input type="file" id="Import_CV" accept=".pdf,.doc,.docx">
+        <span class="upload-icon">📄</span>
+        <span class="upload-text">Tap to upload CV (PDF or Word)</span>
+      </label>
+      <div class="file-name hidden" id="cv-name"></div>
+    </div>
+  </div>
+
+  <!-- SECTION B: Professional Info -->
+  <div class="section-card" id="sec-professional">
+    <div class="section-title">Professional Information</div>
+    <div class="section-subtitle">Impormasyon tungkol sa iyong trabaho at organisasyon</div>
+
+    <div class="field">
+      <label class="field-label">Training Applying For</label>
+      <input type="text" id="Training_Applied_Display" readonly style="background:#f5f4ee;color:var(--meta)">
+      <input type="hidden" id="Training_Applied">
+    </div>
+
+    <div class="field">
+      <label class="field-label">Organization Name <span class="req">*</span></label>
+      <span class="field-label-fil">Pangalan ng Organisasyon</span>
+      <input type="text" id="Account_Name" placeholder="Start typing your organization name…">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Your Role in the Organisation <span class="req">*</span></label>
+      <span class="field-label-fil">Tungkulin sa Organisasyon</span>
+      <input type="text" id="Role_in_the_Organisation" placeholder="e.g. Program Coordinator">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Professional Bio (max 100 words) <span class="req">*</span></label>
+      <span class="field-label-fil">Propesyonal na Bio — hanggang 100 salita</span>
+      <textarea id="Please_provide_a_100_word_bio_that_best_describes" rows="5" placeholder="Briefly describe your professional background, campaign work, and what drives you…"></textarea>
+      <div class="field-hint"><span id="bio-word-count">0</span> / 100 words</div>
+      <div class="field-error">This field is required (max 100 words).</div>
+    </div>
+  </div>
+
+  <!-- SECTION C: Terms & Conditions -->
+  <div class="section-card" id="sec-terms">
+    <div class="section-title">Terms &amp; Conditions</div>
+    <div class="section-subtitle">Mga Tuntunin at Kondisyon</div>
+
+    <div class="check-group">
+      <label class="check-opt">
+        <input type="checkbox" id="terms1">
+        <div>
+          <div class="check-label">I agree to participate actively and commit to the full duration of the training.</div>
+          <div class="check-label-fil">Sumasang-ayon akong aktibong lumahok at pangako kong makukumpleto ang buong training.</div>
+        </div>
+      </label>
+      <label class="check-opt">
+        <input type="checkbox" id="terms2">
+        <div>
+          <div class="check-label">I agree to contribute to a respectful and safe learning space for all participants.</div>
+          <div class="check-label-fil">Sumasang-ayon akong mag-ambag sa isang mapagkakatiwalaang espasyo ng pagkatuto para sa lahat.</div>
+        </div>
+      </label>
+      <label class="check-opt">
+        <input type="checkbox" id="terms3">
+        <div>
+          <div class="check-label">I consent to photos/videos taken during the training being used for AktivAsia communications.</div>
+          <div class="check-label-fil">Pumapayag ako na ang mga larawan/video na kukunin sa training ay maaaring gamitin para sa komunikasyon ng AktivAsia.</div>
+        </div>
+      </label>
+    </div>
+    <div class="field-error" id="terms-error" style="margin-top:12px">Please agree to all terms to continue.</div>
+  </div>
+
+  <!-- SECTION D: Experience — Foundational -->
+  <div class="section-card" id="sec-exp-foundational">
+    <div class="section-title">Experience &amp; Motivation</div>
+    <div class="section-subtitle">Karanasan at Motibasyon</div>
+
+    <div class="field">
+      <label class="field-label">Are you currently involved in a campaign? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="campaigning_f" value="Yes"> Yes / Oo</label>
+        <label class="radio-opt"><input type="radio" name="campaigning_f" value="No"> No / Hindi</label>
+      </div>
+      <div class="field-error" id="campaign-f-error">This field is required.</div>
+    </div>
+
+    <div class="field" id="campaign-desc-field">
+      <label class="field-label">If yes, briefly describe your campaign (max 300 words)</label>
+      <textarea id="Current_Campaign_Description" rows="4" placeholder="Describe your campaign…"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Why are you applying for this training? <span class="req">*</span></label>
+      <textarea id="Reason_for_Applying_F" rows="4" placeholder="Share your motivation…"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+  </div>
+
+  <!-- SECTION D: Experience — TOT -->
+  <div class="section-card" id="sec-exp-tot">
+    <div class="section-title">Experience &amp; Motivation</div>
+    <div class="section-subtitle">Karanasan at Motibasyon</div>
+
+    <div class="field">
+      <label class="field-label">Do you have previous experience teaching or training others? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="teaching_tot" value="Yes"> Yes / Oo</label>
+        <label class="radio-opt"><input type="radio" name="teaching_tot" value="No"> No / Hindi</label>
+      </div>
+      <div class="field-error" id="teaching-tot-error">This field is required.</div>
+    </div>
+
+    <div class="field" id="teaching-desc-field">
+      <label class="field-label">If yes, describe your experience</label>
+      <textarea id="Teaching_Experience_Description" rows="4" placeholder="Describe your teaching/training experience…"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Why are you applying for this TOT training? <span class="req">*</span></label>
+      <textarea id="Reason_for_Applying_TOT" rows="4" placeholder="Share your motivation…"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+  </div>
+
+  <!-- SECTION D: Experience — Feminist Leadership -->
+  <div class="section-card" id="sec-exp-feminist">
+    <div class="section-title">Experience &amp; Motivation</div>
+    <div class="section-subtitle">Karanasan at Motibasyon</div>
+
+    <div class="field">
+      <label class="field-label">How will this training benefit your campaign work? <span class="req">*</span></label>
+      <textarea id="Defining_Leadership_Experience" rows="4" placeholder="Describe how this training will help…"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">What personal leadership goals do you hope to achieve? <span class="req">*</span></label>
+      <textarea id="Personal_Leadership_Goals" rows="4" placeholder="Share your personal goals…"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">What challenges have you faced as a woman in leadership? <span class="req">*</span></label>
+      <textarea id="Challenges_faced_as_a_woman_in_leadership" rows="4" placeholder="Describe the challenges you've faced…"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Have you attended gender sensitivity or women-specific training before? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="gender_training" value="Yes"> Yes / Oo</label>
+        <label class="radio-opt"><input type="radio" name="gender_training" value="No"> No / Hindi</label>
+      </div>
+      <div class="field-error" id="gender-training-error">This field is required.</div>
+    </div>
+  </div>
+
+  <!-- SECTION D: Experience — Public Narrative -->
+  <div class="section-card" id="sec-exp-pn">
+    <div class="section-title">Experience &amp; Motivation</div>
+    <div class="section-subtitle">Karanasan at Motibasyon</div>
+
+    <div class="field">
+      <label class="field-label">Are you currently involved in a campaign? <span class="req">*</span></label>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="campaigning_pn" value="Yes"> Yes / Oo</label>
+        <label class="radio-opt"><input type="radio" name="campaigning_pn" value="No"> No / Hindi</label>
+      </div>
+      <div class="field-error" id="campaign-pn-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Why are you applying for this training? <span class="req">*</span></label>
+      <textarea id="Reason_for_Applying_PN" rows="4" placeholder="Share your motivation…"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">How many years of campaigning experience do you have, and what prior training have you attended? <span class="req">*</span></label>
+      <textarea id="Campaign_Years_Prior_Training" rows="4" placeholder="e.g. 3 years, attended X training in 2023…"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+  </div>
+
+  <!-- SECTION E: Confidence Ratings Pre-Training -->
+  <div class="section-card" id="sec-ratings">
+    <div class="section-title">Confidence Ratings</div>
+    <div class="section-subtitle">Rate your current confidence from 1 (not confident) to 7 (very confident) — Isulat ang iyong antas ng kumpiyansa</div>
+    <div id="ratings-container"></div>
+  </div>
+
+  <!-- SECTION F: Custom Questions -->
+  <div class="section-card hidden" id="sec-custom">
+    <div class="section-title">Additional Questions</div>
+    <div class="section-subtitle">Karagdagang mga Katanungan</div>
+    <div id="custom-questions-container"></div>
+  </div>
+
+</div><!-- /form-wrap -->
+
+<!-- Navigation -->
+<div class="nav-buttons" id="nav-buttons">
+  <button class="btn btn-back hidden" id="btn-back" onclick="prevSection()">← Back</button>
+  <button class="btn btn-next" id="btn-next" onclick="nextSection()">Continue →</button>
+  <button class="btn btn-submit hidden" id="btn-submit" onclick="submitForm()">Submit Application</button>
+</div>
+
+<!-- Success screen -->
+<div class="success-screen" id="success-screen">
+  <div class="icon">🎉</div>
+  <h2>Application Submitted!</h2>
+  <p>Thank you for applying. Your application has been received and you will be contacted by the AktivAsia team soon.<br><br><em>Salamat sa iyong aplikasyon. Makikipag-ugnayan sa iyo ang koponan ng AktivAsia.</em></p>
+</div>
+
+<script src="js/form-apply-ph.js"></script>
+</body>
+</html>

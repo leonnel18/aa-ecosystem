@@ -1,0 +1,172 @@
+// crm-proxy.js — Cloudflare Worker
+// Proxies Zoho CRM API calls from the browser. Keeps OAuth credentials server-side.
+//
+// Routes handled:
+//   GET  /solutions/:id?fields=...   → GET /crm/v2/Solutions/:id?fields=...
+//   POST /deals                      → POST /crm/v2/Deals  (creates application Deal)
+//   POST /deals/:id/files?field=...  → POST /crm/v2/Deals/:id/attachments (file upload)
+//
+// Required Worker Secrets (set via wrangler secret put):
+//   ZOHO_CLIENT_ID
+//   ZOHO_CLIENT_SECRET
+//   ZOHO_REFRESH_TOKEN
+//
+// Allowed origins (CORS):
+//   https://aktivasia-portal.pages.dev
+//   http://localhost:*  (local dev)
+
+const CRM_BASE    = "https://www.zohoapis.in/crm/v2";
+const TOKEN_URL   = "https://accounts.zoho.in/oauth/v2/token";
+const ALLOWED_ORIGINS = ["https://aktivasia-portal.pages.dev"];
+
+// ── Token cache (in-memory, per Worker instance) ──────────────────────────────
+let cachedToken    = null;
+let tokenExpiresAt = 0;
+
+async function getAccessToken(env) {
+  if (cachedToken && Date.now() < tokenExpiresAt - 60_000) return cachedToken;
+
+  const body = new URLSearchParams({
+    grant_type:    "refresh_token",
+    client_id:     env.ZOHO_CLIENT_ID,
+    client_secret: env.ZOHO_CLIENT_SECRET,
+    refresh_token: env.ZOHO_REFRESH_TOKEN,
+  });
+
+  const res  = await fetch(TOKEN_URL, { method: "POST", body });
+  const json = await res.json();
+
+  if (!res.ok || !json.access_token) {
+    throw new Error("Token refresh failed: " + JSON.stringify(json));
+  }
+
+  cachedToken    = json.access_token;
+  tokenExpiresAt = Date.now() + (json.expires_in ?? 3600) * 1000;
+  return cachedToken;
+}
+
+// ── CORS helpers ──────────────────────────────────────────────────────────────
+function corsHeaders(origin) {
+  const allowed = ALLOWED_ORIGINS.includes(origin)
+    || (origin && /^http:\/\/localhost(:\d+)?$/.test(origin));
+  return {
+    "Access-Control-Allow-Origin":  allowed ? origin : ALLOWED_ORIGINS[0],
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age":       "86400",
+  };
+}
+
+function preflight(origin) {
+  return new Response(null, { status: 204, headers: corsHeaders(origin) });
+}
+
+function jsonResponse(data, status, origin) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { "Content-Type": "application/json", ...corsHeaders(origin) },
+  });
+}
+
+// ── Main handler ──────────────────────────────────────────────────────────────
+export default {
+  async fetch(request, env) {
+    const origin = request.headers.get("Origin") ?? "";
+    const url    = new URL(request.url);
+    const path   = url.pathname;
+
+    // Preflight
+    if (request.method === "OPTIONS") return preflight(origin);
+
+    try {
+      const token = await getAccessToken(env);
+      const auth  = { Authorization: `Zoho-oauthtoken ${token}` };
+
+      // ── GET /solutions/:id ────────────────────────────────────────────────────
+      const solMatch = path.match(/^\/solutions\/([^/]+)$/);
+      if (request.method === "GET" && solMatch) {
+        const id     = solMatch[1];
+        const fields = url.searchParams.get("fields") ?? "";
+        const crmUrl = `${CRM_BASE}/Solutions/${id}?fields=${fields}`;
+        const crmRes = await fetch(crmUrl, { headers: auth });
+        const body   = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      // ── GET /deals/search?training_id=&first=&last= ───────────────────────────
+      if (request.method === "GET" && path === "/deals/search") {
+        const trainingId = url.searchParams.get("training_id") ?? "";
+        const first      = url.searchParams.get("first") ?? "";
+        const last       = url.searchParams.get("last") ?? "";
+        const fields     = "First_Name,Last_Name,Email,Account_Name,Training_Applied,Stage";
+        // Search all Deals for this training filtered by name
+        const searchUrl  = `${CRM_BASE}/Deals?fields=${fields}&per_page=200`;
+        const crmRes     = await fetch(searchUrl, { headers: auth });
+        const allDeals   = await crmRes.json();
+        const match = (allDeals.data ?? []).find(d =>
+          d.Training_Applied?.id === trainingId &&
+          d.First_Name?.toLowerCase() === first.toLowerCase() &&
+          d.Last_Name?.toLowerCase()  === last.toLowerCase()
+        );
+        return jsonResponse(
+          match ? { data: [match] } : { data: [] },
+          200,
+          origin
+        );
+      }
+
+      // ── POST /deals ───────────────────────────────────────────────────────────
+      if (request.method === "POST" && path === "/deals") {
+        const payload = await request.json();
+        const crmRes  = await fetch(`${CRM_BASE}/Deals`, {
+          method:  "POST",
+          headers: { ...auth, "Content-Type": "application/json" },
+          body:    JSON.stringify(payload),
+        });
+        const body = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      // ── PUT /deals/:id ────────────────────────────────────────────────────────
+      const dealPutMatch = path.match(/^\/deals\/([^/]+)$/);
+      if (request.method === "PUT" && dealPutMatch) {
+        const id      = dealPutMatch[1];
+        const payload = await request.json();
+        const crmRes  = await fetch(`${CRM_BASE}/Deals/${id}`, {
+          method:  "PUT",
+          headers: { ...auth, "Content-Type": "application/json" },
+          body:    JSON.stringify(payload),
+        });
+        const body = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      // ── POST /deals/:id/files?field=... ───────────────────────────────────────
+      const fileMatch = path.match(/^\/deals\/([^/]+)\/files$/);
+      if (request.method === "POST" && fileMatch) {
+        const dealId    = fileMatch[1];
+        const fieldName = url.searchParams.get("field") ?? "Recent_Photo";
+        const formData  = await request.formData();
+        const file      = formData.get("file");
+
+        if (!file) return jsonResponse({ error: "No file provided" }, 400, origin);
+
+        // Forward as multipart to CRM attachments endpoint
+        const crmForm = new FormData();
+        crmForm.append("file", file, file.name);
+        const crmRes = await fetch(`${CRM_BASE}/Deals/${dealId}/Attachments`, {
+          method: "POST",
+          headers: auth,
+          body:   crmForm,
+        });
+        const body = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      return jsonResponse({ error: "Not found" }, 404, origin);
+
+    } catch (err) {
+      return jsonResponse({ error: err.message }, 500, origin);
+    }
+  },
+};

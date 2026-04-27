@@ -30,6 +30,7 @@
       <a class="nav-tab" data-tab="section-r2">Training Report</a>
       <a class="nav-tab" data-tab="section-r-orgs">Organization Stats</a>
       <a class="nav-tab" data-tab="section-r3">Qualitative Insights</a>
+      <a class="nav-tab" data-tab="section-forms">Training Forms</a>
     </div>
   </nav>
 
@@ -362,6 +363,25 @@
         </div>
         <div id="r3-testimonials"></div>
         <div class="pagination-controls" id="pg-r3-test"></div>
+      </div>
+
+    </section>
+
+    <!-- ── Training Forms ───────────────────────────────────────────────── -->
+    <section class="report-section" id="section-forms">
+
+      <div class="section-header">
+        <h2>Training Forms</h2>
+        <span class="section-badge">Forms</span>
+      </div>
+
+      <div class="filter-row" style="margin-bottom:16px">
+        <select class="filter" id="forms-year-filter"><option value="">All Years</option></select>
+        <select class="filter" id="forms-type-filter"><option value="">All Types</option></select>
+      </div>
+
+      <div id="training-forms-list">
+        <div class="loading"><div class="spinner"></div></div>
       </div>
 
     </section>

@@ -1,0 +1,12 @@
+name = "crm-proxy"
+main = "crm-proxy.js"
+compatibility_date = "2024-01-01"
+
+# Deploy: wrangler deploy
+# Secrets (run once):
+#   wrangler secret put ZOHO_CLIENT_ID
+#   wrangler secret put ZOHO_CLIENT_SECRET
+#   wrangler secret put ZOHO_REFRESH_TOKEN
+
+[env.production]
+routes = [{ pattern = "crm-proxy.aktivasia.workers.dev", custom_domain = true }]
