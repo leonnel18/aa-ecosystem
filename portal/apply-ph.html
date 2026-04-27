@@ -370,14 +370,16 @@
     /* ── Navigation buttons ── */
     .nav-buttons {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 640px;
       background: var(--white);
       border-top: 1px solid var(--border);
       padding: 16px 20px;
       display: flex;
       gap: 12px;
-      max-width: 640px;
-      margin: 0 auto;
     }
     .btn {
       flex: 1;
@@ -496,6 +498,7 @@
       align-items: center;
       text-align: left;
       transition: border-color 0.2s;
+      -webkit-appearance: none;
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23788099' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
