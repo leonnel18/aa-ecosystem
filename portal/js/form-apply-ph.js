@@ -231,7 +231,7 @@ function showError(msg) {
 
 // ── Section list ──────────────────────────────────────────────────────────────
 const SECTION_LABELS = {
-  "sec-demographics":        "Personal Info",
+  "sec-demographics":        "Demographics",
   "sec-professional":        "Professional",
   "sec-terms":               "Terms",
   "sec-exp-foundational":    "Experience",
@@ -241,6 +241,14 @@ const SECTION_LABELS = {
   "sec-ratings":             "Confidence",
   "sec-custom":              "Extra Questions",
 };
+
+// 4 visible stepper nodes — sec-terms navigates through but is not a stepper node
+const STEPPER_NODES = [
+  { sections: ["sec-demographics"],                                                    title: "Demographics", desc: "Personal Info" },
+  { sections: ["sec-professional"],                                                    title: "Professional", desc: "Your work" },
+  { sections: ["sec-exp-foundational","sec-exp-tot","sec-exp-feminist","sec-exp-pn"], title: "Experience",   desc: "& Motivation" },
+  { sections: ["sec-ratings", "sec-custom"],                                           title: "Confidence",   desc: "Ratings" },
+];
 
 function buildSectionList() {
   sections = ["sec-demographics", "sec-professional", "sec-terms"];
@@ -263,19 +271,36 @@ function buildSectionList() {
 
 // ── Progress bar ──────────────────────────────────────────────────────────────
 function buildProgressBar() {
-  const stepsEl = document.getElementById("progress-steps");
-  stepsEl.innerHTML = sections.map((_, i) =>
-    `<div class="step-dot" id="dot-${i}"></div>`
-  ).join("");
+  const nav = document.getElementById("progress-steps");
+  nav.innerHTML = STEPPER_NODES.map((node, i) => {
+    const isLast = i === STEPPER_NODES.length - 1;
+    return `
+      <div class="stepper-item" id="stepper-node-${i}" data-state="inactive">
+        <button type="button" class="stepper-trigger" tabindex="-1" aria-label="Step ${i+1}: ${node.title}">
+          <div class="stepper-indicator">${i + 1}</div>
+          <div class="stepper-text">
+            <div class="stepper-title">${node.title}</div>
+            <div class="stepper-desc">${node.desc}</div>
+          </div>
+        </button>
+      </div>
+      ${!isLast ? `<div class="stepper-separator" id="stepper-sep-${i}"></div>` : ""}
+    `;
+  }).join("");
 }
 
 function updateProgressBar() {
-  sections.forEach((_, i) => {
-    const dot = document.getElementById(`dot-${i}`);
-    dot.className = "step-dot" + (i < currentIdx ? " done" : i === currentIdx ? " active" : "");
+  const activeNodeIdx = STEPPER_NODES.findIndex(node =>
+    node.sections.includes(sections[currentIdx])
+  );
+
+  STEPPER_NODES.forEach((_, i) => {
+    const node = document.getElementById(`stepper-node-${i}`);
+    if (!node) return;
+    if (i < activeNodeIdx)       node.dataset.state = "completed";
+    else if (i === activeNodeIdx) node.dataset.state = "active";
+    else                          node.dataset.state = "inactive";
   });
-  document.getElementById("progress-label").textContent =
-    `Step ${currentIdx + 1} of ${sections.length} — ${SECTION_LABELS[sections[currentIdx]] || ""}`;
 }
 
 // ── Section navigation ────────────────────────────────────────────────────────
