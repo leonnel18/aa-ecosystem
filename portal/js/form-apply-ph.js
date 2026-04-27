@@ -97,6 +97,69 @@ const ratingValues = {};
 const customValues = {};
 
 // ── Custom selects ────────────────────────────────────────────────────────────
+const PH_PROVINCES = [
+  "Abra","Agusan del Norte","Agusan del Sur","Aklan","Albay","Antique","Apayao",
+  "Aurora","Basilan","Bataan","Batanes","Batangas","Benguet","Biliran","Bohol",
+  "Bukidnon","Bulacan","Cagayan","Camarines Norte","Camarines Sur","Camiguin",
+  "Capiz","Catanduanes","Cavite","Cebu","Compostela Valley","Cotabato","Davao de Oro",
+  "Davao del Norte","Davao del Sur","Davao Occidental","Davao Oriental",
+  "Dinagat Islands","Eastern Samar","Guimaras","Ifugao","Ilocos Norte","Ilocos Sur",
+  "Iloilo","Isabela","Kalinga","La Union","Laguna","Lanao del Norte","Lanao del Sur",
+  "Leyte","Maguindanao","Masbate","Marinduque","Metro Manila (NCR)",
+  "Misamis Occidental","Misamis Oriental","Mountain Province","Negros Occidental",
+  "Negros Oriental","Northern Samar","Nueva Ecija","Nueva Vizcaya","Occidental Mindoro",
+  "Oriental Mindoro","Palawan","Pampanga","Pangasinan","Quezon","Quirino","Rizal",
+  "Romblon","Samar","Sarangani","Siquijor","Sorsogon","South Cotabato",
+  "Southern Leyte","Sultan Kudarat","Sulu","Surigao del Norte","Surigao del Sur",
+  "Tarlac","Tawi-Tawi","Zambales","Zamboanga del Norte","Zamboanga del Sur",
+  "Zamboanga Sibugay",
+];
+
+function wireProvinceDropdown() {
+  const trigger  = document.getElementById("trigger-Province");
+  const listbox  = document.getElementById("listbox-Province");
+  const hidden   = document.getElementById("Province");
+  if (!trigger || !listbox || !hidden) return;
+
+  // Populate options
+  listbox.innerHTML = PH_PROVINCES.map(p =>
+    `<div class="custom-select-option" data-value="${p}">${p}</div>`
+  ).join("");
+  hidden.innerHTML = `<option value=""></option>` +
+    PH_PROVINCES.map(p => `<option value="${p}">${p}</option>`).join("");
+
+  // Reuse the same open/close/select pattern
+  const options = listbox.querySelectorAll(".custom-select-option");
+
+  function openListbox() {
+    listbox.classList.add("open");
+    trigger.setAttribute("aria-expanded", "true");
+  }
+  function closeListbox() {
+    listbox.classList.remove("open");
+    trigger.setAttribute("aria-expanded", "false");
+  }
+  function selectOption(opt) {
+    const val = opt.dataset.value;
+    options.forEach(o => o.classList.remove("selected"));
+    opt.classList.add("selected");
+    trigger.textContent = val;
+    trigger.classList.remove("placeholder");
+    trigger.style.fontSize = "";
+    hidden.value = val;
+    closeListbox();
+  }
+
+  trigger.addEventListener("click", () => {
+    listbox.classList.contains("open") ? closeListbox() : openListbox();
+  });
+  options.forEach(opt => opt.addEventListener("click", () => selectOption(opt)));
+  document.addEventListener("click", e => {
+    const wrap = document.getElementById("wrap-Province");
+    if (wrap && !wrap.contains(e.target)) closeListbox();
+  });
+}
+
 function wireCustomSelects() {
   const selects = [
     "Country_of_Residence",
@@ -256,6 +319,7 @@ async function init() {
 
   // Wire custom select dropdowns
   wireCustomSelects();
+  wireProvinceDropdown();
 
   // Wire multiselect for Identify as
   wireMultiselect();
@@ -521,7 +585,8 @@ function validateSection(sectionId) {
     ok = validateEmail("Email") && ok;
     ok = validateRequired("Mobile") && ok;
     ok = validateRequired("Address") && ok;
-    ok = validateRequired("City_Province") && ok;
+    ok = validateRequired("City_Town") && ok;
+    ok = validateSelect("Province", "province-error") && ok;
     ok = validateSelect("Country_of_Residence") && ok;
     ok = validateYear("Year_of_Birth") && ok;
     ok = validateSelect("Gender") && ok;
@@ -928,7 +993,7 @@ function buildPayload() {
       return "+63" + m;
     })(),
     Address:                val("Address"),
-    City_Province:          val("City_Province"),
+    City_Province:          [val("City_Town"), val("Province")].filter(Boolean).join(", "),
     Country_of_Residence:   val("Country_of_Residence"),
     Year_of_Birth:          parseInt(val("Year_of_Birth"), 10) || null,
     Gender:                 val("Gender"),

@@ -612,6 +612,64 @@
       display: flex;
       align-items: center;
     }
+    /* ── Field divider ── */
+    .field-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 8px 0 20px;
+    }
+    .field-group-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--meta);
+      margin-bottom: 14px;
+    }
+
+    /* ── Address row ── */
+    .address-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .address-row .field { margin-bottom: 0; }
+    @media (max-width: 440px) {
+      .address-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── Terms ── */
+    .terms-text-box {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .terms-text-box p { margin-bottom: 10px; }
+    .terms-text-box p:last-child { margin-bottom: 0; }
+    .terms-accept-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .terms-accept-row input[type="checkbox"] {
+      width: 20px; height: 20px; min-height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
     /* ── Org combobox ── */
     .org-combobox-wrap { position: relative; }
     .org-combobox-input-row {
@@ -744,6 +802,7 @@
     <div class="section-title">Demographics</div>
     <div class="section-subtitle">Impormasyon tungkol sa iyo</div>
 
+    <!-- Group 1: Identity -->
     <div class="name-row">
       <div class="field">
         <label class="field-label">First Name <span class="req">*</span></label>
@@ -767,6 +826,38 @@
     </div>
 
     <div class="field">
+      <label class="field-label">Year of Birth <span class="req">*</span></label>
+      <span class="field-label-fil">Taon ng Kapanganakan (hal. 1995)</span>
+      <input type="number" id="Year_of_Birth" min="1940" max="2010" inputmode="numeric" placeholder="e.g. 1990">
+      <div class="field-error">Please enter a valid birth year (e.g. 1990).</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Preferred Language <span class="req">*</span></label>
+      <span class="field-label-fil">Nais na Wika</span>
+      <div class="custom-select-wrap" id="wrap-Preferred_Language">
+        <button type="button" class="custom-select-trigger placeholder" id="trigger-Preferred_Language" aria-haspopup="listbox" aria-expanded="false">
+          — Select / Pumili —
+        </button>
+        <div class="custom-select-listbox" id="listbox-Preferred_Language" role="listbox">
+          <div class="custom-select-option" data-value="Filipino">Filipino</div>
+          <div class="custom-select-option" data-value="English">English</div>
+          <div class="custom-select-option" data-value="Other">Other / Iba pa</div>
+        </div>
+        <select id="Preferred_Language" style="display:none" tabindex="-1">
+          <option value="">— Select / Pumili —</option>
+          <option value="Filipino">Filipino</option>
+          <option value="English">English</option>
+          <option value="Other">Other / Iba pa</option>
+        </select>
+        <div class="field-error" id="lang-error">This field is required.</div>
+      </div>
+      <div class="field hidden" id="other-language-field" style="margin-top:10px">
+        <input type="text" id="Preferred_Language_Other" placeholder="Please specify / Ibigay ang wika">
+      </div>
+    </div>
+
+    <div class="field">
       <label class="field-label">Email <span class="req">*</span></label>
       <input type="email" id="Email" autocomplete="email" inputmode="email">
       <div class="field-error">Please enter a valid email address.</div>
@@ -782,53 +873,9 @@
       <div class="field-error">This field is required.</div>
     </div>
 
-    <div class="field">
-      <label class="field-label">Street Address <span class="req">*</span></label>
-      <span class="field-label-fil">Address</span>
-      <textarea id="Address" rows="2" autocomplete="street-address"></textarea>
-      <div class="field-error">This field is required.</div>
-    </div>
+    <hr class="field-divider">
 
-    <div class="field">
-      <label class="field-label">City / Province <span class="req">*</span></label>
-      <span class="field-label-fil">Lungsod / Probinsya</span>
-      <input type="text" id="City_Province" autocomplete="address-level2">
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Country of Residence <span class="req">*</span></label>
-      <span class="field-label-fil">Bansa</span>
-      <div class="custom-select-wrap" id="wrap-Country_of_Residence">
-        <button type="button" class="custom-select-trigger placeholder" id="trigger-Country_of_Residence" aria-haspopup="listbox" aria-expanded="false">
-          — Select / Pumili —
-        </button>
-        <div class="custom-select-listbox" id="listbox-Country_of_Residence" role="listbox">
-          <div class="custom-select-option" data-value="Philippines">Philippines</div>
-          <div class="custom-select-option" data-value="Pakistan">Pakistan</div>
-          <div class="custom-select-option" data-value="South Korea">South Korea</div>
-          <div class="custom-select-option" data-value="Indonesia">Indonesia</div>
-          <div class="custom-select-option" data-value="Other">Other</div>
-        </div>
-        <select id="Country_of_Residence" style="display:none" tabindex="-1">
-          <option value="">— Select / Pumili —</option>
-          <option value="Philippines" selected>Philippines</option>
-          <option value="Pakistan">Pakistan</option>
-          <option value="South Korea">South Korea</option>
-          <option value="Indonesia">Indonesia</option>
-          <option value="Other">Other</option>
-        </select>
-        <div class="field-error">This field is required.</div>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Year of Birth <span class="req">*</span></label>
-      <span class="field-label-fil">Taon ng Kapanganakan (hal. 1995)</span>
-      <input type="number" id="Year_of_Birth" min="1940" max="2010" inputmode="numeric" placeholder="e.g. 1990">
-      <div class="field-error">Please enter a valid birth year (e.g. 1990).</div>
-    </div>
-
+    <!-- Group 2: Gender identity -->
     <div class="field">
       <label class="field-label">Gender <span class="req">*</span></label>
       <span class="field-label-fil">Kasarian</span>
@@ -887,31 +934,6 @@
     </div>
 
     <div class="field">
-      <label class="field-label">Preferred Language <span class="req">*</span></label>
-      <span class="field-label-fil">Nais na Wika</span>
-      <div class="custom-select-wrap" id="wrap-Preferred_Language">
-        <button type="button" class="custom-select-trigger placeholder" id="trigger-Preferred_Language" aria-haspopup="listbox" aria-expanded="false">
-          — Select / Pumili —
-        </button>
-        <div class="custom-select-listbox" id="listbox-Preferred_Language" role="listbox">
-          <div class="custom-select-option" data-value="Filipino">Filipino</div>
-          <div class="custom-select-option" data-value="English">English</div>
-          <div class="custom-select-option" data-value="Other">Other / Iba pa</div>
-        </div>
-        <select id="Preferred_Language" style="display:none" tabindex="-1">
-          <option value="">— Select / Pumili —</option>
-          <option value="Filipino">Filipino</option>
-          <option value="English">English</option>
-          <option value="Other">Other / Iba pa</option>
-        </select>
-        <div class="field-error" id="lang-error">This field is required.</div>
-      </div>
-      <div class="field hidden" id="other-language-field" style="margin-top:10px">
-        <input type="text" id="Preferred_Language_Other" placeholder="Please specify / Ibigay ang wika">
-      </div>
-    </div>
-
-    <div class="field">
       <label class="field-label">Do you identify as <span class="req">*</span></label>
       <span class="field-label-fil">Kabilang ka ba sa — maaaring pumili ng marami</span>
       <div class="multiselect-wrap" id="multiselect-identify">
@@ -952,12 +974,66 @@
       <div class="field-error" id="identify-error">Please select at least one option.</div>
     </div>
 
+    <hr class="field-divider">
+
+    <!-- Group 3: Address -->
+    <div class="field-group-label">Address <span style="font-size:12px;font-weight:400;color:var(--meta)">/ Tirahan</span></div>
+
     <div class="field">
-      <label class="field-label">Special Requirements / Accessibility Needs</label>
-      <span class="field-label-fil">Espesyal na Pangangailangan (opsyonal)</span>
-      <textarea id="Special_Requirements" rows="2" placeholder="e.g. wheelchair access, dietary needs…"></textarea>
+      <label class="field-label">Street Address <span class="req">*</span></label>
+      <span class="field-label-fil">Kalye / Barangay</span>
+      <textarea id="Address" rows="2" autocomplete="street-address"></textarea>
+      <div class="field-error">This field is required.</div>
     </div>
 
+    <div class="address-row">
+      <div class="field">
+        <label class="field-label">City / Town <span class="req">*</span></label>
+        <input type="text" id="City_Town" autocomplete="address-level3" placeholder="e.g. Quezon City">
+        <div class="field-error">This field is required.</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Province <span class="req">*</span></label>
+        <div class="custom-select-wrap" id="wrap-Province">
+          <button type="button" class="custom-select-trigger placeholder" id="trigger-Province" aria-haspopup="listbox" aria-expanded="false" style="font-size:15px">
+            — Province —
+          </button>
+          <div class="custom-select-listbox" id="listbox-Province" role="listbox"></div>
+          <select id="Province" style="display:none" tabindex="-1"></select>
+          <div class="field-error" id="province-error">Required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Country of Residence <span class="req">*</span></label>
+      <span class="field-label-fil">Bansa</span>
+      <div class="custom-select-wrap" id="wrap-Country_of_Residence">
+        <button type="button" class="custom-select-trigger placeholder" id="trigger-Country_of_Residence" aria-haspopup="listbox" aria-expanded="false">
+          — Select / Pumili —
+        </button>
+        <div class="custom-select-listbox" id="listbox-Country_of_Residence" role="listbox">
+          <div class="custom-select-option" data-value="Philippines">Philippines</div>
+          <div class="custom-select-option" data-value="Pakistan">Pakistan</div>
+          <div class="custom-select-option" data-value="South Korea">South Korea</div>
+          <div class="custom-select-option" data-value="Indonesia">Indonesia</div>
+          <div class="custom-select-option" data-value="Other">Other</div>
+        </div>
+        <select id="Country_of_Residence" style="display:none" tabindex="-1">
+          <option value="">— Select / Pumili —</option>
+          <option value="Philippines" selected>Philippines</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="South Korea">South Korea</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Other">Other</option>
+        </select>
+        <div class="field-error">This field is required.</div>
+      </div>
+    </div>
+
+    <hr class="field-divider">
+
+    <!-- Group 4: Files -->
     <div class="field">
       <label class="field-label">Recent Photo <span class="req">*</span></label>
       <span class="field-label-fil">Kamakailang Larawan</span>
@@ -1178,18 +1254,24 @@
 
   <!-- SECTION E: Terms & Conditions -->
   <div class="section-card" id="sec-terms">
-    <div class="section-title">Terms &amp; Conditions</div>
+    <div class="section-title">Terms &amp; Conditions <span class="req">*</span></div>
     <div class="section-subtitle">Mga Tuntunin at Kondisyon</div>
-    <div class="check-group">
-      <label class="check-opt">
-        <input type="checkbox" id="terms1">
-        <div>
-          <div class="check-label">I agree to participate fully, maintain a respectful learning space, and consent to photos/videos being used for AktivAsia communications.</div>
-          <div class="check-label-fil">Sumasang-ayon akong aktibong lumahok, mapanatili ang isang ligtas na espasyo ng pagkatuto, at payagan ang paggamit ng mga larawan/video para sa komunikasyon ng AktivAsia.</div>
-        </div>
-      </label>
+
+    <div class="terms-text-box">
+      <p>If selected, I commit to actively participate, be fully present, and stay focused throughout the workshop and associated activities.</p>
+      <p>I am committed to creating a respectful, safe, and inclusive space for all other participants by holding space for others to share their views and ideas.</p>
+      <p>I grant consent for the use of pictures, videos, and narratives from the training on our online platforms, website, and social media, etc.</p>
+      <hr style="border:none;border-top:1px solid var(--border);margin:12px 0">
+      <p style="font-style:italic;color:var(--meta)">Kung mapipili, nangangako akong aktibong lumahok, maging presente, at manatiling nakatuon sa buong workshop at kaugnay na aktibidad.</p>
+      <p style="font-style:italic;color:var(--meta)">Nakatuon ako sa paglikha ng isang mapagrespeto, ligtas, at inklusibong espasyo para sa lahat ng ibang kalahok sa pamamagitan ng pagbibigay ng pagkakataon sa iba na ibahagi ang kanilang mga pananaw at ideya.</p>
+      <p style="font-style:italic;color:var(--meta)">Nagbibigay ako ng pahintulot para sa paggamit ng mga larawan, video, at mga kwento mula sa pagsasanay sa aming mga online platform, website, at social media, atbp.</p>
     </div>
-    <div class="field-error" id="terms-error" style="margin-top:12px">Please agree to the terms to continue.</div>
+
+    <label class="terms-accept-row">
+      <input type="checkbox" id="terms1">
+      <span>I accept the Terms and Conditions. / Tinatanggap ko ang mga Tuntunin at Kondisyon.</span>
+    </label>
+    <div class="field-error" id="terms-error" style="margin-top:8px">Please agree to the terms to continue.</div>
   </div>
 
   <!-- SECTION F: Custom Questions -->
