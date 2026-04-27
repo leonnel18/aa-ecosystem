@@ -57,8 +57,12 @@ async function loadPlans(organisedBy) {
   input.placeholder = "Type to search training plans…";
   hint.textContent = "Loading plans…";
 
+  const seq = (input._loadSeq = (input._loadSeq ?? 0) + 1);
+  input._plans = [];
+
   try {
     const res  = await fetch(`${PROXY_BASE}/training-plans/search?organised_by=${encodeURIComponent(organisedBy)}`);
+    if (input._loadSeq !== seq) return; // discard stale response from a superseded country selection
     const json = await res.json();
     const plans = json.data ?? [];
     if (plans.length === 0) {
