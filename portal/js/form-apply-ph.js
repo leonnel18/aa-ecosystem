@@ -15,6 +15,14 @@ const TYPE_LABELS = {
   "Public_Narrative":              "Public Narrative",
 };
 
+// Training-type slug → CRM Products record ID
+const TYPE_IDS = {
+  "Foundational":               "773031000000354510",
+  "Training_of_Trainers__TOT_": "773031000000354567",
+  "Feminist_Leadership":        "773031000000354572",
+  "Public_Narrative":           "773031000000354577",
+};
+
 // Confidence rating definitions per training type (pre-training, 1-7 scale)
 const RATINGS_CONFIG = {
   Foundational: [
@@ -675,7 +683,7 @@ function buildPayload() {
     Role_in_the_Organisation: val("Role_in_the_Organisation"),
     Please_provide_a_100_word_bio_that_best_describes: val("Please_provide_a_100_word_bio_that_best_describes"),
     Training_Applied:       { id: trainingId },
-    Training_Type_Applied:  TYPE_LABELS[trainingType] ?? trainingType,
+    Training_Type_Applied:  TYPE_IDS[trainingType] ? { id: TYPE_IDS[trainingType] } : null,
     Stage:                  "Still in Applied Stage",
   };
 
