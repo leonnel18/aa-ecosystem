@@ -869,7 +869,11 @@ function buildPayload() {
     Last_Name:              val("Last_Name"),
     Preferred_Name_Nick_Name: val("Preferred_Name_Nick_Name"),
     Email:                  val("Email"),
-    Mobile:                 val("Mobile"),
+    Mobile: (() => {
+      let m = val("Mobile").replace(/\s/g, "");
+      if (m.startsWith("0")) m = m.slice(1);
+      return "+63" + m;
+    })(),
     Address:                val("Address"),
     City_Province:          val("City_Province"),
     Country_of_Residence:   val("Country_of_Residence"),
