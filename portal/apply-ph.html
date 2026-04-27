@@ -548,11 +548,29 @@
       <input type="hidden" id="Training_Applied">
     </div>
 
-    <div class="field">
+    <div class="field" style="position:relative">
       <label class="field-label">Organization Name <span class="req">*</span></label>
       <span class="field-label-fil">Pangalan ng Organisasyon</span>
-      <input type="text" id="Account_Name" placeholder="Start typing your organization name…">
-      <div class="field-error">This field is required.</div>
+      <input type="text" id="Account_Name" placeholder="Start typing your organization name…" autocomplete="off">
+      <input type="hidden" id="Account_Name_Id">
+      <div id="org-dropdown" style="display:none;position:absolute;left:0;right:0;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-sm);z-index:100;max-height:220px;overflow-y:auto;box-shadow:0 4px 16px rgba(0,0,0,.10)"></div>
+      <div id="org-new-prompt" style="display:none;margin-top:8px;font-size:13px;color:var(--meta)">
+        Organization not found. <button type="button" id="org-add-btn" style="background:none;border:none;color:var(--primary);font-weight:700;cursor:pointer;font-size:13px;padding:0">+ Add new organization</button>
+      </div>
+      <div id="org-new-fields" style="display:none;margin-top:10px;padding:14px;background:var(--primary-light);border-radius:var(--radius-sm)">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--primary)">New Organization Details</div>
+        <input type="text" id="org-new-name" placeholder="Full organization name" style="margin-bottom:8px">
+        <input type="text" id="org-new-city" placeholder="City / Province" style="margin-bottom:8px">
+        <select id="org-new-country" style="margin-bottom:0">
+          <option value="">— Country —</option>
+          <option value="Philippines" selected>Philippines</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="South Korea">South Korea</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="field-error" id="org-error">This field is required.</div>
     </div>
 
     <div class="field">

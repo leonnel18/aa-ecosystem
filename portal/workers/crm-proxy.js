@@ -93,6 +93,28 @@ export default {
         return jsonResponse(body, crmRes.status, origin);
       }
 
+      // ── GET /accounts/search?q= ──────────────────────────────────────────────
+      if (request.method === "GET" && path === "/accounts/search") {
+        const q = (url.searchParams.get("q") ?? "").trim();
+        if (q.length < 2) return jsonResponse({ data: [] }, 200, origin);
+        const searchUrl = `${CRM_BASE}/Accounts/search?criteria=(Account_Name:contains:${encodeURIComponent(q)})&fields=id,Account_Name&per_page=10`;
+        const crmRes = await fetch(searchUrl, { headers: auth });
+        const body   = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      // ── POST /accounts ────────────────────────────────────────────────────────
+      if (request.method === "POST" && path === "/accounts") {
+        const payload = await request.json();
+        const crmRes  = await fetch(`${CRM_BASE}/Accounts`, {
+          method:  "POST",
+          headers: { ...auth, "Content-Type": "application/json" },
+          body:    JSON.stringify(payload),
+        });
+        const body = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
       // ── GET /deals/search?training_id=&first=&last= ───────────────────────────
       if (request.method === "GET" && path === "/deals/search") {
         const trainingId = url.searchParams.get("training_id") ?? "";

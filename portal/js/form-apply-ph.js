@@ -26,7 +26,7 @@ const TYPE_IDS = {
 // Confidence rating definitions per training type (pre-training, 1-7 scale)
 const RATINGS_CONFIG = {
   Foundational: [
-    { id: "A_Pre_Training_Strategy_Buildings",    renderKey: "rating_f_a", label: "A) Campaign Experience Assessment",         labelFil: "Karanasan sa Kampanya" },
+    { id: "Campaigning_Experience_Pre",           renderKey: "rating_f_a", label: "A) Campaign Experience Assessment",         labelFil: "Karanasan sa Kampanya" },
     { id: "A_Pre_Training_Strategy_Buildings",    renderKey: "rating_f_b", label: "B) Strategy & Tactics",                    labelFil: "Estratehiya at Taktika" },
     { id: "B_Pre_Training_Building_Communication",renderKey: "rating_f_c", label: "C) Communication Strategy",                 labelFil: "Estratehiya sa Komunikasyon" },
     { id: "C_Pre_Training_Confident_facilitator", renderKey: "rating_f_d", label: "D) Facilitating Workshops / Meetings",      labelFil: "Pagpapatakbo ng mga Workshop" },
@@ -101,6 +101,9 @@ async function init() {
   document.getElementById("Preferred_Language").addEventListener("change", function() {
     document.getElementById("other-language-field").classList.toggle("hidden", this.value !== "Other");
   });
+
+  // Organization typeahead
+  wireOrgTypeahead();
 
   // Bio word count
   const bioField = document.getElementById("Please_provide_a_100_word_bio_that_best_describes");
@@ -320,7 +323,13 @@ function validateSection(sectionId) {
   }
 
   if (sectionId === "sec-professional") {
-    ok = validateRequired("Account_Name") && ok;
+    const orgInput = document.getElementById("Account_Name").value.trim();
+    if (!orgInput) {
+      document.getElementById("org-error").style.display = "block";
+      ok = false;
+    } else {
+      document.getElementById("org-error").style.display = "none";
+    }
     ok = validateRequired("Role_in_the_Organisation") && ok;
     ok = validateBio() && ok;
   }
@@ -632,6 +641,22 @@ async function submitForm() {
   submitBtn.innerHTML = '<span class="spinner"></span> Submitting…';
 
   try {
+    // If adding a new org, create it first and get the id
+    if (addingNewOrg) {
+      const orgName    = document.getElementById("org-new-name").value.trim();
+      const orgCity    = document.getElementById("org-new-city").value.trim();
+      const orgCountry = document.getElementById("org-new-country").value;
+      if (!orgName) throw new Error("Please enter the organization name.");
+      const orgRes  = await fetch(`${PROXY_BASE}/accounts`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ data: [{ Account_Name: orgName, Billing_City: orgCity, Billing_Country: orgCountry }] }),
+      });
+      const orgJson = await orgRes.json();
+      const newId   = orgJson.data?.[0]?.details?.id;
+      if (newId) { selectedOrgId = newId; addingNewOrg = false; }
+    }
+
     const payload = buildPayload();
     const res = await fetch(`${PROXY_BASE}/deals`, {
       method:  "POST",
@@ -679,7 +704,7 @@ function buildPayload() {
     Preferred_Language:     val("Preferred_Language") === "Other" ? val("Preferred_Language_Other") : val("Preferred_Language"),
     Identify_as_Multiple:   checkArr("Identify_as"),
     Special_Requirements:   val("Special_Requirements"),
-    Account_Name:           { name: val("Account_Name") },
+    Account_Name:           selectedOrgId ? { id: selectedOrgId } : { name: val("Account_Name") },
     Role_in_the_Organisation: val("Role_in_the_Organisation"),
     Please_provide_a_100_word_bio_that_best_describes: val("Please_provide_a_100_word_bio_that_best_describes"),
     Training_Applied:       { id: trainingId },
@@ -808,6 +833,82 @@ function wireFileUpload(inputId, nameDisplayId) {
       display.classList.add("hidden");
     }
   });
+}
+
+let selectedOrgId   = null;  // CRM Account id if picked from dropdown
+let addingNewOrg    = false; // user chose to add new org
+
+function wireOrgTypeahead() {
+  const input    = document.getElementById("Account_Name");
+  const dropdown = document.getElementById("org-dropdown");
+  const newPrompt= document.getElementById("org-new-prompt");
+  const newFields= document.getElementById("org-new-fields");
+  let debounce;
+
+  input.addEventListener("input", () => {
+    selectedOrgId = null;
+    addingNewOrg  = false;
+    newPrompt.style.display = "none";
+    newFields.style.display = "none";
+    clearTimeout(debounce);
+    const q = input.value.trim();
+    if (q.length < 2) { dropdown.style.display = "none"; return; }
+    debounce = setTimeout(() => searchOrgs(q), 300);
+  });
+
+  document.addEventListener("click", e => {
+    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
+
+  document.getElementById("org-add-btn").addEventListener("click", () => {
+    addingNewOrg = true;
+    newFields.style.display = "block";
+    newPrompt.style.display = "none";
+    document.getElementById("org-new-name").value = input.value.trim();
+  });
+}
+
+async function searchOrgs(q) {
+  const dropdown  = document.getElementById("org-dropdown");
+  const newPrompt = document.getElementById("org-new-prompt");
+  dropdown.innerHTML = `<div style="padding:12px;color:var(--meta);font-size:13px">Searching…</div>`;
+  dropdown.style.display = "block";
+  try {
+    const res  = await fetch(`${PROXY_BASE}/accounts/search?q=${encodeURIComponent(q)}`);
+    const json = await res.json();
+    const orgs = json.data ?? [];
+    if (orgs.length === 0) {
+      dropdown.style.display = "none";
+      newPrompt.style.display = "block";
+      return;
+    }
+    dropdown.innerHTML = orgs.map(o =>
+      `<div data-id="${o.id}" data-name="${o.Account_Name}" style="padding:12px 16px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--border)">${o.Account_Name}</div>`
+    ).join("") +
+      `<div data-id="__new__" style="padding:12px 16px;cursor:pointer;font-size:13px;color:var(--primary);font-weight:600">+ Add new organization</div>`;
+    dropdown.querySelectorAll("[data-id]").forEach(item => {
+      item.addEventListener("mouseover",  () => item.style.background = "var(--primary-light)");
+      item.addEventListener("mouseout",   () => item.style.background = "");
+      item.addEventListener("click", () => {
+        if (item.dataset.id === "__new__") {
+          document.getElementById("org-new-fields").style.display = "block";
+          document.getElementById("org-new-name").value = document.getElementById("Account_Name").value.trim();
+          addingNewOrg = true;
+        } else {
+          document.getElementById("Account_Name").value    = item.dataset.name;
+          document.getElementById("Account_Name_Id").value = item.dataset.id;
+          selectedOrgId = item.dataset.id;
+          addingNewOrg  = false;
+        }
+        dropdown.style.display = "none";
+        document.getElementById("org-new-prompt").style.display = "none";
+      });
+    });
+  } catch {
+    dropdown.style.display = "none";
+  }
 }
 
 // Expose globals called from inline onclick attributes in HTML
