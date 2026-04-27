@@ -71,6 +71,73 @@ const ratingValues = {};
 // Collected custom answer values: { fieldId: stringOrInt }
 const customValues = {};
 
+// ── Custom selects ────────────────────────────────────────────────────────────
+function wireCustomSelects() {
+  const selects = [
+    "Country_of_Residence",
+    "Gender",
+    "Preferred_Language",
+  ];
+
+  selects.forEach(id => {
+    const trigger  = document.getElementById(`trigger-${id}`);
+    const listbox  = document.getElementById(`listbox-${id}`);
+    const hidden   = document.getElementById(id);
+    if (!trigger || !listbox || !hidden) return;
+
+    const options = listbox.querySelectorAll(".custom-select-option");
+
+    function openListbox() {
+      listbox.classList.add("open");
+      trigger.setAttribute("aria-expanded", "true");
+    }
+    function closeListbox() {
+      listbox.classList.remove("open");
+      trigger.setAttribute("aria-expanded", "false");
+    }
+    function selectOption(opt) {
+      const val   = opt.dataset.value;
+      const label = opt.textContent.trim();
+      options.forEach(o => o.classList.remove("selected"));
+      opt.classList.add("selected");
+      trigger.textContent = label;
+      trigger.classList.remove("placeholder");
+      hidden.value = val;
+      hidden.dispatchEvent(new Event("change", { bubbles: true }));
+      closeListbox();
+    }
+
+    trigger.addEventListener("click", () => {
+      listbox.classList.contains("open") ? closeListbox() : openListbox();
+    });
+
+    options.forEach(opt => {
+      opt.addEventListener("click", () => selectOption(opt));
+    });
+
+    trigger.addEventListener("keydown", e => {
+      const openOpts = [...options];
+      const curIdx   = openOpts.findIndex(o => o.classList.contains("selected"));
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openListbox(); }
+      if (e.key === "Escape") closeListbox();
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const next = openOpts[curIdx + 1] || openOpts[0];
+        selectOption(next);
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const prev = openOpts[curIdx - 1] || openOpts[openOpts.length - 1];
+        selectOption(prev);
+      }
+    });
+
+    document.addEventListener("click", e => {
+      if (!trigger.contains(e.target) && !listbox.contains(e.target)) closeListbox();
+    });
+  });
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", init);
 
@@ -89,6 +156,9 @@ async function init() {
 
   // Wire up checkbox visual state
   document.querySelectorAll(".check-group").forEach(wireCheckGroup);
+
+  // Wire custom select dropdowns
+  wireCustomSelects();
 
   // Pronoun "Other" toggle
   document.querySelectorAll('input[name="Pronoun"]').forEach(r => {
