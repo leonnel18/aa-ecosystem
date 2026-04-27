@@ -97,66 +97,114 @@ const ratingValues = {};
 const customValues = {};
 
 // ── Custom selects ────────────────────────────────────────────────────────────
-const PH_PROVINCES = [
-  "Abra","Agusan del Norte","Agusan del Sur","Aklan","Albay","Antique","Apayao",
-  "Aurora","Basilan","Bataan","Batanes","Batangas","Benguet","Biliran","Bohol",
-  "Bukidnon","Bulacan","Cagayan","Camarines Norte","Camarines Sur","Camiguin",
-  "Capiz","Catanduanes","Cavite","Cebu","Compostela Valley","Cotabato","Davao de Oro",
-  "Davao del Norte","Davao del Sur","Davao Occidental","Davao Oriental",
-  "Dinagat Islands","Eastern Samar","Guimaras","Ifugao","Ilocos Norte","Ilocos Sur",
-  "Iloilo","Isabela","Kalinga","La Union","Laguna","Lanao del Norte","Lanao del Sur",
-  "Leyte","Maguindanao","Masbate","Marinduque","Metro Manila (NCR)",
-  "Misamis Occidental","Misamis Oriental","Mountain Province","Negros Occidental",
-  "Negros Oriental","Northern Samar","Nueva Ecija","Nueva Vizcaya","Occidental Mindoro",
-  "Oriental Mindoro","Palawan","Pampanga","Pangasinan","Quezon","Quirino","Rizal",
-  "Romblon","Samar","Sarangani","Siquijor","Sorsogon","South Cotabato",
-  "Southern Leyte","Sultan Kudarat","Sulu","Surigao del Norte","Surigao del Sur",
-  "Tarlac","Tawi-Tawi","Zambales","Zamboanga del Norte","Zamboanga del Sur",
-  "Zamboanga Sibugay",
-];
 
 function wireProvinceDropdown() {
-  const trigger  = document.getElementById("trigger-Province");
-  const listbox  = document.getElementById("listbox-Province");
-  const hidden   = document.getElementById("Province");
-  if (!trigger || !listbox || !hidden) return;
+  const provinces = Object.keys(PH_MUNICIPALITIES).sort();
 
-  // Populate options
-  listbox.innerHTML = PH_PROVINCES.map(p =>
+  // ── Province dropdown ──────────────────────────────────────────────────────
+  const pTrigger = document.getElementById("trigger-Province");
+  const pListbox = document.getElementById("listbox-Province");
+  const pHidden  = document.getElementById("Province");
+  if (!pTrigger || !pListbox || !pHidden) return;
+
+  pListbox.innerHTML = provinces.map(p =>
     `<div class="custom-select-option" data-value="${p}">${p}</div>`
   ).join("");
-  hidden.innerHTML = `<option value=""></option>` +
-    PH_PROVINCES.map(p => `<option value="${p}">${p}</option>`).join("");
+  pHidden.innerHTML = `<option value=""></option>` +
+    provinces.map(p => `<option value="${p}">${p}</option>`).join("");
 
-  // Reuse the same open/close/select pattern
-  const options = listbox.querySelectorAll(".custom-select-option");
+  const pOptions = pListbox.querySelectorAll(".custom-select-option");
 
-  function openListbox() {
-    listbox.classList.add("open");
-    trigger.setAttribute("aria-expanded", "true");
-  }
-  function closeListbox() {
-    listbox.classList.remove("open");
-    trigger.setAttribute("aria-expanded", "false");
-  }
-  function selectOption(opt) {
+  function openProv() { pListbox.classList.add("open"); pTrigger.setAttribute("aria-expanded","true"); }
+  function closeProv() { pListbox.classList.remove("open"); pTrigger.setAttribute("aria-expanded","false"); }
+
+  function selectProvince(opt) {
     const val = opt.dataset.value;
-    options.forEach(o => o.classList.remove("selected"));
+    pOptions.forEach(o => o.classList.remove("selected"));
     opt.classList.add("selected");
-    trigger.textContent = val;
-    trigger.classList.remove("placeholder");
-    trigger.style.fontSize = "";
-    hidden.value = val;
-    closeListbox();
+    pTrigger.textContent = val;
+    pTrigger.classList.remove("placeholder");
+    pHidden.value = val;
+    closeProv();
+    buildCityList(val);
   }
 
-  trigger.addEventListener("click", () => {
-    listbox.classList.contains("open") ? closeListbox() : openListbox();
-  });
-  options.forEach(opt => opt.addEventListener("click", () => selectOption(opt)));
+  pTrigger.addEventListener("click", () => pListbox.classList.contains("open") ? closeProv() : openProv());
+  pOptions.forEach(opt => opt.addEventListener("click", () => selectProvince(opt)));
   document.addEventListener("click", e => {
-    const wrap = document.getElementById("wrap-Province");
-    if (wrap && !wrap.contains(e.target)) closeListbox();
+    if (!document.getElementById("wrap-Province")?.contains(e.target)) closeProv();
+  });
+
+  // ── City/Town combobox ─────────────────────────────────────────────────────
+  // HTML structure (already in apply-ph.html): #city-combobox-wrap > #city-search-input + #city-dropdown-list + #City_Town (hidden input)
+  const cityWrap    = document.getElementById("city-combobox-wrap");
+  const cityInput   = document.getElementById("city-search-input");
+  const cityList    = document.getElementById("city-dropdown-list");
+  const cityHidden  = document.getElementById("City_Town");
+  const cityManual  = document.getElementById("city-manual-wrap");
+  const cityManInput= document.getElementById("city-manual-input");
+  if (!cityInput || !cityList || !cityHidden) return;
+
+  let currentMunis = [];
+
+  function buildCityList(province) {
+    currentMunis = (PH_MUNICIPALITIES[province] || []).slice().sort();
+    cityInput.value = "";
+    cityHidden.value = "";
+    cityInput.disabled = false;
+    cityInput.placeholder = "Search city / town…";
+    if (cityManual) cityManual.style.display = "none";
+    cityList.classList.remove("open");
+    renderCityOptions("");
+  }
+
+  function renderCityOptions(q) {
+    const lower = q.toLowerCase();
+    const matches = q.length === 0
+      ? currentMunis
+      : currentMunis.filter(m => m.toLowerCase().includes(lower));
+
+    if (matches.length === 0 && q.length > 0) {
+      cityList.innerHTML = `
+        <div class="org-dropdown-item" style="color:var(--meta);cursor:default;font-size:13px">No match — type to enter manually</div>
+        <div class="org-add-row" id="city-enter-manual">Use "${escHtml(q)}" as city/town</div>`;
+      cityList.classList.add("open");
+      cityList.querySelector("#city-enter-manual")?.addEventListener("click", () => {
+        cityHidden.value = q;
+        cityInput.value  = q;
+        cityList.classList.remove("open");
+      });
+      return;
+    }
+
+    cityList.innerHTML = matches.map(m =>
+      `<div class="org-dropdown-item" data-city="${escHtml(m)}">${escHtml(m)}</div>`
+    ).join("");
+
+    if (matches.length > 0) cityList.classList.add("open");
+    else cityList.classList.remove("open");
+
+    cityList.querySelectorAll("[data-city]").forEach(item => {
+      item.addEventListener("click", () => {
+        cityHidden.value = item.dataset.city;
+        cityInput.value  = item.dataset.city;
+        cityList.classList.remove("open");
+      });
+    });
+  }
+
+  cityInput.addEventListener("input", () => {
+    if (currentMunis.length === 0) return;
+    cityHidden.value = "";
+    renderCityOptions(cityInput.value.trim());
+  });
+
+  cityInput.addEventListener("focus", () => {
+    if (currentMunis.length > 0 && cityInput.value === "") renderCityOptions("");
+  });
+
+  document.addEventListener("click", e => {
+    if (cityWrap && !cityWrap.contains(e.target)) cityList.classList.remove("open");
   });
 }
 
@@ -332,6 +380,13 @@ async function init() {
   // Preferred Language "Other" toggle
   document.getElementById("Preferred_Language").addEventListener("change", function() {
     document.getElementById("other-language-field").classList.toggle("hidden", this.value !== "Other");
+  });
+
+  // Phone: numbers only, strip non-digits on input
+  document.getElementById("Mobile").addEventListener("input", function() {
+    const pos = this.selectionStart;
+    const cleaned = this.value.replace(/\D/g, "").slice(0, 10);
+    if (this.value !== cleaned) { this.value = cleaned; this.setSelectionRange(pos, pos); }
   });
 
   // Organization typeahead
@@ -583,10 +638,9 @@ function validateSection(sectionId) {
     ok = validateRequired("Last_Name") && ok;
     ok = validateRequired("Preferred_Name_Nick_Name") && ok;
     ok = validateEmail("Email") && ok;
-    ok = validateRequired("Mobile") && ok;
-    ok = validateRequired("Address") && ok;
-    ok = validateRequired("City_Town") && ok;
+    ok = validatePhone("Mobile") && ok;
     ok = validateSelect("Province", "province-error") && ok;
+    ok = validateCityTown() && ok;
     ok = validateSelect("Country_of_Residence") && ok;
     ok = validateYear("Year_of_Birth") && ok;
     ok = validateSelect("Gender") && ok;
@@ -685,7 +739,16 @@ function validateSelect(id, errorId) {
 function validateEmail(id) {
   const el    = document.getElementById(id);
   const field = el.closest(".field");
-  const pass  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+  const pass  = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(el.value.trim());
+  field.classList.toggle("has-error", !pass);
+  return pass;
+}
+
+function validatePhone(id) {
+  const el    = document.getElementById(id);
+  const field = el.closest(".field");
+  const val   = el.value.replace(/\D/g, "");
+  const pass  = val.length === 10 && val.startsWith("9");
   field.classList.toggle("has-error", !pass);
   return pass;
 }
@@ -729,6 +792,14 @@ function validateBio() {
   const words = el.value.trim() === "" ? 0 : el.value.trim().split(/\s+/).length;
   const pass  = words > 0 && words <= 100;
   field.classList.toggle("has-error", !pass);
+  return pass;
+}
+
+function validateCityTown() {
+  const val   = (document.getElementById("City_Town")?.value ?? "").trim();
+  const errEl = document.getElementById("city-error");
+  const pass  = val !== "";
+  if (errEl) errEl.style.display = pass ? "none" : "block";
   return pass;
 }
 
@@ -985,13 +1056,7 @@ function buildPayload() {
     Last_Name:              val("Last_Name"),
     Preferred_Name_Nick_Name: val("Preferred_Name_Nick_Name"),
     Email:                  val("Email"),
-    Mobile: (() => {
-      let m = val("Mobile").replace(/[\s\-().]/g, "");
-      if (m.startsWith("+63")) return m;
-      if (m.startsWith("63")) return "+" + m;
-      if (m.startsWith("0")) m = m.slice(1);
-      return "+63" + m;
-    })(),
+    Mobile: "+63" + val("Mobile").replace(/\D/g, "").replace(/^0/, ""),
     Address:                val("Address"),
     City_Province:          [val("City_Town"), val("Province")].filter(Boolean).join(", "),
     Country_of_Residence:   val("Country_of_Residence"),

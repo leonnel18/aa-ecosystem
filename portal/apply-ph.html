@@ -807,13 +807,13 @@
       <div class="field">
         <label class="field-label">First Name <span class="req">*</span></label>
         <span class="field-label-fil">Pangalan</span>
-        <input type="text" id="First_Name" autocomplete="given-name" inputmode="text">
+        <input type="text" id="First_Name" autocomplete="given-name" inputmode="text" placeholder="e.g. Maria">
         <div class="field-error">This field is required.</div>
       </div>
       <div class="field">
         <label class="field-label">Last Name <span class="req">*</span></label>
         <span class="field-label-fil">Apelyido</span>
-        <input type="text" id="Last_Name" autocomplete="family-name">
+        <input type="text" id="Last_Name" autocomplete="family-name" placeholder="e.g. Santos">
         <div class="field-error">This field is required.</div>
       </div>
     </div>
@@ -821,7 +821,7 @@
     <div class="field">
       <label class="field-label">Preferred Name / Nickname <span class="req">*</span></label>
       <span class="field-label-fil">Palayaw — Ano ang gusto mong itawag sa iyo?</span>
-      <input type="text" id="Preferred_Name_Nick_Name">
+      <input type="text" id="Preferred_Name_Nick_Name" placeholder="e.g. Marj">
       <div class="field-error">This field is required.</div>
     </div>
 
@@ -859,7 +859,7 @@
 
     <div class="field">
       <label class="field-label">Email <span class="req">*</span></label>
-      <input type="email" id="Email" autocomplete="email" inputmode="email">
+      <input type="email" id="Email" autocomplete="email" inputmode="email" placeholder="e.g. maria@example.com">
       <div class="field-error">Please enter a valid email address.</div>
     </div>
 
@@ -868,9 +868,9 @@
       <span class="field-label-fil">Numero ng Telepono / WhatsApp</span>
       <div class="phone-wrap">
         <span class="phone-prefix"><img src="https://flagcdn.com/w40/ph.png" width="20" height="14" alt="PH" style="border-radius:2px;display:block"> +63</span>
-        <input type="tel" id="Mobile" autocomplete="tel" inputmode="tel" placeholder="9XX XXX XXXX">
+        <input type="tel" id="Mobile" autocomplete="tel" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="9XXXXXXXXX">
       </div>
-      <div class="field-error">This field is required.</div>
+      <div class="field-error">Enter a valid 10-digit PH number starting with 9 (e.g. 9171234567).</div>
     </div>
 
     <hr class="field-divider">
@@ -980,47 +980,20 @@
     <div class="field-group-label">Address <span style="font-size:12px;font-weight:400;color:var(--meta)">/ Tirahan</span></div>
 
     <div class="field">
-      <label class="field-label">Street Address <span class="req">*</span></label>
-      <span class="field-label-fil">Kalye / Barangay</span>
-      <textarea id="Address" rows="2" autocomplete="street-address"></textarea>
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <div class="address-row">
-      <div class="field">
-        <label class="field-label">City / Town <span class="req">*</span></label>
-        <input type="text" id="City_Town" autocomplete="address-level3" placeholder="e.g. Quezon City">
-        <div class="field-error">This field is required.</div>
-      </div>
-      <div class="field">
-        <label class="field-label">Province <span class="req">*</span></label>
-        <div class="custom-select-wrap" id="wrap-Province">
-          <button type="button" class="custom-select-trigger placeholder" id="trigger-Province" aria-haspopup="listbox" aria-expanded="false" style="font-size:15px">
-            — Province —
-          </button>
-          <div class="custom-select-listbox" id="listbox-Province" role="listbox"></div>
-          <select id="Province" style="display:none" tabindex="-1"></select>
-          <div class="field-error" id="province-error">Required.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="field">
       <label class="field-label">Country of Residence <span class="req">*</span></label>
       <span class="field-label-fil">Bansa</span>
       <div class="custom-select-wrap" id="wrap-Country_of_Residence">
-        <button type="button" class="custom-select-trigger placeholder" id="trigger-Country_of_Residence" aria-haspopup="listbox" aria-expanded="false">
-          — Select / Pumili —
+        <button type="button" class="custom-select-trigger" id="trigger-Country_of_Residence" aria-haspopup="listbox" aria-expanded="false">
+          Philippines
         </button>
         <div class="custom-select-listbox" id="listbox-Country_of_Residence" role="listbox">
-          <div class="custom-select-option" data-value="Philippines">Philippines</div>
+          <div class="custom-select-option selected" data-value="Philippines">Philippines</div>
           <div class="custom-select-option" data-value="Pakistan">Pakistan</div>
           <div class="custom-select-option" data-value="South Korea">South Korea</div>
           <div class="custom-select-option" data-value="Indonesia">Indonesia</div>
           <div class="custom-select-option" data-value="Other">Other</div>
         </div>
         <select id="Country_of_Residence" style="display:none" tabindex="-1">
-          <option value="">— Select / Pumili —</option>
           <option value="Philippines" selected>Philippines</option>
           <option value="Pakistan">Pakistan</option>
           <option value="South Korea">South Korea</option>
@@ -1029,6 +1002,40 @@
         </select>
         <div class="field-error">This field is required.</div>
       </div>
+    </div>
+
+    <div class="address-row">
+      <div class="field">
+        <label class="field-label">Province <span class="req">*</span></label>
+        <div class="custom-select-wrap" id="wrap-Province">
+          <button type="button" class="custom-select-trigger placeholder" id="trigger-Province" aria-haspopup="listbox" aria-expanded="false" style="font-size:15px">
+            — Select Province —
+          </button>
+          <div class="custom-select-listbox" id="listbox-Province" role="listbox"></div>
+          <select id="Province" style="display:none" tabindex="-1"></select>
+          <div class="field-error" id="province-error">Required.</div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">City / Town <span class="req">*</span></label>
+        <div id="city-combobox-wrap" style="position:relative">
+          <div class="org-combobox-input-row">
+            <span class="org-combobox-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+            <input type="text" id="city-search-input" placeholder="Select province first…" autocomplete="off" disabled style="border:none;border-radius:0;padding:10px 8px;min-height:unset;flex:1;font-size:15px">
+          </div>
+          <div class="org-dropdown-list" id="city-dropdown-list"></div>
+          <input type="hidden" id="City_Town">
+        </div>
+        <div class="field-error" id="city-error">This field is required.</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Street Address <span style="font-weight:400;color:var(--meta)">(optional)</span></label>
+      <span class="field-label-fil">Kalye / Barangay</span>
+      <input type="text" id="Address" autocomplete="street-address" placeholder="e.g. 123 Rizal St., Barangay Poblacion">
     </div>
 
     <hr class="field-divider">
@@ -1297,6 +1304,7 @@
   <p>Thank you for applying. Your application has been received and you will be contacted by the AktivAsia team soon.<br><br><em>Salamat sa iyong aplikasyon. Makikipag-ugnayan sa iyo ang koponan ng AktivAsia.</em></p>
 </div>
 
+<script src="js/ph-municipalities.js"></script>
 <script src="js/form-apply-ph.js"></script>
 </body>
 </html>
