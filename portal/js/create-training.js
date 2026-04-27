@@ -25,6 +25,27 @@ const COUNTRY_SLUG_MAP = {
   "Regional":    "backbone",
 };
 
+const OWNER_EMAIL_MAP = {
+  "Philippines": "aktivasia.philippines@gmail.com",
+  "Pakistan":    "aktivasia.pakistan@gmail.com",
+  "Korea":       "aktivasia.korea@gmail.com",
+  "Indonesia":   "aktivasia.indonesia@gmail.com",
+  "Regional":    "aktivasia.backbone@gmail.com",
+};
+
+async function resolveOwner(organisedBy) {
+  const email = OWNER_EMAIL_MAP[organisedBy];
+  if (!email) return undefined;
+  try {
+    const res  = await fetch(`${PROXY_BASE}/users/search?email=${encodeURIComponent(email)}`);
+    const json = await res.json();
+    const user = (json.users ?? [])[0];
+    return user ? { id: user.id } : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 // ── Country/portal change ─────────────────────────────────────────────────────
 function onOrganisedByChange(select) {
   const field = document.getElementById("countries-participated-field");
@@ -527,6 +548,7 @@ async function submitTraining() {
     // Step 1: POST /solutions — create the training record
     setStatus("Creating training record in CRM…");
 
+    const owner = await resolveOwner(organisedBy);
     const facilitators = collectFacilitators();
     const countriesEl = document.getElementById("Countries_Participated");
     const selectedCountries = [...countriesEl.selectedOptions].map(o => o.value);
@@ -536,6 +558,7 @@ async function submitTraining() {
         Solution_Title:              val("Solution_Title"),
         Training_Type:               { id: typeId },
         Organised_By:                organisedBy,
+        Owner:                       owner,
         Format:                      val("Format") || undefined,
         Start_Date:                  val("Start_Date"),
         End_Date:                    val("End_Date"),
