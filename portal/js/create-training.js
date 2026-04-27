@@ -105,13 +105,17 @@ function addFacilitator() {
   row.style.cssText = "display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;align-items:start;position:relative";
   row.innerHTML = `
     <div class="field" style="margin-bottom:0">
-      <label class="field-label">Name ${facilitatorCount}</label>
-      <input type="text" class="fac-name" placeholder="Facilitator name">
-    </div>
-    <div class="field" style="margin-bottom:0">
-      <label class="field-label">Role ${facilitatorCount}
+      <label class="field-label">Name ${facilitatorCount}
         <button type="button" class="btn-remove-q" style="float:right;margin-top:-2px" onclick="removeFacilitator(this)">× Remove</button>
       </label>
+      <div class="fac-typeahead-wrap">
+        <input type="text" class="fac-name" placeholder="Search contact name…" autocomplete="off" oninput="onFacInput(this)" onfocus="onFacInput(this)">
+        <input type="hidden" class="fac-id">
+        <div class="fac-dropdown" style="display:none"></div>
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label class="field-label">Role ${facilitatorCount}</label>
       <select class="fac-role">${ROLE_OPTIONS}</select>
     </div>
   `;
@@ -127,7 +131,7 @@ function removeFacilitator(btn) {
   document.getElementById("btn-add-facilitator").disabled = false;
   document.querySelectorAll(".facilitator-row").forEach((row, i) => {
     const n = i + 1;
-    row.querySelector(".fac-name").previousElementSibling.textContent = `Name ${n}`;
+    row.querySelector(".fac-typeahead-wrap").closest(".field").querySelector(".field-label").childNodes[0].textContent = `Name ${n}`;
   });
 }
 
@@ -139,15 +143,132 @@ function collectFacilitators() {
   const result = {};
   document.querySelectorAll(".facilitator-row").forEach((row, i) => {
     const name = row.querySelector(".fac-name").value.trim();
+    const id   = row.querySelector(".fac-id").value.trim();
     const role = row.querySelector(".fac-role").value;
-    if (!name && !role) return;
+    if (!name && !id && !role) return;
     const nameKey = FAC_NAME_KEYS[i];
     const roleKey = i < 5 ? FAC_ROLE_KEYS_1_5[i] : FAC_ROLE_KEYS_6_10[i - 5];
-    if (name) result[nameKey] = name;
+    // Slots 1–8 are CRM lookups → send {id}; slots 9–10 are plain text
+    if (i < 8) {
+      if (id)        result[nameKey] = { id };
+      else if (name) result[nameKey] = name;
+    } else {
+      if (name) result[nameKey] = name;
+    }
     if (role) result[roleKey] = role;
   });
   return result;
 }
+
+// ── Facilitator typeahead ─────────────────────────────────────────────────────
+let facDebounceTimer = null;
+let pendingFacRow    = null;
+
+async function onFacInput(input) {
+  const row      = input.closest(".facilitator-row");
+  const dropdown = row.querySelector(".fac-dropdown");
+  const q        = input.value.trim();
+
+  clearTimeout(facDebounceTimer);
+  if (q.length < 2) { dropdown.style.display = "none"; return; }
+
+  facDebounceTimer = setTimeout(async () => {
+    try {
+      const res  = await fetch(`${PROXY_BASE}/contacts/search?q=${encodeURIComponent(q)}`);
+      const json = await res.json();
+      renderFacDropdown(row, json.data ?? []);
+    } catch { dropdown.style.display = "none"; }
+  }, 280);
+}
+
+function renderFacDropdown(row, contacts) {
+  const dropdown = row.querySelector(".fac-dropdown");
+  dropdown.innerHTML = "";
+
+  contacts.slice(0, 8).forEach(c => {
+    const item = document.createElement("div");
+    item.className = "fac-dropdown-item";
+    item.textContent = c.Full_Name + (c.Email ? ` — ${c.Email}` : "");
+    item.onclick = () => selectFacContact(row, c.id, c.Full_Name);
+    dropdown.appendChild(item);
+  });
+
+  const addNew = document.createElement("div");
+  addNew.className = "fac-dropdown-item add-new";
+  addNew.textContent = "+ Add New Contact";
+  addNew.onclick = () => openAddContactModal(row);
+  dropdown.appendChild(addNew);
+
+  dropdown.style.display = "block";
+}
+
+function selectFacContact(row, id, name) {
+  row.querySelector(".fac-id").value   = id;
+  row.querySelector(".fac-name").value = name;
+  row.querySelector(".fac-dropdown").style.display = "none";
+}
+
+function openAddContactModal(row) {
+  pendingFacRow = row;
+  row.querySelector(".fac-dropdown").style.display = "none";
+  document.getElementById("nc-fullname").value = "";
+  document.getElementById("nc-email").value    = "";
+  document.getElementById("nc-role").value     = "";
+  document.getElementById("nc-status").textContent = "";
+  document.getElementById("nc-save-btn").disabled  = false;
+  document.getElementById("add-contact-modal").classList.add("visible");
+}
+
+function closeAddContactModal() {
+  document.getElementById("add-contact-modal").classList.remove("visible");
+  pendingFacRow = null;
+}
+
+async function saveNewContact() {
+  const fullName = document.getElementById("nc-fullname").value.trim();
+  if (!fullName) {
+    document.getElementById("nc-fullname").closest(".field").classList.add("has-error");
+    return;
+  }
+  document.getElementById("nc-fullname").closest(".field").classList.remove("has-error");
+
+  const saveBtn = document.getElementById("nc-save-btn");
+  saveBtn.disabled = true;
+  document.getElementById("nc-status").textContent = "Saving…";
+
+  try {
+    const nameParts = fullName.split(" ");
+    const payload   = {
+      data: [{
+        Last_Name:  nameParts.slice(1).join(" ") || nameParts[0],
+        First_Name: nameParts.length > 1 ? nameParts[0] : "",
+        Email:      document.getElementById("nc-email").value.trim() || undefined,
+        Title:      document.getElementById("nc-role").value.trim()  || undefined,
+      }]
+    };
+    const res  = await fetch(`${PROXY_BASE}/contacts`, {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify(payload),
+    });
+    const json = await res.json();
+    const id   = json?.data?.[0]?.details?.id;
+    if (!id) throw new Error(JSON.stringify(json));
+
+    if (pendingFacRow) selectFacContact(pendingFacRow, id, fullName);
+    closeAddContactModal();
+  } catch (e) {
+    document.getElementById("nc-status").textContent = "Error: " + e.message;
+    saveBtn.disabled = false;
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener("click", e => {
+  if (!e.target.closest(".fac-typeahead-wrap")) {
+    document.querySelectorAll(".fac-dropdown").forEach(d => d.style.display = "none");
+  }
+});
 
 // ── Question builder ──────────────────────────────────────────────────────────
 let questionCount = 0;
@@ -448,7 +569,11 @@ function resetForm() {
     <div class="facilitator-row" data-slot="1" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;align-items:start">
       <div class="field" style="margin-bottom:0">
         <label class="field-label">Name 1</label>
-        <input type="text" class="fac-name" placeholder="Facilitator name">
+        <div class="fac-typeahead-wrap">
+          <input type="text" class="fac-name" placeholder="Search contact name…" autocomplete="off" oninput="onFacInput(this)" onfocus="onFacInput(this)">
+          <input type="hidden" class="fac-id">
+          <div class="fac-dropdown" style="display:none"></div>
+        </div>
       </div>
       <div class="field" style="margin-bottom:0">
         <label class="field-label">Role 1</label>

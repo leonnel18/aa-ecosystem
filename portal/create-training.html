@@ -400,6 +400,49 @@
       line-height: 1;
       color: var(--primary);
     }
+
+    /* ── Facilitator typeahead ── */
+    .fac-typeahead-wrap { position: relative; }
+    .fac-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      z-index: 20;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .fac-dropdown-item {
+      padding: 10px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+    }
+    .fac-dropdown-item:last-child { border-bottom: none; }
+    .fac-dropdown-item:hover { background: var(--bg); }
+    .fac-dropdown-item.add-new { color: var(--primary); font-weight: 600; }
+    /* Add New Contact modal */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      width: min(440px, 90vw);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+    }
+    .modal-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -580,7 +623,11 @@
       <div class="facilitator-row" data-slot="1" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;align-items:start">
         <div class="field" style="margin-bottom:0">
           <label class="field-label">Name 1</label>
-          <input type="text" class="fac-name" placeholder="Facilitator name">
+          <div class="fac-typeahead-wrap">
+            <input type="text" class="fac-name" placeholder="Search contact name…" autocomplete="off" oninput="onFacInput(this)" onfocus="onFacInput(this)">
+            <input type="hidden" class="fac-id">
+            <div class="fac-dropdown" style="display:none"></div>
+          </div>
         </div>
         <div class="field" style="margin-bottom:0">
           <label class="field-label">Role 1</label>
@@ -701,6 +748,31 @@
 <div class="submit-bar" id="submit-bar">
   <div class="status-msg" id="status-msg"></div>
   <button type="button" class="btn btn-primary" id="btn-submit" onclick="submitTraining()">Create Training</button>
+</div>
+
+<!-- Add New Contact modal -->
+<div class="modal-overlay" id="add-contact-modal">
+  <div class="modal-card">
+    <div class="modal-title">Add New Contact</div>
+    <div class="field">
+      <label class="field-label" for="nc-fullname">Full Name <span class="req">*</span></label>
+      <input type="text" id="nc-fullname" placeholder="First and last name">
+      <div class="field-error">Required.</div>
+    </div>
+    <div class="field">
+      <label class="field-label" for="nc-email">Email</label>
+      <input type="text" id="nc-email" placeholder="email@example.com">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label class="field-label" for="nc-role">Role / Position</label>
+      <input type="text" id="nc-role" placeholder="e.g. Trainer, Coordinator">
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-secondary" onclick="closeAddContactModal()">Cancel</button>
+      <button type="button" class="btn btn-primary" id="nc-save-btn" onclick="saveNewContact()">Save Contact</button>
+    </div>
+    <div class="status-msg" id="nc-status" style="text-align:left;margin-top:8px"></div>
+  </div>
 </div>
 
 <script src="js/create-training.js"></script>
