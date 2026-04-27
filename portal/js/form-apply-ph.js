@@ -646,6 +646,7 @@ function buildPayload() {
   const val = id => (document.getElementById(id)?.value ?? "").trim();
   const radVal = name => document.querySelector(`input[name="${name}"]:checked`)?.value ?? "";
   const checkVals = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(c => c.value).join(";");
+  const checkArr  = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(c => c.value);
 
   const data = {
     // Core Deal fields
@@ -663,7 +664,7 @@ function buildPayload() {
     Pronoun:                radVal("Pronoun"),
     Preferred_Pronoun:      val("Preferred_Pronoun"),
     Preferred_Language:     checkVals("Preferred_Language"),
-    Identify_as_Multiple:   checkVals("Identify_as"),
+    Identify_as_Multiple:   checkArr("Identify_as"),
     Special_Requirements:   val("Special_Requirements"),
     Account_Name:           val("Account_Name"),
     Role_in_the_Organisation: val("Role_in_the_Organisation"),
