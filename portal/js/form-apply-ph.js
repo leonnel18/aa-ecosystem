@@ -138,6 +138,56 @@ function wireCustomSelects() {
   });
 }
 
+function wireMultiselect() {
+  const trigger = document.getElementById("trigger-identify");
+  const panel   = document.getElementById("panel-identify");
+  const tagsEl  = document.getElementById("tags-identify");
+  if (!trigger || !panel || !tagsEl) return;
+
+  function getChecked() {
+    return [...document.querySelectorAll('input[name="Identify_as"]:checked')];
+  }
+
+  function renderTags() {
+    const checked = getChecked();
+    trigger.classList.toggle("has-selection", checked.length > 0);
+    trigger.textContent = checked.length === 0
+      ? "Select all that apply / Pumili ng lahat ng angkop"
+      : `${checked.length} selected`;
+    tagsEl.innerHTML = checked.map(cb =>
+      `<div class="multiselect-tag" data-val="${cb.value}">
+        ${cb.value}
+        <button type="button" aria-label="Remove ${cb.value}">×</button>
+      </div>`
+    ).join("");
+    tagsEl.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const val = btn.closest(".multiselect-tag").dataset.val;
+        const cb  = document.querySelector(`input[name="Identify_as"][value="${val}"]`);
+        if (cb) { cb.checked = false; }
+        renderTags();
+      });
+    });
+  }
+
+  trigger.addEventListener("click", () => {
+    const isOpen = panel.classList.contains("open");
+    panel.classList.toggle("open", !isOpen);
+    trigger.setAttribute("aria-expanded", String(!isOpen));
+  });
+
+  panel.addEventListener("change", () => renderTags());
+
+  document.addEventListener("click", e => {
+    if (!trigger.contains(e.target) && !panel.contains(e.target) && !tagsEl.contains(e.target)) {
+      panel.classList.remove("open");
+      trigger.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  renderTags();
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", init);
 
@@ -159,6 +209,9 @@ async function init() {
 
   // Wire custom select dropdowns
   wireCustomSelects();
+
+  // Wire multiselect for Identify as
+  wireMultiselect();
 
   // Pronoun "Other" toggle
   document.querySelectorAll('input[name="Pronoun"]').forEach(r => {
