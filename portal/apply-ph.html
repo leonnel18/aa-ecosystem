@@ -210,10 +210,16 @@
     .section-card.active { display: block; }
 
     .section-title {
-      font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--text);
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--text);
     }
     .section-subtitle {
-      font-size: 13px; color: var(--meta); margin-bottom: 20px;
+      font-size: 14px;
+      color: var(--meta);
+      margin-bottom: 20px;
+      opacity: 0.75;
     }
 
     /* ── Fields ── */
@@ -422,6 +428,17 @@
       .form-wrap { padding: 24px 24px 100px; }
       .section-card { padding: 32px 28px; }
     }
+
+    .name-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .name-row .field { margin-bottom: 0; }
+    @media (max-width: 400px) {
+      .name-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -473,21 +490,22 @@
 
   <!-- SECTION A: Demographics -->
   <div class="section-card" id="sec-demographics">
-    <div class="section-title">Personal Information</div>
+    <div class="section-title">Demographics</div>
     <div class="section-subtitle">Impormasyon tungkol sa iyo</div>
 
-    <div class="field">
-      <label class="field-label">First Name <span class="req">*</span></label>
-      <span class="field-label-fil">Pangalan</span>
-      <input type="text" id="First_Name" autocomplete="given-name" inputmode="text">
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Last Name <span class="req">*</span></label>
-      <span class="field-label-fil">Apelyido</span>
-      <input type="text" id="Last_Name" autocomplete="family-name">
-      <div class="field-error">This field is required.</div>
+    <div class="name-row">
+      <div class="field">
+        <label class="field-label">First Name <span class="req">*</span></label>
+        <span class="field-label-fil">Pangalan</span>
+        <input type="text" id="First_Name" autocomplete="given-name" inputmode="text">
+        <div class="field-error">This field is required.</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Last Name <span class="req">*</span></label>
+        <span class="field-label-fil">Apelyido</span>
+        <input type="text" id="Last_Name" autocomplete="family-name">
+        <div class="field-error">This field is required.</div>
+      </div>
     </div>
 
     <div class="field">
