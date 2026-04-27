@@ -5,7 +5,7 @@
 "use strict";
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const PROXY_BASE = "https://crm-proxy.aktivasia.workers.dev";
+const PROXY_BASE = "https://crm-proxy.gideon-valera.workers.dev";
 
 // Training-type slug → display name
 const TYPE_LABELS = {

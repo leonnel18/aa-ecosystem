@@ -1,6 +1,7 @@
 name = "crm-proxy"
 main = "crm-proxy.js"
 compatibility_date = "2024-01-01"
+account_id = "cc0ee0748d1b8fdd60fd39b29b18fff5"
 
 # Deploy: wrangler deploy
 # Secrets (run once):

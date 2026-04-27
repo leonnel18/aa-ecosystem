@@ -17,7 +17,7 @@
 
 const CRM_BASE    = "https://www.zohoapis.in/crm/v2";
 const TOKEN_URL   = "https://accounts.zoho.in/oauth/v2/token";
-const ALLOWED_ORIGINS = ["https://aktivasia-portal.pages.dev"];
+const ALLOWED_ORIGINS = ["https://aktivasia-portal.pages.dev", "https://crm-proxy.gideon-valera.workers.dev"];
 
 // ── Token cache (in-memory, per Worker instance) ──────────────────────────────
 let cachedToken    = null;

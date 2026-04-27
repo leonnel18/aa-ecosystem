@@ -5,7 +5,7 @@
 
 "use strict";
 
-const PROXY_BASE = "https://crm-proxy.aktivasia.workers.dev";
+const PROXY_BASE = "https://crm-proxy.gideon-valera.workers.dev";
 
 // Post-training confidence ratings per training type (1-7 scale)
 const POST_RATINGS_CONFIG = {
