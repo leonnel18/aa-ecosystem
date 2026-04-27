@@ -161,23 +161,31 @@ function collectFacilitators() {
 }
 
 // ── Facilitator typeahead ─────────────────────────────────────────────────────
-let facDebounceTimer = null;
 let pendingFacRow    = null;
 
-async function onFacInput(input) {
-  const row      = input.closest(".facilitator-row");
+function onFacInput(input) {
+  const row = input.closest(".facilitator-row");
+  const q = input.value.trim();
   const dropdown = row.querySelector(".fac-dropdown");
-  const q        = input.value.trim();
 
-  clearTimeout(facDebounceTimer);
-  if (q.length < 2) { dropdown.style.display = "none"; return; }
+  if (q.length < 2) {
+    dropdown.style.display = "none";
+    return;
+  }
 
-  facDebounceTimer = setTimeout(async () => {
+  clearTimeout(row._facTimer);
+  row._facTimer = setTimeout(async () => {
+    row._facSeq = (row._facSeq || 0) + 1;
+    const seq = row._facSeq;
     try {
       const res  = await fetch(`${PROXY_BASE}/contacts/search?q=${encodeURIComponent(q)}`);
       const json = await res.json();
+      if (row._facSeq !== seq) return; // stale response, discard
       renderFacDropdown(row, json.data ?? []);
-    } catch { dropdown.style.display = "none"; }
+    } catch {
+      if (row._facSeq !== seq) return;
+      renderFacDropdown(row, []);
+    }
   }, 280);
 }
 
@@ -222,6 +230,7 @@ function openAddContactModal(row) {
 function closeAddContactModal() {
   document.getElementById("add-contact-modal").classList.remove("visible");
   pendingFacRow = null;
+  document.getElementById("nc-fullname").closest(".field").classList.remove("has-error");
 }
 
 async function saveNewContact() {
@@ -237,7 +246,7 @@ async function saveNewContact() {
   document.getElementById("nc-status").textContent = "Saving…";
 
   try {
-    const nameParts = fullName.split(" ");
+    const nameParts = fullName.split(" ").filter(Boolean);
     const payload   = {
       data: [{
         Last_Name:  nameParts.slice(1).join(" ") || nameParts[0],
