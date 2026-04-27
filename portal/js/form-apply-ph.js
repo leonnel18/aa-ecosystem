@@ -675,6 +675,17 @@ async function submitForm() {
       throw new Error(resJson.message || `HTTP ${res.status}`);
     }
 
+    // Zoho drops Account_Name when Training_Applied is set in the same POST.
+    // Fix: update Account_Name immediately after creation.
+    const newDealId = resJson?.data?.[0]?.details?.id;
+    if (newDealId && selectedOrgId) {
+      await fetch(`${PROXY_BASE}/deals/${newDealId}`, {
+        method:  "PUT",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ data: [{ Account_Name: { id: selectedOrgId } }] }),
+      });
+    }
+
     // Handle file uploads (photo/CV) — sent separately as multipart
     await uploadFiles(resJson);
 
