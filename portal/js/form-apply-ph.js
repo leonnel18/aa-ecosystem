@@ -412,14 +412,14 @@ async function init() {
     document.getElementById("other-language-field").classList.toggle("hidden", this.value !== "Other");
   });
 
-  // Phone: numbers only, enforce 10 digits, format as 9XX XXX XXXX on display
+  // Phone: strip non-digits, cap at 10 digits, format as 9XX XXX XXXX
   document.getElementById("Mobile").addEventListener("input", function() {
     const digits = this.value.replace(/\D/g, "").slice(0, 10);
-    // Format: 9XX XXX XXXX
     let fmt = digits;
     if (digits.length > 6) fmt = digits.slice(0,3) + " " + digits.slice(3,6) + " " + digits.slice(6);
     else if (digits.length > 3) fmt = digits.slice(0,3) + " " + digits.slice(3);
-    this.value = fmt;
+    // Only update if different to avoid cursor jump on non-digit keypress
+    if (this.value !== fmt) this.value = fmt;
     validatePhone("Mobile");
   });
 
