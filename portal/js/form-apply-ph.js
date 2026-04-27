@@ -504,14 +504,14 @@ function renderRatings() {
 function selectRating(btn) {
   const rk      = btn.dataset.rk;
   const fieldId = btn.dataset.field;
-  const val     = parseInt(btn.dataset.val, 10);
+  const val     = btn.dataset.val;
 
   // Last value for this CRM field wins (for fields shared across two items)
   ratingValues[fieldId] = val;
 
   // Update visual state only for buttons in the same render group
   document.querySelectorAll(`[data-rk="${rk}"]`).forEach(b => {
-    b.classList.toggle("selected", parseInt(b.dataset.val, 10) === val);
+    b.classList.toggle("selected", b.dataset.val === val);
   });
 
   // Clear error for this item
