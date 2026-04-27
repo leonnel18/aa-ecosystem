@@ -617,9 +617,9 @@ function validateBio() {
 }
 
 function validateTerms() {
-  const all = ["terms1", "terms2", "terms3"].every(id => document.getElementById(id).checked);
-  document.getElementById("terms-error").style.display = all ? "none" : "block";
-  return all;
+  const checked = document.getElementById("terms1")?.checked ?? false;
+  document.getElementById("terms-error").style.display = checked ? "none" : "block";
+  return checked;
 }
 
 function validateRatings() {
