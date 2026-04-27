@@ -842,8 +842,9 @@ function wireFileUpload(inputId, nameDisplayId) {
   });
 }
 
-let selectedOrgId   = null;  // CRM Account id if picked from dropdown
-let addingNewOrg    = false; // user chose to add new org
+let selectedOrgId      = null;   // CRM Account id if picked from dropdown
+let addingNewOrg       = false;  // user chose to add new org
+let skipNextOrgInput   = false;  // prevent input reset after programmatic value set
 
 function wireOrgTypeahead() {
   const input    = document.getElementById("Account_Name");
@@ -853,6 +854,7 @@ function wireOrgTypeahead() {
   let debounce;
 
   input.addEventListener("input", () => {
+    if (skipNextOrgInput) { skipNextOrgInput = false; return; }
     selectedOrgId = null;
     addingNewOrg  = false;
     newPrompt.style.display = "none";
@@ -904,6 +906,7 @@ async function searchOrgs(q) {
           document.getElementById("org-new-name").value = document.getElementById("Account_Name").value.trim();
           addingNewOrg = true;
         } else {
+          skipNextOrgInput = true;
           document.getElementById("Account_Name").value    = item.dataset.name;
           document.getElementById("Account_Name_Id").value = item.dataset.id;
           selectedOrgId = item.dataset.id;
