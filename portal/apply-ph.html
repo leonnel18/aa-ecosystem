@@ -480,12 +480,17 @@
 
     <div class="field">
       <label class="field-label">Preferred Language <span class="req">*</span></label>
-      <span class="field-label-fil">Nais na Wika — maaaring pumili ng marami</span>
-      <div class="check-group">
-        <label class="check-opt"><input type="checkbox" name="Preferred_Language" value="Filipino"><div><div class="check-label">Filipino</div></div></label>
-        <label class="check-opt"><input type="checkbox" name="Preferred_Language" value="English"><div><div class="check-label">English</div></div></label>
+      <span class="field-label-fil">Nais na Wika</span>
+      <select id="Preferred_Language">
+        <option value="">— Select / Pumili —</option>
+        <option value="Filipino">Filipino</option>
+        <option value="English">English</option>
+        <option value="Other">Other / Iba pa</option>
+      </select>
+      <div class="field hidden" id="other-language-field" style="margin-top:10px">
+        <input type="text" id="Preferred_Language_Other" placeholder="Please specify / Ibigay ang wika">
       </div>
-      <div class="field-error" id="lang-error">Please select at least one language.</div>
+      <div class="field-error" id="lang-error">This field is required.</div>
     </div>
 
     <div class="field">
@@ -607,6 +612,7 @@
       <div class="radio-group">
         <label class="radio-opt"><input type="radio" name="campaigning_f" value="Yes"> Yes / Oo</label>
         <label class="radio-opt"><input type="radio" name="campaigning_f" value="No"> No / Hindi</label>
+        <label class="radio-opt"><input type="radio" name="campaigning_f" value="Have in the past but not currently"> Have in the past but not currently / Noon lang</label>
       </div>
       <div class="field-error" id="campaign-f-error">This field is required.</div>
     </div>
@@ -692,6 +698,7 @@
       <div class="radio-group">
         <label class="radio-opt"><input type="radio" name="campaigning_pn" value="Yes"> Yes / Oo</label>
         <label class="radio-opt"><input type="radio" name="campaigning_pn" value="No"> No / Hindi</label>
+        <label class="radio-opt"><input type="radio" name="campaigning_pn" value="Have in the past but not currently"> Have in the past but not currently / Noon lang</label>
       </div>
       <div class="field-error" id="campaign-pn-error">This field is required.</div>
     </div>

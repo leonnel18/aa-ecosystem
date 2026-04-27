@@ -89,6 +89,11 @@ async function init() {
     });
   });
 
+  // Preferred Language "Other" toggle
+  document.getElementById("Preferred_Language").addEventListener("change", function() {
+    document.getElementById("other-language-field").classList.toggle("hidden", this.value !== "Other");
+  });
+
   // Bio word count
   const bioField = document.getElementById("Please_provide_a_100_word_bio_that_best_describes");
   bioField.addEventListener("input", () => {
@@ -301,7 +306,7 @@ function validateSection(sectionId) {
     ok = validateYear("Year_of_Birth") && ok;
     ok = validateSelect("Gender") && ok;
     ok = validateRadioGroup("pronoun-group", "pronoun-error") && ok;
-    ok = validateCheckGroup("Preferred_Language", "lang-error") && ok;
+    ok = validateSelect("Preferred_Language", "lang-error") && ok;
     ok = validateCheckGroup("Identify_as", "identify-error") && ok;
     ok = validateFileUpload("Recent_Photo", "photo-error") && ok;
   }
@@ -663,19 +668,21 @@ function buildPayload() {
     Gender:                 val("Gender"),
     Pronoun:                radVal("Pronoun"),
     Preferred_Pronoun:      val("Preferred_Pronoun"),
-    Preferred_Language:     checkVals("Preferred_Language"),
+    Preferred_Language:     val("Preferred_Language") === "Other" ? val("Preferred_Language_Other") : val("Preferred_Language"),
     Identify_as_Multiple:   checkArr("Identify_as"),
     Special_Requirements:   val("Special_Requirements"),
-    Account_Name:           val("Account_Name"),
+    Account_Name:           { name: val("Account_Name") },
     Role_in_the_Organisation: val("Role_in_the_Organisation"),
     Please_provide_a_100_word_bio_that_best_describes: val("Please_provide_a_100_word_bio_that_best_describes"),
     Training_Applied:       { id: trainingId },
+    Training_Type_Applied:  TYPE_LABELS[trainingType] ?? trainingType,
     Stage:                  "Still in Applied Stage",
   };
 
   // Experience fields per training type
   switch (trainingType) {
     case "Foundational":
+      data.Currently_Campaigning        = radVal("campaigning_f");
       data.Current_Campaign_Description = val("Current_Campaign_Description");
       data.Reason_for_Applying          = val("Reason_for_Applying_F");
       break;
@@ -690,8 +697,7 @@ function buildPayload() {
       data.Attended_Gender_Sensitivity_or_women_specific_trai = radVal("gender_training");
       break;
     case "Public_Narrative":
-      data.Current_Campaign_Description = radVal("campaigning_pn") === "Yes"
-        ? "Currently campaigning: Yes" : "Currently campaigning: No";
+      data.Currently_Campaigning        = radVal("campaigning_pn");
       data.Reason_for_Applying          = val("Reason_for_Applying_PN");
       data.Campaign_Years_Prior_Training = val("Campaign_Years_Prior_Training");
       break;
