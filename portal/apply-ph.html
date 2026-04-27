@@ -1015,6 +1015,9 @@
           <select id="Province" style="display:none" tabindex="-1"></select>
           <div class="field-error" id="province-error">Required.</div>
         </div>
+        <div class="field-text-fallback" style="display:none">
+          <input type="text" id="province-text-input" placeholder="State / Region" autocomplete="address-level1">
+        </div>
       </div>
       <div class="field">
         <label class="field-label">City / Town <span class="req">*</span></label>
@@ -1027,6 +1030,9 @@
           </div>
           <div class="org-dropdown-list" id="city-dropdown-list"></div>
           <input type="hidden" id="City_Town">
+        </div>
+        <div class="field-text-fallback" style="display:none">
+          <input type="text" id="city-text-input" placeholder="City / Town" autocomplete="address-level2">
         </div>
         <div class="field-error" id="city-error">This field is required.</div>
       </div>
@@ -1116,8 +1122,8 @@
     </div>
 
     <div class="field">
-      <label class="field-label">Professional Bio (max 100 words) <span class="req">*</span></label>
-      <span class="field-label-fil">Propesyonal na Bio — hanggang 100 salita</span>
+      <label class="field-label">Professional Bio <span class="req">*</span></label>
+      <span class="field-label-fil">Propesyonal na Bio</span>
       <textarea id="Please_provide_a_100_word_bio_that_best_describes" rows="5" placeholder="Briefly describe your professional background, campaign work, and what drives you…"></textarea>
       <div class="field-hint"><span id="bio-word-count">0</span> / 100 words</div>
       <div class="field-error">This field is required (max 100 words).</div>
@@ -1130,7 +1136,7 @@
   <div class="section-subtitle">Karanasan at Motibasyon</div>
 
   <div class="field">
-    <label class="field-label">Are you currently active in campaigning, advocating or organising a community? <span class="req">*</span></label>
+    <label class="field-label">Actively campaigning, advocating or organising a community? <span class="req">*</span></label>
     <span class="field-label-fil">Ikaw ba ay kasalukuyang nagkakampaniya, may gawaing adbokasiya, o nag-oorganisa sa iyong komunidad?</span>
     <div class="custom-select-wrap" id="wrap-campaigning_f">
       <button type="button" class="custom-select-trigger placeholder" id="trigger-campaigning_f" aria-haspopup="listbox" aria-expanded="false">
@@ -1152,13 +1158,14 @@
   </div>
 
   <div class="field" id="campaign-desc-field">
-    <label class="field-label">Describe your campaigning, advocacy, or organizing efforts. Highlight the most rewarding aspects and the most challenging aspects of your work in these areas. (300 words or less)</label>
-    <span class="field-label-fil">I-kuwento sa amin ang iyong gawaing pangangampaniya, adbokasiya, o pag-oorganisa. Isama ang mga pinakamasaya o makabuluhan at pinakamahirap na aspeto ng iyong gawain (hindi hihigit sa 300 salita).</span>
+    <label class="field-label">Describe your campaigning, advocacy, or organizing efforts. Highlight the most rewarding aspects and the most challenging aspects of your work in these areas.</label>
+    <span class="field-label-fil">I-kuwento sa amin ang iyong gawaing pangangampaniya, adbokasiya, o pag-oorganisa. Isama ang mga pinakamasaya o makabuluhan at pinakamahirap na aspeto ng iyong gawain.</span>
     <textarea id="Current_Campaign_Description" rows="5" placeholder="Describe your work…"></textarea>
+    <div class="field-hint"><span id="campaign-word-count">0</span> / 300 words</div>
   </div>
 
   <div class="field">
-    <label class="field-label">Why are you applying for the training? Specify the knowledge or skills you aim to develop and describe how you plan to use these new skills and knowledge in your work. <span class="req">*</span></label>
+    <label class="field-label">Why are you applying for the training? Specify the knowledge or skills you aim to develop and describe how you plan to use these in your work. <span class="req">*</span></label>
     <span class="field-label-fil">Bakit gusto mong makadalo sa pagsasanay na ito? Ano ang gusto mong makuha o mapaunlad na knowledge o skills at paano mo ito naiisip na magamit pagkatapos sa iyong gawain?</span>
     <textarea id="Reason_for_Applying_F" rows="5" placeholder="Share your motivation…"></textarea>
     <div class="field-error">This field is required.</div>
@@ -1254,8 +1261,8 @@
 
   <!-- SECTION E: Confidence Ratings Pre-Training -->
   <div class="section-card" id="sec-ratings">
-    <div class="section-title">Confidence Ratings</div>
-    <div class="section-subtitle">Rate your current confidence from 1 (not confident) to 7 (very confident) — Isulat ang iyong antas ng kumpiyansa</div>
+    <div class="section-title">Confidence in Different Areas of Campaigning</div>
+    <div class="section-subtitle">Rate your current confidence from 1 (not at all confident) to 7 (highly confident) — Isulat ang iyong antas ng kumpiyansa</div>
     <div id="ratings-container"></div>
   </div>
 

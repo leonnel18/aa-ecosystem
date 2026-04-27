@@ -29,31 +29,31 @@ const RATINGS_CONFIG = {
     {
       id: "Campaigning_Experience_Pre",
       renderKey: "rating_f_a",
-      label: "1) How would you rank your experience in campaigning? By a \"campaign\" we mean an organized course of action to achieve a social, environmental, or political goal. (1 being not at all confident and 7 being highly confident)",
+      label: "1) How would you rank your experience in campaigning? By a \"campaign\" we mean an organized course of action to achieve a social, environmental, or political goal.",
       labelFil: "Anong masasabi mo tungkol sa iyong karanasan sa pangangampaniya? Ang tinutukoy nating \"kampaniya\" ay ang organisadong pagkilos na may mga hakbangin o gawain para sa isang sosyal, environmental, o politikal na layunin.",
     },
     {
       id: "A_Pre_Training_Strategy_Buildings",
       renderKey: "rating_f_b",
-      label: "2) I feel confident building strategy and choosing tactics for a campaign. (1 being not at all confident and 7 being highly confident)",
+      label: "2) I feel confident building strategy and choosing tactics for a campaign.",
       labelFil: "Ako ay kumpiyansa sa paggawa o pagtukoy ng ng stratehiya at gawain para sa isang kampaniya.",
     },
     {
       id: "B_Pre_Training_Building_Communication",
       renderKey: "rating_f_c",
-      label: "3) I feel confident using stories to connect with others for campaigns OR starting a communication strategy or plan for a campaign. (1 being not at all confident and 7 being highly confident)",
+      label: "3) I feel confident using stories to connect with others for campaigns OR starting a communication strategy or plan for a campaign.",
       labelFil: "Ako ay kumpiyansa sa paggamit ng aking kwento/karanasa sa pakikipag-ugnayan sa ibang tao na pwedeng makatutulong sa aking kampaniya o sa pagsisimula ng isang stratehiya o planong pangkomunikasyon para sa isang kampaniya.",
     },
     {
       id: "C_Pre_Training_Confident_facilitator",
       renderKey: "rating_f_d",
-      label: "4) I feel confident facilitating discussions or knowledge sharing activities for a campaign. (1 being not at all confident and 7 being highly confident)",
+      label: "4) I feel confident facilitating discussions or knowledge sharing activities for a campaign.",
       labelFil: "Ako ay kumpiyansang magpadaloy ng workshops at meetings para sa isang kampaniya.",
     },
     {
       id: "D_Pre_Training_Confident_connector",
       renderKey: "rating_f_e",
-      label: "5) I feel confident building connections with others to support a campaign. (1 being not at all confident and 7 being highly confident)",
+      label: "5) I feel confident building connections with others to support a campaign.",
       labelFil: "Ako ay kumpiyansang makapagbuo ng mga ugnayan sa ibang tao upang masuportahan ang isang kampaniya.",
     },
   ],
@@ -97,6 +97,36 @@ const ratingValues = {};
 const customValues = {};
 
 // ── Custom selects ────────────────────────────────────────────────────────────
+
+function wireCityProvinceMode(country) {
+  const isPH = country === "Philippines" || country === "";
+  const provWrap   = document.getElementById("wrap-Province");
+  const provText   = document.getElementById("province-text-input");
+  const cityCombo  = document.getElementById("city-combobox-wrap");
+  const cityText   = document.getElementById("city-text-input");
+  if (!provWrap || !cityCombo) return;
+
+  if (isPH) {
+    provWrap.style.display  = "";
+    cityCombo.style.display = "";
+    if (provText)  provText.closest(".field-text-fallback").style.display  = "none";
+    if (cityText)  cityText.closest(".field-text-fallback").style.display  = "none";
+  } else {
+    provWrap.style.display  = "none";
+    cityCombo.style.display = "none";
+    // Reset PH selections
+    const provHidden = document.getElementById("Province");
+    const cityHidden = document.getElementById("City_Town");
+    if (provHidden) provHidden.value = "";
+    if (cityHidden) cityHidden.value = "";
+    const pTrig = document.getElementById("trigger-Province");
+    if (pTrig) { pTrig.textContent = "— Select Province —"; pTrig.classList.add("placeholder"); }
+    const cInput = document.getElementById("city-search-input");
+    if (cInput) { cInput.value = ""; cInput.disabled = true; cInput.placeholder = "Select province first…"; }
+    if (provText)  provText.closest(".field-text-fallback").style.display  = "";
+    if (cityText)  cityText.closest(".field-text-fallback").style.display  = "";
+  }
+}
 
 function wireProvinceDropdown() {
   const provinces = Object.keys(PH_MUNICIPALITIES).sort();
@@ -382,11 +412,36 @@ async function init() {
     document.getElementById("other-language-field").classList.toggle("hidden", this.value !== "Other");
   });
 
-  // Phone: numbers only, strip non-digits on input
+  // Phone: numbers only, enforce 10 digits, format as 9XX XXX XXXX on display
   document.getElementById("Mobile").addEventListener("input", function() {
-    const pos = this.selectionStart;
-    const cleaned = this.value.replace(/\D/g, "").slice(0, 10);
-    if (this.value !== cleaned) { this.value = cleaned; this.setSelectionRange(pos, pos); }
+    const digits = this.value.replace(/\D/g, "").slice(0, 10);
+    // Format: 9XX XXX XXXX
+    let fmt = digits;
+    if (digits.length > 6) fmt = digits.slice(0,3) + " " + digits.slice(3,6) + " " + digits.slice(6);
+    else if (digits.length > 3) fmt = digits.slice(0,3) + " " + digits.slice(3);
+    this.value = fmt;
+    validatePhone("Mobile");
+  });
+
+  // Real-time email validation
+  document.getElementById("Email").addEventListener("blur", () => validateEmail("Email"));
+  document.getElementById("Email").addEventListener("input", function() {
+    if (this.closest(".field").classList.contains("has-error")) validateEmail("Email");
+  });
+
+  // Campaign description word counter (300 words)
+  const campDesc = document.getElementById("Current_Campaign_Description");
+  if (campDesc) {
+    campDesc.addEventListener("input", () => {
+      const words = campDesc.value.trim() === "" ? 0 : campDesc.value.trim().split(/\s+/).length;
+      const el = document.getElementById("campaign-word-count");
+      if (el) el.textContent = words;
+    });
+  }
+
+  // Country change → switch Province/City between PH dropdown and plain text
+  document.getElementById("Country_of_Residence").addEventListener("change", function() {
+    wireCityProvinceMode(this.value);
   });
 
   // Organization typeahead
@@ -639,7 +694,14 @@ function validateSection(sectionId) {
     ok = validateRequired("Preferred_Name_Nick_Name") && ok;
     ok = validateEmail("Email") && ok;
     ok = validatePhone("Mobile") && ok;
-    ok = validateSelect("Province", "province-error") && ok;
+    if (isPHCountry()) {
+      ok = validateSelect("Province", "province-error") && ok;
+    } else {
+      const pv = (document.getElementById("province-text-input")?.value ?? "").trim();
+      const pe = document.getElementById("province-error");
+      if (pe) pe.style.display = pv ? "none" : "block";
+      if (!pv) ok = false;
+    }
     ok = validateCityTown() && ok;
     ok = validateSelect("Country_of_Residence") && ok;
     ok = validateYear("Year_of_Birth") && ok;
@@ -747,8 +809,8 @@ function validateEmail(id) {
 function validatePhone(id) {
   const el    = document.getElementById(id);
   const field = el.closest(".field");
-  const val   = el.value.replace(/\D/g, "");
-  const pass  = val.length === 10 && val.startsWith("9");
+  const digits = el.value.replace(/\D/g, "");
+  const pass  = digits.length === 10 && digits.startsWith("9");
   field.classList.toggle("has-error", !pass);
   return pass;
 }
@@ -795,10 +857,17 @@ function validateBio() {
   return pass;
 }
 
+function isPHCountry() {
+  const v = (document.getElementById("Country_of_Residence")?.value ?? "Philippines");
+  return v === "Philippines" || v === "";
+}
+
 function validateCityTown() {
-  const val   = (document.getElementById("City_Town")?.value ?? "").trim();
   const errEl = document.getElementById("city-error");
-  const pass  = val !== "";
+  const val = isPHCountry()
+    ? (document.getElementById("City_Town")?.value ?? "").trim()
+    : (document.getElementById("city-text-input")?.value ?? "").trim();
+  const pass = val !== "";
   if (errEl) errEl.style.display = pass ? "none" : "block";
   return pass;
 }
@@ -1056,9 +1125,11 @@ function buildPayload() {
     Last_Name:              val("Last_Name"),
     Preferred_Name_Nick_Name: val("Preferred_Name_Nick_Name"),
     Email:                  val("Email"),
-    Mobile: "+63" + val("Mobile").replace(/\D/g, "").replace(/^0/, ""),
+    Mobile: "+63" + (document.getElementById("Mobile")?.value ?? "").replace(/\D/g, ""),
     Address:                val("Address"),
-    City_Province:          [val("City_Town"), val("Province")].filter(Boolean).join(", "),
+    City_Province: isPHCountry()
+      ? [val("City_Town"), val("Province")].filter(Boolean).join(", ")
+      : [(document.getElementById("city-text-input")?.value ?? "").trim(), (document.getElementById("province-text-input")?.value ?? "").trim()].filter(Boolean).join(", "),
     Country_of_Residence:   val("Country_of_Residence"),
     Year_of_Birth:          parseInt(val("Year_of_Birth"), 10) || null,
     Gender:                 val("Gender"),
