@@ -36,7 +36,8 @@ function onOrganisedByChange(select) {
 
 // ── Language of Delivery tags ─────────────────────────────────────────────────
 function toggleLang(chip) {
-  chip.classList.toggle("selected");
+  const nowSelected = chip.classList.toggle("selected");
+  chip.setAttribute("aria-pressed", String(nowSelected));
 }
 
 function showLangOthers(btn) {
@@ -50,6 +51,9 @@ function addCustomLang() {
   const input = document.getElementById("lang-others-input");
   const text  = input.value.trim();
   if (!text) return;
+  const already = [...document.querySelectorAll(".lang-chip.selected")].map(c => c.dataset.lang.toLowerCase());
+  const custom  = [...document.querySelectorAll(".lang-custom-tag")].map(c => c.dataset.lang.toLowerCase());
+  if ([...already, ...custom].includes(text.toLowerCase())) { input.select(); return; }
   const container = document.getElementById("lang-custom-tags");
   const tag = document.createElement("span");
   tag.className = "lang-custom-tag";
