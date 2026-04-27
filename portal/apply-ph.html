@@ -522,6 +522,86 @@
     .custom-select-option.selected::after {
       content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath d='M1 5l4 4L13 1' stroke='%23821545' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     }
+
+    .multiselect-wrap { position: relative; }
+    .multiselect-trigger {
+      width: 100%;
+      min-height: var(--input-h);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 36px 12px 14px;
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--meta);
+      background: var(--white);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.2s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23788099' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    .multiselect-trigger:focus,
+    .multiselect-trigger[aria-expanded="true"] { outline: none; border-color: var(--primary); }
+    .multiselect-trigger.has-selection { color: var(--text); }
+    .multiselect-panel {
+      display: none;
+      position: absolute;
+      left: 0; right: 0;
+      top: calc(100% + 4px);
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 16px rgba(0,0,0,.10);
+      max-height: 280px;
+      overflow-y: auto;
+      z-index: 200;
+    }
+    .multiselect-panel.open { display: block; }
+    .multiselect-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .multiselect-option:hover { background: var(--primary-light); }
+    .multiselect-option input[type="checkbox"] {
+      width: 18px; height: 18px; min-height: 18px;
+      margin-top: 1px;
+      flex-shrink: 0;
+      accent-color: var(--primary);
+    }
+    .multiselect-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .multiselect-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-light);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      border-radius: 9999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .multiselect-tag button {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
@@ -734,14 +814,41 @@
     <div class="field">
       <label class="field-label">Do you identify as <span class="req">*</span></label>
       <span class="field-label-fil">Kabilang ka ba sa — maaaring pumili ng marami</span>
-      <div class="check-group">
-        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Person with disability"><div><div class="check-label">Person with disability</div><div class="check-label-fil">Taong may kapansanan</div></div></label>
-        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Indigenous / First Nations"><div><div class="check-label">Indigenous / First Nations</div><div class="check-label-fil">Katutubo</div></div></label>
-        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Frontline Community"><div><div class="check-label">Frontline Community</div></div></label>
-        <label class="check-opt"><input type="checkbox" name="Identify_as" value="LGBTIQ+ Person"><div><div class="check-label">LGBTIQ+ Person</div></div></label>
-        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Sole Parent"><div><div class="check-label">Sole Parent</div><div class="check-label-fil">Nag-iisang magulang</div></div></label>
-        <label class="check-opt"><input type="checkbox" name="Identify_as" value="None"><div><div class="check-label">None</div><div class="check-label-fil">Wala sa nabanggit</div></div></label>
-        <label class="check-opt"><input type="checkbox" name="Identify_as" value="Other"><div><div class="check-label">Other / Iba pa</div></div></label>
+      <div class="multiselect-wrap" id="multiselect-identify">
+        <button type="button" class="multiselect-trigger" id="trigger-identify" aria-haspopup="listbox" aria-expanded="false">
+          Select all that apply / Pumili ng lahat ng angkop
+        </button>
+        <div class="multiselect-panel" id="panel-identify" role="listbox" aria-multiselectable="true">
+          <div class="multiselect-option">
+            <input type="checkbox" name="Identify_as" value="Person with disability" id="id-pwd">
+            <label for="id-pwd"><div class="check-label">Person with disability</div><div class="check-label-fil">Taong may kapansanan</div></label>
+          </div>
+          <div class="multiselect-option">
+            <input type="checkbox" name="Identify_as" value="Indigenous / First Nations" id="id-indigenous">
+            <label for="id-indigenous"><div class="check-label">Indigenous / First Nations</div><div class="check-label-fil">Katutubo</div></label>
+          </div>
+          <div class="multiselect-option">
+            <input type="checkbox" name="Identify_as" value="Frontline Community" id="id-frontline">
+            <label for="id-frontline"><div class="check-label">Frontline Community</div></label>
+          </div>
+          <div class="multiselect-option">
+            <input type="checkbox" name="Identify_as" value="LGBTIQ+ Person" id="id-lgbtiq">
+            <label for="id-lgbtiq"><div class="check-label">LGBTIQ+ Person</div></label>
+          </div>
+          <div class="multiselect-option">
+            <input type="checkbox" name="Identify_as" value="Sole Parent" id="id-soleparent">
+            <label for="id-soleparent"><div class="check-label">Sole Parent</div><div class="check-label-fil">Nag-iisang magulang</div></label>
+          </div>
+          <div class="multiselect-option">
+            <input type="checkbox" name="Identify_as" value="None" id="id-none">
+            <label for="id-none"><div class="check-label">None</div><div class="check-label-fil">Wala sa nabanggit</div></label>
+          </div>
+          <div class="multiselect-option">
+            <input type="checkbox" name="Identify_as" value="Other" id="id-other">
+            <label for="id-other"><div class="check-label">Other / Iba pa</div></label>
+          </div>
+        </div>
+        <div class="multiselect-tags" id="tags-identify"></div>
       </div>
       <div class="field-error" id="identify-error">Please select at least one option.</div>
     </div>
