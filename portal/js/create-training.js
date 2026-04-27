@@ -439,6 +439,15 @@ function addQuestion() {
       <input type="text" class="q-translation" placeholder="e.g. Filipino translation of the question">
     </div>
 
+    <div class="q-field">
+      <label>Show in <span style="font-weight:400;color:var(--meta)">(which form section)</span></label>
+      <select class="q-section">
+        <option value="both">Both (Pre-application & Post-survey)</option>
+        <option value="pre">Pre-application only</option>
+        <option value="post">Post-survey only</option>
+      </select>
+    </div>
+
     <div class="q-required-row">
       <input type="checkbox" class="q-required" id="q-req-${idx}" checked>
       <label for="q-req-${idx}">Required field</label>
@@ -486,6 +495,7 @@ function serializeCustomQuestions() {
       translation:   card.querySelector(".q-translation").value.trim(),
       options:       (type === "dropdown" || type === "checkbox") ? options : [],
       required:      card.querySelector(".q-required").checked,
+      section:       card.querySelector(".q-section").value,
     };
   });
 
