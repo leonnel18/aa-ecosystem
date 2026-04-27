@@ -157,6 +157,7 @@ async function fetchTraining(id) {
     "Solution_Title", "Training_Type", "Organised_By",
     "Start_Date", "End_Date",
     "Application_Form_Open_Date", "Application_Form_Close_Date",
+    "Venue_Address",
     "Custom_Questions",
   ].join(",");
   const res = await fetch(`${PROXY_BASE}/solutions/${id}?fields=${fields}`);
@@ -167,12 +168,22 @@ async function fetchTraining(id) {
 
 // ── Banner ────────────────────────────────────────────────────────────────────
 function populateBanner(t) {
-  document.getElementById("banner-title").textContent = t.Solution_Title || "Training Application";
-  document.getElementById("banner-type").textContent  = "🏷 " + (t.Training_Type?.name || trainingType.replace(/_/g, " "));
+  document.getElementById("banner-title").textContent =
+    t.Solution_Title || "Training Application";
+
+  const typeEl = document.getElementById("banner-type");
+  typeEl.textContent = t.Training_Type?.name || trainingType.replace(/_/g, " ");
+
   if (t.Start_Date && t.End_Date) {
-    document.getElementById("banner-dates").textContent = "📅 " + fmtDate(t.Start_Date) + " – " + fmtDate(t.End_Date);
+    document.getElementById("banner-dates").textContent =
+      fmtDate(t.Start_Date) + " – " + fmtDate(t.End_Date);
   }
-  document.getElementById("banner-country").textContent = "📍 " + (t.Organised_By || "Philippines");
+
+  document.getElementById("banner-venue").textContent =
+    t.Venue_Address || t.Organised_By || "Philippines";
+
+  document.getElementById("banner-deadline").textContent =
+    t.Application_Form_Close_Date ? fmtDate(t.Application_Form_Close_Date) : "—";
 }
 
 function fmtDate(iso) {
@@ -640,8 +651,11 @@ function selectCustomRating(btn) {
 
 // ── Form submission ───────────────────────────────────────────────────────────
 async function submitForm() {
+  if (isSubmitting) return;
   if (!validateSection(sections[currentIdx])) return;
 
+  isSubmitting = true;
+  let createdDealId = null;   // set once Deal is created; prevents duplicate POST on retry
   const submitBtn = document.getElementById("btn-submit");
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<span class="spinner"></span> Submitting…';
@@ -675,25 +689,22 @@ async function submitForm() {
       throw new Error(resJson.message || `HTTP ${res.status}`);
     }
 
-    // Zoho drops Account_Name when Training_Applied is set in the same POST.
-    // Fix: update Account_Name immediately after creation.
-    const newDealId = resJson?.data?.[0]?.details?.id;
-    if (newDealId && selectedOrgId) {
-      await fetch(`${PROXY_BASE}/deals/${newDealId}`, {
-        method:  "PUT",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ data: [{ Account_Name: { id: selectedOrgId } }] }),
-      });
-    }
+    createdDealId = resJson?.data?.[0]?.details?.id;
 
     // Handle file uploads (photo/CV) — sent separately as multipart
     await uploadFiles(resJson);
 
     showSuccess();
   } catch (e) {
+    isSubmitting = false;
     submitBtn.disabled = false;
     submitBtn.innerHTML = "Submit Application";
-    alert("Submission failed: " + e.message + "\n\nPlease try again or contact the AktivAsia team.");
+    if (createdDealId) {
+      alert("Your application was submitted but there was a problem with file upload. Your data was saved. Please contact the AktivAsia team if needed.");
+      showSuccess();
+    } else {
+      alert("Submission failed: " + e.message + "\n\nPlease try again or contact the AktivAsia team.");
+    }
   }
 }
 
@@ -721,7 +732,7 @@ function buildPayload() {
     Preferred_Language:     val("Preferred_Language") === "Other" ? val("Preferred_Language_Other") : val("Preferred_Language"),
     Identify_as_Multiple:   checkArr("Identify_as"),
     Special_Requirements:   val("Special_Requirements"),
-    Account_Name:           selectedOrgId ? { id: selectedOrgId } : { name: val("Account_Name") },
+    Organisation:           val("Account_Name"),
     Role_in_the_Organisation: val("Role_in_the_Organisation"),
     Please_provide_a_100_word_bio_that_best_describes: val("Please_provide_a_100_word_bio_that_best_describes"),
     Training_Applied:       { id: trainingId },
@@ -854,8 +865,10 @@ function wireFileUpload(inputId, nameDisplayId) {
 }
 
 let selectedOrgId      = null;   // CRM Account id if picked from dropdown
+let selectedOrgName    = null;   // CRM Account name if picked from dropdown
 let addingNewOrg       = false;  // user chose to add new org
 let skipNextOrgInput   = false;  // prevent input reset after programmatic value set
+let isSubmitting       = false;  // guard against duplicate submissions
 
 function wireOrgTypeahead() {
   const input    = document.getElementById("Account_Name");
@@ -866,8 +879,9 @@ function wireOrgTypeahead() {
 
   input.addEventListener("input", () => {
     if (skipNextOrgInput) { skipNextOrgInput = false; return; }
-    selectedOrgId = null;
-    addingNewOrg  = false;
+    selectedOrgId   = null;
+    selectedOrgName = null;
+    addingNewOrg    = false;
     newPrompt.style.display = "none";
     newFields.style.display = "none";
     clearTimeout(debounce);
@@ -920,8 +934,9 @@ async function searchOrgs(q) {
           skipNextOrgInput = true;
           document.getElementById("Account_Name").value    = item.dataset.name;
           document.getElementById("Account_Name_Id").value = item.dataset.id;
-          selectedOrgId = item.dataset.id;
-          addingNewOrg  = false;
+          selectedOrgId   = item.dataset.id;
+          selectedOrgName = item.dataset.name;
+          addingNewOrg    = false;
           document.getElementById("org-error").style.display = "none";
         }
         dropdown.style.display = "none";
