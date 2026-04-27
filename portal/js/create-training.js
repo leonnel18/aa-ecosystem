@@ -25,6 +25,84 @@ const COUNTRY_SLUG_MAP = {
   "Regional":    "backbone",
 };
 
+// ── Country/portal change ─────────────────────────────────────────────────────
+function onOrganisedByChange(select) {
+  const field = document.getElementById("countries-participated-field");
+  field.style.display = select.value === "Regional" ? "" : "none";
+  if (select.value !== "Regional") {
+    document.getElementById("Countries_Participated").selectedIndex = -1;
+  }
+}
+
+// ── Facilitators ──────────────────────────────────────────────────────────────
+const ROLE_OPTIONS = `
+  <option value="">— Select role —</option>
+  <option value="Lead Facilitator">Lead Facilitator</option>
+  <option value="Senior Facilitator">Senior Facilitator</option>
+  <option value="Co-Facilitator">Co-Facilitator</option>
+  <option value="Junior/ Peer Facilitator">Junior/ Peer Facilitator</option>
+  <option value="Guest/ External Facilitator">Guest/ External Facilitator</option>
+  <option value="Coach">Coach</option>
+  <option value="Shadow Coach">Shadow Coach</option>
+  <option value="Support">Support</option>
+`.trim();
+
+let facilitatorCount = 1;
+
+function addFacilitator() {
+  if (facilitatorCount >= 10) return;
+  facilitatorCount++;
+  const container = document.getElementById("facilitators-container");
+  const row = document.createElement("div");
+  row.className = "facilitator-row";
+  row.dataset.slot = facilitatorCount;
+  row.style.cssText = "display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;align-items:start;position:relative";
+  row.innerHTML = `
+    <div class="field" style="margin-bottom:0">
+      <label class="field-label">Name ${facilitatorCount}</label>
+      <input type="text" class="fac-name" placeholder="Facilitator name">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label class="field-label">Role ${facilitatorCount}
+        <button type="button" class="btn-remove-q" style="float:right;margin-top:-2px" onclick="removeFacilitator(this)">× Remove</button>
+      </label>
+      <select class="fac-role">${ROLE_OPTIONS}</select>
+    </div>
+  `;
+  container.appendChild(row);
+  if (facilitatorCount >= 10) {
+    document.getElementById("btn-add-facilitator").disabled = true;
+  }
+}
+
+function removeFacilitator(btn) {
+  btn.closest(".facilitator-row").remove();
+  facilitatorCount--;
+  document.getElementById("btn-add-facilitator").disabled = false;
+  document.querySelectorAll(".facilitator-row").forEach((row, i) => {
+    const n = i + 1;
+    row.querySelector(".fac-name").previousElementSibling.textContent = `Name ${n}`;
+  });
+}
+
+const FAC_NAME_KEYS      = ["Facilitator", "Name_2", "Name_3", "Name_4", "Name_5", "Name_6", "Name_7", "Name_8", "Name_9", "Name_10"];
+const FAC_ROLE_KEYS_1_5  = ["Facilitator_Type_for_Trainer_1", "Facilitator_Type_for_Trainer_2", "Facilitator_Type_for_Trainer_3", "Facilitator_Type_for_Trainer_4", "Facilitator_Type_for_Trainer_5"];
+const FAC_ROLE_KEYS_6_10 = ["Facilitator_Type_6", "Facilitator_Type_7", "Facilitator_Type_8", "Facilitator_Type_9", "Facilitator_Type_10"];
+
+function collectFacilitators() {
+  const result = {};
+  document.querySelectorAll(".facilitator-row").forEach((row, i) => {
+    const name = row.querySelector(".fac-name").value.trim();
+    const role = row.querySelector(".fac-role").value;
+    if (!name && !role) return;
+    const nameKey = FAC_NAME_KEYS[i];
+    const roleKey = i < 5 ? FAC_ROLE_KEYS_1_5[i] : FAC_ROLE_KEYS_6_10[i - 5];
+    if (name) result[nameKey] = name;
+    if (role) result[roleKey] = role;
+  });
+  return result;
+}
+
 // ── Question builder ──────────────────────────────────────────────────────────
 let questionCount = 0;
 
@@ -163,6 +241,8 @@ function validateAll() {
   ok = validateRequired("End_Date") && ok;
   ok = validateRequired("Application_Form_Open_Date") && ok;
   ok = validateRequired("Application_Form_Close_Date") && ok;
+  ok = validateRequired("Who_is_this_training_for") && ok;
+  ok = validateRequired("Training_Objectives") && ok;
   return ok;
 }
 
@@ -186,6 +266,11 @@ async function submitTraining() {
 
     // Step 1: POST /solutions — create the training record
     setStatus("Creating training record in CRM…");
+
+    const facilitators = collectFacilitators();
+    const countriesEl = document.getElementById("Countries_Participated");
+    const selectedCountries = [...countriesEl.selectedOptions].map(o => o.value);
+
     const payload = {
       data: [{
         Solution_Title:              val("Solution_Title"),
@@ -201,6 +286,21 @@ async function submitTraining() {
         Post_Survey_Close_Date:      val("Post_Survey_Close_Date") || undefined,
         Venue:                       val("Venue") || undefined,
         Venue_Address:               val("Venue_Address") || undefined,
+        // Section A extras
+        Language_of_Delivery:        val("Language_of_Delivery") || undefined,
+        Co_host:                     val("Co_host") || undefined,
+        Countries_Participated:      selectedCountries.length ? selectedCountries : undefined,
+        // Section C
+        Training_Title_Plan:         val("Training_Title_Plan") || undefined,
+        // Section D — update keys below to match confirmed CRM API names
+        Who_is_this_training_for:    val("Who_is_this_training_for") || undefined,
+        Training_Objectives:         val("Training_Objectives") || undefined,
+        Approach_Pedagogy:           val("Approach_Pedagogy") || undefined,
+        Costs_Covered:               val("Costs_Covered") || undefined,
+        Costs_Not_Covered:           val("Costs_Not_Covered") || undefined,
+        Course_Access_Information:   val("Course_Access_Information") || undefined,
+        // Section B facilitators
+        ...facilitators,
       }]
     };
 
@@ -279,10 +379,42 @@ function copyLink(inputId, btn) {
 }
 
 function resetForm() {
-  // Reset all inputs
   document.querySelectorAll("input[type='text'], input[type='number'], input[type='date'], select, textarea").forEach(el => {
-    el.value = "";
+    if (el.multiple) {
+      el.selectedIndex = -1;
+    } else {
+      el.value = "";
+    }
   });
+
+  // Reset Countries Participated visibility
+  document.getElementById("countries-participated-field").style.display = "none";
+
+  // Reset facilitators to single empty slot
+  document.getElementById("facilitators-container").innerHTML = `
+    <div class="facilitator-row" data-slot="1" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;align-items:start">
+      <div class="field" style="margin-bottom:0">
+        <label class="field-label">Name 1</label>
+        <input type="text" class="fac-name" placeholder="Facilitator name">
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label class="field-label">Role 1</label>
+        <select class="fac-role">
+          <option value="">— Select role —</option>
+          <option value="Lead Facilitator">Lead Facilitator</option>
+          <option value="Senior Facilitator">Senior Facilitator</option>
+          <option value="Co-Facilitator">Co-Facilitator</option>
+          <option value="Junior/ Peer Facilitator">Junior/ Peer Facilitator</option>
+          <option value="Guest/ External Facilitator">Guest/ External Facilitator</option>
+          <option value="Coach">Coach</option>
+          <option value="Shadow Coach">Shadow Coach</option>
+          <option value="Support">Support</option>
+        </select>
+      </div>
+    </div>
+  `;
+  facilitatorCount = 1;
+  document.getElementById("btn-add-facilitator").disabled = false;
 
   // Clear question cards
   document.getElementById("questions-container").innerHTML = "";
@@ -297,9 +429,7 @@ function resetForm() {
   btn.innerHTML = "Create Training";
   setStatus("");
 
-  // Clear any validation errors
   document.querySelectorAll(".field.has-error").forEach(f => f.classList.remove("has-error"));
-
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 

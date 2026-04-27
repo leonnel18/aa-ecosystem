@@ -397,7 +397,7 @@
 
     <div class="field">
       <label class="field-label" for="Organised_By">Country / Portal <span class="req">*</span></label>
-      <select id="Organised_By">
+      <select id="Organised_By" onchange="onOrganisedByChange(this)">
         <option value="">— Select country —</option>
         <option value="Philippines">Philippines</option>
         <option value="Pakistan">Pakistan</option>
@@ -421,6 +421,29 @@
     <div class="field">
       <label class="field-label" for="Target_Participants">Target Participants</label>
       <input type="number" id="Target_Participants" min="1" max="500" placeholder="e.g. 25" inputmode="numeric">
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Language_of_Delivery">Language of Delivery</label>
+      <input type="text" id="Language_of_Delivery" placeholder="e.g. English, Filipino">
+      <div class="field-hint">Separate multiple languages with commas.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Co_host">Co-host</label>
+      <input type="text" id="Co_host" placeholder="e.g. Partner organisation name">
+    </div>
+
+    <div class="field" id="countries-participated-field" style="display:none">
+      <label class="field-label" for="Countries_Participated">Countries Participated</label>
+      <select id="Countries_Participated" multiple style="min-height:110px">
+        <option value="Philippines">Philippines</option>
+        <option value="Pakistan">Pakistan</option>
+        <option value="Korea">Korea</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Others">Others</option>
+      </select>
+      <div class="field-hint">Hold Ctrl / Cmd to select multiple countries.</div>
     </div>
   </div>
 
@@ -489,6 +512,89 @@
     <div class="field">
       <label class="field-label" for="Venue_Address">Venue Address</label>
       <textarea id="Venue_Address" rows="2" placeholder="Full address shown to applicants on the form banner"></textarea>
+    </div>
+  </div>
+
+  <!-- Section B2: Facilitators / Trainers -->
+  <div class="section-card">
+    <div class="section-title">Facilitators / Trainers</div>
+    <div class="section-subtitle">Add up to 10 facilitators for this training</div>
+
+    <div id="facilitators-container">
+      <div class="facilitator-row" data-slot="1" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;align-items:start">
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label">Name 1</label>
+          <input type="text" class="fac-name" placeholder="Facilitator name">
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label">Role 1</label>
+          <select class="fac-role">
+            <option value="">— Select role —</option>
+            <option value="Lead Facilitator">Lead Facilitator</option>
+            <option value="Senior Facilitator">Senior Facilitator</option>
+            <option value="Co-Facilitator">Co-Facilitator</option>
+            <option value="Junior/ Peer Facilitator">Junior/ Peer Facilitator</option>
+            <option value="Guest/ External Facilitator">Guest/ External Facilitator</option>
+            <option value="Coach">Coach</option>
+            <option value="Shadow Coach">Shadow Coach</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn-add-q" onclick="addFacilitator()" id="btn-add-facilitator">
+      <span style="font-size:18px;line-height:1">+</span> Add Facilitator
+    </button>
+  </div>
+
+  <!-- Section C2: Associated Training Plan -->
+  <div class="section-card">
+    <div class="section-title">Associated Training Plan</div>
+    <div class="section-subtitle">Optional — links this training to an existing plan record</div>
+
+    <div class="field" style="margin-bottom:0">
+      <label class="field-label" for="Training_Title_Plan">Training Plan Name</label>
+      <input type="text" id="Training_Title_Plan" placeholder="e.g. PH Annual Plan 2026">
+      <div class="field-hint">Enter the exact name of the Training Plan record in the CRM.</div>
+    </div>
+  </div>
+
+  <!-- Section D2: Training Details / Website -->
+  <div class="section-card">
+    <div class="section-title">Training Details</div>
+    <div class="section-subtitle">Shown on the public training page — fill in before publishing</div>
+
+    <div class="field">
+      <label class="field-label" for="Who_is_this_training_for">Who Is This Training For <span class="req">*</span></label>
+      <input type="text" id="Who_is_this_training_for" placeholder="e.g. Civil society campaigners in the Philippines">
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Training_Objectives">Training Objectives <span class="req">*</span></label>
+      <textarea id="Training_Objectives" rows="4" placeholder="List the key objectives of this training…"></textarea>
+      <div class="field-error">This field is required.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Approach_Pedagogy">Approach / Pedagogy</label>
+      <textarea id="Approach_Pedagogy" rows="3" placeholder="Describe the teaching approach or pedagogy…"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Costs_Covered">Costs Covered</label>
+      <textarea id="Costs_Covered" rows="2" placeholder="e.g. Meals, accommodation, training materials"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="Costs_Not_Covered">Costs Not Covered</label>
+      <textarea id="Costs_Not_Covered" rows="2" placeholder="e.g. Travel to/from venue"></textarea>
+    </div>
+
+    <div class="field" style="margin-bottom:0">
+      <label class="field-label" for="Course_Access_Information">Course Access Information</label>
+      <textarea id="Course_Access_Information" rows="2" placeholder="e.g. Zoom link will be sent 24 hours before the training"></textarea>
     </div>
   </div>
 
