@@ -396,8 +396,6 @@
       background: var(--bg);
       color: var(--text);
       border: 1.5px solid var(--border);
-      flex: 0 0 auto;
-      padding: 0 24px;
     }
     .btn-next {
       background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
@@ -542,9 +540,9 @@
       min-height: var(--input-h);
       border: 1.5px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 12px 36px 12px 14px;
+      padding: 8px 36px 8px 10px;
       font-family: inherit;
-      font-size: 16px;
+      font-size: 15px;
       color: var(--meta);
       background: var(--white);
       cursor: pointer;
@@ -552,11 +550,15 @@
       transition: border-color 0.2s;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23788099' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 14px center;
+      background-position: right 12px center;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
     }
     .multiselect-trigger:focus,
     .multiselect-trigger[aria-expanded="true"] { outline: none; border-color: var(--primary); }
-    .multiselect-trigger.has-selection { color: var(--text); }
+    .multiselect-placeholder { color: var(--meta); font-size: 15px; line-height: 1.4; }
     .multiselect-panel {
       display: none;
       position: absolute;
@@ -586,35 +588,108 @@
       flex-shrink: 0;
       accent-color: var(--primary);
     }
-    .multiselect-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .multiselect-tag {
-      display: flex;
+    .ms-chip {
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       background: var(--primary-light);
       border: 1px solid var(--primary);
       color: var(--primary);
       border-radius: 9999px;
-      padding: 4px 10px;
-      font-size: 13px;
+      padding: 2px 8px;
+      font-size: 12px;
       font-weight: 500;
+      white-space: nowrap;
     }
-    .multiselect-tag button {
+    .ms-chip-remove {
       background: none;
       border: none;
       color: var(--primary);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1;
       cursor: pointer;
       padding: 0;
       display: flex;
       align-items: center;
     }
+    /* ── Org combobox ── */
+    .org-combobox-wrap { position: relative; }
+    .org-combobox-input-row {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      transition: border-color 0.2s;
+      min-height: var(--input-h);
+    }
+    .org-combobox-input-row:focus-within { border-color: var(--primary); }
+    .org-combobox-icon {
+      padding: 0 10px 0 14px;
+      color: var(--meta);
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .org-combobox-input-row input[type="text"] {
+      border: none;
+      border-radius: 0;
+      padding: 12px 8px;
+      min-height: unset;
+      flex: 1;
+    }
+    .org-combobox-input-row input[type="text"]:focus { border: none; outline: none; }
+    .org-clear-btn {
+      background: none;
+      border: none;
+      color: var(--meta);
+      padding: 0 14px;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      display: none;
+      align-items: center;
+    }
+    .org-clear-btn.visible { display: flex; }
+    .org-dropdown-list {
+      display: none;
+      position: absolute;
+      left: 0; right: 0;
+      top: calc(100% + 4px);
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      z-index: 200;
+      max-height: 220px;
+      overflow-y: auto;
+      box-shadow: 0 4px 16px rgba(0,0,0,.10);
+    }
+    .org-dropdown-list.open { display: block; }
+    .org-dropdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .org-dropdown-item:last-child { border-bottom: none; }
+    .org-dropdown-item:hover { background: var(--primary-light); }
+    .org-dropdown-item.selected { color: var(--primary); font-weight: 600; }
+    .org-dropdown-item.selected::after {
+      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath d='M1 5l4 4L13 1' stroke='%23821545' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .org-add-row {
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .org-add-row:hover { background: var(--primary-light); }
+
   </style>
 </head>
 <body>
@@ -701,7 +776,7 @@
       <label class="field-label">Phone / WhatsApp <span class="req">*</span></label>
       <span class="field-label-fil">Numero ng Telepono / WhatsApp</span>
       <div class="phone-wrap">
-        <span class="phone-prefix">🇵🇭 +63</span>
+        <span class="phone-prefix"><img src="https://flagcdn.com/w40/ph.png" width="20" height="14" alt="PH" style="border-radius:2px;display:block"> +63</span>
         <input type="tel" id="Mobile" autocomplete="tel" inputmode="tel" placeholder="9XX XXX XXXX">
       </div>
       <div class="field-error">This field is required.</div>
@@ -784,13 +859,25 @@
 
     <div class="field">
       <label class="field-label">Pronoun <span class="req">*</span></label>
-      <div class="radio-group" id="pronoun-group">
-        <label class="radio-opt"><input type="radio" name="Pronoun" value="She/Her"> She/Her</label>
-        <label class="radio-opt"><input type="radio" name="Pronoun" value="He/Him"> He/Him</label>
-        <label class="radio-opt"><input type="radio" name="Pronoun" value="They/Them"> They/Them</label>
-        <label class="radio-opt"><input type="radio" name="Pronoun" value="Other"> Other / Iba pa</label>
+      <div class="custom-select-wrap" id="wrap-Pronoun">
+        <button type="button" class="custom-select-trigger placeholder" id="trigger-Pronoun" aria-haspopup="listbox" aria-expanded="false">
+          — Select / Pumili —
+        </button>
+        <div class="custom-select-listbox" id="listbox-Pronoun" role="listbox">
+          <div class="custom-select-option" data-value="She/Her">She/Her</div>
+          <div class="custom-select-option" data-value="He/Him">He/Him</div>
+          <div class="custom-select-option" data-value="They/Them">They/Them</div>
+          <div class="custom-select-option" data-value="Other">Other / Iba pa</div>
+        </div>
+        <select id="Pronoun" name="Pronoun" style="display:none" tabindex="-1">
+          <option value="">— Select / Pumili —</option>
+          <option value="She/Her">She/Her</option>
+          <option value="He/Him">He/Him</option>
+          <option value="They/Them">They/Them</option>
+          <option value="Other">Other / Iba pa</option>
+        </select>
+        <div class="field-error" id="pronoun-error">This field is required.</div>
       </div>
-      <div class="field-error" id="pronoun-error">This field is required.</div>
     </div>
 
     <div class="field hidden" id="other-pronoun-field">
@@ -828,9 +915,9 @@
       <label class="field-label">Do you identify as <span class="req">*</span></label>
       <span class="field-label-fil">Kabilang ka ba sa — maaaring pumili ng marami</span>
       <div class="multiselect-wrap" id="multiselect-identify">
-        <button type="button" class="multiselect-trigger" id="trigger-identify" aria-haspopup="listbox" aria-expanded="false">
-          Select all that apply / Pumili ng lahat ng angkop
-        </button>
+        <div class="multiselect-trigger" id="trigger-identify" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+          <span class="multiselect-placeholder">Select all that apply / Pumili ng lahat ng angkop</span>
+        </div>
         <div class="multiselect-panel" id="panel-identify" role="listbox" aria-multiselectable="true">
           <div class="multiselect-option">
             <input type="checkbox" name="Identify_as" value="Person with disability" id="id-pwd">
@@ -861,7 +948,6 @@
             <label for="id-other"><div class="check-label">Other / Iba pa</div></label>
           </div>
         </div>
-        <div class="multiselect-tags" id="tags-identify"></div>
       </div>
       <div class="field-error" id="identify-error">Please select at least one option.</div>
     </div>
@@ -906,12 +992,20 @@
       <input type="hidden" id="Training_Applied">
     </div>
 
-    <div class="field" style="position:relative">
+    <div class="field">
       <label class="field-label">Organization Name <span class="req">*</span></label>
       <span class="field-label-fil">Pangalan ng Organisasyon</span>
-      <input type="text" id="Account_Name" placeholder="Start typing your organization name…" autocomplete="off">
-      <input type="hidden" id="Account_Name_Id">
-      <div id="org-dropdown" style="display:none;position:absolute;left:0;right:0;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-sm);z-index:100;max-height:220px;overflow-y:auto;box-shadow:0 4px 16px rgba(0,0,0,.10)"></div>
+      <div class="org-combobox-wrap">
+        <div class="org-combobox-input-row">
+          <span class="org-combobox-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" id="Account_Name" placeholder="Search your organization…" autocomplete="off" style="border:none;border-radius:0;padding:12px 8px;min-height:unset;flex:1">
+          <button type="button" class="org-clear-btn" id="org-clear-btn" aria-label="Clear">×</button>
+        </div>
+        <input type="hidden" id="Account_Name_Id">
+        <div class="org-dropdown-list" id="org-dropdown"></div>
+      </div>
       <div id="org-new-prompt" style="display:none;margin-top:8px;font-size:13px;color:var(--meta)">
         Organization not found. <button type="button" id="org-add-btn" style="background:none;border:none;color:var(--primary);font-weight:700;cursor:pointer;font-size:13px;padding:0">+ Add new organization</button>
       </div>
@@ -947,22 +1041,6 @@
     </div>
   </div>
 
-  <!-- SECTION C: Terms & Conditions -->
-  <div class="section-card" id="sec-terms">
-    <div class="section-title">Terms &amp; Conditions</div>
-    <div class="section-subtitle">Mga Tuntunin at Kondisyon</div>
-    <div class="check-group">
-      <label class="check-opt">
-        <input type="checkbox" id="terms1">
-        <div>
-          <div class="check-label">I agree to participate fully, maintain a respectful learning space, and consent to photos/videos being used for AktivAsia communications.</div>
-          <div class="check-label-fil">Sumasang-ayon akong aktibong lumahok, mapanatili ang isang ligtas na espasyo ng pagkatuto, at payagan ang paggamit ng mga larawan/video para sa komunikasyon ng AktivAsia.</div>
-        </div>
-      </label>
-    </div>
-    <div class="field-error" id="terms-error" style="margin-top:12px">Please agree to the terms to continue.</div>
-  </div>
-
   <!-- SECTION D: Experience — Foundational -->
   <div class="section-card" id="sec-exp-foundational">
   <div class="section-title">Experience</div>
@@ -971,10 +1049,21 @@
   <div class="field">
     <label class="field-label">Are you currently active in campaigning, advocating or organising a community? <span class="req">*</span></label>
     <span class="field-label-fil">Ikaw ba ay kasalukuyang nagkakampaniya, may gawaing adbokasiya, o nag-oorganisa sa iyong komunidad?</span>
-    <div class="radio-group">
-      <label class="radio-opt"><input type="radio" name="campaigning_f" value="Yes"> Yes / Oo</label>
-      <label class="radio-opt"><input type="radio" name="campaigning_f" value="No"> No / Hindi</label>
-      <label class="radio-opt"><input type="radio" name="campaigning_f" value="Have in the past but not currently"> Have in the past but not currently / Noon lang</label>
+    <div class="custom-select-wrap" id="wrap-campaigning_f">
+      <button type="button" class="custom-select-trigger placeholder" id="trigger-campaigning_f" aria-haspopup="listbox" aria-expanded="false">
+        — Select / Pumili —
+      </button>
+      <div class="custom-select-listbox" id="listbox-campaigning_f" role="listbox">
+        <div class="custom-select-option" data-value="Yes">Yes / Oo</div>
+        <div class="custom-select-option" data-value="No">No / Hindi</div>
+        <div class="custom-select-option" data-value="Have in the past but not currently">Have in the past but not currently / Noon lang</div>
+      </div>
+      <select id="campaigning_f" name="campaigning_f" style="display:none" tabindex="-1">
+        <option value="">— Select / Pumili —</option>
+        <option value="Yes">Yes / Oo</option>
+        <option value="No">No / Hindi</option>
+        <option value="Have in the past but not currently">Have in the past but not currently / Noon lang</option>
+      </select>
     </div>
     <div class="field-error" id="campaign-f-error">This field is required.</div>
   </div>
@@ -1085,6 +1174,22 @@
     <div class="section-title">Confidence Ratings</div>
     <div class="section-subtitle">Rate your current confidence from 1 (not confident) to 7 (very confident) — Isulat ang iyong antas ng kumpiyansa</div>
     <div id="ratings-container"></div>
+  </div>
+
+  <!-- SECTION E: Terms & Conditions -->
+  <div class="section-card" id="sec-terms">
+    <div class="section-title">Terms &amp; Conditions</div>
+    <div class="section-subtitle">Mga Tuntunin at Kondisyon</div>
+    <div class="check-group">
+      <label class="check-opt">
+        <input type="checkbox" id="terms1">
+        <div>
+          <div class="check-label">I agree to participate fully, maintain a respectful learning space, and consent to photos/videos being used for AktivAsia communications.</div>
+          <div class="check-label-fil">Sumasang-ayon akong aktibong lumahok, mapanatili ang isang ligtas na espasyo ng pagkatuto, at payagan ang paggamit ng mga larawan/video para sa komunikasyon ng AktivAsia.</div>
+        </div>
+      </label>
+    </div>
+    <div class="field-error" id="terms-error" style="margin-top:12px">Please agree to the terms to continue.</div>
   </div>
 
   <!-- SECTION F: Custom Questions -->

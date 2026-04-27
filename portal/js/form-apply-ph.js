@@ -102,6 +102,8 @@ function wireCustomSelects() {
     "Country_of_Residence",
     "Gender",
     "Preferred_Language",
+    "Pronoun",
+    "campaigning_f",
   ];
 
   selects.forEach(id => {
@@ -176,51 +178,61 @@ function escHtml(s) {
 function wireMultiselect() {
   const trigger = document.getElementById("trigger-identify");
   const panel   = document.getElementById("panel-identify");
-  const tagsEl  = document.getElementById("tags-identify");
-  if (!trigger || !panel || !tagsEl) return;
+  if (!trigger || !panel) return;
 
   function getChecked() {
     return [...document.querySelectorAll('input[name="Identify_as"]:checked')];
   }
 
-  function renderTags() {
+  function renderChips() {
     const checked = getChecked();
-    trigger.classList.toggle("has-selection", checked.length > 0);
-    trigger.textContent = checked.length === 0
-      ? "Select all that apply / Pumili ng lahat ng angkop"
-      : `${checked.length} selected`;
-    tagsEl.innerHTML = checked.map(cb =>
-      `<div class="multiselect-tag" data-val="${escHtml(cb.value)}">
-        ${escHtml(cb.value)}
-        <button type="button" aria-label="Remove ${escHtml(cb.value)}">×</button>
-      </div>`
-    ).join("");
-    tagsEl.querySelectorAll("button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const val = btn.closest(".multiselect-tag").dataset.val;
-        const cb  = document.querySelector(`input[name="Identify_as"][value="${val}"]`);
-        if (cb) { cb.checked = false; }
-        renderTags();
+    // Remove existing chips and placeholder
+    trigger.querySelectorAll(".ms-chip, .multiselect-placeholder").forEach(el => el.remove());
+
+    if (checked.length === 0) {
+      trigger.insertAdjacentHTML("afterbegin",
+        `<span class="multiselect-placeholder">Select all that apply / Pumili ng lahat ng angkop</span>`
+      );
+    } else {
+      const frag = document.createDocumentFragment();
+      checked.forEach(cb => {
+        const chip = document.createElement("span");
+        chip.className = "ms-chip";
+        chip.dataset.val = cb.value;
+        chip.innerHTML = `${escHtml(cb.value)}<button type="button" class="ms-chip-remove" aria-label="Remove ${escHtml(cb.value)}">×</button>`;
+        chip.querySelector(".ms-chip-remove").addEventListener("click", ev => {
+          ev.stopPropagation();
+          cb.checked = false;
+          renderChips();
+        });
+        frag.appendChild(chip);
       });
-    });
+      trigger.insertBefore(frag, trigger.firstChild);
+    }
   }
 
-  trigger.addEventListener("click", () => {
+  trigger.addEventListener("click", e => {
+    if (e.target.closest(".ms-chip-remove")) return;
     const isOpen = panel.classList.contains("open");
     panel.classList.toggle("open", !isOpen);
     trigger.setAttribute("aria-expanded", String(!isOpen));
   });
 
-  panel.addEventListener("change", () => renderTags());
+  trigger.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); trigger.click(); }
+    if (e.key === "Escape") { panel.classList.remove("open"); trigger.setAttribute("aria-expanded", "false"); }
+  });
+
+  panel.addEventListener("change", () => renderChips());
 
   document.addEventListener("click", e => {
-    if (!trigger.contains(e.target) && !panel.contains(e.target) && !tagsEl.contains(e.target)) {
+    if (!trigger.contains(e.target) && !panel.contains(e.target)) {
       panel.classList.remove("open");
       trigger.setAttribute("aria-expanded", "false");
     }
   });
 
-  renderTags();
+  renderChips();
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
@@ -248,11 +260,9 @@ async function init() {
   // Wire multiselect for Identify as
   wireMultiselect();
 
-  // Pronoun "Other" toggle
-  document.querySelectorAll('input[name="Pronoun"]').forEach(r => {
-    r.addEventListener("change", () => {
-      document.getElementById("other-pronoun-field").classList.toggle("hidden", r.value !== "Other" || !r.checked);
-    });
+  // Pronoun "Other" toggle — listens on the hidden <select> synced by wireCustomSelects
+  document.getElementById("Pronoun").addEventListener("change", function() {
+    document.getElementById("other-pronoun-field").classList.toggle("hidden", this.value !== "Other");
   });
 
   // Preferred Language "Other" toggle
@@ -409,7 +419,7 @@ const STEPPER_NODES = [
 ];
 
 function buildSectionList() {
-  sections = ["sec-demographics", "sec-professional", "sec-terms"];
+  sections = ["sec-demographics", "sec-professional"];
 
   // Add the correct experience section
   const expMap = {
@@ -425,6 +435,9 @@ function buildSectionList() {
   // Add custom questions section only if there are custom questions
   const cq = parseCustomQuestions(trainingData.Custom_Questions);
   if (cq.length > 0) sections.push("sec-custom");
+
+  // Terms always last
+  sections.push("sec-terms");
 }
 
 // ── Progress bar ──────────────────────────────────────────────────────────────
@@ -451,8 +464,8 @@ function updateProgressBar() {
   let activeNodeIdx = STEPPER_NODES.findIndex(node =>
     node.sections.includes(sections[currentIdx])
   );
-  // sec-terms is not in any stepper node; keep Professional (node 1) active
-  if (activeNodeIdx === -1) activeNodeIdx = 1;
+  // sec-terms is not in any stepper node; show all nodes completed
+  if (activeNodeIdx === -1) activeNodeIdx = STEPPER_NODES.length;
 
   STEPPER_NODES.forEach((_, i) => {
     const node = document.getElementById(`stepper-node-${i}`);
@@ -512,7 +525,7 @@ function validateSection(sectionId) {
     ok = validateSelect("Country_of_Residence") && ok;
     ok = validateYear("Year_of_Birth") && ok;
     ok = validateSelect("Gender") && ok;
-    ok = validateRadioGroup("pronoun-group", "pronoun-error") && ok;
+    ok = validateSelect("Pronoun", "pronoun-error") && ok;
     ok = validateSelect("Preferred_Language", "lang-error") && ok;
     ok = validateCheckGroup("Identify_as", "identify-error") && ok;
     ok = validateFileUpload("Recent_Photo", "photo-error") && ok;
@@ -541,10 +554,7 @@ function validateSection(sectionId) {
   }
 
   if (sectionId === "sec-exp-foundational") {
-    ok = validateRadioGroup(
-      document.querySelector('#sec-exp-foundational .radio-group'),
-      "campaign-f-error"
-    ) && ok;
+    ok = validateSelect("campaigning_f", "campaign-f-error") && ok;
     ok = validateRequired("Reason_for_Applying_F") && ok;
   }
 
@@ -595,11 +605,15 @@ function validateRequired(id) {
   return pass;
 }
 
-function validateSelect(id) {
+function validateSelect(id, errorId) {
   const el    = document.getElementById(id);
   const field = el.closest(".field");
   const pass  = el.value !== "";
   field.classList.toggle("has-error", !pass);
+  if (errorId) {
+    const errEl = document.getElementById(errorId);
+    if (errEl) errEl.style.display = pass ? "none" : "block";
+  }
   return pass;
 }
 
@@ -918,7 +932,7 @@ function buildPayload() {
     Country_of_Residence:   val("Country_of_Residence"),
     Year_of_Birth:          parseInt(val("Year_of_Birth"), 10) || null,
     Gender:                 val("Gender"),
-    Pronoun:                radVal("Pronoun"),
+    Pronoun:                val("Pronoun"),
     Preferred_Pronoun:      val("Preferred_Pronoun"),
     Preferred_Language:     val("Preferred_Language") === "Other" ? val("Preferred_Language_Other") : val("Preferred_Language"),
     Identify_as_Multiple:   checkArr("Identify_as"),
@@ -935,7 +949,7 @@ function buildPayload() {
   // Experience fields per training type
   switch (trainingType) {
     case "Foundational":
-      data.Currently_Campaigning        = radVal("campaigning_f");
+      data.Currently_Campaigning        = val("campaigning_f");
       data.Current_Campaign_Description = val("Current_Campaign_Description");
       data.Reason_for_Applying          = val("Reason_for_Applying_F");
       break;
@@ -1062,29 +1076,47 @@ let skipNextOrgInput   = false;  // prevent input reset after programmatic value
 let isSubmitting       = false;  // guard against duplicate submissions
 
 function wireOrgTypeahead() {
-  const input    = document.getElementById("Account_Name");
-  const dropdown = document.getElementById("org-dropdown");
-  const newPrompt= document.getElementById("org-new-prompt");
-  const newFields= document.getElementById("org-new-fields");
+  const input     = document.getElementById("Account_Name");
+  const dropdown  = document.getElementById("org-dropdown");
+  const clearBtn  = document.getElementById("org-clear-btn");
+  const newPrompt = document.getElementById("org-new-prompt");
+  const newFields = document.getElementById("org-new-fields");
   let debounce;
 
+  function updateClearBtn() {
+    clearBtn.classList.toggle("visible", input.value.length > 0);
+  }
+
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    document.getElementById("Account_Name_Id").value = "";
+    selectedOrgId   = null;
+    selectedOrgName = null;
+    addingNewOrg    = false;
+    dropdown.classList.remove("open");
+    newPrompt.style.display = "none";
+    newFields.style.display = "none";
+    updateClearBtn();
+    input.focus();
+  });
+
   input.addEventListener("input", () => {
-    if (skipNextOrgInput) { skipNextOrgInput = false; return; }
+    if (skipNextOrgInput) { skipNextOrgInput = false; updateClearBtn(); return; }
     selectedOrgId   = null;
     selectedOrgName = null;
     addingNewOrg    = false;
     newPrompt.style.display = "none";
     newFields.style.display = "none";
+    updateClearBtn();
     clearTimeout(debounce);
     const q = input.value.trim();
-    if (q.length < 2) { dropdown.style.display = "none"; return; }
+    if (q.length < 2) { dropdown.classList.remove("open"); return; }
     debounce = setTimeout(() => searchOrgs(q), 300);
   });
 
   document.addEventListener("click", e => {
-    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-      dropdown.style.display = "none";
-    }
+    const wrap = document.querySelector(".org-combobox-wrap");
+    if (wrap && !wrap.contains(e.target)) dropdown.classList.remove("open");
   });
 
   document.getElementById("org-add-btn").addEventListener("click", () => {
@@ -1098,24 +1130,22 @@ function wireOrgTypeahead() {
 async function searchOrgs(q) {
   const dropdown  = document.getElementById("org-dropdown");
   const newPrompt = document.getElementById("org-new-prompt");
-  dropdown.innerHTML = `<div style="padding:12px;color:var(--meta);font-size:13px">Searching…</div>`;
-  dropdown.style.display = "block";
+  dropdown.innerHTML = `<div class="org-dropdown-item" style="color:var(--meta);cursor:default">Searching…</div>`;
+  dropdown.classList.add("open");
   try {
     const res  = await fetch(`${PROXY_BASE}/accounts/search?q=${encodeURIComponent(q)}`);
     const json = await res.json();
     const orgs = json.data ?? [];
     if (orgs.length === 0) {
-      dropdown.style.display = "none";
+      dropdown.classList.remove("open");
       newPrompt.style.display = "block";
       return;
     }
     dropdown.innerHTML = orgs.map(o =>
-      `<div data-id="${o.id}" data-name="${o.Account_Name}" style="padding:12px 16px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--border)">${o.Account_Name}</div>`
+      `<div class="org-dropdown-item${o.id === selectedOrgId ? " selected" : ""}" data-id="${escHtml(o.id)}" data-name="${escHtml(o.Account_Name)}">${escHtml(o.Account_Name)}</div>`
     ).join("") +
-      `<div data-id="__new__" style="padding:12px 16px;cursor:pointer;font-size:13px;color:var(--primary);font-weight:600">+ Add new organization</div>`;
+      `<div class="org-add-row" data-id="__new__">+ Add new organization</div>`;
     dropdown.querySelectorAll("[data-id]").forEach(item => {
-      item.addEventListener("mouseover",  () => item.style.background = "var(--primary-light)");
-      item.addEventListener("mouseout",   () => item.style.background = "");
       item.addEventListener("click", () => {
         if (item.dataset.id === "__new__") {
           document.getElementById("org-new-fields").style.display = "block";
@@ -1129,13 +1159,14 @@ async function searchOrgs(q) {
           selectedOrgName = item.dataset.name;
           addingNewOrg    = false;
           document.getElementById("org-error").style.display = "none";
+          document.getElementById("org-clear-btn").classList.add("visible");
         }
-        dropdown.style.display = "none";
-        document.getElementById("org-new-prompt").style.display = "none";
+        dropdown.classList.remove("open");
+        newPrompt.style.display = "none";
       });
     });
   } catch {
-    dropdown.style.display = "none";
+    dropdown.classList.remove("open");
   }
 }
 
