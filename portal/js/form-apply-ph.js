@@ -324,11 +324,17 @@ function validateSection(sectionId) {
 
   if (sectionId === "sec-professional") {
     const orgInput = document.getElementById("Account_Name").value.trim();
+    const orgErrEl = document.getElementById("org-error");
     if (!orgInput) {
-      document.getElementById("org-error").style.display = "block";
+      orgErrEl.textContent = "This field is required.";
+      orgErrEl.style.display = "block";
+      ok = false;
+    } else if (!selectedOrgId && !addingNewOrg) {
+      orgErrEl.textContent = "Please select an organization from the list or click '+ Add new organization'.";
+      orgErrEl.style.display = "block";
       ok = false;
     } else {
-      document.getElementById("org-error").style.display = "none";
+      orgErrEl.style.display = "none";
     }
     ok = validateRequired("Role_in_the_Organisation") && ok;
     ok = validateBio() && ok;
@@ -704,7 +710,7 @@ function buildPayload() {
     Preferred_Language:     val("Preferred_Language") === "Other" ? val("Preferred_Language_Other") : val("Preferred_Language"),
     Identify_as_Multiple:   checkArr("Identify_as"),
     Special_Requirements:   val("Special_Requirements"),
-    Account_Name:           selectedOrgId ? { id: selectedOrgId } : { name: val("Account_Name") },
+    Account_Name:           selectedOrgId ? { id: selectedOrgId } : { name: val("Account_Name").replace(" ✓", "") },
     Role_in_the_Organisation: val("Role_in_the_Organisation"),
     Please_provide_a_100_word_bio_that_best_describes: val("Please_provide_a_100_word_bio_that_best_describes"),
     Training_Applied:       { id: trainingId },
@@ -897,10 +903,13 @@ async function searchOrgs(q) {
           document.getElementById("org-new-name").value = document.getElementById("Account_Name").value.trim();
           addingNewOrg = true;
         } else {
-          document.getElementById("Account_Name").value    = item.dataset.name;
+          const input = document.getElementById("Account_Name");
+          input.value = item.dataset.name + " ✓";
+          input.style.color = "var(--primary)";
           document.getElementById("Account_Name_Id").value = item.dataset.id;
           selectedOrgId = item.dataset.id;
           addingNewOrg  = false;
+          document.getElementById("org-error").style.display = "none";
         }
         dropdown.style.display = "none";
         document.getElementById("org-new-prompt").style.display = "none";

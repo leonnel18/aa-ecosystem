@@ -97,7 +97,7 @@ export default {
       if (request.method === "GET" && path === "/accounts/search") {
         const q = (url.searchParams.get("q") ?? "").trim();
         if (q.length < 2) return jsonResponse({ data: [] }, 200, origin);
-        const searchUrl = `${CRM_BASE}/Accounts/search?criteria=(Account_Name:contains:${encodeURIComponent(q)})&fields=id,Account_Name&per_page=10`;
+        const searchUrl = `${CRM_BASE}/Accounts/search?word=${encodeURIComponent(q)}&fields=id,Account_Name&per_page=10`;
         const crmRes = await fetch(searchUrl, { headers: auth });
         const body   = await crmRes.json();
         return jsonResponse(body, crmRes.status, origin);
