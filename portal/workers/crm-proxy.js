@@ -19,6 +19,7 @@
 //   http://localhost:*  (local dev)
 
 const CRM_BASE    = "https://www.zohoapis.in/crm/v6";
+const USERS_URL   = "https://www.zohoapis.in/crm/v2/users";
 const TOKEN_URL   = "https://accounts.zoho.in/oauth/v2/token";
 const ALLOWED_ORIGINS = ["https://aktivasia-portal.pages.dev", "https://crm-proxy.gideon-valera.workers.dev"];
 
@@ -252,17 +253,19 @@ export default {
         const plansUrl = `${CRM_BASE}/Training_Plans?fields=id,Name,Organised_By&per_page=200`;
         const crmRes   = await fetch(plansUrl, { headers: auth });
         const body     = await crmRes.json();
+        if (!crmRes.ok) return jsonResponse(body, crmRes.status, origin);
         const plans = (body.data ?? []).filter(p =>
           !organisedBy || p.Organised_By === organisedBy
         );
-        return jsonResponse({ data: plans }, 200, origin);
+        const more = body.info?.more_records ?? false;
+        return jsonResponse({ data: plans, more_records: more }, 200, origin);
       }
 
       // ── GET /users/search?email= ──────────────────────────────────────────────
       if (request.method === "GET" && path === "/users/search") {
         const email = (url.searchParams.get("email") ?? "").trim();
         if (!email) return jsonResponse({ users: [] }, 200, origin);
-        const usersUrl = `${CRM_BASE.replace("/crm/v6", "")}/crm/v2/users?type=AllUsers`;
+        const usersUrl = `${USERS_URL}?type=AllUsers`; // v2 endpoint; no targeted search available so full list is pulled
         const crmRes   = await fetch(usersUrl, { headers: auth });
         const body     = await crmRes.json();
         const match    = (body.users ?? []).find(u => u.email?.toLowerCase() === email.toLowerCase());
