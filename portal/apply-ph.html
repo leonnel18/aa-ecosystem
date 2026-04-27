@@ -439,6 +439,36 @@
     @media (max-width: 400px) {
       .name-row { grid-template-columns: 1fr; }
     }
+
+    .phone-wrap {
+      display: flex;
+      align-items: stretch;
+    }
+    .phone-prefix {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 14px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-right: none;
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      min-height: var(--input-h);
+      flex-shrink: 0;
+    }
+    .phone-wrap input[type="tel"] {
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      border-left: none;
+      flex: 1;
+    }
+    .phone-wrap input[type="tel"]:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -524,7 +554,10 @@
     <div class="field">
       <label class="field-label">Phone / WhatsApp <span class="req">*</span></label>
       <span class="field-label-fil">Numero ng Telepono / WhatsApp</span>
-      <input type="tel" id="Mobile" autocomplete="tel" inputmode="tel">
+      <div class="phone-wrap">
+        <span class="phone-prefix">🇵🇭 +63</span>
+        <input type="tel" id="Mobile" autocomplete="tel" inputmode="tel" placeholder="9XX XXX XXXX">
+      </div>
       <div class="field-error">This field is required.</div>
     </div>
 
