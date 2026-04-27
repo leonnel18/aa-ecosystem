@@ -549,6 +549,9 @@ async function submitTraining() {
     setStatus("Creating training record in CRM…");
 
     const owner = await resolveOwner(organisedBy);
+    if (!owner) {
+      setStatus("Warning: could not resolve country owner — record will use default CRM owner.", true);
+    }
     const facilitators = collectFacilitators();
     const countriesEl = document.getElementById("Countries_Participated");
     const selectedCountries = [...countriesEl.selectedOptions].map(o => o.value);
