@@ -147,11 +147,13 @@ function wireCustomSelects() {
       if (e.key === "Escape") closeListbox();
       if (e.key === "ArrowDown") {
         e.preventDefault();
+        if (!listbox.classList.contains("open")) { openListbox(); return; }
         const next = openOpts[curIdx + 1] || openOpts[0];
         selectOption(next);
       }
       if (e.key === "ArrowUp") {
         e.preventDefault();
+        if (!listbox.classList.contains("open")) { openListbox(); return; }
         const prev = openOpts[curIdx - 1] || openOpts[openOpts.length - 1];
         selectOption(prev);
       }
@@ -161,6 +163,14 @@ function wireCustomSelects() {
       if (!trigger.contains(e.target) && !listbox.contains(e.target)) closeListbox();
     });
   });
+}
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function wireMultiselect() {
@@ -180,9 +190,9 @@ function wireMultiselect() {
       ? "Select all that apply / Pumili ng lahat ng angkop"
       : `${checked.length} selected`;
     tagsEl.innerHTML = checked.map(cb =>
-      `<div class="multiselect-tag" data-val="${cb.value}">
-        ${cb.value}
-        <button type="button" aria-label="Remove ${cb.value}">×</button>
+      `<div class="multiselect-tag" data-val="${escHtml(cb.value)}">
+        ${escHtml(cb.value)}
+        <button type="button" aria-label="Remove ${escHtml(cb.value)}">×</button>
       </div>`
     ).join("");
     tagsEl.querySelectorAll("button").forEach(btn => {
@@ -438,14 +448,16 @@ function buildProgressBar() {
 }
 
 function updateProgressBar() {
-  const activeNodeIdx = STEPPER_NODES.findIndex(node =>
+  let activeNodeIdx = STEPPER_NODES.findIndex(node =>
     node.sections.includes(sections[currentIdx])
   );
+  // sec-terms is not in any stepper node; keep Professional (node 1) active
+  if (activeNodeIdx === -1) activeNodeIdx = 1;
 
   STEPPER_NODES.forEach((_, i) => {
     const node = document.getElementById(`stepper-node-${i}`);
     if (!node) return;
-    if (i < activeNodeIdx)       node.dataset.state = "completed";
+    if (i < activeNodeIdx)        node.dataset.state = "completed";
     else if (i === activeNodeIdx) node.dataset.state = "active";
     else                          node.dataset.state = "inactive";
   });
@@ -895,7 +907,9 @@ function buildPayload() {
     Preferred_Name_Nick_Name: val("Preferred_Name_Nick_Name"),
     Email:                  val("Email"),
     Mobile: (() => {
-      let m = val("Mobile").replace(/\s/g, "");
+      let m = val("Mobile").replace(/[\s\-().]/g, "");
+      if (m.startsWith("+63")) return m;
+      if (m.startsWith("63")) return "+" + m;
       if (m.startsWith("0")) m = m.slice(1);
       return "+63" + m;
     })(),
