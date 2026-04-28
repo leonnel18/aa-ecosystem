@@ -439,6 +439,15 @@ async function init() {
     });
   }
 
+  // Show/hide campaign description based on campaigning answer
+  const campaigningSelect = document.getElementById("campaigning_f");
+  if (campaigningSelect) {
+    campaigningSelect.addEventListener("change", function() {
+      const show = this.value === "Yes" || this.value === "Have in the past but not currently";
+      document.getElementById("campaign-desc-field").style.display = show ? "" : "none";
+    });
+  }
+
   // Country change → switch Province/City between PH dropdown and plain text
   document.getElementById("Country_of_Residence").addEventListener("change", function() {
     wireCityProvinceMode(this.value);
@@ -501,6 +510,7 @@ async function fetchTraining(id) {
     "Application_Form_Open_Date", "Application_Form_Close_Date",
     "Venue_Address",
     "Custom_Questions",
+    "Training_Description",
   ].join(",");
   const res = await fetch(`${PROXY_BASE}/solutions/${id}?fields=${fields}`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -526,6 +536,13 @@ function populateBanner(t) {
 
   document.getElementById("banner-deadline").textContent =
     t.Application_Form_Close_Date ? fmtDate(t.Application_Form_Close_Date) : "—";
+
+  const descBlock = document.getElementById("training-description-block");
+  const descBody  = document.getElementById("training-description-body");
+  if (t.Training_Description && t.Training_Description.trim()) {
+    descBody.innerHTML = t.Training_Description;
+    descBlock.style.display = "block";
+  }
 }
 
 function fmtDate(iso) {
@@ -936,8 +953,8 @@ function renderRatings() {
         ).join("")}
       </div>
       <div class="rating-scale-labels">
-        <span>1 — Not at all confident</span>
-        <span>7 — Highly confident</span>
+        <span>Not confident</span>
+        <span>Highly confident</span>
       </div>
       <div class="field-error" style="display:none">Please rate this item.</div>
     </div>`;
@@ -973,75 +990,117 @@ function parseCustomQuestions(raw) {
   }
 }
 
+function buildCustomQuestionHtml(q, i) {
+  const req = q.required !== false;
+  const id  = `custom_q_${i}`;
+  let inputHtml = "";
+
+  switch (q.type) {
+    case "paragraph":
+      inputHtml = `<textarea id="${id}" rows="4" placeholder="${q.placeholder || ""}"></textarea>`;
+      break;
+    case "number":
+      inputHtml = `<input type="number" id="${id}" inputmode="numeric" placeholder="${q.placeholder || ""}">`;
+      break;
+    case "dropdown":
+      inputHtml = `<select id="${id}">
+        <option value="">— Select —</option>
+        ${(q.options || []).map(opt => `<option value="${opt}">${opt}</option>`).join("")}
+      </select>`;
+      break;
+    case "checkbox":
+      inputHtml = `<div class="check-group">
+        ${(q.options || []).map(opt =>
+          `<label class="check-opt">
+            <input type="checkbox" name="custom_q_${i}" value="${opt}">
+            <div><div class="check-label">${opt}</div></div>
+          </label>`
+        ).join("")}
+      </div>`;
+      break;
+    case "date":
+      inputHtml = `<input type="date" id="${id}">`;
+      break;
+    case "rating":
+      inputHtml = `<div class="rating-scale" id="scale-cq-${i}">
+        ${[1,2,3,4,5,6,7].map(n =>
+          `<button type="button" class="rating-btn" data-cqidx="${i}" data-val="${n}"
+            onclick="selectCustomRating(this)">${n}</button>`
+        ).join("")}
+      </div>
+      <div class="rating-scale-labels"><span>1</span><span>7</span></div>`;
+      break;
+    default: // text
+      inputHtml = `<input type="text" id="${id}" placeholder="${q.placeholder || ""}">`;
+  }
+
+  return `
+    <div class="field" data-cq-idx="${i}">
+      <label class="field-label">${q.question_text}${req ? ' <span class="req">*</span>' : ''}</label>
+      ${q.translation ? `<span class="field-label-fil">${q.translation}</span>` : ""}
+      ${q.instructions ? `<div class="field-hint">${q.instructions}</div>` : ""}
+      ${inputHtml}
+      ${req ? `<div class="field-error">This field is required.</div>` : ""}
+    </div>
+  `;
+}
+
+// Maps form_section value → section card IDs (active experience section resolved at runtime)
+const SECTION_ID_MAP = {
+  demographics: "sec-demographics",
+  professional: "sec-professional",
+  confidence:   "sec-ratings",
+};
+
+function resolveExperienceSectionId() {
+  const expSections = ["sec-exp-foundational", "sec-exp-tot", "sec-exp-feminist", "sec-exp-pn"];
+  return expSections.find(id => document.getElementById(id) && !document.getElementById(id).classList.contains("hidden"))
+    || `sec-exp-${trainingType.toLowerCase().replace(/[^a-z]/g, "")}`;
+}
+
 function renderCustomQuestions(raw) {
-  const cq        = parseCustomQuestions(raw);
-  const container = document.getElementById("custom-questions-container");
-  const section   = document.getElementById("sec-custom");
+  const cq          = parseCustomQuestions(raw);
+  const container   = document.getElementById("custom-questions-container");
+  const section     = document.getElementById("sec-custom");
 
   if (cq.length === 0) {
     section.classList.add("hidden");
     return;
   }
 
-  section.classList.remove("hidden");
-
-  container.innerHTML = cq.map((q, i) => {
-    const req = q.required !== false;
-    const id  = `custom_q_${i}`;
-    let inputHtml = "";
-
-    switch (q.type) {
-      case "paragraph":
-        inputHtml = `<textarea id="${id}" rows="4" placeholder="${q.placeholder || ""}"></textarea>`;
-        break;
-      case "number":
-        inputHtml = `<input type="number" id="${id}" inputmode="numeric" placeholder="${q.placeholder || ""}">`;
-        break;
-      case "dropdown":
-        inputHtml = `<select id="${id}">
-          <option value="">— Select —</option>
-          ${(q.options || []).map(opt => `<option value="${opt}">${opt}</option>`).join("")}
-        </select>`;
-        break;
-      case "checkbox":
-        inputHtml = `<div class="check-group">
-          ${(q.options || []).map(opt =>
-            `<label class="check-opt">
-              <input type="checkbox" name="custom_q_${i}" value="${opt}">
-              <div><div class="check-label">${opt}</div></div>
-            </label>`
-          ).join("")}
-        </div>`;
-        break;
-      case "date":
-        inputHtml = `<input type="date" id="${id}">`;
-        break;
-      case "rating":
-        inputHtml = `<div class="rating-scale" id="scale-cq-${i}">
-          ${[1,2,3,4,5,6,7].map(n =>
-            `<button type="button" class="rating-btn" data-cqidx="${i}" data-val="${n}"
-              onclick="selectCustomRating(this)">${n}</button>`
-          ).join("")}
-        </div>
-        <div class="rating-scale-labels"><span>1</span><span>7</span></div>`;
-        break;
-      default: // text
-        inputHtml = `<input type="text" id="${id}" placeholder="${q.placeholder || ""}">`;
+  // Separate questions: those with form_section go into specific sections, rest go to sec-custom
+  const legacyQs  = [];
+  const sectionQs = [];
+  cq.forEach((q, i) => {
+    if (q.form_section) {
+      sectionQs.push({ q, i });
+    } else {
+      legacyQs.push({ q, i });
     }
+  });
 
-    return `
-      <div class="field">
-        <label class="field-label">${q.question_text}${req ? ' <span class="req">*</span>' : ''}</label>
-        ${q.translation ? `<span class="field-label-fil">${q.translation}</span>` : ""}
-        ${q.instructions ? `<div class="field-hint">${q.instructions}</div>` : ""}
-        ${inputHtml}
-        ${req ? `<div class="field-error">This field is required.</div>` : ""}
-      </div>
-    `;
-  }).join("");
+  // Render legacy questions into sec-custom
+  if (legacyQs.length > 0) {
+    section.classList.remove("hidden");
+    container.innerHTML = legacyQs.map(({ q, i }) => buildCustomQuestionHtml(q, i)).join("");
+    container.querySelectorAll(".check-group").forEach(wireCheckGroup);
+  } else {
+    section.classList.add("hidden");
+  }
 
-  // Wire checkbox visual state inside custom section
-  container.querySelectorAll(".check-group").forEach(wireCheckGroup);
+  // Inject section-targeted questions at bottom of their respective sections
+  sectionQs.forEach(({ q, i }) => {
+    let targetId = SECTION_ID_MAP[q.form_section];
+    if (q.form_section === "experience") targetId = resolveExperienceSectionId();
+    const target = targetId ? document.getElementById(targetId) : null;
+    if (!target) return;
+
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = buildCustomQuestionHtml(q, i);
+    const fieldEl = wrapper.firstElementChild;
+    target.appendChild(fieldEl);
+    wrapper.querySelectorAll(".check-group").forEach(wireCheckGroup);
+  });
 }
 
 function selectCustomRating(btn) {

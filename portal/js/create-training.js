@@ -448,6 +448,17 @@ function addQuestion() {
       </select>
     </div>
 
+    <div class="q-field">
+      <label>Form Section <span style="font-weight:400;color:var(--meta)">(where in the form it appears)</span></label>
+      <select class="q-form-section">
+        <option value="demographics">Demographics</option>
+        <option value="professional">Professional</option>
+        <option value="experience">Experience</option>
+        <option value="confidence">Confidence</option>
+      </select>
+      <div class="field-hint" style="margin-top:4px;font-size:12px">Question is appended at the bottom of this section.</div>
+    </div>
+
     <div class="q-required-row">
       <input type="checkbox" class="q-required" id="q-req-${idx}" checked>
       <label for="q-req-${idx}">Required field</label>
@@ -496,10 +507,16 @@ function serializeCustomQuestions() {
       options:       (type === "dropdown" || type === "checkbox") ? options : [],
       required:      card.querySelector(".q-required").checked,
       section:       card.querySelector(".q-section").value,
+      form_section:  card.querySelector(".q-form-section").value,
     };
   });
 
   return JSON.stringify(arr);
+}
+
+// ── Training Details gate ──────────────────────────────────────────────────────
+function toggleTrainingDetails(cb) {
+  document.getElementById("training-details-fields").style.display = cb.checked ? "" : "none";
 }
 
 // ── Validation ────────────────────────────────────────────────────────────────
@@ -532,8 +549,12 @@ function validateAll() {
   ok = validateRequired("End_Date") && ok;
   ok = validateRequired("Application_Form_Open_Date") && ok;
   ok = validateRequired("Application_Form_Close_Date") && ok;
-  ok = validateRequired("Who_is_this_training_for") && ok;
-  ok = validateRequired("Training_Objectives") && ok;
+
+  if (document.getElementById("show-training-details")?.checked) {
+    ok = validateRequired("Who_is_this_training_for") && ok;
+    ok = validateRequired("Training_Objectives") && ok;
+  }
+
   return ok;
 }
 
@@ -569,6 +590,7 @@ async function submitTraining() {
     const payload = {
       data: [{
         Solution_Title:              val("Solution_Title"),
+        Training_Description:        val("Training_Description") || undefined,
         Training_Type:               { id: typeId },
         Organised_By:                organisedBy,
         Owner:                       owner,
