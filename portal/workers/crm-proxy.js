@@ -155,26 +155,35 @@ export default {
         return jsonResponse(body, crmRes.status, origin);
       }
 
-      // ── GET /deals/search?training_id=&first=&last= ───────────────────────────
+      // ── GET /deals/search?training_id=&q= (or legacy &first=&last=) ──────────
       if (request.method === "GET" && path === "/deals/search") {
         const trainingId = url.searchParams.get("training_id") ?? "";
+        const q          = (url.searchParams.get("q") ?? "").trim().toLowerCase();
         const first      = url.searchParams.get("first") ?? "";
         const last       = url.searchParams.get("last") ?? "";
         const fields     = "First_Name,Last_Name,Email,Account_Name,Training_Applied,Stage";
-        // Search all Deals for this training filtered by name
         const searchUrl  = `${CRM_BASE}/Deals?fields=${fields}&per_page=200`;
         const crmRes     = await fetch(searchUrl, { headers: auth });
         const allDeals   = await crmRes.json();
-        const match = (allDeals.data ?? []).find(d =>
-          d.Training_Applied?.id === trainingId &&
-          d.First_Name?.toLowerCase() === first.toLowerCase() &&
-          d.Last_Name?.toLowerCase()  === last.toLowerCase()
-        );
-        return jsonResponse(
-          match ? { data: [match] } : { data: [] },
-          200,
-          origin
-        );
+
+        let matches;
+        if (q) {
+          matches = (allDeals.data ?? []).filter(d => {
+            if (d.Training_Applied?.id !== trainingId) return false;
+            const fullName = `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.toLowerCase();
+            const email    = (d.Email ?? "").toLowerCase();
+            return fullName.includes(q) || email.includes(q);
+          });
+        } else {
+          const match = (allDeals.data ?? []).find(d =>
+            d.Training_Applied?.id === trainingId &&
+            d.First_Name?.toLowerCase() === first.toLowerCase() &&
+            d.Last_Name?.toLowerCase()  === last.toLowerCase()
+          );
+          matches = match ? [match] : [];
+        }
+
+        return jsonResponse({ data: matches }, 200, origin);
       }
 
       // ── POST /deals ───────────────────────────────────────────────────────────

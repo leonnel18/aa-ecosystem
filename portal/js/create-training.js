@@ -487,6 +487,76 @@ function onTypeChange(select) {
   optionsWrap.classList.toggle("visible", needsOptions);
 }
 
+// ── Session Topics ────────────────────────────────────────────────────────────
+const FOUNDATIONAL_TOPICS = [
+  "Building Learning Containers",
+  "Introduction to Campaigning",
+  "Campaign Tools and Elements",
+  "Power",
+  "Leadership",
+];
+
+const MAX_TOPICS = 7;
+
+function onTrainingTypeChange(type) {
+  if (type === "Foundational") {
+    setTopics(FOUNDATIONAL_TOPICS);
+  }
+}
+
+function setTopics(names) {
+  const container = document.getElementById("topics-container");
+  container.innerHTML = "";
+  names.forEach(name => addTopic(name));
+}
+
+function addTopic(prefill = "") {
+  const container = document.getElementById("topics-container");
+  const current   = container.querySelectorAll(".topic-row").length;
+  if (current >= MAX_TOPICS) return;
+
+  const idx = current + 1;
+  const row = document.createElement("div");
+  row.className = "topic-row";
+  row.style.cssText = "display:flex;align-items:center;gap:8px";
+  row.innerHTML = `
+    <span style="font-size:13px;font-weight:700;color:var(--meta);min-width:20px">${idx}</span>
+    <input type="text" class="topic-input" placeholder="Topic name…" value="${escHtml(prefill)}" style="flex:1;min-height:44px">
+    <button type="button" onclick="removeTopic(this)" style="background:none;border:none;color:var(--meta);font-size:20px;line-height:1;cursor:pointer;padding:0 4px;flex-shrink:0" aria-label="Remove">×</button>`;
+  container.appendChild(row);
+  updateTopicNumbers();
+  updateAddTopicBtn();
+}
+
+function removeTopic(btn) {
+  btn.closest(".topic-row").remove();
+  updateTopicNumbers();
+  updateAddTopicBtn();
+}
+
+function updateTopicNumbers() {
+  document.querySelectorAll(".topic-row").forEach((row, i) => {
+    row.querySelector("span").textContent = i + 1;
+  });
+}
+
+function updateAddTopicBtn() {
+  const count = document.querySelectorAll(".topic-row").length;
+  document.getElementById("btn-add-topic").disabled = count >= MAX_TOPICS;
+}
+
+function collectTopics() {
+  const inputs = document.querySelectorAll(".topic-input");
+  const names  = [...inputs].map(i => i.value.trim()).filter(Boolean);
+  return names.length ? JSON.stringify(names) : undefined;
+}
+
+function escHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
 function serializeCustomQuestions() {
   const cards = document.querySelectorAll(".question-card");
   if (cards.length === 0) return "[]";
@@ -642,20 +712,21 @@ async function submitTraining() {
     const applyUrl  = `${PORTAL_BASE}/apply-${countrySlug}.html?id=${solutionId}&type=${typeSlug}`;
     const surveyUrl = `${PORTAL_BASE}/trainingsurvey-${countrySlug}.html?id=${solutionId}&type=${typeSlug}`;
 
-    // Step 3: PUT /solutions/:id — write back links and custom questions
+    // Step 3: PUT /solutions/:id — write back links, custom questions, and topics
     setStatus("Saving form links to CRM record…");
     const customQs = serializeCustomQuestions();
+    const topics   = collectTopics();
+    const putBody  = {
+      id:               solutionId,
+      Application_Form: applyUrl,
+      Evaluation_Form:  surveyUrl,
+      Custom_Questions: customQs,
+    };
+    if (topics !== undefined) putBody.Training_Topics = topics;
     const putRes = await fetch(`${PROXY_BASE}/solutions/${solutionId}`, {
       method:  "PUT",
       headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify({
-        data: [{
-          id:               solutionId,
-          Application_Form: applyUrl,
-          Evaluation_Form:  surveyUrl,
-          Custom_Questions: customQs,
-        }]
-      }),
+      body:    JSON.stringify({ data: [putBody] }),
     });
     if (!putRes.ok) {
       const putJson = await putRes.json().catch(() => ({}));

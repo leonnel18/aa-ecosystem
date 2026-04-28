@@ -19,3 +19,5 @@ data/*.csv
 .DS_Store
 Thumbs.db
 .worktrees/
+.wrangler/
+

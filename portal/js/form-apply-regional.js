@@ -1,4 +1,4 @@
-// form-apply-ph.js — PH Pre-Application Form logic
+// form-apply-regional.js — Regional Foundational Pre-Application Form logic
 // Reads ?id= (solutionId) and ?type= (trainingType) from URL
 // Fetches training info from CRM via Worker proxy, renders dynamic sections, submits Deal
 
@@ -7,236 +7,59 @@
 // ── Config ────────────────────────────────────────────────────────────────────
 const PROXY_BASE = "https://crm-proxy.gideon-valera.workers.dev";
 
-// Training-type slug → display name
+// Training-type slug → display name (Foundational only for Regional)
 const TYPE_LABELS = {
-  "Foundational":                  "Foundational",
-  "Training_of_Trainers__TOT_":    "Training of Trainers (TOT)",
-  "Feminist_Leadership":           "Feminist Leadership",
-  "Public_Narrative":              "Public Narrative",
+  "Foundational": "Foundational",
 };
 
 // Training-type slug → CRM Products record ID
 const TYPE_IDS = {
-  "Foundational":               "773031000000354510",
-  "Training_of_Trainers__TOT_": "773031000000354567",
-  "Feminist_Leadership":        "773031000000354572",
-  "Public_Narrative":           "773031000000354577",
+  "Foundational": "773031000000354510",
 };
 
-// Confidence rating definitions per training type (pre-training, 1-7 scale)
+// Confidence rating definitions — Foundational only (1-7 scale)
 const RATINGS_CONFIG = {
   Foundational: [
     {
       id: "Campaigning_Experience_Pre",
       renderKey: "rating_f_a",
       label: "1) How would you rank your experience in campaigning? By a \"campaign\" we mean an organized course of action to achieve a social, environmental, or political goal.",
-      labelFil: "Anong masasabi mo tungkol sa iyong karanasan sa pangangampaniya? Ang tinutukoy nating \"kampaniya\" ay ang organisadong pagkilos na may mga hakbangin o gawain para sa isang sosyal, environmental, o politikal na layunin.",
     },
     {
       id: "A_Pre_Training_Strategy_Buildings",
       renderKey: "rating_f_b",
       label: "2) I feel confident building strategy and choosing tactics for a campaign.",
-      labelFil: "Ako ay kumpiyansa sa paggawa o pagtukoy ng ng stratehiya at gawain para sa isang kampaniya.",
     },
     {
       id: "B_Pre_Training_Building_Communication",
       renderKey: "rating_f_c",
       label: "3) I feel confident using stories to connect with others for campaigns OR starting a communication strategy or plan for a campaign.",
-      labelFil: "Ako ay kumpiyansa sa paggamit ng aking kwento/karanasa sa pakikipag-ugnayan sa ibang tao na pwedeng makatutulong sa aking kampaniya o sa pagsisimula ng isang stratehiya o planong pangkomunikasyon para sa isang kampaniya.",
     },
     {
       id: "C_Pre_Training_Confident_facilitator",
       renderKey: "rating_f_d",
       label: "4) I feel confident facilitating discussions or knowledge sharing activities for a campaign.",
-      labelFil: "Ako ay kumpiyansang magpadaloy ng workshops at meetings para sa isang kampaniya.",
     },
     {
       id: "D_Pre_Training_Confident_connector",
       renderKey: "rating_f_e",
       label: "5) I feel confident building connections with others to support a campaign.",
-      labelFil: "Ako ay kumpiyansang makapagbuo ng mga ugnayan sa ibang tao upang masuportahan ang isang kampaniya.",
     },
-  ],
-  Training_of_Trainers__TOT_: [
-    { id: "A_Experience_in_Facilitating_Pre",         renderKey: "rating_tot_a", label: "A) Experience in Facilitating",             labelFil: "Karanasan sa Pagpapatakbo" },
-    { id: "B_Schedules_and_Agendas_Pre",              renderKey: "rating_tot_b", label: "B) Schedules and Agendas",                  labelFil: "Mga Iskedyul at Agenda" },
-    { id: "C_Facilitating_and_Moderating_Pre",        renderKey: "rating_tot_c", label: "C) Facilitating and Moderating",            labelFil: "Pagpapatakbo at Pamamagitan" },
-    { id: "D_Designing_Workshops_Pre",                renderKey: "rating_tot_d", label: "D) Designing Workshops",                    labelFil: "Pagdidisenyo ng mga Workshop" },
-    { id: "E_Confidently_Adaptable_Facilitation_Pre", renderKey: "rating_tot_e", label: "E) Confidently Adaptable Facilitation",     labelFil: "Kakayahang Mag-angkop" },
-  ],
-  Feminist_Leadership: [
-    { id: "Confident_Analysis_Pre",    renderKey: "rating_fl_1", label: "1. Gender Mainstreaming",                   labelFil: "Pagsasama ng Kasarian sa Pangunahing Agos" },
-    { id: "Strategic_Confidence_Pre",  renderKey: "rating_fl_2", label: "2. Gender Lens in Social Analysis",          labelFil: "Pagtingin sa Kasarian sa Panlipunang Pagsusuri" },
-    { id: "Gender_Climate_Pre",        renderKey: "rating_fl_3", label: "3. Gender & Climate Change",                 labelFil: "Kasarian at Pagbabago ng Klima" },
-    { id: "Gender_Strategy_Pre",       renderKey: "rating_fl_4", label: "4. Gender Strategy Building",                labelFil: "Pagbuo ng Estratehiya sa Kasarian" },
-    { id: "Self_Reflection_Pre",       renderKey: "rating_fl_5", label: "5. Self-Reflection & Leadership Bias",       labelFil: "Pagninilay at Pagkiling sa Pamumuno" },
-    { id: "F_Gendered_Leadership_Pre", renderKey: "rating_fl_6", label: "F) Leadership Coaching",                    labelFil: "Coaching sa Pamumuno" },
-    { id: "F_Leadership_Coaching_Pre", renderKey: "rating_fl_7", label: "G) Confident in Building Connections",       labelFil: "Kumpiyansa sa Pagbuo ng Koneksyon" },
-  ],
-  Public_Narrative: [
-    { id: "A_Campaign_Experience_Assessment_Pre", renderKey: "rating_pn_a", label: "A) Campaign Experience Assessment",    labelFil: "Pagtatasa ng Karanasan sa Kampanya" },
-    { id: "B_Narrative_Application_Pre",          renderKey: "rating_pn_b", label: "B) Narrative Application",             labelFil: "Paggamit ng Salaysay" },
-    { id: "C_Collective_Action_Pre",              renderKey: "rating_pn_c", label: "C) Collective Action",                 labelFil: "Kolektibong Aksyon" },
-    { id: "D_Relationship_Building_Pre",          renderKey: "rating_pn_d", label: "D) Relationship Building",             labelFil: "Pagbuo ng Relasyon" },
-    { id: "E_Collaborative_Values_Pre",           renderKey: "rating_pn_e", label: "E) Collaborative Values",              labelFil: "Mga Halaga ng Pakikipagtulungan" },
   ],
 };
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let trainingId   = null;
-let trainingType = null;   // URL slug e.g. "Foundational"
-let trainingData = null;   // resolved from CRM
+let trainingType = null;
+let trainingData = null;
 
-// Ordered list of section IDs that will be active for this submission
 let sections = [];
 let currentIdx = 0;
 
-// Collected rating values: { fieldId: intValue }
 const ratingValues = {};
-// Collected custom answer values: { fieldId: stringOrInt }
 const customValues = {};
 
 // ── Custom selects ────────────────────────────────────────────────────────────
-
-function wireCityProvinceMode(country) {
-  const isPH = country === "Philippines" || country === "";
-  const provWrap   = document.getElementById("wrap-Province");
-  const provText   = document.getElementById("province-text-input");
-  const cityCombo  = document.getElementById("city-combobox-wrap");
-  const cityText   = document.getElementById("city-text-input");
-  if (!provWrap || !cityCombo) return;
-
-  if (isPH) {
-    provWrap.style.display  = "";
-    cityCombo.style.display = "";
-    if (provText)  provText.closest(".field-text-fallback").style.display  = "none";
-    if (cityText)  cityText.closest(".field-text-fallback").style.display  = "none";
-  } else {
-    provWrap.style.display  = "none";
-    cityCombo.style.display = "none";
-    // Reset PH selections
-    const provHidden = document.getElementById("Province");
-    const cityHidden = document.getElementById("City_Town");
-    if (provHidden) provHidden.value = "";
-    if (cityHidden) cityHidden.value = "";
-    const pTrig = document.getElementById("trigger-Province");
-    if (pTrig) { pTrig.textContent = "— Select Province —"; pTrig.classList.add("placeholder"); }
-    const cInput = document.getElementById("city-search-input");
-    if (cInput) { cInput.value = ""; cInput.disabled = true; cInput.placeholder = "Select province first…"; }
-    if (provText)  provText.closest(".field-text-fallback").style.display  = "";
-    if (cityText)  cityText.closest(".field-text-fallback").style.display  = "";
-  }
-}
-
-function wireProvinceDropdown() {
-  const provinces = Object.keys(PH_MUNICIPALITIES).sort();
-
-  // ── Province dropdown ──────────────────────────────────────────────────────
-  const pTrigger = document.getElementById("trigger-Province");
-  const pListbox = document.getElementById("listbox-Province");
-  const pHidden  = document.getElementById("Province");
-  if (!pTrigger || !pListbox || !pHidden) return;
-
-  pListbox.innerHTML = provinces.map(p =>
-    `<div class="custom-select-option" data-value="${p}">${p}</div>`
-  ).join("");
-  pHidden.innerHTML = `<option value=""></option>` +
-    provinces.map(p => `<option value="${p}">${p}</option>`).join("");
-
-  const pOptions = pListbox.querySelectorAll(".custom-select-option");
-
-  function openProv() { pListbox.classList.add("open"); pTrigger.setAttribute("aria-expanded","true"); }
-  function closeProv() { pListbox.classList.remove("open"); pTrigger.setAttribute("aria-expanded","false"); }
-
-  function selectProvince(opt) {
-    const val = opt.dataset.value;
-    pOptions.forEach(o => o.classList.remove("selected"));
-    opt.classList.add("selected");
-    pTrigger.textContent = val;
-    pTrigger.classList.remove("placeholder");
-    pHidden.value = val;
-    closeProv();
-    buildCityList(val);
-  }
-
-  pTrigger.addEventListener("click", () => pListbox.classList.contains("open") ? closeProv() : openProv());
-  pOptions.forEach(opt => opt.addEventListener("click", () => selectProvince(opt)));
-  document.addEventListener("click", e => {
-    if (!document.getElementById("wrap-Province")?.contains(e.target)) closeProv();
-  });
-
-  // ── City/Town combobox ─────────────────────────────────────────────────────
-  // HTML structure (already in apply-ph.html): #city-combobox-wrap > #city-search-input + #city-dropdown-list + #City_Town (hidden input)
-  const cityWrap    = document.getElementById("city-combobox-wrap");
-  const cityInput   = document.getElementById("city-search-input");
-  const cityList    = document.getElementById("city-dropdown-list");
-  const cityHidden  = document.getElementById("City_Town");
-  const cityManual  = document.getElementById("city-manual-wrap");
-  const cityManInput= document.getElementById("city-manual-input");
-  if (!cityInput || !cityList || !cityHidden) return;
-
-  let currentMunis = [];
-
-  function buildCityList(province) {
-    currentMunis = (PH_MUNICIPALITIES[province] || []).slice().sort();
-    cityInput.value = "";
-    cityHidden.value = "";
-    cityInput.disabled = false;
-    cityInput.placeholder = "Search city / town…";
-    if (cityManual) cityManual.style.display = "none";
-    cityList.classList.remove("open");
-    renderCityOptions("");
-  }
-
-  function renderCityOptions(q) {
-    const lower = q.toLowerCase();
-    const matches = q.length === 0
-      ? currentMunis
-      : currentMunis.filter(m => m.toLowerCase().includes(lower));
-
-    if (matches.length === 0 && q.length > 0) {
-      cityList.innerHTML = `
-        <div class="org-dropdown-item" style="color:var(--meta);cursor:default;font-size:13px">No match — type to enter manually</div>
-        <div class="org-add-row" id="city-enter-manual">Use "${escHtml(q)}" as city/town</div>`;
-      cityList.classList.add("open");
-      cityList.querySelector("#city-enter-manual")?.addEventListener("click", () => {
-        cityHidden.value = q;
-        cityInput.value  = q;
-        cityList.classList.remove("open");
-      });
-      return;
-    }
-
-    cityList.innerHTML = matches.map(m =>
-      `<div class="org-dropdown-item" data-city="${escHtml(m)}">${escHtml(m)}</div>`
-    ).join("");
-
-    if (matches.length > 0) cityList.classList.add("open");
-    else cityList.classList.remove("open");
-
-    cityList.querySelectorAll("[data-city]").forEach(item => {
-      item.addEventListener("click", () => {
-        cityHidden.value = item.dataset.city;
-        cityInput.value  = item.dataset.city;
-        cityList.classList.remove("open");
-      });
-    });
-  }
-
-  cityInput.addEventListener("input", () => {
-    if (currentMunis.length === 0) return;
-    cityHidden.value = "";
-    renderCityOptions(cityInput.value.trim());
-  });
-
-  cityInput.addEventListener("focus", () => {
-    if (currentMunis.length > 0 && cityInput.value === "") renderCityOptions("");
-  });
-
-  document.addEventListener("click", e => {
-    if (cityWrap && !cityWrap.contains(e.target)) cityList.classList.remove("open");
-  });
-}
 
 function wireCustomSelects() {
   const selects = [
@@ -327,12 +150,11 @@ function wireMultiselect() {
 
   function renderChips() {
     const checked = getChecked();
-    // Remove existing chips and placeholder
     trigger.querySelectorAll(".ms-chip, .multiselect-placeholder").forEach(el => el.remove());
 
     if (checked.length === 0) {
       trigger.insertAdjacentHTML("afterbegin",
-        `<span class="multiselect-placeholder">Select all that apply / Pumili ng lahat ng angkop</span>`
+        `<span class="multiselect-placeholder">Select all that apply</span>`
       );
     } else {
       const frag = document.createDocumentFragment();
@@ -389,47 +211,33 @@ async function init() {
     return;
   }
 
-  // Wire up radio-group click behaviour (delegated)
   document.querySelectorAll(".radio-group").forEach(wireRadioGroup);
-
-  // Wire up checkbox visual state
   document.querySelectorAll(".check-group").forEach(wireCheckGroup);
 
-  // Wire custom select dropdowns
   wireCustomSelects();
-  wireProvinceDropdown();
-
-  // Wire multiselect for Identify as
   wireMultiselect();
 
-  // Pronoun "Other" toggle — listens on the hidden <select> synced by wireCustomSelects
   document.getElementById("Pronoun").addEventListener("change", function() {
     document.getElementById("other-pronoun-field").classList.toggle("hidden", this.value !== "Other");
   });
 
-  // Preferred Language "Other" toggle
   document.getElementById("Preferred_Language").addEventListener("change", function() {
     document.getElementById("other-language-field").classList.toggle("hidden", this.value !== "Other");
   });
 
-  // Phone: strip non-digits, cap at 10 digits, format as 9XX XXX XXXX
+  // Phone: strip non-digits, no format enforced for Regional (international)
   document.getElementById("Mobile").addEventListener("input", function() {
-    const digits = this.value.replace(/\D/g, "").slice(0, 10);
-    let fmt = digits;
-    if (digits.length > 6) fmt = digits.slice(0,3) + " " + digits.slice(3,6) + " " + digits.slice(6);
-    else if (digits.length > 3) fmt = digits.slice(0,3) + " " + digits.slice(3);
-    // Only update if different to avoid cursor jump on non-digit keypress
-    if (this.value !== fmt) this.value = fmt;
-    validatePhone("Mobile");
+    const digits = this.value.replace(/[^\d+\s\-()]/g, "");
+    if (this.value !== digits) this.value = digits;
   });
 
-  // Real-time email validation
+  document.getElementById("Mobile").addEventListener("blur", () => validatePhone("Mobile"));
+
   document.getElementById("Email").addEventListener("blur", () => validateEmail("Email"));
   document.getElementById("Email").addEventListener("input", function() {
     if (this.closest(".field").classList.contains("has-error")) validateEmail("Email");
   });
 
-  // Campaign description word counter (300 words)
   const campDesc = document.getElementById("Current_Campaign_Description");
   if (campDesc) {
     campDesc.addEventListener("input", () => {
@@ -439,7 +247,6 @@ async function init() {
     });
   }
 
-  // Show/hide campaign description based on campaigning answer
   const campaigningSelect = document.getElementById("campaigning_f");
   if (campaigningSelect) {
     campaigningSelect.addEventListener("change", function() {
@@ -448,26 +255,17 @@ async function init() {
     });
   }
 
-  // Country change → switch Province/City between PH dropdown and plain text
-  document.getElementById("Country_of_Residence").addEventListener("change", function() {
-    wireCityProvinceMode(this.value);
-  });
-
-  // Organization typeahead
   wireOrgTypeahead();
 
-  // Bio word count
   const bioField = document.getElementById("Please_provide_a_100_word_bio_that_best_describes");
   bioField.addEventListener("input", () => {
     const words = bioField.value.trim() === "" ? 0 : bioField.value.trim().split(/\s+/).length;
     document.getElementById("bio-word-count").textContent = words;
   });
 
-  // File upload labels
   wireFileUpload("Recent_Photo", "photo-name");
   wireFileUpload("Import_CV",    "cv-name");
 
-  // Fetch training from CRM
   try {
     trainingData = await fetchTraining(trainingId);
   } catch (e) {
@@ -475,30 +273,20 @@ async function init() {
     return;
   }
 
-  // Populate banner
   populateBanner(trainingData);
 
-  // Check date window
   if (!isWithinApplicationWindow(trainingData)) {
     showClosed(trainingData);
     return;
   }
 
-  // Pre-fill hidden training field
   document.getElementById("Training_Applied").value = trainingId;
   document.getElementById("Training_Applied_Display").value = trainingData.Solution_Title || "—";
 
-  // Build section list based on training type
   buildSectionList();
-
-  // Render dynamic sections
   renderRatings();
   renderCustomQuestions(trainingData.Custom_Questions);
-
-  // Build progress bar
   buildProgressBar();
-
-  // Show first section
   showSection(0);
 }
 
@@ -532,7 +320,7 @@ function populateBanner(t) {
   }
 
   document.getElementById("banner-venue").textContent =
-    t.Venue_Address || t.Organised_By || "Philippines";
+    t.Venue_Address || t.Organised_By || "Regional";
 
   document.getElementById("banner-deadline").textContent =
     t.Application_Form_Close_Date ? fmtDate(t.Application_Form_Close_Date) : "—";
@@ -546,7 +334,7 @@ function populateBanner(t) {
 }
 
 function fmtDate(iso) {
-  return new Date(iso).toLocaleDateString("en-PH", { day: "numeric", month: "short", year: "numeric" });
+  return new Date(iso).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
 }
 
 // ── Date window check ─────────────────────────────────────────────────────────
@@ -589,44 +377,17 @@ function showError(msg) {
 }
 
 // ── Section list ──────────────────────────────────────────────────────────────
-const SECTION_LABELS = {
-  "sec-demographics":        "Demographics",
-  "sec-professional":        "Professional",
-  "sec-terms":               "Terms",
-  "sec-exp-foundational":    "Experience",
-  "sec-exp-tot":             "Experience",
-  "sec-exp-feminist":        "Experience",
-  "sec-exp-pn":              "Experience",
-  "sec-ratings":             "Confidence",
-  "sec-custom":              "Extra Questions",
-};
-
-// 4 visible stepper nodes — sec-terms navigates through but is not a stepper node
 const STEPPER_NODES = [
-  { sections: ["sec-demographics"],                                                    title: "Demographics", desc: "Personal Info" },
-  { sections: ["sec-professional"],                                                    title: "Professional", desc: "Your work" },
-  { sections: ["sec-exp-foundational","sec-exp-tot","sec-exp-feminist","sec-exp-pn"], title: "Experience",   desc: "& Motivation" },
-  { sections: ["sec-ratings", "sec-custom"],                                           title: "Confidence",   desc: "Ratings" },
+  { sections: ["sec-demographics"],         title: "Demographics", desc: "Personal Info" },
+  { sections: ["sec-professional"],          title: "Professional", desc: "Your work" },
+  { sections: ["sec-exp-foundational"],      title: "Experience",   desc: "& Motivation" },
+  { sections: ["sec-ratings", "sec-custom"], title: "Confidence",   desc: "Ratings" },
 ];
 
 function buildSectionList() {
-  sections = ["sec-demographics", "sec-professional"];
-
-  // Add the correct experience section
-  const expMap = {
-    "Foundational":               "sec-exp-foundational",
-    "Training_of_Trainers__TOT_": "sec-exp-tot",
-    "Feminist_Leadership":        "sec-exp-feminist",
-    "Public_Narrative":           "sec-exp-pn",
-  };
-  if (expMap[trainingType]) sections.push(expMap[trainingType]);
-
-  sections.push("sec-ratings");
-
-  // Add custom questions section only if there are custom questions
+  sections = ["sec-demographics", "sec-professional", "sec-exp-foundational", "sec-ratings"];
   const cq = parseCustomQuestions(trainingData.Custom_Questions);
   if (cq.length > 0) sections.push("sec-custom");
-  // sec-terms is now embedded inside sec-ratings, not a separate step
 }
 
 // ── Progress bar ──────────────────────────────────────────────────────────────
@@ -653,7 +414,6 @@ function updateProgressBar() {
   let activeNodeIdx = STEPPER_NODES.findIndex(node =>
     node.sections.includes(sections[currentIdx])
   );
-  // sec-terms is not in any stepper node; show all nodes completed
   if (activeNodeIdx === -1) activeNodeIdx = STEPPER_NODES.length;
 
   STEPPER_NODES.forEach((_, i) => {
@@ -667,12 +427,8 @@ function updateProgressBar() {
 
 // ── Section navigation ────────────────────────────────────────────────────────
 function showSection(idx) {
-  // Hide all section cards
   document.querySelectorAll(".section-card").forEach(el => el.classList.remove("active"));
-
-  // Show target
   document.getElementById(sections[idx]).classList.add("active");
-
   currentIdx = idx;
   updateProgressBar();
   updateNavButtons();
@@ -709,15 +465,8 @@ function validateSection(sectionId) {
     ok = validateRequired("Preferred_Name_Nick_Name") && ok;
     ok = validateEmail("Email") && ok;
     ok = validatePhone("Mobile") && ok;
-    if (isPHCountry()) {
-      ok = validateSelect("Province", "province-error") && ok;
-    } else {
-      const pv = (document.getElementById("province-text-input")?.value ?? "").trim();
-      const pe = document.getElementById("province-error");
-      if (pe) pe.style.display = pv ? "none" : "block";
-      if (!pv) ok = false;
-    }
-    ok = validateCityTown() && ok;
+    ok = validateRequired("Province") && ok;
+    ok = validateRequired("City_Town") && ok;
     ok = validateSelect("Country_of_Residence") && ok;
     ok = validateYear("Year_of_Birth") && ok;
     ok = validateSelect("Gender") && ok;
@@ -745,40 +494,9 @@ function validateSection(sectionId) {
     ok = validateBio() && ok;
   }
 
-  if (sectionId === "sec-terms") {
-    ok = validateTerms() && ok;
-  }
-
   if (sectionId === "sec-exp-foundational") {
     ok = validateSelect("campaigning_f", "campaign-f-error") && ok;
     ok = validateRequired("Reason_for_Applying_F") && ok;
-  }
-
-  if (sectionId === "sec-exp-tot") {
-    ok = validateRadioGroup(
-      document.querySelector('#sec-exp-tot .radio-group'),
-      "teaching-tot-error"
-    ) && ok;
-    ok = validateRequired("Reason_for_Applying_TOT") && ok;
-  }
-
-  if (sectionId === "sec-exp-feminist") {
-    ok = validateRequired("Defining_Leadership_Experience") && ok;
-    ok = validateRequired("Personal_Leadership_Goals") && ok;
-    ok = validateRequired("Challenges_faced_as_a_woman_in_leadership") && ok;
-    ok = validateRadioGroup(
-      document.querySelector('#sec-exp-feminist .radio-group:last-of-type'),
-      "gender-training-error"
-    ) && ok;
-  }
-
-  if (sectionId === "sec-exp-pn") {
-    ok = validateRadioGroup(
-      document.querySelector('#sec-exp-pn .radio-group'),
-      "campaign-pn-error"
-    ) && ok;
-    ok = validateRequired("Reason_for_Applying_PN") && ok;
-    ok = validateRequired("Campaign_Years_Prior_Training") && ok;
   }
 
   if (sectionId === "sec-ratings") {
@@ -823,10 +541,11 @@ function validateEmail(id) {
 }
 
 function validatePhone(id) {
-  const el    = document.getElementById(id);
-  const field = el.closest(".field");
+  const el     = document.getElementById(id);
+  const field  = el.closest(".field");
   const digits = el.value.replace(/\D/g, "");
-  const pass  = digits.length === 10 && digits.startsWith("9");
+  // Regional: 7-15 digits, any country
+  const pass = digits.length >= 7 && digits.length <= 15;
   field.classList.toggle("has-error", !pass);
   return pass;
 }
@@ -840,7 +559,6 @@ function validateYear(id) {
   return pass;
 }
 
-// accepts either a container element or an element ID for the group
 function validateRadioGroup(groupElOrId, errorId) {
   const group = typeof groupElOrId === "string"
     ? document.getElementById(groupElOrId)
@@ -873,21 +591,6 @@ function validateBio() {
   return pass;
 }
 
-function isPHCountry() {
-  const v = (document.getElementById("Country_of_Residence")?.value ?? "Philippines");
-  return v === "Philippines" || v === "";
-}
-
-function validateCityTown() {
-  const errEl = document.getElementById("city-error");
-  const val = isPHCountry()
-    ? (document.getElementById("City_Town")?.value ?? "").trim()
-    : (document.getElementById("city-text-input")?.value ?? "").trim();
-  const pass = val !== "";
-  if (errEl) errEl.style.display = pass ? "none" : "block";
-  return pass;
-}
-
 function validateTerms() {
   const checked = document.getElementById("terms1")?.checked ?? false;
   document.getElementById("terms-error").style.display = checked ? "none" : "block";
@@ -901,7 +604,6 @@ function validateRatings() {
     const rk       = item.renderKey || item.id;
     const ratingEl = document.getElementById(`rating-item-${rk}`);
     const errEl    = ratingEl?.querySelector(".field-error");
-    // A rating is valid if any button in this render group has been selected
     const selected = ratingEl?.querySelector(".rating-btn.selected");
     const pass     = !!selected;
     if (errEl) errEl.style.display = pass ? "none" : "block";
@@ -938,14 +640,10 @@ function renderRatings() {
   }
 
   container.innerHTML = config.map(item => {
-    // renderKey is used for unique DOM IDs; falls back to id if not set
     const rk = item.renderKey || item.id;
     return `
     <div class="rating-item" id="rating-item-${rk}">
-      <div class="rating-question">
-        ${item.label}
-        ${item.labelFil ? `<div style="font-size:12px;font-weight:400;color:var(--meta);margin-top:2px;font-style:italic">${item.labelFil}</div>` : ""}
-      </div>
+      <div class="rating-question">${item.label}</div>
       <div class="rating-scale">
         ${[1,2,3,4,5,6,7].map(n =>
           `<button type="button" class="rating-btn" data-rk="${rk}" data-field="${item.id}" data-val="${n}" onclick="selectRating(this)">${n}</button>`
@@ -965,15 +663,12 @@ function selectRating(btn) {
   const fieldId = btn.dataset.field;
   const val     = btn.dataset.val;
 
-  // Last value for this CRM field wins (for fields shared across two items)
   ratingValues[fieldId] = val;
 
-  // Update visual state only for buttons in the same render group
   document.querySelectorAll(`[data-rk="${rk}"]`).forEach(b => {
     b.classList.toggle("selected", b.dataset.val === val);
   });
 
-  // Clear error for this item
   const errEl = document.getElementById(`rating-item-${rk}`)?.querySelector(".field-error");
   if (errEl) errEl.style.display = "none";
 }
@@ -1029,14 +724,13 @@ function buildCustomQuestionHtml(q, i) {
       </div>
       <div class="rating-scale-labels"><span>1</span><span>7</span></div>`;
       break;
-    default: // text
+    default:
       inputHtml = `<input type="text" id="${id}" placeholder="${q.placeholder || ""}">`;
   }
 
   return `
     <div class="field" data-cq-idx="${i}">
       <label class="field-label">${q.question_text}${req ? ' <span class="req">*</span>' : ''}</label>
-      ${q.translation ? `<span class="field-label-fil">${q.translation}</span>` : ""}
       ${q.instructions ? `<div class="field-hint">${q.instructions}</div>` : ""}
       ${inputHtml}
       ${req ? `<div class="field-error">This field is required.</div>` : ""}
@@ -1044,18 +738,12 @@ function buildCustomQuestionHtml(q, i) {
   `;
 }
 
-// Maps form_section value → section card IDs (active experience section resolved at runtime)
 const SECTION_ID_MAP = {
   demographics: "sec-demographics",
   professional: "sec-professional",
   confidence:   "sec-ratings",
+  experience:   "sec-exp-foundational",
 };
-
-function resolveExperienceSectionId() {
-  const expSections = ["sec-exp-foundational", "sec-exp-tot", "sec-exp-feminist", "sec-exp-pn"];
-  return expSections.find(id => document.getElementById(id) && !document.getElementById(id).classList.contains("hidden"))
-    || `sec-exp-${trainingType.toLowerCase().replace(/[^a-z]/g, "")}`;
-}
 
 function renderCustomQuestions(raw) {
   const cq          = parseCustomQuestions(raw);
@@ -1067,7 +755,6 @@ function renderCustomQuestions(raw) {
     return;
   }
 
-  // Separate questions: those with form_section go into specific sections, rest go to sec-custom
   const legacyQs  = [];
   const sectionQs = [];
   cq.forEach((q, i) => {
@@ -1078,7 +765,6 @@ function renderCustomQuestions(raw) {
     }
   });
 
-  // Render legacy questions into sec-custom
   if (legacyQs.length > 0) {
     section.classList.remove("hidden");
     container.innerHTML = legacyQs.map(({ q, i }) => buildCustomQuestionHtml(q, i)).join("");
@@ -1087,10 +773,8 @@ function renderCustomQuestions(raw) {
     section.classList.add("hidden");
   }
 
-  // Inject section-targeted questions at bottom of their respective sections
   sectionQs.forEach(({ q, i }) => {
-    let targetId = SECTION_ID_MAP[q.form_section];
-    if (q.form_section === "experience") targetId = resolveExperienceSectionId();
+    const targetId = SECTION_ID_MAP[q.form_section];
     const target = targetId ? document.getElementById(targetId) : null;
     if (!target) return;
 
@@ -1117,13 +801,12 @@ async function submitForm() {
   if (!validateSection(sections[currentIdx])) return;
 
   isSubmitting = true;
-  let createdDealId = null;   // set once Deal is created; prevents duplicate POST on retry
+  let createdDealId = null;
   const submitBtn = document.getElementById("btn-submit");
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<span class="spinner"></span> Submitting…';
 
   try {
-    // If adding a new org, create it first and get the id
     if (addingNewOrg) {
       const orgName    = document.getElementById("org-new-name").value.trim();
       const orgCity    = document.getElementById("org-new-city").value.trim();
@@ -1152,10 +835,7 @@ async function submitForm() {
     }
 
     createdDealId = resJson?.data?.[0]?.details?.id;
-
-    // Handle file uploads (photo/CV) — sent separately as multipart
     await uploadFiles(resJson);
-
     showSuccess();
   } catch (e) {
     isSubmitting = false;
@@ -1172,22 +852,20 @@ async function submitForm() {
 
 function buildPayload() {
   const val = id => (document.getElementById(id)?.value ?? "").trim();
-  const radVal = name => document.querySelector(`input[name="${name}"]:checked`)?.value ?? "";
-  const checkVals = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(c => c.value).join(";");
-  const checkArr  = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(c => c.value);
+  const checkArr = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(c => c.value);
+
+  const province = val("Province");
+  const city     = val("City_Town");
 
   const data = {
-    // Core Deal fields
     Deal_Name:              val("First_Name") + " " + val("Last_Name"),
     First_Name:             val("First_Name"),
     Last_Name:              val("Last_Name"),
     Preferred_Name_Nick_Name: val("Preferred_Name_Nick_Name"),
     Email:                  val("Email"),
-    Mobile: "+63" + (document.getElementById("Mobile")?.value ?? "").replace(/\D/g, ""),
+    Mobile:                 val("Mobile"),
     Address:                val("Address"),
-    City_Province: isPHCountry()
-      ? [val("City_Town"), val("Province")].filter(Boolean).join(", ")
-      : [(document.getElementById("city-text-input")?.value ?? "").trim(), (document.getElementById("province-text-input")?.value ?? "").trim()].filter(Boolean).join(", "),
+    City_Province:          [city, province].filter(Boolean).join(", "),
     Country_of_Residence:   val("Country_of_Residence"),
     Year_of_Birth:          parseInt(val("Year_of_Birth"), 10) || null,
     Gender:                 val("Gender"),
@@ -1203,36 +881,13 @@ function buildPayload() {
     Training_Type_Applied:  TYPE_IDS[trainingType] ? { id: TYPE_IDS[trainingType] } : null,
     Pipeline:               "Application Pipeline",
     Stage:                  "Still in Applied Stage",
+    Currently_Campaigning:        val("campaigning_f"),
+    Current_Campaign_Description: val("Current_Campaign_Description"),
+    Reason_for_Applying:          val("Reason_for_Applying_F"),
   };
 
-  // Experience fields per training type
-  switch (trainingType) {
-    case "Foundational":
-      data.Currently_Campaigning        = val("campaigning_f");
-      data.Current_Campaign_Description = val("Current_Campaign_Description");
-      data.Reason_for_Applying          = val("Reason_for_Applying_F");
-      break;
-    case "Training_of_Trainers__TOT_":
-      data.Teaching_Experience_Description = val("Teaching_Experience_Description");
-      data.Reason_for_Applying             = val("Reason_for_Applying_TOT");
-      break;
-    case "Feminist_Leadership":
-      data.Defining_Leadership_Experience              = val("Defining_Leadership_Experience");
-      data.Personal_Leadership_Goals                   = val("Personal_Leadership_Goals");
-      data.Challenges_faced_as_a_woman_in_leadership   = val("Challenges_faced_as_a_woman_in_leadership");
-      data.Attended_Gender_Sensitivity_or_women_specific_trai = radVal("gender_training");
-      break;
-    case "Public_Narrative":
-      data.Currently_Campaigning        = radVal("campaigning_pn");
-      data.Reason_for_Applying          = val("Reason_for_Applying_PN");
-      data.Campaign_Years_Prior_Training = val("Campaign_Years_Prior_Training");
-      break;
-  }
-
-  // Confidence ratings
   Object.assign(data, ratingValues);
 
-  // Custom question responses as JSON array
   const cq = parseCustomQuestions(trainingData.Custom_Questions);
   if (cq.length > 0) {
     const responses = cq.map((q, i) => {
@@ -1307,7 +962,6 @@ function wireCheckGroup(group) {
     cb.checked = !cb.checked;
     opt.classList.toggle("selected", cb.checked);
   });
-  // Sync initial visual state
   group.querySelectorAll(".check-opt").forEach(opt => {
     const cb = opt.querySelector('input[type="checkbox"]');
     if (cb?.checked) opt.classList.add("selected");
@@ -1328,11 +982,11 @@ function wireFileUpload(inputId, nameDisplayId) {
   });
 }
 
-let selectedOrgId      = null;   // CRM Account id if picked from dropdown
-let selectedOrgName    = null;   // CRM Account name if picked from dropdown
-let addingNewOrg       = false;  // user chose to add new org
-let skipNextOrgInput   = false;  // prevent input reset after programmatic value set
-let isSubmitting       = false;  // guard against duplicate submissions
+let selectedOrgId      = null;
+let selectedOrgName    = null;
+let addingNewOrg       = false;
+let skipNextOrgInput   = false;
+let isSubmitting       = false;
 
 function wireOrgTypeahead() {
   const input     = document.getElementById("Account_Name");
@@ -1429,7 +1083,6 @@ async function searchOrgs(q) {
   }
 }
 
-// Expose globals called from inline onclick attributes in HTML
 window.prevSection  = prevSection;
 window.nextSection  = nextSection;
 window.submitForm   = submitForm;

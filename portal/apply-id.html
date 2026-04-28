@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -839,77 +839,77 @@
   <!-- SECTION A: Demographics -->
   <div class="section-card" id="sec-demographics">
     <div class="section-title">Demographics</div>
-    <div class="section-subtitle">Impormasyon tungkol sa iyo</div>
+    <div class="section-subtitle">Informasi tentang diri Anda</div>
 
     <!-- Group 1: Identity -->
     <div class="name-row">
       <div class="field">
         <label class="field-label">First Name <span class="req">*</span></label>
-        <span class="field-label-fil">Pangalan</span>
-        <input type="text" id="First_Name" autocomplete="given-name" inputmode="text" placeholder="e.g. Maria">
-        <div class="field-error">This field is required.</div>
+        <span class="field-label-fil">Nama Depan</span>
+        <input type="text" id="First_Name" autocomplete="given-name" inputmode="text" placeholder="cth. Budi">
+        <div class="field-error">Kolom ini wajib diisi.</div>
       </div>
       <div class="field">
         <label class="field-label">Last Name <span class="req">*</span></label>
-        <span class="field-label-fil">Apelyido</span>
-        <input type="text" id="Last_Name" autocomplete="family-name" placeholder="e.g. Santos">
-        <div class="field-error">This field is required.</div>
+        <span class="field-label-fil">Nama Belakang</span>
+        <input type="text" id="Last_Name" autocomplete="family-name" placeholder="cth. Santoso">
+        <div class="field-error">Kolom ini wajib diisi.</div>
       </div>
     </div>
 
     <div class="field">
       <label class="field-label">Preferred Name / Nickname <span class="req">*</span></label>
-      <span class="field-label-fil">Palayaw — Ano ang gusto mong itawag sa iyo?</span>
-      <input type="text" id="Preferred_Name_Nick_Name" placeholder="e.g. Marj">
-      <div class="field-error">This field is required.</div>
+      <span class="field-label-fil">Nama Panggilan — Bagaimana Anda ingin dipanggil?</span>
+      <input type="text" id="Preferred_Name_Nick_Name" placeholder="cth. Budi">
+      <div class="field-error">Kolom ini wajib diisi.</div>
     </div>
 
     <div class="field">
       <label class="field-label">Year of Birth <span class="req">*</span></label>
-      <span class="field-label-fil">Taon ng Kapanganakan (hal. 1995)</span>
-      <input type="number" id="Year_of_Birth" min="1940" max="2010" inputmode="numeric" placeholder="e.g. 1990">
-      <div class="field-error">Please enter a valid birth year (e.g. 1990).</div>
+      <span class="field-label-fil">Tahun Lahir (cth. 1995)</span>
+      <input type="number" id="Year_of_Birth" min="1940" max="2010" inputmode="numeric" placeholder="cth. 1990">
+      <div class="field-error">Masukkan tahun lahir yang valid (cth. 1990).</div>
     </div>
 
     <div class="field">
       <label class="field-label">Preferred Language <span class="req">*</span></label>
-      <span class="field-label-fil">Nais na Wika</span>
+      <span class="field-label-fil">Bahasa yang Diinginkan</span>
       <div class="custom-select-wrap" id="wrap-Preferred_Language">
         <button type="button" class="custom-select-trigger placeholder" id="trigger-Preferred_Language" aria-haspopup="listbox" aria-expanded="false">
-          — Select / Pumili —
+          — Select / Pilih —
         </button>
         <div class="custom-select-listbox" id="listbox-Preferred_Language" role="listbox">
-          <div class="custom-select-option" data-value="Filipino">Filipino</div>
+          <div class="custom-select-option" data-value="Bahasa Indonesia">Bahasa Indonesia</div>
           <div class="custom-select-option" data-value="English">English</div>
-          <div class="custom-select-option" data-value="Other">Other / Iba pa</div>
+          <div class="custom-select-option" data-value="Other">Other / Lainnya</div>
         </div>
         <select id="Preferred_Language" style="display:none" tabindex="-1">
-          <option value="">— Select / Pumili —</option>
-          <option value="Filipino">Filipino</option>
+          <option value="">— Select / Pilih —</option>
+          <option value="Bahasa Indonesia">Bahasa Indonesia</option>
           <option value="English">English</option>
-          <option value="Other">Other / Iba pa</option>
+          <option value="Other">Other / Lainnya</option>
         </select>
-        <div class="field-error" id="lang-error">This field is required.</div>
+        <div class="field-error" id="lang-error">Kolom ini wajib diisi.</div>
       </div>
       <div class="field hidden" id="other-language-field" style="margin-top:10px">
-        <input type="text" id="Preferred_Language_Other" placeholder="Please specify / Ibigay ang wika">
+        <input type="text" id="Preferred_Language_Other" placeholder="Silakan sebutkan / Please specify">
       </div>
     </div>
 
     <div class="field">
       <label class="field-label">Email <span class="req">*</span></label>
-      <input type="email" id="Email" autocomplete="email" inputmode="email" placeholder="e.g. maria@example.com">
-      <div class="field-error">Please enter a valid email address.</div>
+      <input type="email" id="Email" autocomplete="email" inputmode="email" placeholder="cth. budi@contoh.com">
+      <div class="field-error">Masukkan alamat email yang valid.</div>
     </div>
 
     <div class="field">
       <label class="field-label">Phone / WhatsApp <span class="req">*</span></label>
-      <span class="field-label-fil">Numero ng Telepono / WhatsApp</span>
+      <span class="field-label-fil">Nomor Telepon / WhatsApp</span>
       <div class="phone-wrap">
-        <span class="phone-prefix"><img src="https://flagcdn.com/w40/ph.png" width="20" height="14" alt="PH" style="border-radius:2px;display:block"> +63</span>
-        <input type="tel" id="Mobile" autocomplete="tel" inputmode="numeric" placeholder="9XX XXX XXXX">
+        <span class="phone-prefix"><img src="https://flagcdn.com/w40/id.png" width="20" height="14" alt="ID" style="border-radius:2px;display:block"> +62</span>
+        <input type="tel" id="Mobile" autocomplete="tel" inputmode="numeric" placeholder="08XX XXXX XXXX">
       </div>
-      <div class="field-error">Enter a valid 10-digit PH number starting with 9 (e.g. 9171234567).</div>
+      <div class="field-error">Masukkan nomor HP Indonesia yang valid (cth. 081234567890).</div>
     </div>
 
     <hr class="field-divider">
@@ -917,29 +917,29 @@
     <!-- Group 2: Gender identity -->
     <div class="field">
       <label class="field-label">Gender <span class="req">*</span></label>
-      <span class="field-label-fil">Kasarian</span>
+      <span class="field-label-fil">Jenis Kelamin</span>
       <div class="custom-select-wrap" id="wrap-Gender">
         <button type="button" class="custom-select-trigger placeholder" id="trigger-Gender" aria-haspopup="listbox" aria-expanded="false">
-          — Select / Pumili —
+          — Select / Pilih —
         </button>
         <div class="custom-select-listbox" id="listbox-Gender" role="listbox">
-          <div class="custom-select-option" data-value="Female">Female / Babae</div>
-          <div class="custom-select-option" data-value="Male">Male / Lalaki</div>
+          <div class="custom-select-option" data-value="Female">Female / Perempuan</div>
+          <div class="custom-select-option" data-value="Male">Male / Laki-laki</div>
           <div class="custom-select-option" data-value="Transgender">Transgender</div>
           <div class="custom-select-option" data-value="Non-Binary">Non-Binary</div>
-          <div class="custom-select-option" data-value="Prefer not to answer">Prefer not to answer / Ayaw ko pong ipaalam</div>
-          <div class="custom-select-option" data-value="Other">Other / Iba pa</div>
+          <div class="custom-select-option" data-value="Prefer not to answer">Prefer not to answer / Tidak ingin menjawab</div>
+          <div class="custom-select-option" data-value="Other">Other / Lainnya</div>
         </div>
         <select id="Gender" style="display:none" tabindex="-1">
-          <option value="">— Select / Pumili —</option>
-          <option value="Female">Female / Babae</option>
-          <option value="Male">Male / Lalaki</option>
+          <option value="">— Select / Pilih —</option>
+          <option value="Female">Female / Perempuan</option>
+          <option value="Male">Male / Laki-laki</option>
           <option value="Transgender">Transgender</option>
           <option value="Non-Binary">Non-Binary</option>
-          <option value="Prefer not to answer">Prefer not to answer / Ayaw ko pong ipaalam</option>
-          <option value="Other">Other / Iba pa</option>
+          <option value="Prefer not to answer">Prefer not to answer / Tidak ingin menjawab</option>
+          <option value="Other">Other / Lainnya</option>
         </select>
-        <div class="field-error">This field is required.</div>
+        <div class="field-error">Kolom ini wajib diisi.</div>
       </div>
     </div>
 
@@ -947,46 +947,46 @@
       <label class="field-label">Pronoun <span class="req">*</span></label>
       <div class="custom-select-wrap" id="wrap-Pronoun">
         <button type="button" class="custom-select-trigger placeholder" id="trigger-Pronoun" aria-haspopup="listbox" aria-expanded="false">
-          — Select / Pumili —
+          — Select / Pilih —
         </button>
         <div class="custom-select-listbox" id="listbox-Pronoun" role="listbox">
           <div class="custom-select-option" data-value="She/Her">She/Her</div>
           <div class="custom-select-option" data-value="He/Him">He/Him</div>
           <div class="custom-select-option" data-value="They/Them">They/Them</div>
-          <div class="custom-select-option" data-value="Other">Other / Iba pa</div>
+          <div class="custom-select-option" data-value="Other">Other / Lainnya</div>
         </div>
         <select id="Pronoun" name="Pronoun" style="display:none" tabindex="-1">
-          <option value="">— Select / Pumili —</option>
+          <option value="">— Select / Pilih —</option>
           <option value="She/Her">She/Her</option>
           <option value="He/Him">He/Him</option>
           <option value="They/Them">They/Them</option>
-          <option value="Other">Other / Iba pa</option>
+          <option value="Other">Other / Lainnya</option>
         </select>
-        <div class="field-error" id="pronoun-error">This field is required.</div>
+        <div class="field-error" id="pronoun-error">Kolom ini wajib diisi.</div>
       </div>
     </div>
 
     <div class="field hidden" id="other-pronoun-field">
       <label class="field-label">Please specify your pronoun</label>
-      <span class="field-label-fil">Iba pang Pronoun</span>
+      <span class="field-label-fil">Pronoun lainnya</span>
       <input type="text" id="Preferred_Pronoun">
     </div>
 
     <div class="field">
       <label class="field-label">Do you identify as <span class="req">*</span></label>
-      <span class="field-label-fil">Kabilang ka ba sa — maaaring pumili ng marami</span>
+      <span class="field-label-fil">Apakah Anda mengidentifikasi diri sebagai — boleh pilih lebih dari satu</span>
       <div class="multiselect-wrap" id="multiselect-identify">
         <div class="multiselect-trigger" id="trigger-identify" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
-          <span class="multiselect-placeholder">Select all that apply / Pumili ng lahat ng angkop</span>
+          <span class="multiselect-placeholder">Select all that apply / Pilih semua yang sesuai</span>
         </div>
         <div class="multiselect-panel" id="panel-identify" role="listbox" aria-multiselectable="true">
           <div class="multiselect-option">
             <input type="checkbox" name="Identify_as" value="Person with disability" id="id-pwd">
-            <label for="id-pwd"><div class="check-label">Person with disability</div><div class="check-label-fil">Taong may kapansanan</div></label>
+            <label for="id-pwd"><div class="check-label">Person with disability</div><div class="check-label-fil">Penyandang disabilitas</div></label>
           </div>
           <div class="multiselect-option">
             <input type="checkbox" name="Identify_as" value="Indigenous / First Nations" id="id-indigenous">
-            <label for="id-indigenous"><div class="check-label">Indigenous / First Nations</div><div class="check-label-fil">Katutubo</div></label>
+            <label for="id-indigenous"><div class="check-label">Indigenous / First Nations</div><div class="check-label-fil">Masyarakat adat</div></label>
           </div>
           <div class="multiselect-option">
             <input type="checkbox" name="Identify_as" value="Frontline Community" id="id-frontline">
@@ -998,48 +998,48 @@
           </div>
           <div class="multiselect-option">
             <input type="checkbox" name="Identify_as" value="Sole Parent" id="id-soleparent">
-            <label for="id-soleparent"><div class="check-label">Sole Parent</div><div class="check-label-fil">Nag-iisang magulang</div></label>
+            <label for="id-soleparent"><div class="check-label">Sole Parent</div><div class="check-label-fil">Orang tua tunggal</div></label>
           </div>
           <div class="multiselect-option">
             <input type="checkbox" name="Identify_as" value="None" id="id-none">
-            <label for="id-none"><div class="check-label">None</div><div class="check-label-fil">Wala sa nabanggit</div></label>
+            <label for="id-none"><div class="check-label">None</div><div class="check-label-fil">Tidak ada dari yang disebutkan</div></label>
           </div>
           <div class="multiselect-option">
             <input type="checkbox" name="Identify_as" value="Other" id="id-other">
-            <label for="id-other"><div class="check-label">Other / Iba pa</div></label>
+            <label for="id-other"><div class="check-label">Other / Lainnya</div></label>
           </div>
         </div>
       </div>
-      <div class="field-error" id="identify-error">Please select at least one option.</div>
+      <div class="field-error" id="identify-error">Pilih setidaknya satu pilihan.</div>
     </div>
 
     <hr class="field-divider">
 
     <!-- Group 3: Address -->
-    <div class="field-group-label">Address <span style="font-size:12px;font-weight:400;color:var(--meta)">/ Tirahan</span></div>
+    <div class="field-group-label">Address <span style="font-size:12px;font-weight:400;color:var(--meta)">/ Alamat</span></div>
 
     <div class="field">
       <label class="field-label">Country of Residence <span class="req">*</span></label>
-      <span class="field-label-fil">Bansa</span>
+      <span class="field-label-fil">Negara Tempat Tinggal</span>
       <div class="custom-select-wrap" id="wrap-Country_of_Residence">
         <button type="button" class="custom-select-trigger" id="trigger-Country_of_Residence" aria-haspopup="listbox" aria-expanded="false">
-          Philippines
+          Indonesia
         </button>
         <div class="custom-select-listbox" id="listbox-Country_of_Residence" role="listbox">
-          <div class="custom-select-option selected" data-value="Philippines">Philippines</div>
+          <div class="custom-select-option selected" data-value="Indonesia">Indonesia</div>
+          <div class="custom-select-option" data-value="Philippines">Philippines</div>
           <div class="custom-select-option" data-value="Pakistan">Pakistan</div>
           <div class="custom-select-option" data-value="South Korea">South Korea</div>
-          <div class="custom-select-option" data-value="Indonesia">Indonesia</div>
           <div class="custom-select-option" data-value="Other">Other</div>
         </div>
         <select id="Country_of_Residence" style="display:none" tabindex="-1">
-          <option value="Philippines" selected>Philippines</option>
+          <option value="Indonesia" selected>Indonesia</option>
+          <option value="Philippines">Philippines</option>
           <option value="Pakistan">Pakistan</option>
           <option value="South Korea">South Korea</option>
-          <option value="Indonesia">Indonesia</option>
           <option value="Other">Other</option>
         </select>
-        <div class="field-error">This field is required.</div>
+        <div class="field-error">Kolom ini wajib diisi.</div>
       </div>
     </div>
 
@@ -1052,35 +1052,35 @@
           </button>
           <div class="custom-select-listbox" id="listbox-Province" role="listbox"></div>
           <select id="Province" style="display:none" tabindex="-1"></select>
-          <div class="field-error" id="province-error">Required.</div>
+          <div class="field-error" id="province-error">Wajib diisi.</div>
         </div>
         <div class="field-text-fallback" style="display:none">
           <input type="text" id="province-text-input" placeholder="State / Region" autocomplete="address-level1">
         </div>
       </div>
       <div class="field">
-        <label class="field-label">City / Town <span class="req">*</span></label>
+        <label class="field-label">City / Regency <span class="req">*</span></label>
         <div id="city-combobox-wrap" style="position:relative">
           <div class="org-combobox-input-row">
             <span class="org-combobox-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </span>
-            <input type="text" id="city-search-input" placeholder="Select province first…" autocomplete="off" disabled style="border:none;border-radius:0;padding:10px 8px;min-height:unset;flex:1;font-size:15px">
+            <input type="text" id="city-search-input" placeholder="Pilih provinsi dulu…" autocomplete="off" disabled style="border:none;border-radius:0;padding:10px 8px;min-height:unset;flex:1;font-size:15px">
           </div>
           <div class="org-dropdown-list" id="city-dropdown-list"></div>
           <input type="hidden" id="City_Town">
         </div>
         <div class="field-text-fallback" style="display:none">
-          <input type="text" id="city-text-input" placeholder="City / Town" autocomplete="address-level2">
+          <input type="text" id="city-text-input" placeholder="City / Regency" autocomplete="address-level2">
         </div>
-        <div class="field-error" id="city-error">This field is required.</div>
+        <div class="field-error" id="city-error">Kolom ini wajib diisi.</div>
       </div>
     </div>
 
     <div class="field">
-      <label class="field-label">Street Address <span style="font-weight:400;color:var(--meta)">(optional)</span></label>
-      <span class="field-label-fil">Kalye / Barangay</span>
-      <input type="text" id="Address" autocomplete="street-address" placeholder="e.g. 123 Rizal St., Barangay Poblacion">
+      <label class="field-label">Street Address <span style="font-weight:400;color:var(--meta)">(optional / opsional)</span></label>
+      <span class="field-label-fil">Alamat Jalan / Kelurahan</span>
+      <input type="text" id="Address" autocomplete="street-address" placeholder="cth. Jl. Sudirman No. 10, Kelurahan Menteng">
     </div>
 
     <hr class="field-divider">
@@ -1088,18 +1088,18 @@
     <!-- Group 4: Files -->
     <div class="field">
       <label class="field-label">Recent Photo <span class="req">*</span></label>
-      <span class="field-label-fil">Kamakailang Larawan</span>
+      <span class="field-label-fil">Foto Terbaru</span>
       <label class="file-upload-btn">
         <input type="file" id="Recent_Photo" accept="image/*">
         <span class="upload-icon">📷</span>
         <span class="upload-text">Tap to upload photo</span>
       </label>
       <div class="file-name hidden" id="photo-name"></div>
-      <div class="field-error" id="photo-error">Please upload a recent photo.</div>
+      <div class="field-error" id="photo-error">Harap unggah foto terbaru.</div>
     </div>
 
     <div class="field">
-      <label class="field-label">CV / Resume <span style="font-weight:400;color:var(--meta)">(optional)</span></label>
+      <label class="field-label">CV / Resume <span style="font-weight:400;color:var(--meta)">(optional / opsional)</span></label>
       <label class="file-upload-btn">
         <input type="file" id="Import_CV" accept=".pdf,.doc,.docx">
         <span class="upload-icon">📄</span>
@@ -1109,16 +1109,16 @@
     </div>
 
     <div class="field">
-      <label class="field-label">Accessibility / Special Requirements <span style="font-weight:400;color:var(--meta)">(optional)</span></label>
-      <span class="field-label-fil">Accessibility o Espesyal na Pangangailangan</span>
-      <textarea id="Special_Requirements" rows="3" placeholder="Let us know if you have any accessibility needs or special requirements so we can make arrangements…"></textarea>
+      <label class="field-label">Accessibility / Special Requirements <span style="font-weight:400;color:var(--meta)">(optional / opsional)</span></label>
+      <span class="field-label-fil">Aksesibilitas atau Kebutuhan Khusus</span>
+      <textarea id="Special_Requirements" rows="3" placeholder="Beritahu kami jika Anda memiliki kebutuhan aksesibilitas atau persyaratan khusus…"></textarea>
     </div>
   </div>
 
   <!-- SECTION B: Professional Info -->
   <div class="section-card" id="sec-professional">
     <div class="section-title">Professional Information</div>
-    <div class="section-subtitle">Impormasyon tungkol sa iyong trabaho at organisasyon</div>
+    <div class="section-subtitle">Informasi pekerjaan dan organisasi Anda</div>
 
     <div class="field">
       <label class="field-label">Training Applying For</label>
@@ -1128,13 +1128,13 @@
 
     <div class="field">
       <label class="field-label">Organization Name <span class="req">*</span></label>
-      <span class="field-label-fil">Pangalan ng Organisasyon</span>
+      <span class="field-label-fil">Nama Organisasi</span>
       <div class="org-combobox-wrap">
         <div class="org-combobox-input-row">
           <span class="org-combobox-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </span>
-          <input type="text" id="Account_Name" placeholder="Search your organization…" autocomplete="off" style="border:none;border-radius:0;padding:12px 8px;min-height:unset;flex:1">
+          <input type="text" id="Account_Name" placeholder="Cari organisasi Anda…" autocomplete="off" style="border:none;border-radius:0;padding:12px 8px;min-height:unset;flex:1">
           <button type="button" class="org-clear-btn" id="org-clear-btn" aria-label="Clear">×</button>
         </div>
         <input type="hidden" id="Account_Name_Id">
@@ -1149,62 +1149,62 @@
         <input type="text" id="org-new-city" placeholder="City / Province" style="margin-bottom:8px">
         <select id="org-new-country" style="margin-bottom:0">
           <option value="">— Country —</option>
-          <option value="Philippines" selected>Philippines</option>
+          <option value="Indonesia" selected>Indonesia</option>
+          <option value="Philippines">Philippines</option>
           <option value="Pakistan">Pakistan</option>
           <option value="South Korea">South Korea</option>
-          <option value="Indonesia">Indonesia</option>
           <option value="Other">Other</option>
         </select>
       </div>
-      <div class="field-error" id="org-error">This field is required.</div>
+      <div class="field-error" id="org-error">Kolom ini wajib diisi.</div>
     </div>
 
     <div class="field">
       <label class="field-label">Your Role in the Organisation <span class="req">*</span></label>
-      <span class="field-label-fil">Tungkulin sa Organisasyon</span>
-      <input type="text" id="Role_in_the_Organisation" placeholder="e.g. Program Coordinator">
-      <div class="field-error">This field is required.</div>
+      <span class="field-label-fil">Peran Anda di Organisasi</span>
+      <input type="text" id="Role_in_the_Organisation" placeholder="cth. Koordinator Program">
+      <div class="field-error">Kolom ini wajib diisi.</div>
     </div>
 
     <div class="field">
       <label class="field-label">Professional Bio <span class="req">*</span></label>
-      <span class="field-label-fil">Propesyonal na Bio</span>
-      <textarea id="Please_provide_a_100_word_bio_that_best_describes" rows="5" placeholder="Briefly describe your professional background, campaign work, and what drives you…"></textarea>
+      <span class="field-label-fil">Bio Profesional</span>
+      <textarea id="Please_provide_a_100_word_bio_that_best_describes" rows="5" placeholder="Jelaskan secara singkat latar belakang profesional, pekerjaan kampanye, dan motivasi Anda…"></textarea>
       <div class="field-hint"><span id="bio-word-count">0</span> / 100 words</div>
-      <div class="field-error">This field is required (max 100 words).</div>
+      <div class="field-error">Kolom ini wajib diisi (maks. 100 kata).</div>
     </div>
   </div>
 
   <!-- SECTION D: Experience — Foundational -->
   <div class="section-card" id="sec-exp-foundational">
   <div class="section-title">Experience</div>
-  <div class="section-subtitle">Karanasan at Motibasyon</div>
+  <div class="section-subtitle">Pengalaman dan Motivasi</div>
 
   <div class="field">
     <label class="field-label">Actively campaigning, advocating or organising a community? <span class="req">*</span></label>
-    <span class="field-label-fil">Ikaw ba ay kasalukuyang nagkakampaniya, may gawaing adbokasiya, o nag-oorganisa sa iyong komunidad?</span>
+    <span class="field-label-fil">Apakah Anda saat ini aktif berkampanye, melakukan advokasi, atau mengorganisir komunitas?</span>
     <div class="custom-select-wrap" id="wrap-campaigning_f">
       <button type="button" class="custom-select-trigger placeholder" id="trigger-campaigning_f" aria-haspopup="listbox" aria-expanded="false">
-        — Select / Pumili —
+        — Select / Pilih —
       </button>
       <div class="custom-select-listbox" id="listbox-campaigning_f" role="listbox">
-        <div class="custom-select-option" data-value="Yes">Yes / Oo</div>
-        <div class="custom-select-option" data-value="No">No / Hindi</div>
-        <div class="custom-select-option" data-value="Have in the past but not currently">Have in the past but not currently / Noon lang</div>
+        <div class="custom-select-option" data-value="Yes">Yes / Ya</div>
+        <div class="custom-select-option" data-value="No">No / Tidak</div>
+        <div class="custom-select-option" data-value="Have in the past but not currently">Have in the past but not currently / Pernah, tapi tidak sekarang</div>
       </div>
       <select id="campaigning_f" name="campaigning_f" style="display:none" tabindex="-1">
-        <option value="">— Select / Pumili —</option>
-        <option value="Yes">Yes / Oo</option>
-        <option value="No">No / Hindi</option>
-        <option value="Have in the past but not currently">Have in the past but not currently / Noon lang</option>
+        <option value="">— Select / Pilih —</option>
+        <option value="Yes">Yes / Ya</option>
+        <option value="No">No / Tidak</option>
+        <option value="Have in the past but not currently">Have in the past but not currently / Pernah, tapi tidak sekarang</option>
       </select>
     </div>
-    <div class="field-error" id="campaign-f-error">This field is required.</div>
+    <div class="field-error" id="campaign-f-error">Kolom ini wajib diisi.</div>
   </div>
 
   <div class="field" id="campaign-desc-field" style="display:none">
     <label class="field-label">Describe your campaigning, advocacy, or organizing efforts.</label>
-    <span class="field-label-fil">I-kuwento sa amin ang iyong gawaing pangangampaniya, adbokasiya, o pag-oorganisa. Isama ang mga pinakamasaya o makabuluhan at pinakamahirap na aspeto ng iyong gawain.</span>
+    <span class="field-label-fil">Ceritakan tentang kampanye, advokasi, atau upaya pengorganisasian Anda. Sertakan aspek yang paling berkesan dan paling menantang.</span>
     <textarea id="Current_Campaign_Description" rows="5" placeholder="Highlight the most rewarding and/or challenging aspects of your work in these areas."></textarea>
     <div class="field-hint"><span id="campaign-word-count">0</span> / 300 words</div>
   </div>
@@ -1213,97 +1213,10 @@
 
   <div class="field">
     <label class="field-label">Why are you applying for the training? <span class="req">*</span></label>
-    <span class="field-label-fil">Bakit gusto mong makadalo sa pagsasanay na ito? Ano ang gusto mong makuha o mapaunlad na knowledge o skills at paano mo ito naiisip na magamit pagkatapos sa iyong gawain?</span>
+    <span class="field-label-fil">Mengapa Anda mendaftar pelatihan ini? Pengetahuan atau keterampilan apa yang ingin Anda kembangkan, dan bagaimana Anda berencana menggunakannya?</span>
     <textarea id="Reason_for_Applying_F" rows="5" placeholder="Specify the knowledge or skills you aim to develop and describe how you plan to use these in your work."></textarea>
-    <div class="field-error">This field is required.</div>
+    <div class="field-error">Kolom ini wajib diisi.</div>
   </div>
-  </div>
-
-  <!-- SECTION D: Experience — TOT -->
-  <div class="section-card" id="sec-exp-tot">
-    <div class="section-title">Experience &amp; Motivation</div>
-    <div class="section-subtitle">Karanasan at Motibasyon</div>
-
-    <div class="field">
-      <label class="field-label">Do you have previous experience teaching or training others? <span class="req">*</span></label>
-      <div class="radio-group">
-        <label class="radio-opt"><input type="radio" name="teaching_tot" value="Yes"> Yes / Oo</label>
-        <label class="radio-opt"><input type="radio" name="teaching_tot" value="No"> No / Hindi</label>
-      </div>
-      <div class="field-error" id="teaching-tot-error">This field is required.</div>
-    </div>
-
-    <div class="field" id="teaching-desc-field">
-      <label class="field-label">If yes, describe your experience</label>
-      <textarea id="Teaching_Experience_Description" rows="4" placeholder="Describe your teaching/training experience…"></textarea>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Why are you applying for this TOT training? <span class="req">*</span></label>
-      <textarea id="Reason_for_Applying_TOT" rows="4" placeholder="Share your motivation…"></textarea>
-      <div class="field-error">This field is required.</div>
-    </div>
-  </div>
-
-  <!-- SECTION D: Experience — Feminist Leadership -->
-  <div class="section-card" id="sec-exp-feminist">
-    <div class="section-title">Experience &amp; Motivation</div>
-    <div class="section-subtitle">Karanasan at Motibasyon</div>
-
-    <div class="field">
-      <label class="field-label">How will this training benefit your campaign work? <span class="req">*</span></label>
-      <textarea id="Defining_Leadership_Experience" rows="4" placeholder="Describe how this training will help…"></textarea>
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">What personal leadership goals do you hope to achieve? <span class="req">*</span></label>
-      <textarea id="Personal_Leadership_Goals" rows="4" placeholder="Share your personal goals…"></textarea>
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">What challenges have you faced as a woman in leadership? <span class="req">*</span></label>
-      <textarea id="Challenges_faced_as_a_woman_in_leadership" rows="4" placeholder="Describe the challenges you've faced…"></textarea>
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Have you attended gender sensitivity or women-specific training before? <span class="req">*</span></label>
-      <div class="radio-group">
-        <label class="radio-opt"><input type="radio" name="gender_training" value="Yes"> Yes / Oo</label>
-        <label class="radio-opt"><input type="radio" name="gender_training" value="No"> No / Hindi</label>
-      </div>
-      <div class="field-error" id="gender-training-error">This field is required.</div>
-    </div>
-  </div>
-
-  <!-- SECTION D: Experience — Public Narrative -->
-  <div class="section-card" id="sec-exp-pn">
-    <div class="section-title">Experience &amp; Motivation</div>
-    <div class="section-subtitle">Karanasan at Motibasyon</div>
-
-    <div class="field">
-      <label class="field-label">Are you currently involved in a campaign? <span class="req">*</span></label>
-      <div class="radio-group">
-        <label class="radio-opt"><input type="radio" name="campaigning_pn" value="Yes"> Yes / Oo</label>
-        <label class="radio-opt"><input type="radio" name="campaigning_pn" value="No"> No / Hindi</label>
-        <label class="radio-opt"><input type="radio" name="campaigning_pn" value="Have in the past but not currently"> Have in the past but not currently / Noon lang</label>
-      </div>
-      <div class="field-error" id="campaign-pn-error">This field is required.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Why are you applying for this training? <span class="req">*</span></label>
-      <textarea id="Reason_for_Applying_PN" rows="4" placeholder="Share your motivation…"></textarea>
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">How many years of campaigning experience do you have, and what prior training have you attended? <span class="req">*</span></label>
-      <textarea id="Campaign_Years_Prior_Training" rows="4" placeholder="e.g. 3 years, attended X training in 2023…"></textarea>
-      <div class="field-error">This field is required.</div>
-    </div>
   </div>
 
   <!-- SECTION E: Confidence Ratings Pre-Training + Terms & Conditions -->
@@ -1313,30 +1226,30 @@
 
     <div id="sec-terms" style="margin-top:28px">
       <div class="section-title" style="font-size:18px">Terms &amp; Conditions <span class="req">*</span></div>
-      <div class="section-subtitle">Mga Tuntunin at Kondisyon</div>
+      <div class="section-subtitle">Syarat &amp; Ketentuan</div>
 
       <div class="terms-text-box">
         <p>If selected, I commit to actively participate, be fully present, and stay focused throughout the workshop and associated activities.</p>
         <p>I am committed to creating a respectful, safe, and inclusive space for all other participants by holding space for others to share their views and ideas.</p>
         <p>I grant consent for the use of pictures, videos, and narratives from the training on our online platforms, website, and social media, etc.</p>
         <hr style="border:none;border-top:1px solid var(--border);margin:12px 0">
-        <p style="font-style:italic;color:var(--meta)">Kung mapipili, nangangako akong aktibong lumahok, maging presente, at manatiling nakatuon sa buong workshop at kaugnay na aktibidad.</p>
-        <p style="font-style:italic;color:var(--meta)">Nakatuon ako sa paglikha ng isang mapagrespeto, ligtas, at inklusibong espasyo para sa lahat ng ibang kalahok sa pamamagitan ng pagbibigay ng pagkakataon sa iba na ibahagi ang kanilang mga pananaw at ideya.</p>
-        <p style="font-style:italic;color:var(--meta)">Nagbibigay ako ng pahintulot para sa paggamit ng mga larawan, video, at mga kwento mula sa pagsasanay sa aming mga online platform, website, at social media, atbp.</p>
+        <p style="font-style:italic;color:var(--meta)">Jika terpilih, saya berkomitmen untuk berpartisipasi aktif, hadir sepenuhnya, dan tetap fokus sepanjang workshop dan kegiatan terkait.</p>
+        <p style="font-style:italic;color:var(--meta)">Saya berkomitmen untuk menciptakan ruang yang saling menghormati, aman, dan inklusif bagi semua peserta dengan memberikan ruang bagi orang lain untuk berbagi pandangan dan ide mereka.</p>
+        <p style="font-style:italic;color:var(--meta)">Saya memberikan izin untuk penggunaan foto, video, dan narasi dari pelatihan di platform online, situs web, dan media sosial kami, dll.</p>
       </div>
 
       <label class="terms-accept-row">
         <input type="checkbox" id="terms1">
-        <span>I accept the Terms and Conditions. / Tinatanggap ko ang mga Tuntunin at Kondisyon.</span>
+        <span>I accept the Terms and Conditions. / Saya menerima Syarat dan Ketentuan.</span>
       </label>
-      <div class="field-error" id="terms-error" style="margin-top:8px">Please agree to the terms to continue.</div>
+      <div class="field-error" id="terms-error" style="margin-top:8px">Harap setujui syarat dan ketentuan untuk melanjutkan.</div>
     </div>
   </div>
 
   <!-- SECTION F: Custom Questions -->
   <div class="section-card hidden" id="sec-custom">
     <div class="section-title">Additional Questions</div>
-    <div class="section-subtitle">Karagdagang mga Katanungan</div>
+    <div class="section-subtitle">Pertanyaan Tambahan</div>
     <div id="custom-questions-container"></div>
   </div>
 
@@ -1353,10 +1266,10 @@
 <div class="success-screen" id="success-screen">
   <div class="icon">🎉</div>
   <h2>Application Submitted!</h2>
-  <p>Thank you for applying. Your application has been received and you will be contacted by the AktivAsia team soon.<br><br><em>Salamat sa iyong aplikasyon. Makikipag-ugnayan sa iyo ang koponan ng AktivAsia.</em></p>
+  <p>Thank you for applying. Your application has been received and you will be contacted by the AktivAsia team soon.<br><br><em>Terima kasih atas lamaran Anda. Lamaran Anda telah diterima dan tim AktivAsia akan segera menghubungi Anda.</em></p>
 </div>
 
-<script src="js/ph-municipalities.js"></script>
-<script src="js/form-apply-ph.js"></script>
+<script src="js/id-provinces.js"></script>
+<script src="js/form-apply-id.js"></script>
 </body>
 </html>

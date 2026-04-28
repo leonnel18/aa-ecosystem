@@ -71,36 +71,93 @@
     .closed-banner h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
     .closed-banner p { color: var(--meta); font-size: 14px; }
 
-    /* ── Progress bar ── */
+    /* ── Progress stepper ── */
     .progress-wrap {
       background: var(--white);
-      padding: 16px 20px 0;
+      padding: 16px 20px;
       position: sticky;
       top: 0;
       z-index: 10;
       border-bottom: 1px solid var(--border);
     }
-    .progress-steps {
+    .stepper-nav {
       display: flex;
-      gap: 4px;
-      margin-bottom: 12px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      align-items: center;
+      width: 100%;
+      gap: 0;
     }
-    .progress-steps::-webkit-scrollbar { display: none; }
-    .step-dot {
+    .stepper-item {
+      display: flex;
+      align-items: center;
       flex: 1;
-      min-width: 32px;
-      height: 4px;
-      border-radius: 2px;
-      background: var(--border);
-      transition: background 0.3s;
     }
-    .step-dot.done { background: var(--primary); }
-    .step-dot.active { background: var(--cta-start); }
-    .progress-label {
-      font-size: 12px; color: var(--meta); font-weight: 500;
-      padding-bottom: 12px;
+    .stepper-item:last-child { flex: 0 0 auto; }
+    .stepper-trigger {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: default;
+      text-align: left;
+    }
+    .stepper-indicator {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      border: 2px solid var(--border);
+      background: var(--white);
+      color: var(--meta);
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+    .stepper-item[data-state="completed"] .stepper-indicator {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--white);
+    }
+    .stepper-item[data-state="active"] .stepper-indicator {
+      background: var(--cta-start);
+      border-color: var(--cta-start);
+      color: var(--text);
+    }
+    .stepper-text { display: flex; flex-direction: column; gap: 1px; }
+    .stepper-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .stepper-desc {
+      font-size: 11px;
+      color: var(--meta);
+      line-height: 1.2;
+    }
+    .stepper-item[data-state="inactive"] .stepper-title,
+    .stepper-item[data-state="inactive"] .stepper-desc {
+      color: var(--meta);
+    }
+    .stepper-separator {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      margin: 0 8px;
+      border-radius: 1px;
+      transition: background 0.25s;
+    }
+    .stepper-item[data-state="completed"] + .stepper-separator {
+      background: var(--primary);
+    }
+    @media (max-width: 639px) {
+      .stepper-text { display: none; }
+      .stepper-item[data-state="active"] .stepper-text { display: flex; }
+      .stepper-separator { margin: 0 4px; }
     }
 
     /* ── Form container ── */
@@ -117,10 +174,10 @@
     .section-card.active { display: block; }
 
     .section-title {
-      font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--text);
+      font-size: 22px; font-weight: 800; margin-bottom: 4px; color: var(--text);
     }
     .section-subtitle {
-      font-size: 13px; color: var(--meta); margin-bottom: 20px;
+      font-size: 14px; color: var(--meta); margin-bottom: 20px; opacity: 0.75;
     }
 
     /* ── Fields ── */
@@ -155,14 +212,34 @@
       border-color: var(--primary);
     }
     textarea { min-height: 100px; resize: vertical; }
-    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23788099' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
 
     .field-hint { font-size: 12px; color: var(--meta); margin-top: 4px; }
     .field-error { font-size: 12px; color: #e53e3e; margin-top: 4px; display: none; }
     .field.has-error input, .field.has-error select, .field.has-error textarea { border-color: #e53e3e; }
     .field.has-error .field-error { display: block; }
 
-    /* ── Applicant search ── */
+    /* ── Field divider + group label ── */
+    .field-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 8px 0 20px;
+    }
+    .field-group-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--meta);
+      margin-bottom: 6px;
+    }
+    .field-group-subtitle {
+      font-size: 12px;
+      color: var(--meta);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+
+    /* ── Applicant search result card ── */
     .search-result-card {
       border: 1.5px solid var(--primary);
       border-radius: var(--radius-sm);
@@ -173,35 +250,108 @@
     .search-result-card .name { font-weight: 700; font-size: 15px; }
     .search-result-card .detail { font-size: 13px; color: var(--meta); margin-top: 2px; }
 
-    /* ── Rating scale ── */
-    .rating-item { margin-bottom: 24px; }
-    .rating-question { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
-    .rating-scale {
-      display: flex; gap: 6px; align-items: center;
+    /* ── Org / lookup combobox ── */
+    .org-combobox-wrap { position: relative; }
+    .org-combobox-input-row {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      transition: border-color 0.2s;
+      min-height: var(--input-h);
     }
-    .rating-scale-labels {
-      display: flex; justify-content: space-between;
-      font-size: 11px; color: var(--meta); margin-top: 4px;
+    .org-combobox-input-row:focus-within { border-color: var(--primary); }
+    .org-combobox-icon {
+      padding: 0 10px 0 14px;
+      color: var(--meta);
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .org-combobox-input-row input[type="text"] {
+      border: none;
+      border-radius: 0;
+      padding: 12px 8px;
+      min-height: unset;
+      flex: 1;
+    }
+    .org-combobox-input-row input[type="text"]:focus { border: none; outline: none; }
+    .org-clear-btn {
+      background: none;
+      border: none;
+      color: var(--meta);
+      padding: 0 14px;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      display: none;
+      align-items: center;
+    }
+    .org-clear-btn.visible { display: flex; }
+    .org-dropdown-list {
+      display: none;
+      position: absolute;
+      left: 0; right: 0;
+      top: calc(100% + 4px);
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      z-index: 200;
+      max-height: 220px;
+      overflow-y: auto;
+      box-shadow: 0 4px 16px rgba(0,0,0,.10);
+    }
+    .org-dropdown-list.open { display: block; }
+    .org-dropdown-item {
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .org-dropdown-item:last-child { border-bottom: none; }
+    .org-dropdown-item:hover { background: var(--primary-light); }
+
+    /* ── Rating scale ── */
+    .rating-item { margin-bottom: 28px; }
+    .rating-question { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
+    .rating-scale {
+      display: flex;
+      gap: 6px;
+      align-items: center;
     }
     .rating-btn {
       flex: 1;
       min-height: 44px;
+      min-width: 36px;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
+      border-radius: 9999px;
       background: var(--bg);
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
       color: var(--text);
     }
+    .rating-btn:hover {
+      border-color: var(--cta-start);
+      color: var(--cta-start);
+    }
     .rating-btn.selected {
-      background: var(--primary);
-      border-color: var(--primary);
+      background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+      border-color: transparent;
       color: var(--white);
     }
+    .rating-scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--meta);
+      margin-top: 6px;
+    }
 
-    /* ── Radio group ── */
+    /* ── Radio group (for testimonial gate) ── */
     .radio-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
     .radio-opt {
       display: flex; align-items: center; gap: 8px;
@@ -327,107 +477,111 @@
   <p>Please check your link or contact your AktivAsia country team.</p>
 </div>
 
-<!-- Progress -->
+<!-- Progress stepper -->
 <div class="progress-wrap" id="progress-wrap">
-  <div class="progress-steps" id="progress-steps"></div>
-  <div class="progress-label" id="progress-label"></div>
+  <div class="stepper-nav" id="progress-steps"></div>
 </div>
 
 <!-- Main form -->
 <div class="form-wrap" id="form-wrap">
 
-  <!-- SECTION A: Applicant Lookup -->
+  <!-- STEP 1: Training Feedback (lookup + overall rating + open questions) -->
   <div class="section-card" id="sec-lookup">
-    <div class="section-title">Find Your Application</div>
-    <div class="section-subtitle">Hanapin ang iyong aplikasyon — Enter the name you used when you applied</div>
+    <div class="section-title">Training Feedback</div>
+    <div class="section-subtitle">Puna sa Training — Find your application to begin</div>
 
     <div class="field">
-      <label class="field-label">First Name <span class="req">*</span></label>
-      <span class="field-label-fil">Pangalan</span>
-      <input type="text" id="lookup-first" autocomplete="given-name" placeholder="Enter your first name…">
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Last Name <span class="req">*</span></label>
-      <span class="field-label-fil">Apelyido</span>
-      <input type="text" id="lookup-last" autocomplete="family-name" placeholder="Enter your last name…">
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <button type="button" class="btn btn-next" id="btn-search" onclick="searchApplicant()"
-      style="position:static;border-radius:9999px;margin-top:4px">
-      Search / Hanapin
-    </button>
-
-    <div id="search-result" class="hidden" style="margin-top:16px">
-      <div class="search-result-card">
-        <div class="name" id="result-name"></div>
-        <div class="detail" id="result-detail"></div>
+      <label class="field-label">Find Your Application <span class="req">*</span></label>
+      <span class="field-label-fil">Hanapin ang iyong aplikasyon — Search by name or email</span>
+      <div class="org-combobox-wrap">
+        <div class="org-combobox-input-row">
+          <span class="org-combobox-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" id="lookup-input" placeholder="Search by name or email…" autocomplete="off">
+          <button type="button" class="org-clear-btn" id="lookup-clear-btn" aria-label="Clear">×</button>
+        </div>
+        <div class="org-dropdown-list" id="lookup-dropdown"></div>
       </div>
-      <div style="font-size:13px;color:var(--meta);margin-top:8px">Is this you? Continue to fill in the survey below.</div>
-    </div>
 
-    <div id="search-notfound" class="hidden" style="margin-top:16px;color:#e53e3e;font-size:14px">
-      No application found for that name in this training. Please check the spelling or contact your AktivAsia team.
+      <div id="search-result" class="hidden" style="margin-top:12px">
+        <div class="search-result-card">
+          <div class="name" id="result-name"></div>
+          <div class="detail" id="result-detail"></div>
+        </div>
+        <div style="font-size:13px;color:var(--meta);margin-top:8px">Is this you? Continue to fill in the survey below.</div>
+      </div>
+
+      <div id="search-notfound" class="hidden" style="margin-top:12px;color:#e53e3e;font-size:14px">
+        No application found. Please check the spelling or try your email address.
+      </div>
     </div>
 
     <!-- Hidden fields populated after lookup -->
     <input type="hidden" id="Deal_Id">
     <input type="hidden" id="Training_Applied">
-  </div>
 
-  <!-- SECTION B: Training Feedback -->
-  <div class="section-card" id="sec-feedback">
-    <div class="section-title">Training Feedback</div>
-    <div class="section-subtitle">Puna sa Training</div>
+    <!-- Feedback questions — hidden until applicant is found -->
+    <div id="feedback-questions" style="display:none">
+
+    <hr class="field-divider">
+
+    <!-- Overall satisfaction rating -->
+    <div class="rating-item" id="rating-item-Did_the_Training_meet_your_expectations">
+      <div class="rating-question">
+        Overall, to what extent did the training meet your expectations? <span class="req">*</span>
+        <div style="font-size:12px;font-weight:400;color:var(--meta);margin-top:2px;font-style:italic">Gaano naabot o nangyari sa pagsasanay ang iyong inaasahang mangyari o makuha?</div>
+      </div>
+      <div class="rating-scale">
+        <button type="button" class="rating-btn" data-rk="Did_the_Training_meet_your_expectations" data-field="Did_the_Training_meet_your_expectations" data-val="1" onclick="selectRating(this)">1</button>
+        <button type="button" class="rating-btn" data-rk="Did_the_Training_meet_your_expectations" data-field="Did_the_Training_meet_your_expectations" data-val="2" onclick="selectRating(this)">2</button>
+        <button type="button" class="rating-btn" data-rk="Did_the_Training_meet_your_expectations" data-field="Did_the_Training_meet_your_expectations" data-val="3" onclick="selectRating(this)">3</button>
+        <button type="button" class="rating-btn" data-rk="Did_the_Training_meet_your_expectations" data-field="Did_the_Training_meet_your_expectations" data-val="4" onclick="selectRating(this)">4</button>
+        <button type="button" class="rating-btn" data-rk="Did_the_Training_meet_your_expectations" data-field="Did_the_Training_meet_your_expectations" data-val="5" onclick="selectRating(this)">5</button>
+        <button type="button" class="rating-btn" data-rk="Did_the_Training_meet_your_expectations" data-field="Did_the_Training_meet_your_expectations" data-val="6" onclick="selectRating(this)">6</button>
+        <button type="button" class="rating-btn" data-rk="Did_the_Training_meet_your_expectations" data-field="Did_the_Training_meet_your_expectations" data-val="7" onclick="selectRating(this)">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>1 — Not at all satisfied</span><span>7 — Very satisfied</span></div>
+      <div class="field-error" style="display:none">Please rate this item.</div>
+    </div>
 
     <div class="field">
-      <label class="field-label">Overall, did the training meet your expectations? <span class="req">*</span></label>
-      <span class="field-label-fil">Sa kabuuan, natugunan ba ng training ang iyong mga inaasahan?</span>
-      <select id="Did_the_Training_meet_your_expectations">
-        <option value="">— Select / Pumili —</option>
-        <option value="1">1 — Not at all / Hindi talaga</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4 — Somewhat / Medyo</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7 — Completely / Ganap na oo</option>
-      </select>
+      <label class="field-label">What was the best aspect of the workshop? <span class="req">*</span></label>
+      <span class="field-label-fil">Para sa iyo, ano ang pinakamaganda o pinakanagustuhan mong nangyari sa pagsasanay?</span>
+      <textarea id="Best_aspect_of_the_workshop" rows="4" placeholder="e.g. a specific session, a guest speaker, buddy time…"></textarea>
       <div class="field-error">This field is required.</div>
     </div>
 
     <div class="field">
-      <label class="field-label">What was the best aspect of the training? <span class="req">*</span></label>
-      <span class="field-label-fil">Ano ang pinakamahusay na bahagi ng training?</span>
-      <textarea id="Best_aspect_of_the_workshop" rows="4" placeholder="What went well? What did you enjoy most?"></textarea>
-      <div class="field-error">This field is required.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label">What could be improved for next time?</label>
-      <span class="field-label-fil">Ano ang maaaring pagbutihin para sa susunod na beses? (opsyonal)</span>
+      <label class="field-label">What would you suggest improving for next time? <span class="req">*</span></label>
+      <span class="field-label-fil">Sa tingin mo, ano pa ang pwedeng mapagbuti kung gagawin ulit ang pagsasanay?</span>
       <textarea id="Improvement_Suggestion_for_next_time" rows="4" placeholder="Your suggestions for improvement…"></textarea>
+      <div class="field-error">This field is required.</div>
     </div>
+
+    </div><!-- /feedback-questions -->
   </div>
 
-  <!-- SECTION C: Session Topics (dynamic — injected per training) -->
-  <div class="section-card" id="sec-topics">
-    <div class="section-title">Session Ratings</div>
-    <div class="section-subtitle">Rate each session from 1 (not useful) to 7 (very useful) — I-rate ang bawat sesyon</div>
+  <!-- STEP 2: Experiences (Topics + Logistics + Instruction) -->
+  <div class="section-card" id="sec-experiences">
+    <div class="section-title">Experiences</div>
+    <div class="section-subtitle">Rate each area from 1 (lowest) to 7 (highest)</div>
+
+    <!-- A: Topics -->
+    <div class="field-group-label">Topics — Rate Individual Sessions</div>
+    <div class="field-group-subtitle">(1 being the lowest/not at all satisfied and 7 being the highest/very satisfied)</div>
     <div id="topics-container">
       <!-- Rendered by JS from training record topic names -->
     </div>
-  </div>
 
-  <!-- SECTION D: Logistics & Communication -->
-  <div class="section-card" id="sec-logistics">
-    <div class="section-title">Logistics &amp; Communication</div>
-    <div class="section-subtitle">Rate from 1 (poor) to 7 (excellent) — 1 (mahina) hanggang 7 (napakahusay)</div>
+    <hr class="field-divider">
+
+    <!-- B: Logistics -->
+    <div class="field-group-label">Logistics &amp; Communication</div>
+    <div class="field-group-subtitle">(1 being the lowest/not at all satisfied and 7 being the highest/very satisfied)</div>
 
     <div class="rating-item" id="rating-item-Venue_and_Location">
-      <div class="rating-question">Venue and Location <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Lugar ng Training</span></div>
+      <div class="rating-question">1) Venue and Location <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Lugar ng Training</span></div>
       <div class="rating-scale">
         <button type="button" class="rating-btn" data-rk="Venue_and_Location" data-val="1" onclick="selectRating(this)">1</button>
         <button type="button" class="rating-btn" data-rk="Venue_and_Location" data-val="2" onclick="selectRating(this)">2</button>
@@ -442,7 +596,7 @@
     </div>
 
     <div class="rating-item" id="rating-item-Food_catering">
-      <div class="rating-question">Food / Catering <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Pagkain</span></div>
+      <div class="rating-question">2) Food / Catering <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Pagkain</span></div>
       <div class="rating-scale">
         <button type="button" class="rating-btn" data-rk="Food_catering" data-val="1" onclick="selectRating(this)">1</button>
         <button type="button" class="rating-btn" data-rk="Food_catering" data-val="2" onclick="selectRating(this)">2</button>
@@ -457,7 +611,7 @@
     </div>
 
     <div class="rating-item" id="rating-item-Accessibility_of_Location">
-      <div class="rating-question">Accessibility of Location <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Accessibility ng Lugar</span></div>
+      <div class="rating-question">3) Accessibility of Location <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Lapit o layo ng lugar ng pagsasanay</span></div>
       <div class="rating-scale">
         <button type="button" class="rating-btn" data-rk="Accessibility_of_Location" data-val="1" onclick="selectRating(this)">1</button>
         <button type="button" class="rating-btn" data-rk="Accessibility_of_Location" data-val="2" onclick="selectRating(this)">2</button>
@@ -472,7 +626,7 @@
     </div>
 
     <div class="rating-item" id="rating-item-Pre_workshop_Coordination_and_Communication">
-      <div class="rating-question">Pre-workshop Coordination &amp; Communication <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Koordinasyon bago ang Workshop</span></div>
+      <div class="rating-question">4) Pre-workshop Coordination &amp; Communication <span style="font-size:12px;font-weight:400;color:var(--meta);font-style:italic">/ Koordinasyon bago ang Workshop</span></div>
       <div class="rating-scale">
         <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="1" onclick="selectRating(this)">1</button>
         <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="2" onclick="selectRating(this)">2</button>
@@ -482,66 +636,90 @@
         <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="6" onclick="selectRating(this)">6</button>
         <button type="button" class="rating-btn" data-rk="Pre_workshop_Coordination_and_Communication" data-val="7" onclick="selectRating(this)">7</button>
       </div>
-      <div class="rating-scale-labels"><span>1 — Poor</span><span>7 — Excellent</span></div>
+      <div class="rating-scale-labels"><span>1 — Not at all satisfied</span><span>7 — Very satisfied</span></div>
       <div class="field-error" style="display:none">Please rate this item.</div>
     </div>
-  </div>
 
-  <!-- SECTION E: Instruction Quality -->
-  <div class="section-card" id="sec-instruction">
-    <div class="section-title">Instruction Quality</div>
-    <div class="section-subtitle">Rate from 1 (strongly disagree) to 7 (strongly agree) — 1 (lubos na hindi sumasang-ayon) hanggang 7 (lubos na sumasang-ayon)</div>
+    <hr class="field-divider">
 
+    <!-- C: Instruction -->
+    <div class="field-group-label">Instruction</div>
+    <div class="field-group-subtitle">(1 being strongly disagree and 7 being strongly agree)</div>
     <div id="instruction-ratings">
-      <!-- Rendered by macro to avoid repetition -->
+      <!-- Rendered by JS -->
     </div>
   </div>
 
-  <!-- SECTION F: Confidence Post-Training (variable per type) -->
-  <div class="section-card" id="sec-confidence-post">
-    <div class="section-title">Confidence After Training</div>
-    <div class="section-subtitle">Rate your confidence now from 1 (not confident) to 7 (very confident) — Isulat ang iyong kumpiyansa ngayon</div>
-    <div id="confidence-post-container"></div>
+  <!-- STEP 3: Skill-Building & Confidence -->
+  <div class="section-card" id="sec-confidence">
+    <div class="section-title">Skill-Building &amp; Confidence</div>
+    <div class="section-subtitle">Please select a number on a scale of 1 to 7 — 1 means the lowest confidence and 7 means the highest.</div>
+    <div id="confidence-post-container">
+      <!-- Rendered by JS -->
+    </div>
   </div>
 
-  <!-- SECTION G: Next Steps -->
+  <!-- STEP 4: Next Steps -->
   <div class="section-card" id="sec-nextsteps">
-    <div class="section-title">Next Steps &amp; Reflections</div>
-    <div class="section-subtitle">Mga Susunod na Hakbang at Pagninilay</div>
+    <div class="section-title">Next Steps</div>
+    <div class="section-subtitle">Mga Susunod na Hakbang</div>
 
     <div class="field">
-      <label class="field-label">Sum up what you learned at this training</label>
-      <span class="field-label-fil">Ibuod ang iyong natutunan sa training na ito (opsyonal)</span>
-      <textarea id="Sum_up_what_you_learned_at_our_training" rows="4" placeholder="In your own words, what were the key lessons?"></textarea>
-    </div>
-
-    <div class="field">
-      <label class="field-label">What are your action plans for the next 3 months? <span class="req">*</span></label>
-      <span class="field-label-fil">Ano ang iyong mga plano sa susunod na 3 buwan?</span>
-      <textarea id="Action_Plans_in_the_next_3_months" rows="4" placeholder="List 1–3 concrete steps you plan to take…"></textarea>
+      <label class="field-label">How would you sum up what you learned at our training in one sentence? <span class="req">*</span></label>
+      <span class="field-label-fil">Sa isang pangungusap, paano mo ilalarawan o isasabuod ang iyong natutunan mula sa training na ito?</span>
+      <textarea id="Sum_up_what_you_learned_at_our_training" rows="3" placeholder="In one sentence, describe your key learning…"></textarea>
       <div class="field-error">This field is required.</div>
     </div>
 
     <div class="field">
-      <label class="field-label">Suggestions for the next workshop</label>
-      <span class="field-label-fil">Mga mungkahi para sa susunod na workshop (opsyonal)</span>
-      <textarea id="Suggestions_in_the_next_workshop" rows="3" placeholder="Topics, format, logistics…"></textarea>
+      <label class="field-label">What are 1–3 actions you plan on taking in the next 3 months? <span style="font-weight:400;color:var(--meta)">(optional)</span></label>
+      <span class="field-label-fil">Ano ang iyong 1–3 planong hakbangin sa loob ng susunod na 3 buwan?</span>
+      <textarea id="Action_Plans_in_the_next_3_months" rows="4" placeholder="List 1–3 concrete steps you plan to take…"></textarea>
     </div>
 
     <div class="field">
-      <label class="field-label">Testimonial</label>
-      <span class="field-label-fil">Testimonya (opsyonal)</span>
-      <textarea id="Willingness_to_provide_a_testimonial" rows="3" placeholder="A quote we may use to share your experience…"></textarea>
-    </div>
-
-    <div class="field">
-      <label class="field-label">Additional comments</label>
-      <span class="field-label-fil">Karagdagang komento (opsyonal)</span>
-      <textarea id="Anything_else_you_d_like_to_share_or_ask" rows="3" placeholder="Anything else you'd like to share?"></textarea>
+      <label class="field-label">What would you like to see included in the next workshop? <span style="font-weight:400;color:var(--meta)">(optional)</span></label>
+      <span class="field-label-fil">Ano ang iyong maimumungkahing maisama sa susunod na pagsasanay kasama ang AktivAsia?</span>
+      <textarea id="Suggestions_in_the_next_workshop" rows="3" placeholder="Topics, guest speakers, exercises, resources…"></textarea>
     </div>
   </div>
 
-  <!-- SECTION H: Custom Questions (if any) -->
+  <!-- STEP 5: Testimonials -->
+  <div class="section-card" id="sec-testimonials">
+    <div class="section-title">Testimonial</div>
+    <div class="section-subtitle">Testimonya</div>
+
+    <div class="field">
+      <label class="field-label">Would you provide a testimonial on your experience with our training?</label>
+      <span class="field-label-fil">Pwede ka bang magbigay ng testimonyal? Gagamitin namin ito upang hikayatin ang iba na sumali.</span>
+      <div class="radio-group" id="testimonial-gate-group" style="margin-top:10px">
+        <label class="radio-opt">
+          <input type="radio" name="tgate" value="yes"> 👍 Yes
+        </label>
+        <label class="radio-opt">
+          <input type="radio" name="tgate" value="no"> 👎 No
+        </label>
+      </div>
+    </div>
+
+    <div id="testimonial-textarea-wrap" style="display:none">
+      <div class="field">
+        <label class="field-label">Please share why this training was particularly valuable to you</label>
+        <span class="field-label-fil">Pwede ka bang magbigay ng testimonyal ng iyong karanasan sa pagsasanay kasama ang AktivAsia?</span>
+        <textarea id="Willingness_to_provide_a_testimonial" rows="4" placeholder="A few sentences about your experience…"></textarea>
+      </div>
+    </div>
+
+    <hr class="field-divider">
+
+    <div class="field">
+      <label class="field-label">Is there anything else you would like to share with us or ask us? <span style="font-weight:400;color:var(--meta)">(optional)</span></label>
+      <span class="field-label-fil">Mayroon ka pa bang gusting sabihin o itanong sa amin?</span>
+      <textarea id="Anything_else_you_d_like_to_share_or_ask" rows="3" placeholder="Any additional comments or questions…"></textarea>
+    </div>
+  </div>
+
+  <!-- Custom Questions (if any — appended after testimonials) -->
   <div class="section-card hidden" id="sec-custom">
     <div class="section-title">Additional Questions</div>
     <div class="section-subtitle">Karagdagang mga Katanungan</div>

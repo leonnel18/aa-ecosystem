@@ -1,6 +1,6 @@
 // form-survey-ph.js — PH Post-Training Survey logic
 // Reads ?id= (solutionId) and ?type= (trainingType) from URL
-// Applicant lookup by name → matches Deal in this training
+// Applicant lookup by name or email → matches Deal in this training
 // On submit: PATCH Deal with survey responses via Worker proxy
 
 "use strict";
@@ -10,42 +10,42 @@ const PROXY_BASE = "https://crm-proxy.gideon-valera.workers.dev";
 // Post-training confidence ratings per training type (1-7 scale)
 const POST_RATINGS_CONFIG = {
   Foundational: [
-    { id: "A_Post_Training_Strategy_Building",    renderKey: "post_f_a", label: "B) Strategy & Tactics",                    labelFil: "Estratehiya at Taktika" },
-    { id: "B_Post_Training_Building_Communication",renderKey: "post_f_b", label: "C) Communication Strategy",                 labelFil: "Estratehiya sa Komunikasyon" },
-    { id: "C_Post_Training_Confident_facilitator", renderKey: "post_f_c", label: "D) Facilitating Workshops / Meetings",      labelFil: "Pagpapatakbo ng mga Workshop" },
-    { id: "D_Post_Training_Confident_connector",   renderKey: "post_f_d", label: "E) Building Connections",                   labelFil: "Pagbuo ng mga Koneksyon" },
+    { id: "A_Post_Training_Strategy_Building",     renderKey: "post_f_a", label: "1) I feel confident building strategy and choosing tactics for a campaign.",              labelFil: "Ako ay kumpiyansa sa paggawa o pagtukoy ng stratehiya at gawain para sa isang kampaniya." },
+    { id: "B_Post_Training_Building_Communication", renderKey: "post_f_b", label: "2) I feel confident using stories to connect with others for campaigns OR starting a communication strategy for a campaign.", labelFil: "Ako ay kumpiyansa sa pagsisimula ng communication strategy o plano para sa isang kampaniya O gamit ang istorya ay bumuo ng mga ugnayan sa iba." },
+    { id: "C_Post_Training_Confident_facilitator",  renderKey: "post_f_c", label: "3) I feel confident sharing what I learned from the training with others.",             labelFil: "Ako ay kumpiyansa sa paggamit ng aking kwento/karanasan sa pakikipag-ugnayan sa ibang tao." },
+    { id: "D_Post_Training_Confident_connector",    renderKey: "post_f_d", label: "4) I feel confident building connections with others to support a campaign.",             labelFil: "Ako ay kumpiyansang makapagbuo ng mga ugnayan sa ibang tao upang masuportahan ang isang kampaniya." },
+    { id: "Bias_Awareness_Post",                    renderKey: "post_f_e", label: "5) During the training I've developed valuable connections and relationships with other participants in the social campaign space.", labelFil: null },
+    { id: "Confident_with_tools_for_campaigns",     renderKey: "post_f_f", label: "6) I feel confident using the tools I've learned during this training to develop more strategic campaigns.", labelFil: null },
   ],
   Training_of_Trainers__TOT_: [
-    { id: "B_Schedules_and_Agendas_Post",               renderKey: "post_tot_b", label: "B) Schedules and Agendas",                  labelFil: "Mga Iskedyul at Agenda" },
-    { id: "C_Facilitating_and_Moderating_Post",         renderKey: "post_tot_c", label: "C) Facilitating and Moderating",            labelFil: "Pagpapatakbo at Pamamagitan" },
-    { id: "D_Designing_Workshops_Post",                 renderKey: "post_tot_d", label: "D) Designing Workshops",                    labelFil: "Pagdidisenyo ng mga Workshop" },
-    { id: "E_Confidently_Adaptable_Facilitation_Post",  renderKey: "post_tot_e", label: "E) Confidently Adaptable Facilitation",     labelFil: "Kakayahang Mag-angkop" },
+    { id: "B_Schedules_and_Agendas_Post",               renderKey: "post_tot_b", label: "B) Schedules and Agendas",               labelFil: "Mga Iskedyul at Agenda" },
+    { id: "C_Facilitating_and_Moderating_Post",         renderKey: "post_tot_c", label: "C) Facilitating and Moderating",         labelFil: "Pagpapatakbo at Pamamagitan" },
+    { id: "D_Designing_Workshops_Post",                 renderKey: "post_tot_d", label: "D) Designing Workshops",                 labelFil: "Pagdidisenyo ng mga Workshop" },
+    { id: "E_Confidently_Adaptable_Facilitation_Post",  renderKey: "post_tot_e", label: "E) Confidently Adaptable Facilitation",  labelFil: "Kakayahang Mag-angkop" },
   ],
   Feminist_Leadership: [
-    { id: "Confident_Analysis_Post",                renderKey: "post_fl_1", label: "1. Gender Mainstreaming",                   labelFil: "Pagsasama ng Kasarian sa Pangunahing Agos" },
-    { id: "Strategic_Confidence_Post",              renderKey: "post_fl_2", label: "2. Gender Lens in Social Analysis",          labelFil: "Pagtingin sa Kasarian sa Panlipunang Pagsusuri" },
-    { id: "Gender_Aware_Leadership_Post",           renderKey: "post_fl_3", label: "3. Gender-Aware Leadership",                 labelFil: "Pamumunong May Kamalayan sa Kasarian" },
-    { id: "F_Confident_in_building_connections_Post",renderKey: "post_fl_4",label: "4. Confident in Building Connections",       labelFil: "Kumpiyansa sa Pagbuo ng Koneksyon" },
-    { id: "F_Leadership_Coaching_Post",             renderKey: "post_fl_5", label: "5. Leadership Coaching",                    labelFil: "Coaching sa Pamumuno" },
+    { id: "Confident_Analysis_Post",                  renderKey: "post_fl_1", label: "1. Gender Mainstreaming",                labelFil: "Pagsasama ng Kasarian sa Pangunahing Agos" },
+    { id: "Strategic_Confidence_Post",                renderKey: "post_fl_2", label: "2. Gender Lens in Social Analysis",       labelFil: "Pagtingin sa Kasarian sa Panlipunang Pagsusuri" },
+    { id: "Gender_Aware_Leadership_Post",             renderKey: "post_fl_3", label: "3. Gender-Aware Leadership",              labelFil: "Pamumunong May Kamalayan sa Kasarian" },
+    { id: "F_Confident_in_building_connections_Post", renderKey: "post_fl_4", label: "4. Confident in Building Connections",    labelFil: "Kumpiyansa sa Pagbuo ng Koneksyon" },
+    { id: "F_Leadership_Coaching_Post",               renderKey: "post_fl_5", label: "5. Leadership Coaching",                 labelFil: "Coaching sa Pamumuno" },
   ],
   Public_Narrative: [
-    { id: "A_Campaign_Experience_Assessment_Post",  renderKey: "post_pn_a", label: "A) Campaign Experience Assessment",    labelFil: "Pagtatasa ng Karanasan sa Kampanya" },
-    { id: "B_Narrative_Application_Post",           renderKey: "post_pn_b", label: "B) Narrative Application",             labelFil: "Paggamit ng Salaysay" },
-    { id: "C_Collective_Action_Post",               renderKey: "post_pn_c", label: "C) Collective Action",                 labelFil: "Kolektibong Aksyon" },
-    { id: "D_Relationship_Building_Post",           renderKey: "post_pn_d", label: "D) Relationship Building",             labelFil: "Pagbuo ng Relasyon" },
-    { id: "E_Collaborative_Values_Post",            renderKey: "post_pn_e", label: "E) Collaborative Values",              labelFil: "Mga Halaga ng Pakikipagtulungan" },
+    { id: "A_Campaign_Experience_Assessment_Post", renderKey: "post_pn_a", label: "A) Campaign Experience Assessment", labelFil: "Pagtatasa ng Karanasan sa Kampanya" },
+    { id: "B_Narrative_Application_Post",          renderKey: "post_pn_b", label: "B) Narrative Application",          labelFil: "Paggamit ng Salaysay" },
+    { id: "C_Collective_Action_Post",              renderKey: "post_pn_c", label: "C) Collective Action",              labelFil: "Kolektibong Aksyon" },
+    { id: "D_Relationship_Building_Post",          renderKey: "post_pn_d", label: "D) Relationship Building",          labelFil: "Pagbuo ng Relasyon" },
+    { id: "E_Collaborative_Values_Post",           renderKey: "post_pn_e", label: "E) Collaborative Values",           labelFil: "Mga Halaga ng Pakikipagtulungan" },
   ],
 };
 
 // Instruction quality items — same for all training types
 const INSTRUCTION_ITEMS = [
-  { id: "Instructional_methods_were_effective",            renderKey: "inst_1", label: "Instructional methods were effective",                          labelFil: "Epektibo ang mga pamamaraan ng pagtuturo" },
-  { id: "I_learned_valuable_information",                  renderKey: "inst_2", label: "I learned valuable information",                               labelFil: "Natuto ako ng mahalagang impormasyon" },
-  { id: "The_facilitators_created_a_safe_space_for_me",    renderKey: "inst_3", label: "The facilitators created a safe learning space",                labelFil: "Lumikha ang mga facilitator ng ligtas na espasyo ng pagkatuto" },
-  { id: "The_facilitators_involved_me_other_participants", renderKey: "inst_4", label: "The facilitators involved me and other participants",            labelFil: "Kasama kami ng mga facilitator sa proseso" },
-  { id: "The_facilitators_were_well_prepared_and_able_to", renderKey: "inst_5", label: "The facilitators were well prepared",                           labelFil: "Handa ang mga facilitator" },
-  { id: "The_guest_speakers_were_engaging_and_useful",     renderKey: "inst_6", label: "The guest speakers were engaging and useful",                   labelFil: "Nakaka-engganyo at kapaki-pakinabang ang mga panauhing tagapagsalita" },
-  { id: "The_training_resources_and_readings_were_helpful",renderKey: "inst_7", label: "The training resources and readings were helpful",              labelFil: "Kapaki-pakinabang ang mga materyales at babasahin" },
+  { id: "Instructional_methods_were_effective",            renderKey: "inst_1", label: "1) Instructional methods were effective (small group work, exercises, presentations)",                    labelFil: "Epektibo ang mga gawain at ginamit na materyales sa pagsasanay." },
+  { id: "I_learned_valuable_information",                  renderKey: "inst_2", label: "2) I learned valuable information / tools / ideas that can be applied to my work",                        labelFil: "Nakakuha ako ng mahahalagang kaalaman, instrumento, at kaisipan o ideya na maaari kong magamit sa aking gawain." },
+  { id: "The_facilitators_created_a_safe_space_for_me",    renderKey: "inst_3", label: "3) The facilitators created a safe space for me to learn and ask questions",                              labelFil: "Ang mga tagapagpadaloy ay naglaan ng ligtas ng espasyo upang ako ay makalahok, matuto at makapagtanong." },
+  { id: "The_facilitators_involved_me_other_participants", renderKey: "inst_4", label: "4) The facilitators involved me/other participants appropriately",                                          labelFil: null },
+  { id: "The_facilitators_were_well_prepared_and_able_to", renderKey: "inst_5", label: "5) The facilitators were well prepared and able to clearly share ideas",                                  labelFil: "Ang mga tagapagpadaloy ay may sapat na preparasyon o kahandaan at malinaw na naibahagi ang kanilang mga kaalaman." },
 ];
 
 // Topic CRM field API names (Topics 1-7)
@@ -59,35 +59,44 @@ const TOPIC_FIELDS = [
   "Rate_the_session_on_Topic_7_Working_well",
 ];
 
+// 5 visible stepper nodes
+const STEPPER_NODES = [
+  { sections: ["sec-lookup"],       title: "Feedback",    desc: "Overall" },
+  { sections: ["sec-experiences"],  title: "Experiences", desc: "Sessions & Logistics" },
+  { sections: ["sec-confidence"],   title: "Confidence",  desc: "Skill-Building" },
+  { sections: ["sec-nextsteps"],    title: "Next Steps",  desc: "Reflections" },
+  { sections: ["sec-testimonials", "sec-custom"], title: "Testimonial", desc: "& Extras" },
+];
+
 // ── State ─────────────────────────────────────────────────────────────────────
 let trainingId   = null;
 let trainingType = null;
 let trainingData = null;
 let foundDeal    = null;   // { id, First_Name, Last_Name, Email }
 
-let sections    = [];
-let currentIdx  = 0;
+let sections   = [];
+let currentIdx = 0;
 
-const ratingValues = {};   // { crmFieldId: intVal }
+const ratingValues = {};
 const customValues = {};
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
-  const params     = new URLSearchParams(window.location.search);
-  trainingId       = params.get("id");
-  trainingType     = params.get("type");
+  const params = new URLSearchParams(window.location.search);
+  trainingId   = params.get("id");
+  trainingType = params.get("type");
 
   if (!trainingId || !trainingType) {
     showError("Missing training ID or type in URL.");
     return;
   }
 
-  // Wire radio groups
-  document.querySelectorAll(".radio-group").forEach(wireRadioGroup);
+  wireLookupCombobox();
+  wireTestimonialGate();
+  document.querySelectorAll(".radio-group:not(#testimonial-gate-group)").forEach(wireRadioGroup);
 
-  // Fetch training details
   try {
     trainingData = await fetchTraining(trainingId);
   } catch (e) {
@@ -104,13 +113,11 @@ async function init() {
 
   document.getElementById("Training_Applied").value = trainingId;
 
-  // Render dynamic sections
   renderInstructionRatings();
   renderPostConfidenceRatings();
   renderTopics(trainingData);
   renderCustomQuestions(trainingData.Custom_Questions);
 
-  // Build section list (lookup is always first; custom is conditional)
   buildSectionList();
   buildProgressBar();
   showSection(0);
@@ -123,8 +130,7 @@ async function fetchTraining(id) {
     "Start_Date", "End_Date",
     "Post_Survey_Open_Date", "Post_Survey_Close_Date",
     "Custom_Questions",
-    "Topic_1_Name", "Topic_2_Name", "Topic_3_Name",
-    "Topic_4_Name", "Topic_5_Name", "Topic_6_Name", "Topic_7_Name",
+    "Training_Topics",
   ].join(",");
   const res  = await fetch(`${PROXY_BASE}/solutions/${id}?fields=${fields}`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -132,52 +138,101 @@ async function fetchTraining(id) {
   return json.data[0];
 }
 
-// ── Applicant search ──────────────────────────────────────────────────────────
-async function searchApplicant() {
-  const first = document.getElementById("lookup-first").value.trim();
-  const last  = document.getElementById("lookup-last").value.trim();
+// ── Lookup combobox ───────────────────────────────────────────────────────────
+let lookupDebounce = null;
 
-  if (!first || !last) {
-    if (!first) document.getElementById("lookup-first").closest(".field").classList.add("has-error");
-    if (!last)  document.getElementById("lookup-last").closest(".field").classList.add("has-error");
-    return;
-  }
-  document.getElementById("lookup-first").closest(".field").classList.remove("has-error");
-  document.getElementById("lookup-last").closest(".field").classList.remove("has-error");
+function wireLookupCombobox() {
+  const input    = document.getElementById("lookup-input");
+  const dropdown = document.getElementById("lookup-dropdown");
+  const clearBtn = document.getElementById("lookup-clear-btn");
 
-  const btn = document.getElementById("btn-search");
-  btn.disabled = true;
-  btn.textContent = "Searching…";
+  input.addEventListener("input", () => {
+    foundDeal = null;
+    clearBtn.classList.toggle("visible", input.value.length > 0);
+    document.getElementById("search-result").classList.add("hidden");
+    document.getElementById("search-notfound").classList.add("hidden");
+    clearTimeout(lookupDebounce);
+    const q = input.value.trim();
+    if (q.length < 3) { dropdown.classList.remove("open"); return; }
+    lookupDebounce = setTimeout(() => searchApplicants(q), 300);
+  });
+
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    clearBtn.classList.remove("visible");
+    dropdown.classList.remove("open");
+    foundDeal = null;
+    document.getElementById("search-result").classList.add("hidden");
+    document.getElementById("search-notfound").classList.add("hidden");
+    document.getElementById("feedback-questions").style.display = "none";
+  });
+
+  document.addEventListener("click", e => {
+    if (!e.target.closest("#lookup-input") && !e.target.closest("#lookup-dropdown")) {
+      dropdown.classList.remove("open");
+    }
+  });
+}
+
+async function searchApplicants(q) {
+  const dropdown = document.getElementById("lookup-dropdown");
+  dropdown.innerHTML = `<div class="org-dropdown-item" style="color:var(--meta);cursor:default">Searching…</div>`;
+  dropdown.classList.add("open");
 
   try {
-    const deal = await findDeal(trainingId, first, last);
-    if (deal) {
-      foundDeal = deal;
-      document.getElementById("Deal_Id").value = deal.id;
-      document.getElementById("result-name").textContent   = `${deal.First_Name} ${deal.Last_Name}`;
-      document.getElementById("result-detail").textContent = deal.Email || deal.Account_Name?.name || "";
-      document.getElementById("search-result").classList.remove("hidden");
-      document.getElementById("search-notfound").classList.add("hidden");
-    } else {
-      foundDeal = null;
-      document.getElementById("search-result").classList.add("hidden");
-      document.getElementById("search-notfound").classList.remove("hidden");
+    const res   = await fetch(`${PROXY_BASE}/deals/search?training_id=${encodeURIComponent(trainingId)}&q=${encodeURIComponent(q)}`);
+    const json  = await res.json();
+    const deals = json.data ?? [];
+
+    if (deals.length === 0) {
+      dropdown.innerHTML = `<div class="org-dropdown-item" style="color:var(--meta);cursor:default">No applicant found. Check spelling or try your email.</div>`;
+      return;
     }
+
+    dropdown.innerHTML = deals.map(d => `
+      <div class="org-dropdown-item" data-id="${escHtml(d.id)}">
+        <div style="font-weight:600">${escHtml(d.First_Name)} ${escHtml(d.Last_Name)}</div>
+        <div style="font-size:12px;color:var(--meta)">${escHtml(d.Email || "")}</div>
+      </div>`).join("");
+
+    dropdown.querySelectorAll("[data-id]").forEach(item => {
+      item.addEventListener("click", () => {
+        const deal = deals.find(d => d.id === item.dataset.id);
+        selectDeal(deal);
+        dropdown.classList.remove("open");
+      });
+    });
   } catch (e) {
-    alert("Search failed: " + e.message);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Search / Hanapin";
+    dropdown.innerHTML = `<div class="org-dropdown-item" style="color:#e53e3e;cursor:default">Search failed. Please try again.</div>`;
   }
 }
 
-async function findDeal(trainingId, first, last) {
-  const res  = await fetch(
-    `${PROXY_BASE}/deals/search?training_id=${encodeURIComponent(trainingId)}&first=${encodeURIComponent(first)}&last=${encodeURIComponent(last)}`
-  );
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
-  return json.data?.[0] ?? null;
+function selectDeal(deal) {
+  foundDeal = deal;
+  document.getElementById("Deal_Id").value = deal.id;
+  document.getElementById("lookup-input").value = `${deal.First_Name} ${deal.Last_Name}`;
+  document.getElementById("lookup-clear-btn").classList.add("visible");
+  document.getElementById("result-name").textContent   = `${deal.First_Name} ${deal.Last_Name}`;
+  document.getElementById("result-detail").textContent = deal.Email || deal.Account_Name?.name || "";
+  document.getElementById("search-result").classList.remove("hidden");
+  document.getElementById("search-notfound").classList.add("hidden");
+  document.getElementById("feedback-questions").style.display = "block";
+}
+
+// ── Testimonial gate ──────────────────────────────────────────────────────────
+function wireTestimonialGate() {
+  document.getElementById("testimonial-gate-group").addEventListener("click", e => {
+    const opt = e.target.closest(".radio-opt");
+    if (!opt) return;
+    const radio = opt.querySelector('input[type="radio"]');
+    if (!radio) return;
+    radio.checked = true;
+    document.querySelectorAll("#testimonial-gate-group .radio-opt").forEach(o => o.classList.remove("selected"));
+    opt.classList.add("selected");
+    const show = radio.value === "yes";
+    document.getElementById("testimonial-textarea-wrap").style.display = show ? "block" : "none";
+    if (!show) document.getElementById("Willingness_to_provide_a_testimonial").value = "";
+  });
 }
 
 // ── Banner ────────────────────────────────────────────────────────────────────
@@ -233,47 +288,42 @@ function showError(msg) {
 }
 
 // ── Section list ──────────────────────────────────────────────────────────────
-const SECTION_LABELS = {
-  "sec-lookup":           "Find Application",
-  "sec-feedback":         "Feedback",
-  "sec-topics":           "Session Ratings",
-  "sec-logistics":        "Logistics",
-  "sec-instruction":      "Instruction",
-  "sec-confidence-post":  "Confidence",
-  "sec-nextsteps":        "Next Steps",
-  "sec-custom":           "Extra Questions",
-};
-
 function buildSectionList() {
-  sections = [
-    "sec-lookup",
-    "sec-feedback",
-    "sec-topics",
-    "sec-logistics",
-    "sec-instruction",
-    "sec-confidence-post",
-    "sec-nextsteps",
-  ];
-
+  sections = ["sec-lookup", "sec-experiences", "sec-confidence", "sec-nextsteps", "sec-testimonials"];
   const cq = parseCustomQuestions(trainingData.Custom_Questions);
   if (cq.length > 0) sections.push("sec-custom");
 }
 
-// ── Progress bar ──────────────────────────────────────────────────────────────
+// ── Progress stepper ──────────────────────────────────────────────────────────
 function buildProgressBar() {
-  const stepsEl = document.getElementById("progress-steps");
-  stepsEl.innerHTML = sections.map((_, i) =>
-    `<div class="step-dot" id="dot-${i}"></div>`
-  ).join("");
+  const nav = document.getElementById("progress-steps");
+  nav.innerHTML = STEPPER_NODES.map((node, i) => {
+    const isLast = i === STEPPER_NODES.length - 1;
+    return `
+      <div class="stepper-item" data-state="inactive" id="stepper-node-${i}">
+        <button type="button" class="stepper-trigger">
+          <div class="stepper-indicator">${i + 1}</div>
+          <div class="stepper-text">
+            <div class="stepper-title">${node.title}</div>
+            <div class="stepper-desc">${node.desc}</div>
+          </div>
+        </button>
+      </div>
+      ${!isLast ? '<div class="stepper-separator"></div>' : ""}`;
+  }).join("");
 }
 
 function updateProgressBar() {
-  sections.forEach((_, i) => {
-    const dot = document.getElementById(`dot-${i}`);
-    dot.className = "step-dot" + (i < currentIdx ? " done" : i === currentIdx ? " active" : "");
+  const activeNodeIdx = STEPPER_NODES.findIndex(node =>
+    node.sections.includes(sections[currentIdx])
+  );
+  STEPPER_NODES.forEach((_, i) => {
+    const node = document.getElementById(`stepper-node-${i}`);
+    if (!node) return;
+    if (i < activeNodeIdx)        node.dataset.state = "completed";
+    else if (i === activeNodeIdx) node.dataset.state = "active";
+    else                          node.dataset.state = "inactive";
   });
-  document.getElementById("progress-label").textContent =
-    `Step ${currentIdx + 1} of ${sections.length} — ${SECTION_LABELS[sections[currentIdx]] || ""}`;
 }
 
 // ── Navigation ────────────────────────────────────────────────────────────────
@@ -310,40 +360,32 @@ function validateSection(sectionId) {
     if (!foundDeal) {
       document.getElementById("search-notfound").classList.remove("hidden");
       document.getElementById("search-notfound").textContent =
-        "Please search for and confirm your application before continuing.";
-      return false;
+        "Please search for and select your application before continuing.";
+      ok = false;
     }
-  }
-
-  if (sectionId === "sec-feedback") {
-    ok = validateSelect("Did_the_Training_meet_your_expectations") && ok;
+    ok = validateStaticRatings(["Did_the_Training_meet_your_expectations"]) && ok;
     ok = validateRequired("Best_aspect_of_the_workshop") && ok;
+    ok = validateRequired("Improvement_Suggestion_for_next_time") && ok;
   }
 
-  if (sectionId === "sec-topics") {
+  if (sectionId === "sec-experiences") {
     ok = validateDynamicRatings("topics-container") && ok;
-  }
-
-  if (sectionId === "sec-logistics") {
     ok = validateStaticRatings([
       "Venue_and_Location",
       "Food_catering",
       "Accessibility_of_Location",
       "Pre_workshop_Coordination_and_Communication",
     ]) && ok;
-  }
-
-  if (sectionId === "sec-instruction") {
     ok = validateStaticRatings(INSTRUCTION_ITEMS.map(i => i.renderKey)) && ok;
   }
 
-  if (sectionId === "sec-confidence-post") {
+  if (sectionId === "sec-confidence") {
     const config = POST_RATINGS_CONFIG[trainingType] || [];
     ok = validateStaticRatings(config.map(i => i.renderKey)) && ok;
   }
 
   if (sectionId === "sec-nextsteps") {
-    ok = validateRequired("Action_Plans_in_the_next_3_months") && ok;
+    ok = validateRequired("Sum_up_what_you_learned_at_our_training") && ok;
   }
 
   if (sectionId === "sec-custom") {
@@ -362,16 +404,6 @@ function validateRequired(id) {
   return pass;
 }
 
-function validateSelect(id) {
-  const el    = document.getElementById(id);
-  const field = el?.closest(".field");
-  if (!el || !field) return true;
-  const pass  = el.value !== "";
-  field.classList.toggle("has-error", !pass);
-  return pass;
-}
-
-// Validates rating buttons by renderKey — checks for a .selected button in the item
 function validateStaticRatings(renderKeys) {
   let ok = true;
   renderKeys.forEach(rk => {
@@ -419,7 +451,7 @@ function validateCustomQuestions() {
 function renderInstructionRatings() {
   const container = document.getElementById("instruction-ratings");
   container.innerHTML = INSTRUCTION_ITEMS.map(item => ratingItemHtml(
-    item.renderKey, item.id, item.label, item.labelFil, "1 — Disagree", "7 — Agree"
+    item.renderKey, item.id, item.label, item.labelFil, "1 — Strongly disagree", "7 — Strongly agree"
   )).join("");
 }
 
@@ -428,35 +460,41 @@ function renderPostConfidenceRatings() {
   const container = document.getElementById("confidence-post-container");
 
   if (config.length === 0) {
-    document.getElementById("sec-confidence-post").classList.add("hidden");
-    sections = sections.filter(s => s !== "sec-confidence-post");
+    document.getElementById("sec-confidence").classList.add("hidden");
+    sections = sections.filter(s => s !== "sec-confidence");
     return;
   }
   container.innerHTML = config.map(item => ratingItemHtml(
-    item.renderKey, item.id, item.label, item.labelFil, "1 — Not confident", "7 — Very confident"
+    item.renderKey, item.id, item.label, item.labelFil, "1 — Not at all confident", "7 — Highly confident"
   )).join("");
 }
 
 function renderTopics(t) {
   const container = document.getElementById("topics-container");
-  const topicNames = [
-    t.Topic_1_Name, t.Topic_2_Name, t.Topic_3_Name,
-    t.Topic_4_Name, t.Topic_5_Name, t.Topic_6_Name, t.Topic_7_Name,
-  ];
 
-  const available = topicNames
-    .map((name, i) => ({ name, field: TOPIC_FIELDS[i] }))
-    .filter(x => x.name);
+  let topicNames = [];
+  if (t.Training_Topics) {
+    try {
+      const parsed = typeof t.Training_Topics === "string"
+        ? JSON.parse(t.Training_Topics)
+        : t.Training_Topics;
+      if (Array.isArray(parsed)) topicNames = parsed.filter(Boolean);
+    } catch { /* malformed JSON — treat as empty */ }
+  }
 
-  if (available.length === 0) {
-    // Hide section if no topic names defined on the training record
-    document.getElementById("sec-topics").classList.add("hidden");
-    sections = sections.filter(s => s !== "sec-topics");
+  if (topicNames.length === 0) {
+    // Hide the Topics subsection header but leave logistics + instruction visible
+    const groupLabel    = document.querySelector("#sec-experiences .field-group-label");
+    const groupSubtitle = document.querySelector("#sec-experiences .field-group-subtitle");
+    const firstDivider  = document.querySelector("#sec-experiences .field-divider");
+    if (groupLabel)    groupLabel.style.display    = "none";
+    if (groupSubtitle) groupSubtitle.style.display = "none";
+    if (firstDivider)  firstDivider.style.display  = "none";
     return;
   }
 
-  container.innerHTML = available.map(({ name, field }, i) =>
-    ratingItemHtml(`topic_${i}`, field, `Session: ${name}`, null, "1 — Not useful", "7 — Very useful")
+  container.innerHTML = topicNames.map((name, i) =>
+    ratingItemHtml(`topic_${i}`, TOPIC_FIELDS[i] ?? `Rate_the_sessions_on_Topic_${i + 1}`, `${i + 1}. How would you rate the sessions on ${name}?`, null, "1 — Not at all satisfied", "7 — Very satisfied")
   ).join("");
 }
 
@@ -584,22 +622,26 @@ async function submitForm() {
 function buildPayload() {
   const val = id => (document.getElementById(id)?.value ?? "").trim();
 
+  const testimonialGate = document.querySelector('[name="tgate"]:checked')?.value;
+
   const data = {
     Stage: "Graduated or Post Evaluation Completed",
-    Did_the_Training_meet_your_expectations: val("Did_the_Training_meet_your_expectations"),
-    Best_aspect_of_the_workshop:             val("Best_aspect_of_the_workshop"),
-    Improvement_Suggestion_for_next_time:    val("Improvement_Suggestion_for_next_time"),
-    Sum_up_what_you_learned_at_our_training: val("Sum_up_what_you_learned_at_our_training"),
-    Action_Plans_in_the_next_3_months:       val("Action_Plans_in_the_next_3_months"),
-    Suggestions_in_the_next_workshop:        val("Suggestions_in_the_next_workshop"),
-    Willingness_to_provide_a_testimonial:    val("Willingness_to_provide_a_testimonial"),
+    Best_aspect_of_the_workshop:              val("Best_aspect_of_the_workshop"),
+    Improvement_Suggestion_for_next_time:     val("Improvement_Suggestion_for_next_time"),
+    Sum_up_what_you_learned_at_our_training:  val("Sum_up_what_you_learned_at_our_training"),
+    Action_Plans_in_the_next_3_months:        val("Action_Plans_in_the_next_3_months"),
+    Suggestions_in_the_next_workshop:         val("Suggestions_in_the_next_workshop"),
     Anything_else_you_d_like_to_share_or_ask: val("Anything_else_you_d_like_to_share_or_ask"),
   };
 
-  // Merge all rating values
+  if (testimonialGate === "yes") {
+    data.Willingness_to_provide_a_testimonial = val("Willingness_to_provide_a_testimonial");
+  }
+
+  // All rating values (includes Did_the_Training_meet_your_expectations and all others)
   Object.assign(data, ratingValues);
 
-  // Custom question responses — append to existing Custom_Responses JSON
+  // Custom question responses
   const cq = parseCustomQuestions(trainingData.Custom_Questions);
   if (cq.length > 0) {
     const responses = cq.map((q, i) => {
@@ -647,10 +689,17 @@ function wireRadioGroup(group) {
   });
 }
 
-// Expose globals used by inline onclick attributes in HTML
-window.prevSection       = prevSection;
-window.nextSection       = nextSection;
-window.submitForm        = submitForm;
-window.selectRating      = selectRating;
+function escHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+// Expose globals used by inline onclick attributes
+window.prevSection        = prevSection;
+window.nextSection        = nextSection;
+window.submitForm         = submitForm;
+window.selectRating       = selectRating;
 window.selectCustomRating = selectCustomRating;
-window.searchApplicant   = searchApplicant;
