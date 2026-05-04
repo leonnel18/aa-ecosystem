@@ -73,15 +73,17 @@ Deal.Training_Applied (lookup) → Solutions.Organised_By
 
 ### Application (Deals) — Confirmed Field Map
 
-**Stage Pipeline (confirmed CRM values 2026-03-18):**
+**Stage Pipeline (updated 2026-05-04):**
 ```
-Still in Applied Stage → Selected → Rejected or Not Attended → Attended Traning → Graduated or Post Evaluation Completed
+Still in Applied Stage → Selected → Rejected → Rejected or Not Attended → Attended Training → Graduated or Post Evaluation Completed
 ```
-> ⚠️ CRM typo: "Attended Traning" (missing 'i') — match exactly in code.
+> Note: "Rejected" (new stage, 2026-05-04) = applicant rejected during selection phase (pre-training).
+> Note: "Rejected or Not Attended" = participant was selected but did not attend.
+> Note: CRM typo "Attended Traning" was corrected to "Attended Training" on 2026-05-04.
 
 **Stage logic for reports:**
 - `total_ongoing` = `Stage` == `"Selected"`
-- `attended_training` = `Stage` in [`"Attended Traning"`, `"Graduated or Post Evaluation Completed"`]
+- `attended_training` = `Stage` in [`"Attended Training"`, `"Graduated or Post Evaluation Completed"`]
 - `graduated` = `Stage` == `"Graduated or Post Evaluation Completed"`
 - `6M eval completed` = graduated AND any 6M impact field is not null
 
