@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — AktivAsia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .admin-header { background:#1a1a1a; color:#fff; padding:16px 24px; }
+    .admin-header a { color:#f5c842; text-decoration:none; font-size:13px; }
+    .admin-header h1 { margin:4px 0 0; font-size:20px; }
+    .admin-header .meta { color:#aaa; font-size:13px; margin-top:4px; }
+    .admin-tabs { display:flex; gap:0; border-bottom:2px solid #e5e5e5; margin:24px 0 0; padding:0 24px; }
+    .admin-tabs button { background:none; border:none; padding:10px 20px; cursor:pointer;
+                         font-size:14px; font-weight:600; color:#666; border-bottom:2px solid transparent;
+                         margin-bottom:-2px; }
+    .admin-tabs button.active { color:#1a1a1a; border-bottom-color:#f5c842; }
+    .admin-view { display:none; padding:24px; }
+    .admin-view.active { display:block; }
+    .admin-table { width:100%; border-collapse:collapse; margin-top:12px; }
+    .admin-table th { background:#f5f5f5; text-align:left; padding:10px 12px; font-size:12px;
+                      font-weight:700; text-transform:uppercase; letter-spacing:.5px; }
+    .admin-table td { padding:10px 12px; border-bottom:1px solid #eee; font-size:14px; vertical-align:middle; }
+    .admin-table select { padding:4px 8px; border:1px solid #ccc; border-radius:4px; font-size:13px; }
+    .admin-counter { font-size:14px; color:#666; margin-bottom:8px; }
+    .btn-save { background:#f5c842; border:none; padding:10px 24px; font-weight:700;
+                font-size:14px; border-radius:4px; cursor:pointer; margin-top:16px; }
+    .btn-save:hover { background:#e6b800; }
+    .btn-bulk { background:#eee; border:none; padding:6px 14px; font-size:13px;
+                border-radius:4px; cursor:pointer; margin-right:8px; }
+    .btn-bulk:hover { background:#ddd; }
+    .progress-bar-wrap { background:#eee; border-radius:8px; height:16px; margin:12px 0; overflow:hidden; }
+    .progress-bar-fill { background:#f5c842; height:100%; transition:width .3s; }
+    .progress-label { font-size:14px; color:#444; margin-bottom:4px; }
+    .empty-state { color:#888; font-style:italic; padding:24px 0; }
+    .saving-msg { display:none; color:#888; font-size:13px; margin-left:12px; }
+  </style>
+</head>
+<body>
+
+  <div class="admin-header">
+    <div class="container">
+      <a href="portal.html" id="back-link">← Back to Portal</a>
+      <h1 id="training-title">Loading…</h1>
+      <div class="meta" id="training-meta"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <nav class="admin-tabs">
+      <button id="tab-selection"   onclick="switchTab('selection')">Selection</button>
+      <button id="tab-attendance"  onclick="switchTab('attendance')">Attendance</button>
+      <button id="tab-post_survey" onclick="switchTab('post_survey')">Post-Survey</button>
+    </nav>
+
+    <!-- View 1: Selection -->
+    <div class="admin-view" id="view-selection">
+      <div class="admin-counter" id="sel-counter"></div>
+      <div>
+        <button class="btn-bulk" onclick="bulkSetStage('selection', 'Selected')">Select All</button>
+        <button class="btn-bulk" onclick="bulkSetStage('selection', 'Rejected')">Reject All</button>
+      </div>
+      <table class="admin-table">
+        <thead><tr><th>Name</th><th>Organization</th><th>Email</th><th>Stage</th></tr></thead>
+        <tbody id="sel-tbody"></tbody>
+      </table>
+      <div class="empty-state" id="sel-empty" style="display:none">No applicants in "Still in Applied Stage".</div>
+      <button class="btn-save" onclick="saveChanges('selection')">Save Changes</button>
+      <span class="saving-msg" id="sel-saving">Saving…</span>
+    </div>
+
+    <!-- View 2: Attendance -->
+    <div class="admin-view" id="view-attendance">
+      <div class="admin-counter" id="att-counter"></div>
+      <table class="admin-table">
+        <thead><tr><th>Name</th><th>Organization</th><th>Email</th><th>Stage</th></tr></thead>
+        <tbody id="att-tbody"></tbody>
+      </table>
+      <div class="empty-state" id="att-empty" style="display:none">No participants in "Selected" stage.</div>
+      <button class="btn-save" onclick="saveChanges('attendance')">Save Changes</button>
+      <span class="saving-msg" id="att-saving">Saving…</span>
+    </div>
+
+    <!-- View 3: Post-Survey -->
+    <div class="admin-view" id="view-post_survey">
+      <div class="progress-label" id="ps-label"></div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="ps-bar" style="width:0%"></div></div>
+      <table class="admin-table">
+        <thead><tr><th>Name</th><th>Email</th><th>Stage</th></tr></thead>
+        <tbody id="ps-tbody"></tbody>
+      </table>
+      <div class="empty-state" id="ps-empty" style="display:none">All participants have completed the post-survey.</div>
+      <button class="btn-save" onclick="saveChanges('post_survey')">Save Changes</button>
+      <span class="saving-msg" id="ps-saving">Saving…</span>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
