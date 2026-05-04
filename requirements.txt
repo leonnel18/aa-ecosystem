@@ -2,3 +2,5 @@ zohocrmsdk8_0
 requests
 python-dotenv
 pandas
+google-auth-oauthlib
+google-api-python-client

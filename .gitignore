@@ -1,6 +1,7 @@
 # Secrets & credentials
 .env
 data/token_*.json
+tools/credentials.json
 
 # Intermediate workbench
 .tmp/
@@ -14,6 +15,8 @@ __pycache__/
 # Data files (may contain PII)
 data/*.json
 data/*.csv
+# Exception: config file (no PII)
+!data/email_config.json
 
 # OS
 .DS_Store

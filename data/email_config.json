@@ -1,0 +1,14 @@
+{
+  "cc_always": [
+    "gino@aktivasia.org",
+    "nurul@aktivasia.org",
+    "regional@aktivasia.org"
+  ],
+  "country_teams": {
+    "Philippines": { "to": ["aktivasia.philippines@gmail.com"] },
+    "Pakistan":    { "to": ["aktivasia.pakistan@gmail.com"] },
+    "Korea":       { "to": ["aktivasia.korea@gmail.com"] },
+    "Indonesia":   { "to": ["aktivasia.indonesia@gmail.com"] },
+    "Regional":    { "to": ["aktivasia.backbone@gmail.com"] }
+  }
+}
