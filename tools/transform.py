@@ -452,6 +452,7 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
 
         sol_id = sol.get("id")
         actual_trainings.append({
+            "id":         sol_id,
             "name":       sol.get("Solution_Title", ""),
             "type":       type_name,
             "date":       start,

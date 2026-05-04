@@ -533,6 +533,7 @@ function renderReport2(r2) {
           <td style="text-align:right">${t.applicants}</td>
           <td style="text-align:right">${t.graduates}</td>
           <td><span class="badge badge-${sClass}">${t.status || '—'}</span></td>
+          <td>${t.id ? `<a href="admin.html?training_id=${t.id}&view=selection" style="background:#f5c842;padding:4px 10px;border-radius:3px;text-decoration:none;color:#1a1a1a;font-size:12px;font-weight:700;">Manage</a>` : '—'}</td>
         </tr>`;
       }
     });
