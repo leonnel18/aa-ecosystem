@@ -2,6 +2,30 @@
 
 ---
 
+## [2026-05-04] Reminder Engine + Admin Page — COMPLETE
+
+Features shipped:
+- `tools/reminder_engine.py` — daily scheduler (4 reminder types), `--dry-run` flag
+- `tools/gmail_sender.py` — Gmail API sender (gino@aktivasia.org), in-memory token cache
+- `tools/gmail_auth.py` — one-time OAuth2 setup script
+- `tools/reminder_logic.py` — pure business logic, fully tested (17 tests)
+- `tools/email_templates.py` — HTML email builders, fully tested (8 tests)
+- `portal/admin.html` + `portal/js/admin.js` — participant stage management (selection / attendance / post-survey tabs)
+- `portal/workers/crm-proxy.js` — `PATCH /deals/:id/stage` route added
+- `register_reminder_task.bat` — Windows Task Scheduler daily 08:00 trigger
+- `data/email_config.json` — country team email lists
+
+Dry-run against live CRM confirmed:
+- 164 training plans, 116 trainings, 3865 deals fetched successfully
+- 9 due reminders detected (1×R2, 5×R3, 2×R4) — ready to fire after Gmail OAuth setup
+
+CRM changes still needed from Gino (pre-deployment prerequisites):
+- [ ] Add `Rejected` picklist value to `Deals.Stage` in Zoho CRM
+- [ ] Confirm `Attended Training` spelling is live
+- [ ] Enable Gmail API + create OAuth2 credentials → run `python tools/gmail_auth.py`
+
+---
+
 ## [2026-03-18] Protocol 0 — Initialization
 
 **Status:** COMPLETE
