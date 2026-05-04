@@ -55,7 +55,7 @@ function corsHeaders(origin) {
     || (origin && /^http:\/\/localhost(:\d+)?$/.test(origin));
   return {
     "Access-Control-Allow-Origin":  allowed ? origin : ALLOWED_ORIGINS[0],
-    "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Max-Age":       "86400",
   };
@@ -207,6 +207,20 @@ export default {
           method:  "PUT",
           headers: { ...auth, "Content-Type": "application/json" },
           body:    JSON.stringify(payload),
+        });
+        const body = await crmRes.json();
+        return jsonResponse(body, crmRes.status, origin);
+      }
+
+      // ── PATCH /deals/:id/stage ────────────────────────────────────────────────
+      const dealStageMatch = path.match(/^\/deals\/([^/]+)\/stage$/);
+      if (request.method === "PATCH" && dealStageMatch) {
+        const id      = dealStageMatch[1];
+        const { Stage } = await request.json();
+        const crmRes  = await fetch(`${CRM_BASE}/Deals/${id}`, {
+          method:  "PUT",
+          headers: { ...auth, "Content-Type": "application/json" },
+          body:    JSON.stringify({ data: [{ Stage }] }),
         });
         const body = await crmRes.json();
         return jsonResponse(body, crmRes.status, origin);
