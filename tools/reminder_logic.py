@@ -35,7 +35,13 @@ def check_reminder1(training_plans: list, solutions: list, today: date = None) -
     Each dict: { "plan": plan_dict, "days": int, "country": str }
     """
     today = today or date.today()
-    linked_names = {s.get("Training_Title_Plan") for s in solutions if s.get("Training_Title_Plan")}
+    # Training_Title_Plan is a lookup dict {"name": ..., "id": ...} from CRM
+    def _plan_ref(val):
+        if isinstance(val, dict):
+            return val.get("id") or val.get("name")
+        return val
+    linked_plan_ids = {_plan_ref(s.get("Training_Title_Plan")) for s in solutions
+                       if s.get("Training_Title_Plan")}
     results = []
     for plan in training_plans:
         start = _parse_date(plan.get("Start_Date"))
@@ -44,7 +50,7 @@ def check_reminder1(training_plans: list, solutions: list, today: date = None) -
         days = (start - today).days
         if days not in (60, 45, 30):
             continue
-        if plan.get("Name") in linked_names:
+        if plan.get("id") in linked_plan_ids or plan.get("Name") in linked_plan_ids:
             continue
         results.append({"plan": plan, "days": days, "country": plan.get("Organised_By", "")})
     return results
