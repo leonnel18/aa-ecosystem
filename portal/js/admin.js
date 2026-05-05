@@ -48,7 +48,7 @@ function sixMonthStatus(d) {
     return { label: "Complete", cls: "badge-green" };
   }
   if (d.Graduate_Date) {
-    const sendDate = new Date(d.Graduate_Date);
+    const sendDate = new Date(d.Graduate_Date + "T00:00:00");
     sendDate.setMonth(sendDate.getMonth() + 6);
     if (sendDate > new Date()) {
       const fmt = sendDate.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
@@ -265,8 +265,8 @@ function renderGraduates() {
         <td>${dealName(d)}</td>
         <td>${d.Email ?? ""}</td>
         <td>${stageSelect(d.id, d.Stage, "post_survey")}</td>
-        <td><span class="status-badge ${sm.cls}">${sm.label}</span></td>
         <td><span class="status-badge badge-green">Complete</span></td>
+        <td><span class="status-badge ${sm.cls}">${sm.label}</span></td>
       </tr>`;
   }).join("");
 }
