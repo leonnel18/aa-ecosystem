@@ -42,6 +42,22 @@ function stageSelect(dealId, currentStage, view) {
   return `<select class="filter" id="stage-${dealId}" data-original="${currentStage}">${opts}</select>`;
 }
 
+function sixMonthStatus(d) {
+  if (d.Have_you_applied_the_training_to_run_more_effectiv != null &&
+      d.Have_you_applied_the_training_to_run_more_effectiv !== "") {
+    return { label: "Complete", cls: "badge-green" };
+  }
+  if (d.Graduate_Date) {
+    const sendDate = new Date(d.Graduate_Date);
+    sendDate.setMonth(sendDate.getMonth() + 6);
+    if (sendDate > new Date()) {
+      const fmt = sendDate.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+      return { label: `For sending on ${fmt}`, cls: "badge-grey" };
+    }
+  }
+  return { label: "Incomplete", cls: "badge-yellow" };
+}
+
 // ── Fetch training info ───────────────────────────────────────────────────────
 async function loadTrainingInfo() {
   if (!TRAINING_ID) {
