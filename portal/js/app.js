@@ -1252,7 +1252,7 @@ function showEditToast(msg) {
   const t = document.getElementById('edit-toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+  setTimeout(() => t.classList.remove('show'), 1200);
 }
 
 function setEditFooterError(msg) {
@@ -1267,6 +1267,7 @@ function openEditModal(id, name) {
   document.getElementById('edit-modal-subtitle').textContent = name;
   document.getElementById('edit-modal-overlay').classList.add('open');
   setEditFooterError('');
+  document.getElementById('btn-save-edit').disabled = true;
   showEditSkeleton();
   loadTrainingForEdit(id);
 }
@@ -1571,6 +1572,7 @@ function renderEditForm(d, plans) {
     makeAccSection('content',     'Training Content',     contentHtml,  false),
     makeAccSection('facilitators','Facilitators',         facHtml,      false),
   ].join('');
+  document.getElementById('btn-save-edit').disabled = false;
 }
 
 function onEditOrgChange(val) {
