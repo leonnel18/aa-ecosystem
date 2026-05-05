@@ -232,6 +232,42 @@ function renderPostSurvey() {
       <td>${d.Email ?? ""}</td>
       <td>${stageSelect(d.id, d.Stage, "post_survey")}</td>
     </tr>`).join("");
+
+  renderGraduates();
+}
+
+function renderGraduates() {
+  const graduates = allDeals.filter(d => d.Stage === "Graduated or Post Evaluation Completed");
+  const header    = document.getElementById("grad-header");
+  const tbody     = document.getElementById("grad-tbody");
+  const empty     = document.getElementById("grad-empty");
+
+  if (header) header.textContent = `List of Graduates (${graduates.length})`;
+
+  if (graduates.length === 0) {
+    if (tbody)  tbody.innerHTML = "";
+    if (empty)  empty.style.display = "";
+    return;
+  }
+
+  const sorted = [...graduates].sort((a, b) => {
+    const nameA = dealName(a).toLowerCase();
+    const nameB = dealName(b).toLowerCase();
+    return gradSortAsc ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+  });
+
+  if (empty) empty.style.display = "none";
+  if (tbody) tbody.innerHTML = sorted.map(d => {
+    const sm = sixMonthStatus(d);
+    return `
+      <tr>
+        <td>${dealName(d)}</td>
+        <td>${d.Email ?? ""}</td>
+        <td>${stageSelect(d.id, d.Stage, "post_survey")}</td>
+        <td><span class="status-badge ${sm.cls}">${sm.label}</span></td>
+        <td><span class="status-badge badge-green">Complete</span></td>
+      </tr>`;
+  }).join("");
 }
 
 // ── Bulk set stage ────────────────────────────────────────────────────────────
