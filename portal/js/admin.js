@@ -17,7 +17,7 @@ const STAGE_OPTIONS = {
 // ── Tab switching ─────────────────────────────────────────────────────────────
 function switchTab(view) {
   document.querySelectorAll(".admin-view").forEach(el => el.classList.remove("active"));
-  document.querySelectorAll(".nav-tab").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".admin-tabs button").forEach(el => el.classList.remove("active"));
   document.getElementById(`view-${view}`).classList.add("active");
   document.getElementById(`tab-${view}`).classList.add("active");
   const url = new URL(window.location);

@@ -8,17 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Admin view panels */
-    .admin-view { display: none; padding: 32px 0; }
-    .admin-view.active { display: block; }
+    .admin-header { background:#1a1a1a; color:#fff; padding:16px 24px; }
+    .admin-header a { color:#f5c842; text-decoration:none; font-size:13px; }
+    .admin-header h1 { margin:4px 0 0; font-size:20px; }
+    .admin-header .meta { color:#aaa; font-size:13px; margin-top:4px; }
+    .admin-tabs { display:flex; gap:0; border-bottom:2px solid #e5e5e5; margin:24px 0 0; padding:0 24px; }
+    .admin-tabs button { background:none; border:none; padding:10px 20px; cursor:pointer;
+                         font-size:14px; font-weight:600; color:#666; border-bottom:2px solid transparent;
+                         margin-bottom:-2px; }
+    .admin-tabs button.active { color:#1a1a1a; border-bottom-color:#f5c842; }
+    .admin-view { display:none; padding:24px; }
+    .admin-view.active { display:block; }
     .admin-counter { font-size: .85rem; color: var(--text-meta); margin-bottom: 12px; }
-
-    /* Admin tab: gradient underline to signal admin mode */
-    .portal-nav .nav-tab.active {
-      color: var(--brand);
-      border-bottom-color: transparent;
-      border-image: linear-gradient(90deg, var(--grad-start), var(--grad-end)) 1;
-    }
 
     /* Admin modal: gradient top strip */
     .edit-modal-header {
@@ -37,29 +38,20 @@
 </head>
 <body>
 
-  <header class="site-header">
+  <div class="admin-header">
     <div class="container">
-      <a class="logo" href="index.html">Aktiv<span>Asia</span></a>
-    </div>
-  </header>
-
-  <div class="portal-header">
-    <div class="container">
-      <a class="back-link" href="portal.html" id="back-link">← Back to Portal</a>
+      <a href="portal.html" id="back-link">← Back to Portal</a>
       <h1 id="training-title">Loading…</h1>
-      <p class="subtitle" id="training-meta"></p>
+      <div class="meta" id="training-meta"></div>
     </div>
   </div>
 
-  <nav class="portal-nav">
-    <div class="container">
-      <button class="nav-tab" id="tab-selection"   onclick="switchTab('selection')">Selection</button>
-      <button class="nav-tab" id="tab-attendance"  onclick="switchTab('attendance')">Attendance</button>
-      <button class="nav-tab" id="tab-post_survey" onclick="switchTab('post_survey')">Post-Survey</button>
-    </div>
-  </nav>
-
   <div class="container">
+    <nav class="admin-tabs">
+      <button id="tab-selection"   onclick="switchTab('selection')">Selection</button>
+      <button id="tab-attendance"  onclick="switchTab('attendance')">Attendance</button>
+      <button id="tab-post_survey" onclick="switchTab('post_survey')">Post-Survey</button>
+    </nav>
 
     <!-- View 1: Selection -->
     <div class="admin-view" id="view-selection">
@@ -146,15 +138,9 @@
       </div>
     </div>
 
-  </div><!-- /.container -->
+  </div>
 
   <div class="edit-toast" id="admin-toast"></div>
-
-  <footer class="site-footer">
-    <div class="container">
-      <strong>AktivAsia</strong> · Admin · Training Management
-    </div>
-  </footer>
 
   <script src="js/admin.js"></script>
 </body>
