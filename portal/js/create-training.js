@@ -46,6 +46,28 @@ async function resolveOwner(organisedBy) {
   }
 }
 
+// ── Date formatting ───────────────────────────────────────────────────────────
+function fmtDate(isoStr) {
+  if (!isoStr) return "";
+  // Parse as local date to avoid UTC-offset shifting the day
+  const [y, m, d] = isoStr.split("-").map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function updateDateDisplay(inputId) {
+  const el = document.getElementById(inputId + "-display");
+  if (el) el.textContent = fmtDate(document.getElementById(inputId).value);
+}
+
+// ── Accordion ─────────────────────────────────────────────────────────────────
+function toggleAccordion(sectionId) {
+  const body    = document.getElementById(sectionId + "-body");
+  const chevron = document.getElementById(sectionId + "-chevron");
+  const open    = body.style.display === "none";
+  body.style.display    = open ? "" : "none";
+  chevron.style.transform = open ? "rotate(90deg)" : "rotate(0deg)";
+}
+
 // ── Country/portal change ─────────────────────────────────────────────────────
 function onOrganisedByChange(select) {
   const field = document.getElementById("countries-participated-field");
@@ -53,7 +75,26 @@ function onOrganisedByChange(select) {
   if (select.value !== "Regional") {
     document.getElementById("Countries_Participated").selectedIndex = -1;
   }
+  lockTitleAndType();
   loadPlans(select.value);
+}
+
+function lockTitleAndType() {
+  const title = document.getElementById("Solution_Title");
+  const type  = document.getElementById("Training_Type");
+  title.disabled    = true;
+  title.placeholder = "Select a training plan first…";
+  type.disabled     = true;
+  title.value = "";
+  type.value  = "";
+}
+
+function unlockTitleAndType() {
+  const title = document.getElementById("Solution_Title");
+  const type  = document.getElementById("Training_Type");
+  title.disabled    = false;
+  title.placeholder = "e.g. Foundational Campaigning Training — Philippines 2026";
+  type.disabled     = false;
 }
 
 async function loadPlans(organisedBy) {
@@ -120,7 +161,10 @@ function renderPlanDropdown(plans) {
   plans.forEach(plan => {
     const item = document.createElement("div");
     item.className = "fac-dropdown-item";
-    item.textContent = plan.Name;
+    const dateLabel = plan.Start_Date
+      ? ` (${fmtDate(plan.Start_Date)} → ${plan.End_Date ? fmtDate(plan.End_Date) : "?"})`
+      : "";
+    item.textContent = plan.Name + dateLabel;
     item.addEventListener("mousedown", e => {
       e.preventDefault();
       selectPlan(plan.id, plan.Name);
@@ -134,6 +178,7 @@ function selectPlan(id, name) {
   document.getElementById("Training_Title_Plan").value    = name;
   document.getElementById("Training_Title_Plan_id").value = id;
   document.getElementById("plan-dropdown").style.display  = "none";
+  unlockTitleAndType();
 }
 
 // ── Language of Delivery tags ─────────────────────────────────────────────────
@@ -584,6 +629,17 @@ function serializeCustomQuestions() {
   return JSON.stringify(arr);
 }
 
+// ── Post-survey auto-dates (open = start date, close = start + 6 months) ──────
+function onStartDateChange(startVal) {
+  if (!startVal) return;
+  const open  = new Date(startVal);
+  const close = new Date(startVal);
+  close.setMonth(close.getMonth() + 6);
+  const fmt = d => d.toISOString().slice(0, 10);
+  document.getElementById("Post_Survey_Open_Date").value  = fmt(open);
+  document.getElementById("Post_Survey_Close_Date").value = fmt(close);
+}
+
 // ── Training Details gate ──────────────────────────────────────────────────────
 function toggleTrainingDetails(cb) {
   document.getElementById("training-details-fields").style.display = cb.checked ? "" : "none";
@@ -610,19 +666,32 @@ function validateSelect(id) {
   return pass;
 }
 
+function openSection(sectionId) {
+  const body    = document.getElementById(sectionId + "-body");
+  const chevron = document.getElementById(sectionId + "-chevron");
+  if (body && body.style.display === "none") {
+    body.style.display      = "";
+    chevron.style.transform = "rotate(90deg)";
+  }
+}
+
 function validateAll() {
   let ok = true;
   ok = validateRequired("Solution_Title") && ok;
   ok = validateSelect("Training_Type") && ok;
   ok = validateSelect("Organised_By") && ok;
+
   ok = validateRequired("Start_Date") && ok;
   ok = validateRequired("End_Date") && ok;
   ok = validateRequired("Application_Form_Open_Date") && ok;
   ok = validateRequired("Application_Form_Close_Date") && ok;
 
   if (document.getElementById("show-training-details")?.checked) {
-    ok = validateRequired("Who_is_this_training_for") && ok;
-    ok = validateRequired("Training_Objectives") && ok;
+    const websiteOk = [
+      validateRequired("Who_is_this_training_for"),
+      validateRequired("Training_Objectives"),
+    ].every(Boolean);
+    if (!websiteOk) { openSection("section-website"); ok = false; }
   }
 
   return ok;
@@ -779,8 +848,19 @@ function resetForm() {
   // Reset Countries Participated visibility
   document.getElementById("countries-participated-field").style.display = "none";
 
-  // Reset Training Plan typeahead
+  // Reset Training Plan typeahead and cascade
+  lockTitleAndType();
   loadPlans("");
+
+  // Clear auto-calculated post-survey hidden dates
+  document.getElementById("Post_Survey_Open_Date").value  = "";
+  document.getElementById("Post_Survey_Close_Date").value = "";
+
+  // Clear date display labels
+  ["Start_Date", "End_Date", "Application_Form_Open_Date", "Application_Form_Close_Date"].forEach(id => {
+    const el = document.getElementById(id + "-display");
+    if (el) el.textContent = "";
+  });
 
   // Reset language chips
   document.querySelectorAll(".lang-chip").forEach(c => c.classList.remove("selected"));
@@ -822,6 +902,20 @@ function resetForm() {
   // Clear question cards
   document.getElementById("questions-container").innerHTML = "";
   questionCount = 0;
+
+  // Reset accordion: open Basic Info, collapse all others
+  [
+    { id: "section-basic",     open: true  },
+    { id: "section-topics",    open: false },
+    { id: "section-fac",       open: false },
+    { id: "section-website",   open: false },
+    { id: "section-questions", open: false },
+  ].forEach(({ id, open }) => {
+    const body    = document.getElementById(id + "-body");
+    const chevron = document.getElementById(id + "-chevron");
+    if (body)    body.style.display        = open ? "" : "none";
+    if (chevron) chevron.style.transform   = open ? "rotate(90deg)" : "rotate(0deg)";
+  });
 
   // Reset submit bar and result panel
   document.getElementById("submit-bar").style.display = "";

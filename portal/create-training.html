@@ -465,6 +465,69 @@
     .ql-editor { min-height: 140px; }
     .ql-toolbar.ql-snow { border-radius: var(--radius-sm) var(--radius-sm) 0 0; border-color: var(--border); }
     .ql-container.ql-snow { border-radius: 0 0 var(--radius-sm) var(--radius-sm); border-color: var(--border); }
+
+    /* ── Date display label ── */
+    .date-display {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 5px;
+      min-height: 18px;
+    }
+
+    /* ── Prerequisites card ── */
+    .prereq-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--primary);
+    }
+    @media (min-width: 640px) { .prereq-card { padding: 28px 28px; } }
+    .prereq-title { font-size: 18px; font-weight: 800; margin-bottom: 4px; color: var(--text); }
+    .prereq-subtitle { font-size: 13px; color: var(--meta); margin-bottom: 20px; }
+    .step-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── Accordion section-card ── */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 0;
+    }
+    .section-header:hover { opacity: 0.8; }
+    .section-header-text { flex: 1; }
+    .section-chevron {
+      font-size: 14px;
+      color: var(--meta);
+      transition: transform 0.2s;
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
+    .section-body { margin-top: 16px; }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.min.css">
 </head>
@@ -482,14 +545,16 @@
 
 <div class="form-wrap">
 
-  <!-- Section 1: Training Identity -->
-  <div class="section-card">
-    <div class="section-title">Training Identity</div>
-    <div class="section-subtitle">Core details that identify this training</div>
+  <!-- Prerequisites (not collapsible — drives the cascade) -->
+  <div class="prereq-card">
+    <div class="prereq-title">Prerequisites</div>
+    <div class="prereq-subtitle">Complete these in order — each step unlocks the next</div>
 
-    <!-- Group 1: Country -->
+    <!-- Step 1: Country -->
     <div class="field">
-      <label class="field-label" for="Organised_By">Country / Portal <span class="req">*</span></label>
+      <label class="step-label" for="Organised_By">
+        <span class="step-num">1</span> Country / Portal <span class="req">*</span>
+      </label>
       <select id="Organised_By" onchange="onOrganisedByChange(this)">
         <option value="">— Select country —</option>
         <option value="Philippines">Philippines</option>
@@ -513,16 +578,34 @@
       <div class="field-hint">Hold Ctrl / Cmd to select multiple countries.</div>
     </div>
 
-    <!-- Group 2: Title / Type / Description / Format -->
+    <!-- Step 2: Training Plan -->
     <div class="field">
-      <label class="field-label" for="Solution_Title">Training Title <span class="req">*</span></label>
-      <input type="text" id="Solution_Title" placeholder="e.g. Foundational Campaigning Training — Philippines 2026">
+      <label class="step-label">
+        <span class="step-num">2</span> Training Plan
+      </label>
+      <div class="fac-typeahead-wrap" id="plan-typeahead-wrap">
+        <input type="text" id="Training_Title_Plan" placeholder="Select country first, then search…" autocomplete="off" oninput="onPlanInput(this)" onfocus="onPlanInput(this)" disabled>
+        <input type="hidden" id="Training_Title_Plan_id">
+        <div class="fac-dropdown" id="plan-dropdown" style="display:none"></div>
+      </div>
+      <div class="field-hint" id="plan-hint">Select a country above to load plans.</div>
+    </div>
+
+    <!-- Step 3: Training Title -->
+    <div class="field">
+      <label class="step-label" for="Solution_Title">
+        <span class="step-num">3</span> Training Title <span class="req">*</span>
+      </label>
+      <input type="text" id="Solution_Title" placeholder="Select a training plan first…" disabled>
       <div class="field-error">This field is required.</div>
     </div>
 
+    <!-- Step 4: Training Type -->
     <div class="field">
-      <label class="field-label" for="Training_Type">Training Type <span class="req">*</span></label>
-      <select id="Training_Type" onchange="onTrainingTypeChange(this.value)">
+      <label class="step-label" for="Training_Type">
+        <span class="step-num">4</span> Training Type <span class="req">*</span>
+      </label>
+      <select id="Training_Type" onchange="onTrainingTypeChange(this.value)" disabled>
         <option value="">— Select type —</option>
         <option value="Foundational">Foundational</option>
         <option value="Training of Trainers (TOT)">Training of Trainers (TOT)</option>
@@ -532,239 +615,258 @@
       <div class="field-error">This field is required.</div>
     </div>
 
+    <!-- Step 5: Training Dates -->
     <div class="field">
-      <label class="field-label">Training Description</label>
-      <div id="Training_Description_editor"></div>
-      <input type="hidden" id="Training_Description">
-      <div class="field-hint">Shown on the application form below the training banner. Supports bold, bullets, and links.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="Format">Format</label>
-      <select id="Format">
-        <option value="">— Select format —</option>
-        <option value="In-person">In-person</option>
-        <option value="Hybrid">Hybrid</option>
-        <option value="Online">Online</option>
-      </select>
-    </div>
-
-    <!-- Group 3: Participants / Language / Co-host -->
-    <div class="field">
-      <label class="field-label" for="Target_Participants">Target Participants</label>
-      <input type="number" id="Target_Participants" min="1" max="500" placeholder="e.g. 25" inputmode="numeric">
-    </div>
-
-    <div class="field" id="lang-field">
-      <label class="field-label">Language of Delivery</label>
-      <div id="lang-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px">
-        <button type="button" class="lang-chip" data-lang="Filipino" onclick="toggleLang(this)" aria-pressed="false">Filipino</button>
-        <button type="button" class="lang-chip" data-lang="English" onclick="toggleLang(this)" aria-pressed="false">English</button>
-        <button type="button" class="lang-chip" data-lang="Urdu" onclick="toggleLang(this)" aria-pressed="false">Urdu</button>
-        <button type="button" class="lang-chip" data-lang="Bahasa Indonesia" onclick="toggleLang(this)" aria-pressed="false">Bahasa Indonesia</button>
-        <button type="button" class="lang-chip" data-lang="한국어" onclick="toggleLang(this)" aria-pressed="false">한국어</button>
-        <button type="button" class="lang-chip lang-chip--others" onclick="showLangOthers(this)">+ Others</button>
-      </div>
-      <div id="lang-others-row" style="display:none;gap:8px;align-items:center;margin-bottom:8px">
-        <input type="text" id="lang-others-input" placeholder="Type language, press Enter" style="flex:1;min-height:38px;font-size:14px">
-        <button type="button" class="btn-secondary btn" style="min-height:38px;padding:0 14px;font-size:13px" onclick="addCustomLang()">Add</button>
-      </div>
-      <div id="lang-custom-tags" style="display:flex;flex-wrap:wrap;gap:8px"></div>
-      <div class="field-hint">Select all that apply. Use "Others" to add unlisted languages.</div>
-    </div>
-
-    <div class="field">
-      <label class="field-label" for="Co_host">Co-host</label>
-      <input type="text" id="Co_host" placeholder="e.g. Partner organisation name">
-    </div>
-
-    <!-- Group 4: Venue -->
-    <div class="field">
-      <label class="field-label" for="Venue">Venue Name</label>
-      <input type="text" id="Venue" placeholder="e.g. Bayanihan Center, Manila">
-    </div>
-
-    <div class="field" style="margin-bottom:0">
-      <label class="field-label" for="Venue_Address">Venue Address</label>
-      <textarea id="Venue_Address" rows="2" placeholder="Full address shown to applicants on the form banner"></textarea>
-    </div>
-  </div>
-
-  <!-- Section 2: Associated Training Plan -->
-  <div class="section-card">
-    <div class="section-title">Associated Training Plan</div>
-    <div class="section-subtitle">Optional — links this training to an existing plan record</div>
-
-    <div class="field" style="margin-bottom:0">
-      <label class="field-label">Training Plan Name</label>
-      <div class="fac-typeahead-wrap" id="plan-typeahead-wrap">
-        <input type="text" id="Training_Title_Plan" placeholder="Select country first, then search…" autocomplete="off" oninput="onPlanInput(this)" onfocus="onPlanInput(this)" disabled>
-        <input type="hidden" id="Training_Title_Plan_id">
-        <div class="fac-dropdown" id="plan-dropdown" style="display:none"></div>
-      </div>
-      <div class="field-hint" id="plan-hint">Select an Organised By country above to load plans.</div>
-    </div>
-  </div>
-
-  <!-- Section 3: Dates & Availability -->
-  <div class="section-card">
-    <div class="section-title">Dates &amp; Availability</div>
-    <div class="section-subtitle">Set the training period and form windows</div>
-
-    <div class="date-group">
-      <div class="date-group-label">Training Period</div>
-      <div class="date-grid">
-        <div class="field">
-          <label class="field-label" for="Start_Date">Start Date <span class="req">*</span></label>
-          <input type="date" id="Start_Date">
-          <div class="field-error">This field is required.</div>
-        </div>
-        <div class="field">
-          <label class="field-label" for="End_Date">End Date <span class="req">*</span></label>
-          <input type="date" id="End_Date">
-          <div class="field-error">This field is required.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="date-group">
-      <div class="date-group-label">Application Form Window</div>
-      <div class="date-grid">
-        <div class="field">
-          <label class="field-label" for="Application_Form_Open_Date">Opens <span class="req">*</span></label>
-          <input type="date" id="Application_Form_Open_Date">
-          <div class="field-error">This field is required.</div>
-        </div>
-        <div class="field">
-          <label class="field-label" for="Application_Form_Close_Date">Closes <span class="req">*</span></label>
-          <input type="date" id="Application_Form_Close_Date">
-          <div class="field-error">This field is required.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="date-group" style="margin-bottom:0">
-      <div class="date-group-label">Post-Training Survey Window</div>
-      <div class="date-grid">
-        <div class="field">
-          <label class="field-label" for="Post_Survey_Open_Date">Opens</label>
-          <input type="date" id="Post_Survey_Open_Date">
-        </div>
-        <div class="field">
-          <label class="field-label" for="Post_Survey_Close_Date">Closes</label>
-          <input type="date" id="Post_Survey_Close_Date">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Section 4: Session Topics -->
-  <div class="section-card">
-    <div class="section-title">Session Topics</div>
-    <div class="section-subtitle">Up to 7 topics — shown as individual rating questions in the post-training survey</div>
-
-    <div id="topics-container" style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px"></div>
-
-    <button type="button" class="btn-add-q" id="btn-add-topic" onclick="addTopic()">
-      <span style="font-size:18px;line-height:1">+</span> Add Topic
-    </button>
-  </div>
-
-  <!-- Section 5: Facilitators / Trainers -->
-  <div class="section-card">
-    <div class="section-title">Facilitators / Trainers</div>
-    <div class="section-subtitle">Add up to 10 facilitators for this training</div>
-
-    <div id="facilitators-container">
-      <div class="facilitator-row" data-slot="1" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;align-items:start">
-        <div class="field" style="margin-bottom:0">
-          <label class="field-label">Name 1</label>
-          <div class="fac-typeahead-wrap">
-            <input type="text" class="fac-name" placeholder="Search contact name…" autocomplete="off" oninput="onFacInput(this)" onfocus="onFacInput(this)">
-            <input type="hidden" class="fac-id">
-            <div class="fac-dropdown" style="display:none"></div>
-          </div>
-        </div>
-        <div class="field" style="margin-bottom:0">
-          <label class="field-label">Role 1</label>
-          <select class="fac-role">
-            <option value="">— Select role —</option>
-            <option value="Lead Facilitator">Lead Facilitator</option>
-            <option value="Senior Facilitator">Senior Facilitator</option>
-            <option value="Co-Facilitator">Co-Facilitator</option>
-            <option value="Junior/ Peer Facilitator">Junior/ Peer Facilitator</option>
-            <option value="Guest/ External Facilitator">Guest/ External Facilitator</option>
-            <option value="Coach">Coach</option>
-            <option value="Shadow Coach">Shadow Coach</option>
-            <option value="Support">Support</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <button type="button" class="btn-add-q" onclick="addFacilitator()" id="btn-add-facilitator">
-      <span style="font-size:18px;line-height:1">+</span> Add Facilitator
-    </button>
-  </div>
-
-  <!-- Section 6: Training Details / Website -->
-  <div class="section-card">
-    <div class="section-title">Training Details</div>
-    <div class="section-subtitle">Shown on the public training page and used for applicant communication.</div>
-
-    <div class="field" style="margin-bottom:16px">
-      <label class="checkbox-gate-row">
-        <input type="checkbox" id="show-training-details" onchange="toggleTrainingDetails(this)">
-        <span>Add this training in the website</span>
+      <label class="step-label">
+        <span class="step-num">5</span> Training Dates <span class="req">*</span>
       </label>
-      <div class="field-hint" style="margin-top:6px;margin-left:28px">Tick to fill in details shown on the public training page.</div>
+      <div class="date-grid">
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label" for="Start_Date">Start Date</label>
+          <input type="date" id="Start_Date" onchange="onStartDateChange(this.value); updateDateDisplay('Start_Date')">
+          <span class="date-display" id="Start_Date-display"></span>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label" for="End_Date">End Date</label>
+          <input type="date" id="End_Date" onchange="updateDateDisplay('End_Date')">
+          <span class="date-display" id="End_Date-display"></span>
+          <div class="field-error">This field is required.</div>
+        </div>
+      </div>
     </div>
 
-    <div id="training-details-fields" style="display:none">
+    <!-- Step 6: Application Form Window -->
+    <div class="field" style="margin-bottom:0">
+      <label class="step-label">
+        <span class="step-num">6</span> Application Form Window <span class="req">*</span>
+      </label>
+      <div class="date-grid">
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label" for="Application_Form_Open_Date">Opens</label>
+          <input type="date" id="Application_Form_Open_Date" onchange="updateDateDisplay('Application_Form_Open_Date')">
+          <span class="date-display" id="Application_Form_Open_Date-display"></span>
+          <div class="field-error">This field is required.</div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label" for="Application_Form_Close_Date">Closes</label>
+          <input type="date" id="Application_Form_Close_Date" onchange="updateDateDisplay('Application_Form_Close_Date')">
+          <span class="date-display" id="Application_Form_Close_Date-display"></span>
+          <div class="field-error">This field is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden post-survey dates (auto-calculated) -->
+    <input type="hidden" id="Post_Survey_Open_Date">
+    <input type="hidden" id="Post_Survey_Close_Date">
+  </div>
+
+  <!-- Section 1: Basic Info (open by default) -->
+  <div class="section-card">
+    <div class="section-header" onclick="toggleAccordion('section-basic')">
+      <div class="section-header-text">
+        <div class="section-title">Basic Info</div>
+        <div class="section-subtitle" style="margin-bottom:0">Format, participants, description, venue, language, co-host</div>
+      </div>
+      <span class="section-chevron" id="section-basic-chevron" style="transform:rotate(90deg)">▶</span>
+    </div>
+    <div class="section-body" id="section-basic-body">
+
       <div class="field">
-        <label class="field-label" for="Who_is_this_training_for">Who Is This Training For <span class="req">*</span></label>
-        <input type="text" id="Who_is_this_training_for" placeholder="e.g. Civil society campaigners in the Philippines">
-        <div class="field-error">This field is required.</div>
+        <label class="field-label" for="Format">Format</label>
+        <select id="Format">
+          <option value="">— Select format —</option>
+          <option value="In-person">In-person</option>
+          <option value="Hybrid">Hybrid</option>
+          <option value="Online">Online</option>
+        </select>
       </div>
 
       <div class="field">
-        <label class="field-label" for="Training_Objectives">Training Objectives <span class="req">*</span></label>
-        <textarea id="Training_Objectives" rows="4" placeholder="List the key objectives of this training…"></textarea>
-        <div class="field-error">This field is required.</div>
+        <label class="field-label" for="Target_Participants">Target Participants</label>
+        <input type="number" id="Target_Participants" min="1" max="500" placeholder="e.g. 25" inputmode="numeric">
       </div>
 
       <div class="field">
-        <label class="field-label" for="Approach_Pedagogy">Approach / Pedagogy</label>
-        <textarea id="Approach_Pedagogy" rows="3" placeholder="Describe the teaching approach or pedagogy…"></textarea>
+        <label class="field-label">Training Description</label>
+        <div id="Training_Description_editor"></div>
+        <input type="hidden" id="Training_Description">
+        <div class="field-hint">Shown on the application form below the training banner. Supports bold, bullets, and links.</div>
       </div>
 
       <div class="field">
-        <label class="field-label" for="Costs_Covered">Costs Covered</label>
-        <textarea id="Costs_Covered" rows="2" placeholder="e.g. Meals, accommodation, training materials"></textarea>
+        <label class="field-label" for="Venue">Venue Name</label>
+        <input type="text" id="Venue" placeholder="e.g. Bayanihan Center, Manila">
       </div>
 
       <div class="field">
-        <label class="field-label" for="Costs_Not_Covered">Costs Not Covered</label>
-        <textarea id="Costs_Not_Covered" rows="2" placeholder="e.g. Travel to/from venue"></textarea>
+        <label class="field-label" for="Venue_Address">Venue Address</label>
+        <textarea id="Venue_Address" rows="2" placeholder="Full address shown to applicants on the form banner"></textarea>
+      </div>
+
+      <div class="field" id="lang-field">
+        <label class="field-label">Language of Delivery</label>
+        <div id="lang-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+          <button type="button" class="lang-chip" data-lang="Filipino" onclick="toggleLang(this)" aria-pressed="false">Filipino</button>
+          <button type="button" class="lang-chip" data-lang="English" onclick="toggleLang(this)" aria-pressed="false">English</button>
+          <button type="button" class="lang-chip" data-lang="Urdu" onclick="toggleLang(this)" aria-pressed="false">Urdu</button>
+          <button type="button" class="lang-chip" data-lang="Bahasa Indonesia" onclick="toggleLang(this)" aria-pressed="false">Bahasa Indonesia</button>
+          <button type="button" class="lang-chip" data-lang="한국어" onclick="toggleLang(this)" aria-pressed="false">한국어</button>
+          <button type="button" class="lang-chip lang-chip--others" onclick="showLangOthers(this)">+ Others</button>
+        </div>
+        <div id="lang-others-row" style="display:none;gap:8px;align-items:center;margin-bottom:8px">
+          <input type="text" id="lang-others-input" placeholder="Type language, press Enter" style="flex:1;min-height:38px;font-size:14px">
+          <button type="button" class="btn-secondary btn" style="min-height:38px;padding:0 14px;font-size:13px" onclick="addCustomLang()">Add</button>
+        </div>
+        <div id="lang-custom-tags" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+        <div class="field-hint">Select all that apply. Use "Others" to add unlisted languages.</div>
       </div>
 
       <div class="field" style="margin-bottom:0">
-        <label class="field-label" for="Course_Access_Information">Course Access Information</label>
-        <textarea id="Course_Access_Information" rows="2" placeholder="e.g. Zoom link will be sent 24 hours before the training"></textarea>
+        <label class="field-label" for="Co_host">Co-host</label>
+        <input type="text" id="Co_host" placeholder="e.g. Partner organisation name">
       </div>
+
     </div>
   </div>
 
-  <!-- Section 7: Custom Questions Builder -->
+  <!-- Section 2: Session Topics (collapsed) -->
   <div class="section-card">
-    <div class="section-title">Custom Questions</div>
-    <div class="section-subtitle">Optional — specify per question which form section it should appear in</div>
+    <div class="section-header" onclick="toggleAccordion('section-topics')">
+      <div class="section-header-text">
+        <div class="section-title">Session Topics</div>
+        <div class="section-subtitle" style="margin-bottom:0">Up to 7 topics — shown as rating questions in the post-training survey</div>
+      </div>
+      <span class="section-chevron" id="section-topics-chevron">▶</span>
+    </div>
+    <div class="section-body" id="section-topics-body" style="display:none">
 
-    <div id="questions-container"></div>
+      <div id="topics-container" style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px"></div>
+      <button type="button" class="btn-add-q" id="btn-add-topic" onclick="addTopic()">
+        <span style="font-size:18px;line-height:1">+</span> Add Topic
+      </button>
 
-    <button type="button" class="btn-add-q" onclick="addQuestion()">
-      <span style="font-size:18px;line-height:1">+</span> Add Question
-    </button>
+    </div>
+  </div>
+
+  <!-- Section 2: Facilitators (collapsed) -->
+  <div class="section-card">
+    <div class="section-header" onclick="toggleAccordion('section-fac')">
+      <div class="section-header-text">
+        <div class="section-title">Facilitators / Trainers</div>
+        <div class="section-subtitle" style="margin-bottom:0">Add up to 10 facilitators for this training</div>
+      </div>
+      <span class="section-chevron" id="section-fac-chevron">▶</span>
+    </div>
+    <div class="section-body" id="section-fac-body" style="display:none">
+
+      <div id="facilitators-container">
+        <div class="facilitator-row" data-slot="1" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;align-items:start">
+          <div class="field" style="margin-bottom:0">
+            <label class="field-label">Name 1</label>
+            <div class="fac-typeahead-wrap">
+              <input type="text" class="fac-name" placeholder="Search contact name…" autocomplete="off" oninput="onFacInput(this)" onfocus="onFacInput(this)">
+              <input type="hidden" class="fac-id">
+              <div class="fac-dropdown" style="display:none"></div>
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label class="field-label">Role 1</label>
+            <select class="fac-role">
+              <option value="">— Select role —</option>
+              <option value="Lead Facilitator">Lead Facilitator</option>
+              <option value="Senior Facilitator">Senior Facilitator</option>
+              <option value="Co-Facilitator">Co-Facilitator</option>
+              <option value="Junior/ Peer Facilitator">Junior/ Peer Facilitator</option>
+              <option value="Guest/ External Facilitator">Guest/ External Facilitator</option>
+              <option value="Coach">Coach</option>
+              <option value="Shadow Coach">Shadow Coach</option>
+              <option value="Support">Support</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn-add-q" onclick="addFacilitator()" id="btn-add-facilitator">
+        <span style="font-size:18px;line-height:1">+</span> Add Facilitator
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Section 5: Training Website Content (collapsed) -->
+  <div class="section-card">
+    <div class="section-header" onclick="toggleAccordion('section-website')">
+      <div class="section-header-text">
+        <div class="section-title">Training Website Content</div>
+        <div class="section-subtitle" style="margin-bottom:0">Shown on the public training page and used for applicant communication</div>
+      </div>
+      <span class="section-chevron" id="section-website-chevron">▶</span>
+    </div>
+    <div class="section-body" id="section-website-body" style="display:none">
+
+      <div class="field" style="margin-bottom:16px">
+        <label class="checkbox-gate-row">
+          <input type="checkbox" id="show-training-details" onchange="toggleTrainingDetails(this)">
+          <span>Add this training in the website</span>
+        </label>
+        <div class="field-hint" style="margin-top:6px;margin-left:28px">Tick to fill in details shown on the public training page.</div>
+      </div>
+
+      <div id="training-details-fields" style="display:none">
+        <div class="field">
+          <label class="field-label" for="Who_is_this_training_for">Who Is This Training For <span class="req">*</span></label>
+          <input type="text" id="Who_is_this_training_for" placeholder="e.g. Civil society campaigners in the Philippines">
+          <div class="field-error">This field is required.</div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="Training_Objectives">Training Objectives <span class="req">*</span></label>
+          <textarea id="Training_Objectives" rows="4" placeholder="List the key objectives of this training…"></textarea>
+          <div class="field-error">This field is required.</div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="Approach_Pedagogy">Approach / Pedagogy</label>
+          <textarea id="Approach_Pedagogy" rows="3" placeholder="Describe the teaching approach or pedagogy…"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="Costs_Covered">Costs Covered</label>
+          <textarea id="Costs_Covered" rows="2" placeholder="e.g. Meals, accommodation, training materials"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="Costs_Not_Covered">Costs Not Covered</label>
+          <textarea id="Costs_Not_Covered" rows="2" placeholder="e.g. Travel to/from venue"></textarea>
+        </div>
+
+        <div class="field" style="margin-bottom:0">
+          <label class="field-label" for="Course_Access_Information">Course Access Information</label>
+          <textarea id="Course_Access_Information" rows="2" placeholder="e.g. Zoom link will be sent 24 hours before the training"></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Section 6: Custom Questions (collapsed) -->
+  <div class="section-card">
+    <div class="section-header" onclick="toggleAccordion('section-questions')">
+      <div class="section-header-text">
+        <div class="section-title">Custom Questions</div>
+        <div class="section-subtitle" style="margin-bottom:0">Optional — specify per question which form section it should appear in</div>
+      </div>
+      <span class="section-chevron" id="section-questions-chevron">▶</span>
+    </div>
+    <div class="section-body" id="section-questions-body" style="display:none">
+
+      <div id="questions-container"></div>
+      <button type="button" class="btn-add-q" onclick="addQuestion()">
+        <span style="font-size:18px;line-height:1">+</span> Add Question
+      </button>
+
+    </div>
   </div>
 
   <!-- Result Panel -->

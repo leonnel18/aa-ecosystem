@@ -533,12 +533,9 @@ function renderReport2(r2) {
           <td style="text-align:right">${t.applicants}</td>
           <td style="text-align:right">${t.graduates}</td>
           <td><span class="badge badge-${sClass}">${t.status || '—'}</span></td>
-          <td>${t.id ? `<div class="edit-cell">
-            <button class="btn-edit" onclick="toggleEditDropdown('${t.id}', event)">Edit ▾</button>
-            <div class="edit-dropdown" id="edit-dd-${t.id}" style="display:none">
-              <button onclick="openEditModal('${t.id}', ${JSON.stringify(t.name)})">✏️ Edit Training Details</button>
-              <a href="admin.html?training_id=${t.id}&view=selection">👥 Edit Participant Status</a>
-            </div>
+          <td>${t.id ? `<div style="display:flex;gap:6px;justify-content:center">
+            <button class="btn-icon-edit" data-edit-id="${t.id}" data-edit-name="${(t.name||'').replace(/"/g,'&quot;')}" title="Edit Training Details">✏️</button>
+            <a class="btn-icon-edit" href="admin.html?training_id=${t.id}&view=selection" title="Edit Participant Status">👥</a>
           </div>` : '—'}</td>
         </tr>`;
       }
@@ -1262,7 +1259,6 @@ function setEditFooterError(msg) {
 }
 
 function openEditModal(id, name) {
-  closeAllEditDropdowns();
   _editTrainingId = id;
   document.getElementById('edit-modal-subtitle').textContent = name;
   document.getElementById('edit-modal-overlay').classList.add('open');
@@ -1431,14 +1427,13 @@ function editSelectInput(id, options, selected) {
 
 async function loadTrainingForEdit(id) {
   try {
-    const [solRes, plansRes] = await Promise.all([
-      fetch(`${EDIT_PROXY}/solutions/${id}?fields=${EDIT_FIELDS}`),
-      fetch(`${EDIT_PROXY}/training-plans/search?organised_by=`),
-    ]);
+    const solRes  = await fetch(`${EDIT_PROXY}/solutions/${id}?fields=${EDIT_FIELDS}`);
     if (!solRes.ok) throw new Error(`CRM error ${solRes.status}`);
-    const solJson   = await solRes.json();
+    const solJson = await solRes.json();
+    const d       = Array.isArray(solJson.data) ? solJson.data[0] : (solJson.data ?? solJson);
+    const country = d.Organised_By ?? '';
+    const plansRes  = await fetch(`${EDIT_PROXY}/training-plans/search?organised_by=${encodeURIComponent(country)}`);
     const plansJson = plansRes.ok ? await plansRes.json() : { data: [] };
-    const d = solJson.data ?? solJson;
     renderEditForm(d, plansJson.data ?? []);
   } catch (err) {
     document.getElementById('edit-modal-body').innerHTML = `
@@ -1450,7 +1445,10 @@ async function loadTrainingForEdit(id) {
 function renderEditForm(d, plans) {
   const currentPlanId = d.Training_Title_Plan?.id ?? '';
   const planOpts = [{ value: '', label: '— None —' }].concat(
-    plans.map(p => ({ value: p.id, label: p.Name }))
+    plans.map(p => {
+      const dateStr = p.Start_Date ? ` (${p.Start_Date}${p.End_Date ? ' → ' + p.End_Date : ''})` : '';
+      return { value: p.id, label: p.Name + dateStr };
+    })
   );
 
   const typeOpts = [
@@ -1545,15 +1543,25 @@ function renderEditForm(d, plans) {
   for (let i = 0; i < 10; i++) {
     const nameKey = FAC_NAME_KEYS[i];
     const roleKey = i < 5 ? FAC_ROLE_KEYS_1_5[i] : FAC_ROLE_KEYS_6_10[i - 5];
-    const nameVal = typeof d[nameKey] === 'object' ? (d[nameKey]?.name ?? '') : (d[nameKey] ?? '');
-    const nameId  = typeof d[nameKey] === 'object' ? (d[nameKey]?.id ?? '') : '';
+    const raw     = d[nameKey];
+    const nameVal = typeof raw === 'object' && raw !== null
+      ? (raw.name ?? raw.full_name ?? raw.Full_Name ?? '')
+      : (raw ?? '');
+    const nameId  = typeof raw === 'object' && raw !== null ? (raw.id ?? '') : '';
     const roleVal = d[roleKey] ?? '';
+    const isLookup = i < 8;
     facHtml += `
       <div class="edit-fac-row" data-slot="${i}">
         <div class="edit-field" style="margin-bottom:0">
           <label class="edit-label">Facilitator ${i + 1} Name</label>
+          ${isLookup ? `
+          <div class="edit-fac-typeahead">
+            <input type="text" class="ef-fac-name" data-slot="${i}" value="${nameVal.replace(/"/g, '&quot;')}" placeholder="Search contact…" autocomplete="off" oninput="onEditFacInput(this)" onfocus="onEditFacInput(this)">
+            <input type="hidden" class="ef-fac-id" data-slot="${i}" value="${nameId}">
+            <div class="edit-fac-dropdown"></div>
+          </div>` : `
           <input type="text" class="ef-fac-name" data-slot="${i}" value="${nameVal.replace(/"/g, '&quot;')}" placeholder="Name">
-          <input type="hidden" class="ef-fac-id" data-slot="${i}" value="${nameId}">
+          <input type="hidden" class="ef-fac-id" data-slot="${i}" value="">`}
         </div>
         <div class="edit-field" style="margin-bottom:0">
           <label class="edit-label">Role ${i + 1}</label>
@@ -1580,38 +1588,63 @@ function onEditOrgChange(val) {
   if (wrap) wrap.style.display = val === 'Regional' ? 'block' : 'none';
 }
 
-// ── Edit dropdown (global scope — called from inline onclick handlers) ────────
+// ── Edit modal — facilitator typeahead ───────────────────────────────────────
 
-let _openDropdownId = null;
-
-function toggleEditDropdown(id, e) {
-  e.stopPropagation();
-  const dd = document.getElementById(`edit-dd-${id}`);
-  if (!dd) return;
-  const isOpen = dd.style.display !== 'none';
-  closeAllEditDropdowns();
-  if (!isOpen) {
-    const btn = e.currentTarget;
-    const rect = btn.getBoundingClientRect();
-    dd.style.top  = (rect.bottom + 4) + 'px';
-    dd.style.left = Math.max(0, rect.right - 210) + 'px';
-    dd.style.display = 'block';
-    _openDropdownId = id;
-  }
+function onEditFacInput(input) {
+  const wrap = input.closest('.edit-fac-typeahead');
+  const dropdown = wrap.querySelector('.edit-fac-dropdown');
+  const q = input.value.trim();
+  if (q.length < 2) { dropdown.style.display = 'none'; return; }
+  clearTimeout(wrap._editFacTimer);
+  const seq = (wrap._editFacSeq = (wrap._editFacSeq || 0) + 1);
+  wrap._editFacTimer = setTimeout(async () => {
+    try {
+      const res  = await fetch(`${EDIT_PROXY}/contacts/search?q=${encodeURIComponent(q)}`);
+      const json = await res.json();
+      if (wrap._editFacSeq !== seq) return;
+      renderEditFacDropdown(wrap, json.data ?? []);
+    } catch {
+      if (wrap._editFacSeq !== seq) return;
+      renderEditFacDropdown(wrap, []);
+    }
+  }, 280);
 }
 
-function closeAllEditDropdowns() {
-  if (_openDropdownId) {
-    const dd = document.getElementById(`edit-dd-${_openDropdownId}`);
-    if (dd) dd.style.display = 'none';
-    _openDropdownId = null;
-  }
+function renderEditFacDropdown(wrap, contacts) {
+  const dropdown = wrap.querySelector('.edit-fac-dropdown');
+  dropdown.innerHTML = '';
+  contacts.slice(0, 8).forEach(c => {
+    const item = document.createElement('div');
+    item.className = 'edit-fac-item';
+    item.textContent = c.Full_Name + (c.Email ? ` — ${c.Email}` : '');
+    item.onmousedown = e => { e.preventDefault(); selectEditFacContact(wrap, c.id, c.Full_Name); };
+    dropdown.appendChild(item);
+  });
+  dropdown.style.display = contacts.length ? 'block' : 'none';
 }
 
-document.addEventListener('click', closeAllEditDropdowns);
+function selectEditFacContact(wrap, id, name) {
+  wrap.querySelector('.ef-fac-id').value   = id;
+  wrap.querySelector('.ef-fac-name').value = name;
+  wrap.querySelector('.edit-fac-dropdown').style.display = 'none';
+}
+
+// close edit-fac dropdowns when clicking outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.edit-fac-typeahead')) {
+    document.querySelectorAll('.edit-fac-dropdown').forEach(d => { d.style.display = 'none'; });
+  }
+});
+
+// ── Edit icon button — delegated click handler ────────────────────────────────
+
+document.addEventListener('click', function(e) {
+  const editBtn = e.target.closest('[data-edit-id]');
+  if (editBtn) {
+    openEditModal(editBtn.dataset.editId, editBtn.dataset.editName);
+  }
+});
+
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeAllEditDropdowns();
-    if (typeof closeEditModal === 'function') closeEditModal();
-  }
+  if (e.key === 'Escape') closeEditModal();
 });
