@@ -161,26 +161,38 @@ export default {
         const q          = (url.searchParams.get("q") ?? "").trim().toLowerCase();
         const first      = url.searchParams.get("first") ?? "";
         const last       = url.searchParams.get("last") ?? "";
-        const fields     = "First_Name,Last_Name,Email,Account_Name,Training_Applied,Stage";
-        const searchUrl  = `${CRM_BASE}/Deals?fields=${fields}&per_page=200`;
-        const crmRes     = await fetch(searchUrl, { headers: auth });
-        const allDeals   = await crmRes.json();
+        const fields     = "First_Name,Last_Name,Email,Account_Name,Training_Applied,Stage,Graduate_Date,Have_you_applied_the_training_to_run_more_effectiv";
+
+        // Paginate through all deals to find matches for this training
+        let allData = [];
+        let page = 1;
+        let more = true;
+        while (more) {
+          const crmRes = await fetch(`${CRM_BASE}/Deals?fields=${fields}&per_page=200&page=${page}`, { headers: auth });
+          const body   = await crmRes.json();
+          const rows   = body.data ?? [];
+          allData.push(...rows);
+          more = body.info?.more_records === true;
+          page++;
+        }
 
         let matches;
         if (q) {
-          matches = (allDeals.data ?? []).filter(d => {
+          matches = allData.filter(d => {
             if (d.Training_Applied?.id !== trainingId) return false;
             const fullName = `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.toLowerCase();
             const email    = (d.Email ?? "").toLowerCase();
             return fullName.includes(q) || email.includes(q);
           });
-        } else {
-          const match = (allDeals.data ?? []).find(d =>
+        } else if (first || last) {
+          const match = allData.find(d =>
             d.Training_Applied?.id === trainingId &&
             d.First_Name?.toLowerCase() === first.toLowerCase() &&
             d.Last_Name?.toLowerCase()  === last.toLowerCase()
           );
           matches = match ? [match] : [];
+        } else {
+          matches = allData.filter(d => d.Training_Applied?.id === trainingId);
         }
 
         return jsonResponse({ data: matches }, 200, origin);
@@ -273,13 +285,13 @@ export default {
       // ── GET /training-plans/search?organised_by= ─────────────────────────────
       if (request.method === "GET" && path === "/training-plans/search") {
         const organisedBy = (url.searchParams.get("organised_by") ?? "").trim();
-        const plansUrl = `${CRM_BASE}/Training_Plans?fields=id,Name,Organised_By&per_page=200`;
+        const plansUrl = `${CRM_BASE}/Training_Plans?fields=id,Name,Organised_By,Start_Date,End_Date&per_page=200`;
         const crmRes   = await fetch(plansUrl, { headers: auth });
         const body     = await crmRes.json();
         if (!crmRes.ok) return jsonResponse(body, crmRes.status, origin);
-        const plans = (body.data ?? []).filter(p =>
-          !organisedBy || p.Organised_By === organisedBy
-        );
+        const plans = (body.data ?? [])
+          .filter(p => !organisedBy || p.Organised_By === organisedBy)
+          .sort((a, b) => (b.Start_Date ?? "").localeCompare(a.Start_Date ?? ""));
         const more = body.info?.more_records ?? false;
         return jsonResponse({ data: plans, more_records: more }, 200, origin);
       }
