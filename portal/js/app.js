@@ -1193,6 +1193,11 @@ if (document.readyState === 'loading') {
   boot();
 }
 
+// ── Edit modal stubs — implemented in full below ───────────────────────────
+function openEditModal(id, name) { /* implemented below */ }
+function closeEditModal() { /* implemented below */ }
+function saveTrainingEdit() { /* implemented below */ }
+
 // ── Edit dropdown (global scope — called from inline onclick handlers) ────────
 
 let _openDropdownId = null;
@@ -1204,6 +1209,10 @@ function toggleEditDropdown(id, e) {
   const isOpen = dd.style.display !== 'none';
   closeAllEditDropdowns();
   if (!isOpen) {
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    dd.style.top  = (rect.bottom + 4) + 'px';
+    dd.style.left = Math.max(0, rect.right - 210) + 'px';
     dd.style.display = 'block';
     _openDropdownId = id;
   }
@@ -1218,3 +1227,9 @@ function closeAllEditDropdowns() {
 }
 
 document.addEventListener('click', closeAllEditDropdowns);
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeAllEditDropdowns();
+    if (typeof closeEditModal === 'function') closeEditModal();
+  }
+});
