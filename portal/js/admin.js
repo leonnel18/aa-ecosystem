@@ -223,6 +223,7 @@ function renderPostSurvey() {
       empty.textContent = "All participants have completed the post-survey.";
       empty.style.display = "";
     }
+    renderGraduates();
     return;
   }
   empty.style.display = "none";
