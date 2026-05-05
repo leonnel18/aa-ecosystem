@@ -95,6 +95,7 @@ p, li, td, th { line-height: 1.6; }
   transition: opacity .15s, transform .15s;
 }
 .btn:hover { opacity: .88; transform: translateY(-1px); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
 .btn-primary {
   background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
   color: #fff;
