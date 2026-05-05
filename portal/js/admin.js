@@ -17,7 +17,7 @@ const STAGE_OPTIONS = {
 // ── Tab switching ─────────────────────────────────────────────────────────────
 function switchTab(view) {
   document.querySelectorAll(".admin-view").forEach(el => el.classList.remove("active"));
-  document.querySelectorAll(".admin-tabs button").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".nav-tab").forEach(el => el.classList.remove("active"));
   document.getElementById(`view-${view}`).classList.add("active");
   document.getElementById(`tab-${view}`).classList.add("active");
   const url = new URL(window.location);
@@ -39,7 +39,7 @@ function stageSelect(dealId, currentStage, view) {
   const opts = STAGE_OPTIONS[view]
     .map(s => `<option value="${s}"${s === currentStage ? " selected" : ""}>${s}</option>`)
     .join("");
-  return `<select id="stage-${dealId}" data-original="${currentStage}">${opts}</select>`;
+  return `<select class="filter" id="stage-${dealId}" data-original="${currentStage}">${opts}</select>`;
 }
 
 // ── Fetch training info ───────────────────────────────────────────────────────
@@ -85,10 +85,11 @@ function renderAll() {
 }
 
 function renderSelection() {
-  const pending = allDeals.filter(d => d.Stage === "Still in Applied Stage");
-  const tbody   = document.getElementById("sel-tbody");
-  const empty   = document.getElementById("sel-empty");
-  const counter = document.getElementById("sel-counter");
+  const pending  = allDeals.filter(d => d.Stage === "Still in Applied Stage");
+  const rejected = allDeals.filter(d => d.Stage === "Rejected");
+  const tbody    = document.getElementById("sel-tbody");
+  const empty    = document.getElementById("sel-empty");
+  const counter  = document.getElementById("sel-counter");
 
   const resolved = allDeals.filter(d =>
     d.Stage === "Selected" || d.Stage === "Rejected").length;
@@ -97,23 +98,44 @@ function renderSelection() {
   if (pending.length === 0) {
     tbody.innerHTML = "";
     empty.style.display = "";
-    return;
+  } else {
+    empty.style.display = "none";
+    tbody.innerHTML = pending.map(d => `
+      <tr>
+        <td>${dealName(d)}</td>
+        <td>${dealOrg(d)}</td>
+        <td>${d.Email ?? ""}</td>
+        <td>${stageSelect(d.id, d.Stage, "selection")}</td>
+      </tr>`).join("");
   }
-  empty.style.display = "none";
-  tbody.innerHTML = pending.map(d => `
-    <tr>
-      <td>${dealName(d)}</td>
-      <td>${dealOrg(d)}</td>
-      <td>${d.Email ?? ""}</td>
-      <td>${stageSelect(d.id, d.Stage, "selection")}</td>
-    </tr>`).join("");
+
+  // Rejected section
+  const rejTbody  = document.getElementById("sel-rej-tbody");
+  const rejEmpty  = document.getElementById("sel-rej-empty");
+  const rejHeader = document.getElementById("sel-rej-header");
+  rejHeader.textContent = `Rejected (${rejected.length})`;
+
+  if (rejected.length === 0) {
+    rejTbody.innerHTML = "";
+    rejEmpty.style.display = "";
+  } else {
+    rejEmpty.style.display = "none";
+    rejTbody.innerHTML = rejected.map(d => `
+      <tr>
+        <td>${dealName(d)}</td>
+        <td>${dealOrg(d)}</td>
+        <td>${d.Email ?? ""}</td>
+        <td>${stageSelect(d.id, d.Stage, "selection")}</td>
+      </tr>`).join("");
+  }
 }
 
 function renderAttendance() {
-  const selected = allDeals.filter(d => d.Stage === "Selected");
-  const tbody    = document.getElementById("att-tbody");
-  const empty    = document.getElementById("att-empty");
-  const counter  = document.getElementById("att-counter");
+  const selected    = allDeals.filter(d => d.Stage === "Selected");
+  const notAttended = allDeals.filter(d => d.Stage === "Rejected or Not Attended");
+  const tbody       = document.getElementById("att-tbody");
+  const empty       = document.getElementById("att-empty");
+  const counter     = document.getElementById("att-counter");
 
   const confirmed = allDeals.filter(d =>
     d.Stage === "Attended Training" || d.Stage === "Rejected or Not Attended").length;
@@ -122,16 +144,36 @@ function renderAttendance() {
   if (selected.length === 0) {
     tbody.innerHTML = "";
     empty.style.display = "";
-    return;
+  } else {
+    empty.style.display = "none";
+    tbody.innerHTML = selected.map(d => `
+      <tr>
+        <td>${dealName(d)}</td>
+        <td>${dealOrg(d)}</td>
+        <td>${d.Email ?? ""}</td>
+        <td>${stageSelect(d.id, d.Stage, "attendance")}</td>
+      </tr>`).join("");
   }
-  empty.style.display = "none";
-  tbody.innerHTML = selected.map(d => `
-    <tr>
-      <td>${dealName(d)}</td>
-      <td>${dealOrg(d)}</td>
-      <td>${d.Email ?? ""}</td>
-      <td>${stageSelect(d.id, d.Stage, "attendance")}</td>
-    </tr>`).join("");
+
+  // Rejected or Not Attended section
+  const naHeader = document.getElementById("att-na-header");
+  const naTbody  = document.getElementById("att-na-tbody");
+  const naEmpty  = document.getElementById("att-na-empty");
+  naHeader.textContent = `Rejected or Not Attended (${notAttended.length})`;
+
+  if (notAttended.length === 0) {
+    naTbody.innerHTML = "";
+    naEmpty.style.display = "";
+  } else {
+    naEmpty.style.display = "none";
+    naTbody.innerHTML = notAttended.map(d => `
+      <tr>
+        <td>${dealName(d)}</td>
+        <td>${dealOrg(d)}</td>
+        <td>${d.Email ?? ""}</td>
+        <td>${stageSelect(d.id, d.Stage, "attendance")}</td>
+      </tr>`).join("");
+  }
 }
 
 function renderPostSurvey() {
@@ -150,7 +192,13 @@ function renderPostSurvey() {
 
   if (incomplete.length === 0) {
     tbody.innerHTML = "";
-    empty.style.display = "";
+    if (attended.length === 0) {
+      empty.textContent = "No participants have completed the post-training survey yet.";
+      empty.style.display = "";
+    } else {
+      empty.textContent = "All participants have completed the post-survey.";
+      empty.style.display = "";
+    }
     return;
   }
   empty.style.display = "none";
@@ -171,13 +219,16 @@ function bulkSetStage(view, stage) {
   });
 }
 
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showAdminToast(msg) {
+  const t = document.getElementById("admin-toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
+}
+
 // ── Save changes ──────────────────────────────────────────────────────────────
 async function saveChanges(view) {
-  const viewMap = { selection: "sel", attendance: "att", post_survey: "ps" };
-  const prefix  = viewMap[view];
-  const savingEl = document.getElementById(`${prefix}-saving`);
-  savingEl.style.display = "inline";
-
   const selects = document.querySelectorAll(`#view-${view} select`);
   const changes = [];
   selects.forEach(sel => {
@@ -188,10 +239,12 @@ async function saveChanges(view) {
   });
 
   if (changes.length === 0) {
-    savingEl.style.display = "none";
-    alert("No changes to save.");
+    showAdminToast("No changes to save.");
     return;
   }
+
+  const saveBtn = document.querySelector(`#view-${view} .btn-primary`);
+  if (saveBtn) saveBtn.disabled = true;
 
   let successCount = 0;
   for (const change of changes) {
@@ -213,8 +266,8 @@ async function saveChanges(view) {
     }
   }
 
-  savingEl.style.display = "none";
-  alert(`${successCount} of ${changes.length} changes saved.`);
+  if (saveBtn) saveBtn.disabled = false;
+  showAdminToast(`${successCount} of ${changes.length} changes saved.`);
   renderAll();
 }
 
