@@ -55,8 +55,15 @@ async function loadTrainingInfo() {
     document.getElementById("training-title").textContent = t.Solution_Title ?? "Training";
     document.getElementById("training-meta").textContent  =
       `${t.Organised_By ?? ""} · ${t.Start_Date ?? "—"} → ${t.End_Date ?? "—"}`;
+    const COUNTRY_MAP = {
+      Philippines: "portal.html?country=PH",
+      Pakistan:    "portal.html?country=PK",
+      Korea:       "portal.html?country=KR",
+      Indonesia:   "portal.html?country=ID",
+      Regional:    "backbone.html",
+    };
     document.getElementById("back-link").href =
-      `portal.html?country=${encodeURIComponent(t.Organised_By ?? "")}`;
+      COUNTRY_MAP[t.Organised_By] ?? "index.html";
   } catch (e) {
     document.getElementById("training-title").textContent = "Could not load training";
   }
