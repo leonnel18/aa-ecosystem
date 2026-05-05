@@ -1193,10 +1193,390 @@ if (document.readyState === 'loading') {
   boot();
 }
 
-// ── Edit modal stubs — implemented in full below ───────────────────────────
-function openEditModal(id, name) { /* implemented below */ }
-function closeEditModal() { /* implemented below */ }
-function saveTrainingEdit() { /* implemented below */ }
+// ── Edit modal — constants ─────────────────────────────────────────────────
+
+const EDIT_PROXY = 'https://crm-proxy.gideon-valera.workers.dev';
+
+const EDIT_FIELDS = [
+  'Solution_Title','Training_Title_Plan','Training_Type','Organised_By','Format',
+  'Target_Participants','Start_Date','End_Date',
+  'Application_Form_Open_Date','Application_Form_Close_Date',
+  'Post_Survey_Open_Date','Post_Survey_Close_Date',
+  'Venue','Venue_Address','Language_of_Delivery','Co_host','Countries_Participated',
+  'Who_is_this_training_for','Training_Objectives','Approach_Pedagogy',
+  'Costs_Covered','Costs_Not_Covered','Course_Access_Information',
+  'Facilitator','Name_2','Name_3','Name_4','Name_5','Name_6','Name_7','Name_8','Name_9','Name_10',
+  'Facilitator_Type_for_Trainer_1','Facilitator_Type_for_Trainer_2','Facilitator_Type_for_Trainer_3',
+  'Facilitator_Type_for_Trainer_4','Facilitator_Type_for_Trainer_5',
+  'Facilitator_Type_6','Facilitator_Type_7','Facilitator_Type_8','Facilitator_Type_9','Facilitator_Type_10',
+].join(',');
+
+const FAC_NAME_KEYS      = ['Facilitator','Name_2','Name_3','Name_4','Name_5','Name_6','Name_7','Name_8','Name_9','Name_10'];
+const FAC_ROLE_KEYS_1_5  = ['Facilitator_Type_for_Trainer_1','Facilitator_Type_for_Trainer_2','Facilitator_Type_for_Trainer_3','Facilitator_Type_for_Trainer_4','Facilitator_Type_for_Trainer_5'];
+const FAC_ROLE_KEYS_6_10 = ['Facilitator_Type_6','Facilitator_Type_7','Facilitator_Type_8','Facilitator_Type_9','Facilitator_Type_10'];
+
+const EDIT_TRAINING_TYPE_IDS = {
+  'Foundational':               '773031000000354510',
+  'Training of Trainers (TOT)': '773031000000354567',
+  'Feminist Leadership':        '773031000000354572',
+  'Public Narrative':           '773031000000354577',
+};
+
+const ROLE_OPTIONS_HTML = `
+  <option value="">— Select role —</option>
+  <option value="Lead Facilitator">Lead Facilitator</option>
+  <option value="Senior Facilitator">Senior Facilitator</option>
+  <option value="Co-Facilitator">Co-Facilitator</option>
+  <option value="Junior/ Peer Facilitator">Junior/ Peer Facilitator</option>
+  <option value="Guest/ External Facilitator">Guest/ External Facilitator</option>
+  <option value="Coach">Coach</option>
+  <option value="Shadow Coach">Shadow Coach</option>
+  <option value="Support">Support</option>
+`.trim();
+
+let _editTrainingId = null;
+
+function showEditSkeleton() {
+  document.getElementById('edit-modal-body').innerHTML = `
+    <div class="edit-skeleton">
+      <div class="skel-line" style="width:60%"></div>
+      <div class="skel-line" style="width:100%"></div>
+      <div class="skel-line" style="width:80%"></div>
+      <div class="skel-line" style="width:100%"></div>
+      <div class="skel-line" style="width:50%"></div>
+      <div class="skel-line" style="width:100%"></div>
+    </div>`;
+}
+
+function showEditToast(msg) {
+  const t = document.getElementById('edit-toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function setEditFooterError(msg) {
+  const el = document.getElementById('edit-footer-error');
+  el.textContent = msg;
+  el.style.display = msg ? 'block' : 'none';
+}
+
+function openEditModal(id, name) {
+  closeAllEditDropdowns();
+  _editTrainingId = id;
+  document.getElementById('edit-modal-subtitle').textContent = name;
+  document.getElementById('edit-modal-overlay').classList.add('open');
+  setEditFooterError('');
+  showEditSkeleton();
+  loadTrainingForEdit(id);
+}
+
+function closeEditModal() {
+  document.getElementById('edit-modal-overlay').classList.remove('open');
+  _editTrainingId = null;
+  document.getElementById('edit-modal-body').innerHTML = '';
+}
+
+async function saveTrainingEdit() {
+  if (!_editTrainingId) return;
+  const saveBtn = document.getElementById('btn-save-edit');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Saving…';
+  setEditFooterError('');
+
+  try {
+    const facPayload = {};
+    document.querySelectorAll('.ef-fac-name').forEach((input, i) => {
+      const name = input.value.trim();
+      const id   = document.querySelector(`.ef-fac-id[data-slot="${i}"]`).value.trim();
+      const role = document.querySelector(`.ef-fac-role[data-slot="${i}"]`).value;
+      const nameKey = FAC_NAME_KEYS[i];
+      const roleKey = i < 5 ? FAC_ROLE_KEYS_1_5[i] : FAC_ROLE_KEYS_6_10[i - 5];
+      if (i < 8) {
+        if (id) facPayload[nameKey] = { id };
+      } else {
+        if (name) facPayload[nameKey] = name;
+      }
+      if (role) facPayload[roleKey] = role;
+    });
+
+    const countriesSel = document.getElementById('ef-Countries_Participated');
+    const selectedCountries = countriesSel
+      ? [...countriesSel.selectedOptions].map(o => o.value)
+      : [];
+
+    const typeLabel = document.getElementById('ef-Training_Type')?.value ?? '';
+    const typeId    = EDIT_TRAINING_TYPE_IDS[typeLabel];
+    const planId    = document.getElementById('ef-Training_Title_Plan')?.value ?? '';
+
+    const v = fieldId => (document.getElementById(`ef-${fieldId}`)?.value ?? '').trim();
+
+    const rawPayload = {
+      Solution_Title:              v('Solution_Title') || undefined,
+      Training_Type:               typeId ? { id: typeId } : undefined,
+      Organised_By:                v('Organised_By') || undefined,
+      Format:                      v('Format') || undefined,
+      Target_Participants:         parseInt(v('Target_Participants'), 10) || undefined,
+      Start_Date:                  v('Start_Date') || undefined,
+      End_Date:                    v('End_Date') || undefined,
+      Application_Form_Open_Date:  v('Application_Form_Open_Date') || undefined,
+      Application_Form_Close_Date: v('Application_Form_Close_Date') || undefined,
+      Post_Survey_Open_Date:       v('Post_Survey_Open_Date') || undefined,
+      Post_Survey_Close_Date:      v('Post_Survey_Close_Date') || undefined,
+      Venue:                       v('Venue') || undefined,
+      Venue_Address:               v('Venue_Address') || undefined,
+      Language_of_Delivery:        v('Language_of_Delivery') || undefined,
+      Co_host:                     v('Co_host') || undefined,
+      Countries_Participated:      selectedCountries.length ? selectedCountries : undefined,
+      Training_Title_Plan:         planId ? { id: planId } : undefined,
+      Who_is_this_training_for:    v('Who_is_this_training_for') || undefined,
+      Training_Objectives:         v('Training_Objectives') || undefined,
+      Approach_Pedagogy:           v('Approach_Pedagogy') || undefined,
+      Costs_Covered:               v('Costs_Covered') || undefined,
+      Costs_Not_Covered:           v('Costs_Not_Covered') || undefined,
+      Course_Access_Information:   v('Course_Access_Information') || undefined,
+      ...facPayload,
+    };
+
+    const cleanPayload = Object.fromEntries(
+      Object.entries(rawPayload).filter(([, val]) => val !== undefined)
+    );
+
+    const res  = await fetch(`${EDIT_PROXY}/solutions/${_editTrainingId}`, {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ data: [cleanPayload] }),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json?.message ?? `CRM error ${res.status}`);
+
+    // Update visible table row
+    const newName  = v('Solution_Title');
+    const newStart = v('Start_Date');
+    const newEnd   = v('End_Date');
+    const row = document.querySelector(`#edit-dd-${_editTrainingId}`)?.closest('tr');
+    if (row) {
+      const cells = row.querySelectorAll('td');
+      if (newName  && cells[0]) cells[0].textContent = newName;
+      if (typeLabel && cells[1]) cells[1].textContent = typeLabel;
+      if (newStart && cells[2]) cells[2].textContent = newStart;
+      if (newEnd   && cells[3]) cells[3].textContent = newEnd;
+    }
+
+    showEditToast('Training updated ✓');
+    setTimeout(closeEditModal, 1500);
+
+  } catch (err) {
+    setEditFooterError(`Save failed: ${err.message}`);
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Save Changes';
+  }
+}
+
+document.getElementById('edit-modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeEditModal();
+});
+
+// ── Edit modal — accordion helpers ────────────────────────────────────────────
+
+function makeAccSection(id, title, bodyHtml, openByDefault) {
+  return `
+    <div class="acc-card${openByDefault ? ' open' : ''}" id="acc-${id}">
+      <div class="acc-header" onclick="toggleAcc('${id}')">
+        <span class="acc-title">${title}</span>
+        <span class="acc-chevron">▶</span>
+      </div>
+      <div class="acc-body">${bodyHtml}</div>
+    </div>`;
+}
+
+function toggleAcc(id) {
+  document.getElementById(`acc-${id}`).classList.toggle('open');
+}
+
+function editField(label, inputHtml) {
+  return `<div class="edit-field"><label class="edit-label">${label}</label>${inputHtml}</div>`;
+}
+
+function editTextInput(id, val) {
+  const safe = (val ?? '').toString().replace(/"/g, '&quot;');
+  return `<input type="text" id="ef-${id}" value="${safe}">`;
+}
+
+function editDateInput(id, val) {
+  const safe = (val ?? '').toString().replace(/"/g, '&quot;');
+  return `<input type="date" id="ef-${id}" value="${safe}">`;
+}
+
+function editNumberInput(id, val) {
+  return `<input type="number" id="ef-${id}" value="${val ?? ''}">`;
+}
+
+function editTextareaInput(id, val) {
+  const safe = (val ?? '').toString().replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return `<textarea id="ef-${id}">${safe}</textarea>`;
+}
+
+function editSelectInput(id, options, selected) {
+  const opts = options.map(o => {
+    const sel = o.value === selected ? ' selected' : '';
+    return `<option value="${o.value}"${sel}>${o.label}</option>`;
+  }).join('');
+  return `<select id="ef-${id}">${opts}</select>`;
+}
+
+// ── Edit modal — fetch + render ────────────────────────────────────────────────
+
+async function loadTrainingForEdit(id) {
+  try {
+    const [solRes, plansRes] = await Promise.all([
+      fetch(`${EDIT_PROXY}/solutions/${id}?fields=${EDIT_FIELDS}`),
+      fetch(`${EDIT_PROXY}/training-plans/search?organised_by=`),
+    ]);
+    if (!solRes.ok) throw new Error(`CRM error ${solRes.status}`);
+    const solJson   = await solRes.json();
+    const plansJson = plansRes.ok ? await plansRes.json() : { data: [] };
+    const d = solJson.data ?? solJson;
+    renderEditForm(d, plansJson.data ?? []);
+  } catch (err) {
+    document.getElementById('edit-modal-body').innerHTML = `
+      <p style="color:#e53e3e;padding:24px 0">Failed to load training: ${err.message}</p>
+      <button class="btn-cancel-edit" onclick="loadTrainingForEdit('${id}')">Retry</button>`;
+  }
+}
+
+function renderEditForm(d, plans) {
+  const currentPlanId = d.Training_Title_Plan?.id ?? '';
+  const planOpts = [{ value: '', label: '— None —' }].concat(
+    plans.map(p => ({ value: p.id, label: p.Name }))
+  );
+
+  const typeOpts = [
+    { value: '', label: '— Select —' },
+    { value: 'Foundational', label: 'Foundational' },
+    { value: 'Training of Trainers (TOT)', label: 'Training of Trainers (TOT)' },
+    { value: 'Feminist Leadership', label: 'Feminist Leadership' },
+    { value: 'Public Narrative', label: 'Public Narrative' },
+  ];
+  const currentType = d.Training_Type?.name ?? d.Training_Type ?? '';
+
+  const orgOpts = [
+    { value: '', label: '— Select —' },
+    { value: 'Philippines', label: 'Philippines' },
+    { value: 'Pakistan', label: 'Pakistan' },
+    { value: 'Korea', label: 'Korea' },
+    { value: 'Indonesia', label: 'Indonesia' },
+    { value: 'Regional', label: 'Regional' },
+  ];
+  const currentOrg = d.Organised_By ?? '';
+
+  const formatOpts = [
+    { value: '', label: '— None —' },
+    { value: 'In-Person', label: 'In-Person' },
+    { value: 'Online', label: 'Online' },
+    { value: 'Hybrid', label: 'Hybrid' },
+  ];
+
+  // Section 1: Basic Info
+  const basicHtml = [
+    editField('Training Plan', editSelectInput('Training_Title_Plan', planOpts, currentPlanId)),
+    editField('Training Title', editTextInput('Solution_Title', d.Solution_Title)),
+    editField('Training Type', editSelectInput('Training_Type', typeOpts, currentType)),
+    editField('Organised By',
+      `<select id="ef-Organised_By" onchange="onEditOrgChange(this.value)">${
+        orgOpts.map(o => `<option value="${o.value}"${o.value === currentOrg ? ' selected' : ''}>${o.label}</option>`).join('')
+      }</select>`
+    ),
+    editField('Format', editSelectInput('Format', formatOpts, d.Format ?? '')),
+    editField('Target Participants', editNumberInput('Target_Participants', d.Target_Participants)),
+  ].join('');
+
+  // Section 2: Dates
+  const datesHtml = `
+    <div class="edit-date-group-label">Training</div>
+    <div class="edit-date-grid" style="margin-bottom:16px">
+      ${editField('Start Date', editDateInput('Start_Date', d.Start_Date))}
+      ${editField('End Date', editDateInput('End_Date', d.End_Date))}
+    </div>
+    <div class="edit-date-group-label">Application Form</div>
+    <div class="edit-date-grid" style="margin-bottom:16px">
+      ${editField('Open Date', editDateInput('Application_Form_Open_Date', d.Application_Form_Open_Date))}
+      ${editField('Close Date', editDateInput('Application_Form_Close_Date', d.Application_Form_Close_Date))}
+    </div>
+    <div class="edit-date-group-label">Post Survey</div>
+    <div class="edit-date-grid">
+      ${editField('Open Date', editDateInput('Post_Survey_Open_Date', d.Post_Survey_Open_Date))}
+      ${editField('Close Date', editDateInput('Post_Survey_Close_Date', d.Post_Survey_Close_Date))}
+    </div>`;
+
+  // Section 3: Location & Logistics
+  const isRegional = currentOrg === 'Regional';
+  const countriesAll = ['Philippines','Pakistan','Korea','Indonesia','Regional','India','Bangladesh','Myanmar','Sri Lanka','Nepal'];
+  const selectedCountries = Array.isArray(d.Countries_Participated) ? d.Countries_Participated : [];
+  const countriesHtml = `
+    <select id="ef-Countries_Participated" multiple size="6" style="width:100%;border:1.5px solid #e2e0d8;border-radius:8px;padding:6px">
+      ${countriesAll.map(c => `<option value="${c}"${selectedCountries.includes(c) ? ' selected' : ''}>${c}</option>`).join('')}
+    </select>
+    <div style="font-size:11px;color:#788099;margin-top:4px">Hold Ctrl/Cmd to select multiple</div>`;
+  const logisticsHtml = [
+    editField('Venue', editTextInput('Venue', d.Venue)),
+    editField('Venue Address', editTextInput('Venue_Address', d.Venue_Address)),
+    editField('Language of Delivery', editTextInput('Language_of_Delivery', d.Language_of_Delivery)),
+    editField('Co-host', editTextInput('Co_host', d.Co_host)),
+    `<div class="edit-field" id="ef-countries-wrap" style="${isRegional ? '' : 'display:none'}">
+      <label class="edit-label">Countries Participated</label>${countriesHtml}
+    </div>`,
+  ].join('');
+
+  // Section 4: Training Content
+  const contentHtml = [
+    editField('Who is this training for?', editTextareaInput('Who_is_this_training_for', d.Who_is_this_training_for)),
+    editField('Training Objectives', editTextareaInput('Training_Objectives', d.Training_Objectives)),
+    editField('Approach / Pedagogy', editTextareaInput('Approach_Pedagogy', d.Approach_Pedagogy)),
+    editField('Costs Covered', editTextareaInput('Costs_Covered', d.Costs_Covered)),
+    editField('Costs Not Covered', editTextareaInput('Costs_Not_Covered', d.Costs_Not_Covered)),
+    editField('Course Access Information', editTextareaInput('Course_Access_Information', d.Course_Access_Information)),
+  ].join('');
+
+  // Section 5: Facilitators
+  let facHtml = '<div id="edit-fac-container">';
+  for (let i = 0; i < 10; i++) {
+    const nameKey = FAC_NAME_KEYS[i];
+    const roleKey = i < 5 ? FAC_ROLE_KEYS_1_5[i] : FAC_ROLE_KEYS_6_10[i - 5];
+    const nameVal = typeof d[nameKey] === 'object' ? (d[nameKey]?.name ?? '') : (d[nameKey] ?? '');
+    const nameId  = typeof d[nameKey] === 'object' ? (d[nameKey]?.id ?? '') : '';
+    const roleVal = d[roleKey] ?? '';
+    facHtml += `
+      <div class="edit-fac-row" data-slot="${i}">
+        <div class="edit-field" style="margin-bottom:0">
+          <label class="edit-label">Facilitator ${i + 1} Name</label>
+          <input type="text" class="ef-fac-name" data-slot="${i}" value="${nameVal.replace(/"/g, '&quot;')}" placeholder="Name">
+          <input type="hidden" class="ef-fac-id" data-slot="${i}" value="${nameId}">
+        </div>
+        <div class="edit-field" style="margin-bottom:0">
+          <label class="edit-label">Role ${i + 1}</label>
+          <select class="ef-fac-role" data-slot="${i}">
+            ${ROLE_OPTIONS_HTML.replace(`value="${roleVal}"`, `value="${roleVal}" selected`)}
+          </select>
+        </div>
+      </div>`;
+  }
+  facHtml += '</div>';
+
+  document.getElementById('edit-modal-body').innerHTML = [
+    makeAccSection('basic',       'Basic Info',           basicHtml,    true),
+    makeAccSection('dates',       'Dates',                datesHtml,    false),
+    makeAccSection('logistics',   'Location & Logistics', logisticsHtml,false),
+    makeAccSection('content',     'Training Content',     contentHtml,  false),
+    makeAccSection('facilitators','Facilitators',         facHtml,      false),
+  ].join('');
+}
+
+function onEditOrgChange(val) {
+  const wrap = document.getElementById('ef-countries-wrap');
+  if (wrap) wrap.style.display = val === 'Regional' ? 'block' : 'none';
+}
 
 // ── Edit dropdown (global scope — called from inline onclick handlers) ────────
 
