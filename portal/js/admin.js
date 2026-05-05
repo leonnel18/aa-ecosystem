@@ -87,6 +87,7 @@ async function loadTrainingInfo() {
 
 // ── Fetch all deals for this training ─────────────────────────────────────────
 let allDeals = [];
+let gradSortAsc = true;
 
 async function loadDeals() {
   if (!TRAINING_ID) return;
@@ -240,6 +241,13 @@ function bulkSetStage(view, stage) {
     const sel = document.getElementById(`stage-${d.id}`);
     if (sel) sel.value = stage;
   });
+}
+
+function toggleGradSort() {
+  gradSortAsc = !gradSortAsc;
+  const btn = document.getElementById("grad-sort-btn");
+  if (btn) btn.textContent = gradSortAsc ? "A → Z" : "Z → A";
+  renderGraduates();
 }
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
