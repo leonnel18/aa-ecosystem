@@ -56,7 +56,7 @@
     <nav class="admin-tabs">
       <button id="tab-selection"   onclick="switchTab('selection')">Selection</button>
       <button id="tab-attendance"  onclick="switchTab('attendance')">Attendance</button>
-      <button id="tab-post_survey" onclick="switchTab('post_survey')">Post-Survey</button>
+      <button id="tab-post_survey" onclick="switchTab('post_survey')">Graduates</button>
     </nav>
 
     <!-- View 1: Selection -->
@@ -137,6 +137,20 @@
           </table>
         </div>
         <div class="empty" id="ps-empty" style="display:none">All participants have completed the post-survey.</div>
+      </div>
+
+      <div class="section-header" style="margin-top:32px;display:flex;align-items:center;gap:16px">
+        <h2 id="grad-header">List of Graduates (0)</h2>
+        <button class="btn btn-outline" id="grad-sort-btn" onclick="toggleGradSort()" style="font-size:13px;padding:4px 12px">A → Z</button>
+      </div>
+      <div class="chart-card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Stage</th><th>6-Month</th><th>Post Survey</th></tr></thead>
+            <tbody id="grad-tbody"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="grad-empty" style="display:none">No graduates yet.</div>
       </div>
 
       <div style="margin-top:20px;display:flex;align-items:center;gap:12px">
