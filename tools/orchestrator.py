@@ -83,6 +83,12 @@ def run_pipeline(portal: str = None, skip_extract: bool = False):
             log(f"  [FAIL] Data write failed: {e}")
             sys.exit(1)
 
+        # Sync to portal/data/ so Wrangler deploy serves the latest data
+        import shutil
+        portal_data_path = os.path.join(os.path.dirname(__file__), "..", "portal", "data", "dashboard_data.json")
+        shutil.copy2(out, portal_data_path)
+        log(f"  dashboard_data.json synced to portal/data/")
+
     elapsed = (datetime.now(timezone.utc) - start).seconds
     log(f"Pipeline complete in {elapsed}s")
     print(f"\n{'=' * 60}")
