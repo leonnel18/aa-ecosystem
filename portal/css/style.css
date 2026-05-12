@@ -369,6 +369,7 @@ tr:hover td { background: var(--bg-alt); }
 .badge-cancelled    { background: #fee2e2; color: #991b1b; }
 .badge-on-hold      { background: #f3f4f6; color: #374151; }
 .badge-not-attended { background: #fff7ed; color: #c2410c; }
+.badge-missed       { background: #fff7ed; color: #c2410c; }
 .badge-selected     { background: #ede9fe; color: #5b21b6; }
 
 /* ── Progress bars (training types) ─────────────────────────────────────── */

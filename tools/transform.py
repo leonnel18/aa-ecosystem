@@ -561,7 +561,6 @@ def build_training_plan_summary(portal_solutions, actual_trainings):
 
         target_p  = sol.get("Target_Participants") or 0
         plan_title = sol.get("Solution_Title") or ""
-        sol_type   = (sol.get("Training_Type") or {}).get("name", "") if isinstance(sol.get("Training_Type"), dict) else (sol.get("Training_Type") or "")
 
         b["target_activities"] += 1
         b["target_participants"] += int(target_p) if target_p else 0
@@ -583,7 +582,9 @@ def build_training_plan_summary(portal_solutions, actual_trainings):
                 "status":              actual.get("status", "Completed"),
             })
         else:
-            if plan_date and plan_date <= today:
+            if plan_end and plan_end < today:
+                status = "Missed"
+            elif plan_date and plan_date <= today:
                 status = "Ongoing"
             else:
                 status = "Upcoming"
@@ -797,7 +798,7 @@ def transform(portals: list = None) -> dict:
                 if deal.get("Stage") in STAGES_GRADUATED:
                     deal_counts[sol_id]["graduates"] += 1
 
-        # Filter solutions to this portal (same logic as inside build_report_2)
+        # Same filter as inside build_report_2 — must stay in sync if filter logic changes
         portal_solutions = [s for s in solutions
                             if ORG_TO_PORTAL.get(s.get("Organised_By", "")) == portal]
 
