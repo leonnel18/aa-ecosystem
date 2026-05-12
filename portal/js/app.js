@@ -304,6 +304,7 @@ async function initBackbone() {
   const data = await loadData();
   const bb = data.portals.backbone;
   if (!bb) { showError('No backbone data found.'); return; }
+  window._portalData = bb;
 
   const bbR1 = bb.report_1_overview || {};
 
