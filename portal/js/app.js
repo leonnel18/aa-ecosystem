@@ -95,6 +95,99 @@ function initTabs(defaultTabId, onActivate) {
 
 // ── Index page ────────────────────────────────────────────────────────────────
 
+function renderIndexPlanVsActual(data) {
+  const tabsEl  = document.getElementById('pva-index-tabs');
+  const tableEl = document.getElementById('pva-index-table');
+  const labelEl = document.getElementById('pva-year-label');
+  if (!tabsEl || !tableEl) return;
+
+  const PORTALS = ['PH', 'PK', 'KR', 'ID', 'backbone'];
+  const FLAGS   = { PH: '🇵🇭', PK: '🇵🇰', KR: '🇰🇷', ID: '🇮🇩', backbone: '🌏' };
+  const NAMES   = { PH: 'Philippines', PK: 'Pakistan', KR: 'Korea', ID: 'Indonesia', backbone: 'Regional' };
+  const TAB_LABELS = { year_1: 'Year 1', year_2: 'Year 2', archive: 'Archive' };
+  const YEAR_SUBTITLES = {
+    year_1:  'Year 1: Sep 2025 – Aug 2026',
+    year_2:  'Year 2: Sep 2026 – Aug 2027',
+    archive: 'Archive: Before Sep 2025',
+  };
+  const TABS = ['year_1', 'year_2', 'archive'];
+
+  function getPortalBucket(portalCode, bucketKey) {
+    return ((data.portals[portalCode] || {}).training_plan_summary || {})[bucketKey] || {
+      target_activities: 0, actual_activities: 0,
+      target_participants: 0, actual_participants: 0, rows: []
+    };
+  }
+
+  function renderTable(bucketKey) {
+    if (labelEl) labelEl.textContent = YEAR_SUBTITLES[bucketKey];
+    let totalTargetAct = 0, totalActualAct = 0, totalTargetPart = 0, totalActualPart = 0;
+
+    const rows = PORTALS.map(code => {
+      const b = getPortalBucket(code, bucketKey);
+      totalTargetAct  += b.target_activities;
+      totalActualAct  += b.actual_activities;
+      totalTargetPart += b.target_participants;
+      totalActualPart += b.actual_participants;
+
+      const completedTitles = b.rows
+        .filter(r => r.status === 'Completed' && r.actual_title)
+        .map(r => `<span class="badge badge-completed">${r.actual_title}</span>`)
+        .join(' ');
+      const plannedTitles = b.rows
+        .filter(r => r.status !== 'Completed' && r.plan_title)
+        .map(r => `<span class="badge badge-${(r.status||'upcoming').toLowerCase()}">${r.plan_title}</span>`)
+        .join(' ');
+
+      return `<tr>
+        <td><span style="font-size:1.4rem;margin-right:6px">${FLAGS[code]}</span>${NAMES[code]}</td>
+        <td style="text-align:center">${b.target_activities}</td>
+        <td style="text-align:center">${b.actual_activities}</td>
+        <td style="text-align:center">${b.target_participants}</td>
+        <td style="text-align:center">${b.actual_participants}</td>
+        <td style="line-height:2">${completedTitles}${plannedTitles ? ' ' + plannedTitles : ''}</td>
+      </tr>`;
+    }).join('');
+
+    tableEl.innerHTML = `<div class="table-wrap"><table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th style="text-align:center">Target<br>Activities</th>
+          <th style="text-align:center">Actual<br>Activities</th>
+          <th style="text-align:center">Target<br>Participants</th>
+          <th style="text-align:center">Actual<br>Participants</th>
+          <th>Training Titles</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+      <tfoot>
+        <tr class="pva-tfoot">
+          <td><strong>Total</strong></td>
+          <td style="text-align:center"><strong>${totalTargetAct}</strong></td>
+          <td style="text-align:center"><strong>${totalActualAct}</strong></td>
+          <td style="text-align:center"><strong>${totalTargetPart}</strong></td>
+          <td style="text-align:center"><strong>${totalActualPart}</strong></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table></div>`;
+  }
+
+  TABS.forEach((key, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'year-tab' + (i === 0 ? ' active' : '');
+    btn.textContent = TAB_LABELS[key];
+    btn.addEventListener('click', () => {
+      tabsEl.querySelectorAll('.year-tab').forEach(b => b.classList.toggle('active', b === btn));
+      renderTable(key);
+    });
+    tabsEl.appendChild(btn);
+  });
+
+  renderTable('year_1');
+}
+
 async function initIndex() {
   const data = await loadData();
   const grid = document.getElementById('country-grid');
@@ -160,6 +253,8 @@ async function initIndex() {
   if (tsEl && data.generated_at) {
     tsEl.textContent = `Data as of ${data.generated_at.replace('T', ' ').slice(0, 16)} UTC`;
   }
+
+  renderIndexPlanVsActual(data);
 }
 
 // ── Country portal page ───────────────────────────────────────────────────────
@@ -180,6 +275,7 @@ async function initPortal() {
     showError(`No data found for ${code}.`);
     return;
   }
+  window._portalData = portal;
 
   const meta = PORTAL_META[code];
   document.title = `${meta.name} — AktivAsia Team Portal`;
@@ -386,30 +482,97 @@ function renderReport2(r2) {
   }
   renderSessionsTable('');
 
-  // Completed vs Planned card
-  const cpby = r2.completed_vs_planned_by_year || {};
-  const cpbyTabsEl = document.getElementById('r2-cpby-tabs');
-  const cpbyGridEl = document.getElementById('r2-cpby-grid');
-  if (cpbyTabsEl && cpbyGridEl) {
-    ['2024','2025','2026'].forEach((yr, i) => {
+  // Plan vs Actual table (fiscal year tabs)
+  (function renderPlanVsActual() {
+    const tabsEl    = document.getElementById('r2-pva-tabs');
+    const tableEl   = document.getElementById('r2-pva-table');
+    const summaryEl = document.getElementById('r2-pva-summary');
+    if (!tabsEl || !tableEl) return;
+
+    const pva = (window._portalData || {}).training_plan_summary || {};
+
+    const TABS = [
+      { key: 'year_1',  label: 'Year 1'  },
+      { key: 'year_2',  label: 'Year 2'  },
+      { key: 'archive', label: 'Archive' },
+    ];
+
+    function fmtDate(start, end) {
+      if (!start) return '—';
+      const s = new Date(start + 'T00:00:00');
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const sm = months[s.getMonth()];
+      const sd = s.getDate();
+      const sy = s.getFullYear();
+      if (!end || end === start) return `${sm} ${sd}, ${sy}`;
+      const e = new Date(end + 'T00:00:00');
+      if (e.getMonth() === s.getMonth() && e.getFullYear() === s.getFullYear()) {
+        return `${sm} ${sd}–${e.getDate()}, ${sy}`;
+      }
+      return `${sm} ${sd} – ${months[e.getMonth()]} ${e.getDate()}, ${e.getFullYear()}`;
+    }
+
+    function renderBucket(key) {
+      const b = pva[key] || { target_activities: 0, actual_activities: 0,
+                               target_participants: 0, actual_participants: 0, rows: [] };
+      if (summaryEl) {
+        summaryEl.innerHTML =
+          `<span><strong>${b.actual_activities}</strong> Conducted</span>` +
+          `<span><strong>${b.target_activities}</strong> Planned</span>`;
+      }
+
+      if (!b.rows.length) {
+        tableEl.innerHTML = '<div class="empty" style="padding:16px;color:var(--text-meta)">No trainings in this period</div>';
+        return;
+      }
+
+      const rowsHtml = b.rows.map(row => {
+        const sClass = (row.status || '').toLowerCase().replace(/\s+/g, '-');
+        return `<tr>
+          <td>${row.plan_title || '—'}</td>
+          <td>${fmtDate(row.plan_date, row.plan_end_date)}</td>
+          <td style="text-align:center">${row.target_participants != null ? row.target_participants : '—'}</td>
+          <td>${row.actual_title || '—'}</td>
+          <td>${fmtDate(row.actual_date, row.actual_end_date)}</td>
+          <td style="text-align:center">${row.actual_participants != null ? row.actual_participants : '—'}</td>
+          <td><span class="badge badge-${sClass}">${row.status || '—'}</span></td>
+        </tr>`;
+      }).join('');
+
+      tableEl.innerHTML = `<div class="table-wrap"><table>
+        <thead>
+          <tr class="pva-group-header">
+            <th colspan="3">Training Plan</th>
+            <th colspan="3">Actual Training</th>
+            <th class="pva-status-header">Status</th>
+          </tr>
+          <tr>
+            <th>Plan Title</th>
+            <th>Planned Date</th>
+            <th style="text-align:center">Target</th>
+            <th>Actual Title</th>
+            <th>Actual Date</th>
+            <th style="text-align:center">Actual</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>${rowsHtml}</tbody>
+      </table></div>`;
+    }
+
+    TABS.forEach((tab, i) => {
       const btn = document.createElement('button');
       btn.className = 'year-tab' + (i === 0 ? ' active' : '');
-      btn.textContent = yr;
+      btn.textContent = tab.label;
       btn.addEventListener('click', () => {
-        cpbyTabsEl.querySelectorAll('.year-tab').forEach(b => b.classList.toggle('active', b === btn));
-        renderCpby(yr);
+        tabsEl.querySelectorAll('.year-tab').forEach(b => b.classList.toggle('active', b === btn));
+        renderBucket(tab.key);
       });
-      cpbyTabsEl.appendChild(btn);
+      tabsEl.appendChild(btn);
     });
-    function renderCpby(yr) {
-      const d = cpby[yr] || {planned: 0, conducted: 0};
-      cpbyGridEl.innerHTML = `<div class="cpby-grid">
-        <div class="cpby-card"><div class="cpby-num">${d.conducted}</div><div class="cpby-label">Conducted</div></div>
-        <div class="cpby-card"><div class="cpby-num">${d.planned}</div><div class="cpby-label">Planned</div></div>
-      </div>`;
-    }
-    renderCpby('2024');
-  }
+
+    renderBucket('year_1');
+  })();
 
   // Training Plans list
   const plans = r2.training_plans || [];
