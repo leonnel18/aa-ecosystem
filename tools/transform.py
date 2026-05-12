@@ -164,6 +164,21 @@ def _has_6m_data(deal: dict) -> bool:
     return any(deal.get(f) for f in IMPACT_6M_MAP.values())
 
 
+def _fiscal_bucket(date_str):
+    """Return 'year_1', 'year_2', or 'archive' for a YYYY-MM-DD date string."""
+    if not date_str:
+        return "archive"
+    try:
+        d = date.fromisoformat(date_str[:10])
+    except ValueError:
+        return "archive"
+    if date(2025, 9, 1) <= d <= date(2026, 8, 31):
+        return "year_1"
+    if date(2026, 9, 1) <= d <= date(2027, 8, 31):
+        return "year_2"
+    return "archive"
+
+
 # ── Report builders ─────────────────────────────────────────────────────────
 
 def build_report_1(deals: list, solutions: list, solutions_by_id: dict,
@@ -514,6 +529,109 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
     }
 
 
+def build_training_plan_summary(portal_solutions, actual_trainings):
+    """
+    Build training_plan_summary keyed by fiscal bucket (year_1, year_2, archive).
+    Matches plans (Solutions) to actuals by Solution id.
+    Plans that have a matching actual → paired row.
+    Plans with no actual → plan-only row (Upcoming/Ongoing).
+    Actuals not matched to any plan → actual-only row (Completed, unplanned).
+    """
+    today = date.today().isoformat()
+
+    # Index actuals by solution id for O(1) lookup
+    actuals_by_id = {a["id"]: a for a in actual_trainings}
+    matched_actual_ids = set()
+
+    buckets = {
+        "year_1":  {"target_activities": 0, "actual_activities": 0,
+                    "target_participants": 0, "actual_participants": 0, "rows": []},
+        "year_2":  {"target_activities": 0, "actual_activities": 0,
+                    "target_participants": 0, "actual_participants": 0, "rows": []},
+        "archive": {"target_activities": 0, "actual_activities": 0,
+                    "target_participants": 0, "actual_participants": 0, "rows": []},
+    }
+
+    for sol in portal_solutions:
+        sol_id = sol.get("id", "")
+        plan_date = sol.get("Start_Date") or ""
+        plan_end  = sol.get("End_Date") or ""
+        bucket    = _fiscal_bucket(plan_date)
+        b         = buckets[bucket]
+
+        target_p  = sol.get("Target_Participants") or 0
+        plan_title = sol.get("Solution_Title") or ""
+        sol_type   = (sol.get("Training_Type") or {}).get("name", "") if isinstance(sol.get("Training_Type"), dict) else (sol.get("Training_Type") or "")
+
+        b["target_activities"] += 1
+        b["target_participants"] += int(target_p) if target_p else 0
+
+        actual = actuals_by_id.get(sol_id)
+        if actual:
+            matched_actual_ids.add(sol_id)
+            b["actual_activities"] += 1
+            b["actual_participants"] += actual.get("graduates") or 0
+            b["rows"].append({
+                "plan_title":          plan_title,
+                "plan_date":           plan_date,
+                "plan_end_date":       plan_end,
+                "target_participants": int(target_p) if target_p else None,
+                "actual_title":        actual.get("name"),
+                "actual_date":         actual.get("date"),
+                "actual_end_date":     actual.get("end_date"),
+                "actual_participants": actual.get("graduates"),
+                "status":              actual.get("status", "Completed"),
+            })
+        else:
+            if plan_date and plan_date <= today:
+                status = "Ongoing"
+            else:
+                status = "Upcoming"
+            b["rows"].append({
+                "plan_title":          plan_title,
+                "plan_date":           plan_date,
+                "plan_end_date":       plan_end,
+                "target_participants": int(target_p) if target_p else None,
+                "actual_title":        None,
+                "actual_date":         None,
+                "actual_end_date":     None,
+                "actual_participants": None,
+                "status":              status,
+            })
+
+    # Unmatched actuals (no plan in CRM) → actual-only rows
+    for actual in actual_trainings:
+        if actual["id"] in matched_actual_ids:
+            continue
+        actual_date = actual.get("date") or ""
+        bucket = _fiscal_bucket(actual_date)
+        b = buckets[bucket]
+        b["actual_activities"] += 1
+        b["actual_participants"] += actual.get("graduates") or 0
+        b["rows"].append({
+            "plan_title":          None,
+            "plan_date":           None,
+            "plan_end_date":       None,
+            "target_participants": None,
+            "actual_title":        actual.get("name"),
+            "actual_date":         actual_date,
+            "actual_end_date":     actual.get("end_date"),
+            "actual_participants": actual.get("graduates"),
+            "status":              actual.get("status", "Completed"),
+        })
+
+    # Sort rows: completed first (by actual_date desc), then upcoming/ongoing (by plan_date asc)
+    def _sort_key(row):
+        is_done = row["status"] == "Completed"
+        d = row["actual_date"] or row["plan_date"] or ""
+        return (0 if is_done else 1, d if is_done else "", "" if is_done else d)
+
+    for b in buckets.values():
+        b["rows"].sort(key=_sort_key)
+
+    return buckets
+
+
 def build_report_3(deals: list, solutions_by_id: dict, portal: str) -> dict:
     """Training Impact Qualitative — Likert averages + feedback per training."""
     portal_deals = [d for d in deals if _deal_portal(d, solutions_by_id) == portal]
@@ -679,14 +797,24 @@ def transform(portals: list = None) -> dict:
                 if deal.get("Stage") in STAGES_GRADUATED:
                     deal_counts[sol_id]["graduates"] += 1
 
+        # Filter solutions to this portal (same logic as inside build_report_2)
+        portal_solutions = [s for s in solutions
+                            if ORG_TO_PORTAL.get(s.get("Organised_By", "")) == portal]
+
+        r2 = build_report_2(deals, solutions, solutions_by_id, products_by_id, portal, forms, training_plans_raw)
+
         payload = {
             "portal": portal,
             "report_1_overview": build_report_1(
                 deals, solutions, solutions_by_id, products_by_id, deal_counts, portal
             ),
-            "report_2_training_plan":      build_report_2(deals, solutions, solutions_by_id, products_by_id, portal, forms, training_plans_raw),
+            "report_2_training_plan":      r2,
             "report_3_impact_qualitative": build_report_3(deals, solutions_by_id, portal),
             "report_4_impact_quantitative": build_report_4(deals, solutions_by_id, portal),
+            "training_plan_summary": build_training_plan_summary(
+                portal_solutions,
+                r2["actual_trainings"],
+            ),
         }
 
         # backbone also gets per-country aggregate
