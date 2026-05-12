@@ -529,19 +529,18 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
     }
 
 
-def build_training_plan_summary(portal_solutions, actual_trainings):
+def build_training_plan_summary(portal_plans, actual_trainings):
     """
     Build training_plan_summary keyed by fiscal bucket (year_1, year_2, archive).
-    Matches plans (Solutions) to actuals by Solution id.
-    Plans that have a matching actual → paired row.
-    Plans with no actual → plan-only row (Upcoming/Ongoing).
-    Actuals not matched to any plan → actual-only row (Completed, unplanned).
+
+    portal_plans   — raw records from the Training Plans CRM module (separate from Solutions).
+    actual_trainings — conducted trainings from Solutions (already filtered to this portal).
+
+    Plans and actuals are different CRM records with no reliable shared key, so they are
+    listed as independent rows within each fiscal bucket rather than force-matched by ID.
+    Plan-only rows show the left side; actual-only rows show the right side.
     """
     today = date.today().isoformat()
-
-    # Index actuals by solution id for O(1) lookup
-    actuals_by_id = {a["id"]: a for a in actual_trainings}
-    matched_actual_ids = set()
 
     buckets = {
         "year_1":  {"target_activities": 0, "actual_activities": 0,
@@ -552,63 +551,44 @@ def build_training_plan_summary(portal_solutions, actual_trainings):
                     "target_participants": 0, "actual_participants": 0, "rows": []},
     }
 
-    for sol in portal_solutions:
-        sol_id = sol.get("id", "")
-        plan_date = sol.get("Start_Date") or ""
-        plan_end  = sol.get("End_Date") or ""
+    # Plan rows (left side) — from Training Plans CRM module
+    for plan in portal_plans:
+        plan_date = plan.get("start_date") or ""
+        plan_end  = plan.get("end_date") or ""
         bucket    = _fiscal_bucket(plan_date)
         b         = buckets[bucket]
 
-        target_p  = sol.get("Target_Participants") or 0
-        plan_title = sol.get("Solution_Title") or ""
-
         b["target_activities"] += 1
-        b["target_participants"] += int(target_p) if target_p else 0
 
-        actual = actuals_by_id.get(sol_id)
-        if actual:
-            matched_actual_ids.add(sol_id)
-            b["actual_activities"] += 1
-            b["actual_participants"] += actual.get("graduates") or 0
-            b["rows"].append({
-                "plan_title":          plan_title,
-                "plan_date":           plan_date,
-                "plan_end_date":       plan_end,
-                "target_participants": int(target_p) if target_p else None,
-                "actual_title":        actual.get("name"),
-                "actual_date":         actual.get("date"),
-                "actual_end_date":     actual.get("end_date"),
-                "actual_participants": actual.get("graduates"),
-                "status":              actual.get("status", "Completed"),
-            })
+        if plan_end and plan_end < today:
+            status = "Missed"
+        elif plan_date and plan_date <= today:
+            status = "Ongoing"
         else:
-            if plan_end and plan_end < today:
-                status = "Missed"
-            elif plan_date and plan_date <= today:
-                status = "Ongoing"
-            else:
-                status = "Upcoming"
-            b["rows"].append({
-                "plan_title":          plan_title,
-                "plan_date":           plan_date,
-                "plan_end_date":       plan_end,
-                "target_participants": int(target_p) if target_p else None,
-                "actual_title":        None,
-                "actual_date":         None,
-                "actual_end_date":     None,
-                "actual_participants": None,
-                "status":              status,
-            })
+            status = "Upcoming"
 
-    # Unmatched actuals (no plan in CRM) → actual-only rows
+        b["rows"].append({
+            "plan_title":          plan.get("name") or "",
+            "plan_date":           plan_date,
+            "plan_end_date":       plan_end,
+            "target_participants": None,
+            "actual_title":        None,
+            "actual_date":         None,
+            "actual_end_date":     None,
+            "actual_participants": None,
+            "status":              status,
+            "_row_type":           "plan",
+        })
+
+    # Actual rows (right side) — from Solutions (conducted trainings)
     for actual in actual_trainings:
-        if actual["id"] in matched_actual_ids:
-            continue
         actual_date = actual.get("date") or ""
         bucket = _fiscal_bucket(actual_date)
         b = buckets[bucket]
+
         b["actual_activities"] += 1
         b["actual_participants"] += actual.get("graduates") or 0
+
         b["rows"].append({
             "plan_title":          None,
             "plan_date":           None,
@@ -619,16 +599,20 @@ def build_training_plan_summary(portal_solutions, actual_trainings):
             "actual_end_date":     actual.get("end_date"),
             "actual_participants": actual.get("graduates"),
             "status":              actual.get("status", "Completed"),
+            "_row_type":           "actual",
         })
 
-    # Sort rows: completed first (by actual_date desc), then upcoming/ongoing (by plan_date asc)
+    # Sort: actuals (Completed) first by date desc, then plans by date asc
     def _sort_key(row):
-        is_done = row["status"] == "Completed"
+        is_actual = row["_row_type"] == "actual"
         d = row["actual_date"] or row["plan_date"] or ""
-        return (0 if is_done else 1, d if is_done else "", "" if is_done else d)
+        return (0 if is_actual else 1, d if is_actual else "", "" if is_actual else d)
 
     for b in buckets.values():
         b["rows"].sort(key=_sort_key)
+        # Remove internal helper key before writing to JSON
+        for row in b["rows"]:
+            row.pop("_row_type", None)
 
     return buckets
 
@@ -798,10 +782,6 @@ def transform(portals: list = None) -> dict:
                 if deal.get("Stage") in STAGES_GRADUATED:
                     deal_counts[sol_id]["graduates"] += 1
 
-        # Same filter as inside build_report_2 — must stay in sync if filter logic changes
-        portal_solutions = [s for s in solutions
-                            if ORG_TO_PORTAL.get(s.get("Organised_By", "")) == portal]
-
         r2 = build_report_2(deals, solutions, solutions_by_id, products_by_id, portal, forms, training_plans_raw)
 
         payload = {
@@ -813,8 +793,8 @@ def transform(portals: list = None) -> dict:
             "report_3_impact_qualitative": build_report_3(deals, solutions_by_id, portal),
             "report_4_impact_quantitative": build_report_4(deals, solutions_by_id, portal),
             "training_plan_summary": build_training_plan_summary(
-                portal_solutions,
-                r2["actual_trainings"],
+                r2["training_plans"],   # Training Plans CRM module (target activities)
+                r2["actual_trainings"], # Solutions CRM module (conducted trainings)
             ),
         }
 
