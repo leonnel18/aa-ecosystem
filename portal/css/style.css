@@ -781,3 +781,45 @@ select.filter:focus  { outline: none; border-color: var(--brand); box-shadow: 0 
 .cpby-card { background: #f5f4ee; border-radius: 12px; padding: 16px; text-align: center; }
 .cpby-card .cpby-num { font-size: 1.6rem; font-weight: 800; color: #821545; }
 .cpby-card .cpby-label { font-size: .8rem; color: #788099; margin-top: 4px; }
+
+/* ── Plan vs Actual table — column group headers ────────────────────── */
+.pva-group-header th {
+  background: var(--brand);
+  color: #fff;
+  text-align: center;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-bottom: 2px solid var(--brand-dark);
+}
+
+.pva-group-header th.pva-status-header {
+  background: var(--bg-alt);
+  color: var(--text-meta);
+  border-bottom: 2px solid var(--border);
+}
+
+/* ── Summary bar above the plan vs actual table ─────────────────────── */
+.pva-summary-bar {
+  display: flex;
+  gap: 24px;
+  padding: 10px 0 16px;
+  font-size: .9rem;
+  color: var(--text-meta);
+}
+
+.pva-summary-bar strong {
+  color: var(--brand);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+/* ── Total footer row ────────────────────────────────────────────────── */
+.pva-tfoot td {
+  font-weight: 700;
+  background: var(--bg-alt);
+  border-top: 2px solid var(--border);
+  border-bottom: none;
+}
