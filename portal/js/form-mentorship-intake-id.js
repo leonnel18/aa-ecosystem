@@ -10,20 +10,27 @@ let allParticipants = []; // [{ id, name }]
 let selectedParticipant = null; // { id, name }
 let isSubmitting = false;
 
-// DOM refs
-const part1 = document.getElementById("part-1");
-const part2 = document.getElementById("part-2");
+// DOM refs — Part 1
+const part1        = document.getElementById("part-1");
+const loadingMsg   = document.getElementById("loading-msg");
+const errorMsg     = document.getElementById("error-msg");
+const searchArea   = document.getElementById("search-area");
+const nameSearch   = document.getElementById("name-search");
+const nameResults  = document.getElementById("name-results");
+const nameTag      = document.getElementById("selected-name-tag");
+const nameTagText  = document.getElementById("selected-name-text");
+const clearNameBtn = document.getElementById("clear-name-btn");
+const nameError    = document.getElementById("name-error");
+const fieldName    = document.getElementById("field-name");
+
+// DOM refs — Part 2 / nav
+const part2        = document.getElementById("part-2");
 const successScreen = document.getElementById("success-screen");
-const loadingMsg = document.getElementById("loading-msg");
-const errorMsg = document.getElementById("error-msg");
-const searchArea = document.getElementById("search-area");
-const nameSearch = document.getElementById("name-search");
-const nameResults = document.getElementById("name-results");
-const selectedNameDisplay = document.getElementById("selected-name-display");
-const btnNext = document.getElementById("btn-next");
-const btnBack = document.getElementById("btn-back");
-const btnSubmit = document.getElementById("btn-submit");
-const submitError = document.getElementById("submit-error");
+const navButtons   = document.getElementById("nav-buttons");
+const btnBack      = document.getElementById("btn-back");
+const btnNext      = document.getElementById("btn-next");
+const btnSubmit    = document.getElementById("btn-submit");
+const submitError  = document.getElementById("submit-error");
 
 // ── Part 1: Load participants ──────────────────────────────────────────────
 
@@ -36,11 +43,11 @@ async function loadParticipants() {
       .filter((d) => GELP_STAGES.has(d.Stage))
       .map((d) => ({ id: d.id, name: `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim() }))
       .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""));
-    loadingMsg.hidden = true;
-    searchArea.hidden = false;
+    loadingMsg.classList.add("hidden");
+    searchArea.classList.remove("hidden");
   } catch (e) {
-    loadingMsg.hidden = true;
-    errorMsg.hidden = false;
+    loadingMsg.classList.add("hidden");
+    errorMsg.classList.remove("hidden");
   }
 }
 
@@ -49,9 +56,7 @@ async function loadParticipants() {
 nameSearch.addEventListener("input", () => {
   const q = nameSearch.value.trim().toLowerCase();
   if (selectedParticipant && nameSearch.value !== selectedParticipant.name) {
-    selectedParticipant = null;
-    selectedNameDisplay.textContent = "";
-    btnNext.disabled = true;
+    clearSelection();
   }
   renderResults(q);
 });
@@ -67,19 +72,24 @@ document.addEventListener("click", (e) => {
   }
 });
 
+clearNameBtn.addEventListener("click", () => {
+  clearSelection();
+  nameSearch.value = "";
+  nameSearch.focus();
+});
+
+function clearSelection() {
+  selectedParticipant = null;
+  nameTag.classList.remove("visible");
+  nameTagText.textContent = "";
+  btnNext.disabled = true;
+}
+
 function renderResults(q) {
   nameResults.innerHTML = "";
-  if (!q) {
-    nameResults.classList.remove("open");
-    return;
-  }
-  const matches = allParticipants.filter((p) =>
-    p.name.toLowerCase().includes(q)
-  );
-  if (matches.length === 0) {
-    nameResults.classList.remove("open");
-    return;
-  }
+  if (!q) { nameResults.classList.remove("open"); return; }
+  const matches = allParticipants.filter((p) => p.name.toLowerCase().includes(q));
+  if (matches.length === 0) { nameResults.classList.remove("open"); return; }
   matches.forEach((p) => {
     const item = document.createElement("div");
     item.className = "name-result-item";
@@ -95,30 +105,35 @@ function selectParticipant(p) {
   selectedParticipant = p;
   nameSearch.value = p.name;
   nameResults.classList.remove("open");
-
-  selectedNameDisplay.textContent = "";
-  const strong = document.createElement("strong");
-  strong.textContent = p.name;
-  const em = document.createElement("em");
-  em.style.cssText = "font-size:0.8rem;color:var(--meta)";
-  em.textContent = "Bukan Anda? Ketik ulang. / Not you? Type again.";
-  selectedNameDisplay.append("Dipilih: ", strong, " ·  ", em);
-
+  nameTagText.textContent = p.name;
+  nameTag.classList.add("visible");
+  fieldName.classList.remove("has-error");
   btnNext.disabled = false;
 }
 
-// ── Part 1 → Part 2 ────────────────────────────────────────────────────────
+// ── Nav: Part 1 → Part 2 ──────────────────────────────────────────────────
 
 btnNext.addEventListener("click", () => {
-  if (!selectedParticipant) return;
-  part1.hidden = true;
-  part2.hidden = false;
+  if (!selectedParticipant) {
+    fieldName.classList.add("has-error");
+    return;
+  }
+  part1.classList.add("hidden");
+  part2.classList.remove("hidden");
+  btnNext.classList.add("hidden");
+  btnSubmit.classList.remove("hidden");
+  btnBack.classList.remove("hidden");
+  window.scrollTo(0, 0);
 });
 
 btnBack.addEventListener("click", () => {
-  part2.hidden = true;
-  part1.hidden = false;
-  submitError.hidden = true;
+  part2.classList.add("hidden");
+  part1.classList.remove("hidden");
+  btnSubmit.classList.add("hidden");
+  btnNext.classList.remove("hidden");
+  btnBack.classList.add("hidden");
+  submitError.classList.add("hidden");
+  window.scrollTo(0, 0);
 });
 
 // ── Part 2: Validation ─────────────────────────────────────────────────────
@@ -142,35 +157,31 @@ function validatePart2() {
 
 btnSubmit.addEventListener("click", async () => {
   if (isSubmitting) return;
-  submitError.hidden = true;
+  submitError.classList.add("hidden");
 
   if (!validatePart2()) return;
 
   isSubmitting = true;
   btnSubmit.disabled = true;
-  btnSubmit.textContent = "Menyimpan... / Saving...";
+  btnSubmit.innerHTML = '<span class="spinner"></span>Menyimpan…';
 
   const q1 = document.getElementById("q1").value.trim();
   const q2 = document.getElementById("q2").value.trim();
   const q3 = document.getElementById("q3").value.trim();
   const q4 = document.getElementById("q4").value.trim();
 
-  const payload = formatPayload(q1, q2, q3, q4);
-
   try {
-    const res = await fetch(
-      `${PROXY_BASE}/deals/${selectedParticipant.id}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Custom_Responses: payload }),
-      }
-    );
+    const res = await fetch(`${PROXY_BASE}/deals/${selectedParticipant.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Custom_Responses: formatPayload(q1, q2, q3, q4) }),
+    });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    part2.hidden = true;
-    successScreen.hidden = false;
+    part2.classList.add("hidden");
+    navButtons.classList.add("hidden");
+    successScreen.style.display = "block";
   } catch (e) {
-    submitError.hidden = false;
+    submitError.classList.remove("hidden");
     btnSubmit.disabled = false;
     btnSubmit.textContent = "Kirim / Submit";
   } finally {
