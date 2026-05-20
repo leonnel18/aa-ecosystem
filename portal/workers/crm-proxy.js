@@ -307,6 +307,55 @@ export default {
         return jsonResponse(match ? { users: [match] } : { users: [] }, 200, origin);
       }
 
+      // ── GET /gelp-participants ────────────────────────────────────────────────
+      if (path === "/gelp-participants" && request.method === "GET") {
+        const token = await getAccessToken(env);
+
+        // GELP Solution ID — confirm this value in Zoho CRM before deploying
+        const GELP_SOLUTION_ID = "773031000008276089";
+
+        const stages = [
+          "Selected",
+          "Attended Training",
+          "Graduated or Post Evaluation Completed",
+        ];
+        const stageCriteria = stages
+          .map((s) => `(Stage:equals:${s})`)
+          .join("or");
+        const criteria = `(Training_Applied:equals:${GELP_SOLUTION_ID})and(${stageCriteria})`;
+
+        let page = 1;
+        let allDeals = [];
+        let moreRecords = true;
+
+        while (moreRecords) {
+          const url = `${CRM_BASE}/Deals?fields=id,Deal_Name&criteria=${encodeURIComponent(criteria)}&per_page=200&page=${page}`;
+          const res = await fetch(url, {
+            headers: { Authorization: `Zoho-oauthtoken ${token}` },
+          });
+          if (!res.ok) {
+            const err = await res.text();
+            return new Response(JSON.stringify({ error: err }), {
+              status: res.status,
+              headers: corsHeaders(origin),
+            });
+          }
+          const json = await res.json();
+          const records = json.data || [];
+          allDeals = allDeals.concat(records);
+          moreRecords = json.info?.more_records === true;
+          page++;
+        }
+
+        const participants = allDeals
+          .map((d) => ({ id: d.id, name: d.Deal_Name }))
+          .sort((a, b) => a.name.localeCompare(b.name));
+
+        return new Response(JSON.stringify(participants), {
+          headers: { ...corsHeaders(origin), "Content-Type": "application/json" },
+        });
+      }
+
       return jsonResponse({ error: "Not found" }, 404, origin);
 
     } catch (err) {
