@@ -1,4 +1,10 @@
 const PROXY_BASE = "https://crm-proxy.gideon-valera.workers.dev";
+const GELP_TRAINING_ID = "773031000008276089";
+const GELP_STAGES = new Set([
+  "Selected",
+  "Attended Training",
+  "Graduated or Post Evaluation Completed",
+]);
 
 let allParticipants = []; // [{ id, name }]
 let selectedParticipant = null; // { id, name }
@@ -23,9 +29,13 @@ const submitError = document.getElementById("submit-error");
 
 async function loadParticipants() {
   try {
-    const res = await fetch(`${PROXY_BASE}/gelp-participants`);
+    const res = await fetch(`${PROXY_BASE}/deals/search?training_id=${GELP_TRAINING_ID}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    allParticipants = await res.json();
+    const json = await res.json();
+    allParticipants = (json.data ?? [])
+      .filter((d) => GELP_STAGES.has(d.Stage))
+      .map((d) => ({ id: d.id, name: `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim() }))
+      .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""));
     loadingMsg.hidden = true;
     searchArea.hidden = false;
   } catch (e) {

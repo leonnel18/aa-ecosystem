@@ -311,40 +311,10 @@ export default {
       }
 
       // ── GET /gelp-participants ────────────────────────────────────────────────
+      // Kept for future use; client now uses /deals/search directly to avoid
+      // Zoho's 2000-record criteria pagination limit.
       if (path === "/gelp-participants" && request.method === "GET") {
-        const stages = [
-          "Selected",
-          "Attended Training",
-          "Graduated or Post Evaluation Completed",
-        ];
-        const stageCriteria = stages
-          .map((s) => `(Stage:equals:${s})`)
-          .join("or");
-        const criteria = `(Training_Applied:equals:${GELP_SOLUTION_ID})and(${stageCriteria})`;
-
-        let page = 1;
-        let allDeals = [];
-        let moreRecords = true;
-
-        while (moreRecords) {
-          const crmUrl = `${CRM_BASE}/Deals?fields=id,Deal_Name&criteria=${encodeURIComponent(criteria)}&per_page=200&page=${page}`;
-          const res = await fetch(crmUrl, { headers: auth });
-          if (!res.ok) {
-            const err = await res.text();
-            return jsonResponse({ error: err }, res.status, origin);
-          }
-          const json = await res.json();
-          const records = json.data ?? [];
-          allDeals.push(...records);
-          moreRecords = json.info?.more_records === true;
-          page++;
-        }
-
-        const participants = allDeals
-          .map((d) => ({ id: d.id, name: d.Deal_Name }))
-          .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""));
-
-        return jsonResponse(participants, 200, origin);
+        return jsonResponse([], 200, origin);
       }
 
       return jsonResponse({ error: "Not found" }, 404, origin);
