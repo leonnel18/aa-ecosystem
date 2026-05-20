@@ -38,6 +38,11 @@ async function loadParticipants() {
 
 nameSearch.addEventListener("input", () => {
   const q = nameSearch.value.trim().toLowerCase();
+  if (selectedParticipant && nameSearch.value !== selectedParticipant.name) {
+    selectedParticipant = null;
+    selectedNameDisplay.textContent = "";
+    btnNext.disabled = true;
+  }
   renderResults(q);
 });
 
@@ -80,17 +85,17 @@ function selectParticipant(p) {
   selectedParticipant = p;
   nameSearch.value = p.name;
   nameResults.classList.remove("open");
-  selectedNameDisplay.innerHTML = `Dipilih: <strong>${p.name}</strong> &nbsp;·&nbsp; <em style="font-size:0.8rem;color:var(--meta)">Bukan Anda? Ketik ulang. / Not you? Type again.</em>`;
+
+  selectedNameDisplay.textContent = "";
+  const strong = document.createElement("strong");
+  strong.textContent = p.name;
+  const em = document.createElement("em");
+  em.style.cssText = "font-size:0.8rem;color:var(--meta)";
+  em.textContent = "Bukan Anda? Ketik ulang. / Not you? Type again.";
+  selectedNameDisplay.append("Dipilih: ", strong, " ·  ", em);
+
   btnNext.disabled = false;
 }
-
-nameSearch.addEventListener("input", () => {
-  if (selectedParticipant && nameSearch.value !== selectedParticipant.name) {
-    selectedParticipant = null;
-    selectedNameDisplay.innerHTML = "";
-    btnNext.disabled = true;
-  }
-});
 
 // ── Part 1 → Part 2 ────────────────────────────────────────────────────────
 
