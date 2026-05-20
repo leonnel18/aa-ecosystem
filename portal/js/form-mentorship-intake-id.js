@@ -174,7 +174,7 @@ btnSubmit.addEventListener("click", async () => {
     const res = await fetch(`${PROXY_BASE}/deals/${selectedParticipant.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ Custom_Responses: formatPayload(q1, q2, q3, q4) }),
+      body: JSON.stringify({ data: [{ Custom_Responses: formatPayload(q1, q2, q3, q4) }] }),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     part2.classList.add("hidden");

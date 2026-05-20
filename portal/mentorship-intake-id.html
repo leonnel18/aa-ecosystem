@@ -36,12 +36,14 @@
     .site-header {
       background: var(--white);
       border-bottom: 1px solid var(--border);
-      padding: 14px 20px;
+      padding: 12px 20px;
       display: flex;
       align-items: center;
+      gap: 16px;
     }
-    .logo { font-size: 20px; font-weight: 800; color: var(--text); text-decoration: none; }
-    .logo span { color: var(--primary); }
+    .header-logos { display: flex; align-items: center; gap: 12px; }
+    .header-logos img { height: 36px; width: auto; display: block; }
+    .header-divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
 
     /* ── Banner ── */
     .training-banner {
@@ -254,25 +256,27 @@
 <body>
 
 <header class="site-header">
-  <a class="logo" href="index.html">Aktiv<span>Asia</span></a>
+  <div class="header-logos">
+    <img src="https://koneksi.net.au/wp-content/uploads/2022/06/koneksi-logo.png" alt="Koneksi" onerror="this.style.display='none'">
+    <div class="header-divider"></div>
+    <img src="https://aktivasia.org/wp-content/uploads/2023/01/AktivAsia-Logo.png" alt="AktivAsia" onerror="this.style.display='none'">
+  </div>
 </header>
 
 <div class="training-banner">
   <div class="type-pill">Research Mapping Form</div>
-  <h1>Gender Equity Leadership Program (GELP) 2026 Research Mapping Form</h1>
+  <h1>Formulir Pemetaan Riset GELP 2026</h1>
+  <p style="font-size:14px;opacity:0.75;margin-top:8px;font-style:italic">Gender Equity Leadership Program (GELP) 2026 Research Mapping Form</p>
 </div>
 
 <div class="desc-block">
-  <div class="desc-label">Tentang Formulir Ini / About This Form</div>
   <div class="desc-body">
-    <p>Sebagai bagian dari fase program berikutnya, kami mengundang semua peserta untuk mengisi formulir singkat ini guna membantu kami mengidentifikasi fokus penelitian yang ada, area kolaborasi potensial, dan kesenjangan yang mungkin memerlukan eksplorasi dan dukungan lebih lanjut.</p>
-    <p><em>As part of the next phase of the program, we invite all participants to fill in this short form to help us identify existing research focuses, potential collaboration areas, and current gaps that may require further exploration and support.</em></p>
-    <p>Informasi yang terkumpul akan membantu membentuk diskusi mendatang, proses mentoring, dan inisiatif kolektif yang mungkin dilakukan.</p>
-    <p><em>The information gathered will help shape future discussions, mentoring processes, and possible collective initiatives.</em></p>
+    <p>🎯 Kami mengundang semua peserta GELP untuk mengisi formulir singkat ini guna membantu kami memahami fokus riset, area kolaborasi, dan kebutuhan dukungan yang ada.</p>
+    <p>📋 Informasi ini akan membentuk proses mentoring dan inisiatif kolektif ke depannya.</p>
     <ul>
-      <li>Formulir ini <strong>hanya untuk peserta Gender Equity Leadership Program (GELP)</strong>.</li>
-      <li>Semua pertanyaan wajib diisi. / All questions are required.</li>
-      <li>Jawaban Anda akan langsung disimpan ke catatan Anda. / Your answers will be saved directly to your record.</li>
+      <li>✅ Hanya untuk peserta <strong>GELP 2026</strong></li>
+      <li>✏️ Semua pertanyaan wajib diisi</li>
+      <li>💾 Jawaban tersimpan langsung ke catatan Anda</li>
     </ul>
   </div>
 </div>
@@ -313,7 +317,6 @@
 <div class="form-wrap hidden" id="part-2">
   <div class="section-card">
     <div class="section-title">Pertanyaan Riset &amp; Mentoring</div>
-    <div class="section-subtitle">Research &amp; Mentoring Questions — jawab dalam Bahasa Indonesia atau Inggris / answer in Indonesian or English</div>
 
     <div class="field" id="field-q1">
       <label class="field-label" for="q1">1. Apa fokus penelitian atau advokasi utama Anda saat ini? <span class="req">*</span></label>
