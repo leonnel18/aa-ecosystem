@@ -23,6 +23,8 @@ const USERS_URL   = "https://www.zohoapis.in/crm/v2/users";
 const TOKEN_URL   = "https://accounts.zoho.in/oauth/v2/token";
 const ALLOWED_ORIGINS = ["https://aktivasia-portal.pages.dev", "https://crm-proxy.gideon-valera.workers.dev"];
 
+const GELP_SOLUTION_ID = "773031000008276089";
+
 // ── Token cache (in-memory, per Worker instance) ──────────────────────────────
 let cachedToken    = null;
 let tokenExpiresAt = 0;
@@ -309,11 +311,6 @@ export default {
 
       // ── GET /gelp-participants ────────────────────────────────────────────────
       if (path === "/gelp-participants" && request.method === "GET") {
-        const token = await getAccessToken(env);
-
-        // GELP Solution ID — confirm this value in Zoho CRM before deploying
-        const GELP_SOLUTION_ID = "773031000008276089";
-
         const stages = [
           "Selected",
           "Attended Training",
@@ -329,31 +326,24 @@ export default {
         let moreRecords = true;
 
         while (moreRecords) {
-          const url = `${CRM_BASE}/Deals?fields=id,Deal_Name&criteria=${encodeURIComponent(criteria)}&per_page=200&page=${page}`;
-          const res = await fetch(url, {
-            headers: { Authorization: `Zoho-oauthtoken ${token}` },
-          });
+          const crmUrl = `${CRM_BASE}/Deals?fields=id,Deal_Name&criteria=${encodeURIComponent(criteria)}&per_page=200&page=${page}`;
+          const res = await fetch(crmUrl, { headers: auth });
           if (!res.ok) {
             const err = await res.text();
-            return new Response(JSON.stringify({ error: err }), {
-              status: res.status,
-              headers: corsHeaders(origin),
-            });
+            return jsonResponse({ error: err }, res.status, origin);
           }
           const json = await res.json();
-          const records = json.data || [];
-          allDeals = allDeals.concat(records);
+          const records = json.data ?? [];
+          allDeals.push(...records);
           moreRecords = json.info?.more_records === true;
           page++;
         }
 
         const participants = allDeals
           .map((d) => ({ id: d.id, name: d.Deal_Name }))
-          .sort((a, b) => a.name.localeCompare(b.name));
+          .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""));
 
-        return new Response(JSON.stringify(participants), {
-          headers: { ...corsHeaders(origin), "Content-Type": "application/json" },
-        });
+        return jsonResponse(participants, 200, origin);
       }
 
       return jsonResponse({ error: "Not found" }, 404, origin);
