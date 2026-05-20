@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulir Pra-Mentoring GELP</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .intake-wrap {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px 80px;
+    }
+    .intake-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1px solid var(--border);
+    }
+    .intake-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .intake-subtitle {
+      font-size: 0.85rem;
+      color: var(--meta);
+      margin-bottom: 28px;
+    }
+    .search-box {
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .search-box input {
+      width: 100%;
+      height: var(--input-h);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0 16px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .name-results {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      max-height: 240px;
+      overflow-y: auto;
+      display: none;
+    }
+    .name-results.open { display: block; }
+    .name-result-item {
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+    .name-result-item:last-child { border-bottom: none; }
+    .name-result-item:hover,
+    .name-result-item.selected {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .selected-name-display {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--meta);
+      min-height: 20px;
+    }
+    .selected-name-display strong { color: var(--text); }
+    .field-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+      display: block;
+    }
+    .field-label-en {
+      font-size: 0.8rem;
+      color: var(--meta);
+      font-weight: 400;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .field { margin-bottom: 24px; }
+    .field textarea {
+      width: 100%;
+      min-height: 100px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+      background: var(--bg);
+      color: var(--text);
+      resize: vertical;
+      font-family: inherit;
+    }
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .field-error {
+      font-size: 0.8rem;
+      color: #e53e3e;
+      margin-top: 4px;
+      display: none;
+    }
+    .field.has-error textarea,
+    .field.has-error input {
+      border-color: #e53e3e;
+    }
+    .field.has-error .field-error { display: block; }
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      width: 100%;
+      margin-top: 8px;
+    }
+    .btn-primary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .btn-back-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--meta);
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+    }
+    .btn-back-link:hover { color: var(--primary); }
+    .status-msg {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--meta);
+      padding: 12px 0;
+    }
+    .status-msg.error { color: #e53e3e; }
+    .success-screen {
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .success-screen .check-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    .success-screen h2 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+    .success-screen p {
+      color: var(--meta);
+      font-size: 0.95rem;
+    }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <header id="site-header" class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link">
+        <img src="img/logo.png" alt="AktivAsia" class="logo" onerror="this.style.display='none'" />
+      </a>
+    </div>
+  </header>
+
+  <div class="intake-wrap">
+
+    <!-- Part 1: Name Search -->
+    <div id="part-1" class="intake-card">
+      <div class="intake-title">Formulir Pra-Mentoring GELP</div>
+      <div class="intake-subtitle">GELP Pre-Mentoring Intake Form</div>
+
+      <div id="loading-msg" class="status-msg">Memuat daftar peserta... / Loading participant list...</div>
+      <div id="error-msg" class="status-msg error" hidden>
+        Gagal memuat data. Silakan coba lagi. / Failed to load data. Please try again.
+      </div>
+
+      <div id="search-area" hidden>
+        <label class="field-label" for="name-search">Cari nama Anda</label>
+        <span class="field-label-en">Search your name</span>
+        <div class="search-box">
+          <input
+            type="text"
+            id="name-search"
+            placeholder="Ketik nama Anda... / Type your name..."
+            autocomplete="off"
+          />
+        </div>
+        <div id="name-results" class="name-results" role="listbox"></div>
+        <div id="selected-name-display" class="selected-name-display"></div>
+
+        <button id="btn-next" class="btn-primary" disabled>Lanjut / Next</button>
+      </div>
+    </div>
+
+    <!-- Part 2: Questions -->
+    <div id="part-2" class="intake-card" hidden>
+      <div class="intake-title">Pertanyaan Mentoring</div>
+      <div class="intake-subtitle">Mentoring Questions</div>
+
+      <div class="field" id="field-q1">
+        <label class="field-label" for="q1">Apa fokus penelitian atau advokasi utama Anda saat ini?</label>
+        <span class="field-label-en">What is the primary focus of your current research or advocacy work?</span>
+        <textarea id="q1" rows="4"></textarea>
+        <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
+      </div>
+
+      <div class="field" id="field-q2">
+        <label class="field-label" for="q2">Area apa yang ingin Anda kembangkan atau dalami melalui proses mentoring ini?</label>
+        <span class="field-label-en">What areas would you like to develop or deepen through this mentoring process?</span>
+        <textarea id="q2" rows="4"></textarea>
+        <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
+      </div>
+
+      <div class="field" id="field-q3">
+        <label class="field-label" for="q3">Apa tantangan atau kesenjangan utama dalam pekerjaan Anda yang membutuhkan eksplorasi atau dukungan lebih lanjut?</label>
+        <span class="field-label-en">What are the key challenges or gaps in your work that need further exploration or support?</span>
+        <textarea id="q3" rows="4"></textarea>
+        <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
+      </div>
+
+      <div class="field" id="field-q4">
+        <label class="field-label" for="q4">Keterampilan, pengetahuan, atau pengalaman apa yang dapat Anda tawarkan kepada peserta lain dalam program ini?</label>
+        <span class="field-label-en">What skills, knowledge, or experience can you offer to other participants in this program?</span>
+        <textarea id="q4" rows="4"></textarea>
+        <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
+      </div>
+
+      <div id="submit-error" class="status-msg error" hidden>
+        Terjadi kesalahan. Silakan coba lagi. / Something went wrong. Please try again.
+      </div>
+
+      <button id="btn-submit" class="btn-primary">Kirim / Submit</button>
+      <div class="btn-back-link" id="btn-back">&#8592; Kembali / Back</div>
+    </div>
+
+    <!-- Success Screen -->
+    <div id="success-screen" class="intake-card success-screen" hidden>
+      <div class="check-icon">✅</div>
+      <h2>Terima kasih!</h2>
+      <p>Jawaban Anda telah disimpan.<br /><em>Your responses have been saved.</em></p>
+    </div>
+
+  </div>
+
+  <script src="js/form-mentorship-intake-id.js"></script>
+</body>
+</html>

@@ -8,6 +8,7 @@
 //   GET  /solutions/:id?fields=...   → GET  /crm/v6/Solutions/:id?fields=...
 //   POST /deals                      → POST /crm/v6/Deals  (creates application Deal)
 //   POST /deals/:id/files?field=...  → POST /crm/v6/Deals/:id/attachments (file upload)
+//   GET  /gelp-participants           → GET  /crm/v6/Skill_Session_Participant (GELP intake list)
 //
 // Required Worker Secrets (set via wrangler secret put):
 //   ZOHO_CLIENT_ID
