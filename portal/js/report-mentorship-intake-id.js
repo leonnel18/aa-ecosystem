@@ -62,6 +62,7 @@ async function loadData() {
     const json = await res.json();
     processDeals(json.data ?? []);
   } catch (e) {
+    console.error("Failed to load GELP data:", e);
     stateLoading.classList.add("hidden");
     stateError.classList.remove("hidden");
   }
@@ -99,7 +100,7 @@ function processDeals(deals) {
 
 function parseResponses(raw) {
   const result = { q1: "", q2: "", q3: "", q4: "" };
-  const qKeys = ["Fokus Penelitian", "Area Pengembangan", "Tantangan & Kesenjangan", "Kontribusi untuk Jaringan"];
+  const qKeys = Q_KEYS;
   const qProps = ["q1", "q2", "q3", "q4"];
 
   for (let i = 0; i < qKeys.length; i++) {
@@ -171,14 +172,12 @@ function renderAnsweredTable() {
     btn.addEventListener("click", () => {
       const cell = btn.closest("td");
       const span = cell.querySelector(".answer-text");
-      const full = btn.dataset.full;
-      const short = btn.dataset.short;
       if (btn.dataset.expanded === "1") {
-        span.textContent = short + "… ";
+        span.innerHTML = btn.dataset.short + "… ";
         btn.textContent = "▼ Read more";
         btn.dataset.expanded = "0";
       } else {
-        span.textContent = full + " ";
+        span.innerHTML = btn.dataset.full + " ";
         btn.textContent = "▲ Show less";
         btn.dataset.expanded = "1";
       }
@@ -189,9 +188,8 @@ function renderAnsweredTable() {
 function renderAnswerCell(text) {
   if (!text) return '<span style="color:var(--meta);font-size:12px">—</span>';
   if (text.length <= TRUNCATE_LEN) return `<span class="answer-text">${esc(text)}</span>`;
-  const short = esc(text.slice(0, TRUNCATE_LEN));
-  const full = esc(text);
-  return `<span class="answer-text">${short}… </span><button class="answer-toggle" data-full="${full}" data-short="${short}" data-expanded="0">▼ Read more</button>`;
+  const short = text.slice(0, TRUNCATE_LEN);
+  return `<span class="answer-text">${esc(short)}… </span><button class="answer-toggle" data-full="${esc(text)}" data-short="${esc(short)}" data-expanded="0">▼ Read more</button>`;
 }
 
 function renderUnansweredTable() {
