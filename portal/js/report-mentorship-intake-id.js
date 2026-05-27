@@ -168,7 +168,6 @@ function renderAnsweredTable() {
     tr.innerHTML = `
       <td class="num">${i + 1}</td>
       <td><strong>${esc(p.name)}</strong></td>
-      <td><span class="stage-badge">${esc(p.stage)}</span></td>
       ${["q1", "q2", "q3", "q4"].map((q) => `<td class="answer">${renderAnswerCell(p[q])}</td>`).join("")}
     `;
     tbodyAnswered.appendChild(tr);
@@ -243,8 +242,8 @@ btnDownload.addEventListener("click", () => {
 
   // Sheet 1: Answered
   const answeredRows = [
-    ["Name", "Stage", "Fokus Penelitian", "Area Pengembangan", "Tantangan & Kesenjangan", "Kontribusi untuk Jaringan"],
-    ...answeredList.map((p) => [p.name, p.stage, p.q1, p.q2, p.q3, p.q4]),
+    ["Name", "Fokus Penelitian", "Area Pengembangan", "Tantangan & Kesenjangan", "Kontribusi untuk Jaringan"],
+    ...answeredList.map((p) => [p.name, p.q1, p.q2, p.q3, p.q4]),
   ];
   const ws1 = XLSX.utils.aoa_to_sheet(answeredRows);
   XLSX.utils.book_append_sheet(wb, ws1, "Answered");
