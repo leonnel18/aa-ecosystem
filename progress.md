@@ -2,6 +2,15 @@
 
 ---
 
+## [2026-05-28] GELP Research Mapping Form Report page — COMPLETE
+
+Features shipped:
+- `portal/mentorship-intake-report-id.html` — live report page showing GELP Indonesia participants who have/haven't submitted the Research Mapping intake form
+- `portal/js/report-mentorship-intake-id.js` — fetches all GELP deals (no stage filter), parses `Custom_Responses` per question header, renders two-tab table (Answered / Not Answered), XLS export via SheetJS (two sheets)
+- Deployed to: https://aktivasia-portal.pages.dev/mentorship-intake-report-id.html
+
+---
+
 ## [2026-05-04] Reminder Engine + Admin Page — COMPLETE
 
 Features shipped:
@@ -278,3 +287,69 @@ Key architecture decisions:
 [2026-05-05 04:27:15 UTC]   Transformed backbone: applicants=345 graduates=192
 [2026-05-05 04:27:15 UTC]   dashboard_data.json written (1756.1 KB)
 [2026-05-05 04:27:15 UTC] Pipeline complete in 22s
+[2026-05-12 13:25:52 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-05-12 13:26:14 UTC]   Extracted Deals: 3881 records
+[2026-05-12 13:26:14 UTC]   Extracted Solutions: 116 records
+[2026-05-12 13:26:14 UTC]   Extracted Products: 4 records
+[2026-05-12 13:26:14 UTC]   Extracted Accounts: 2141 records
+[2026-05-12 13:26:14 UTC]   Extracted Forms: 8 records
+[2026-05-12 13:26:14 UTC]   Extracted Training_Plans: 167 records
+[2026-05-12 13:26:14 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-05-12 13:26:14 UTC]   Transformed PK: applicants=1008 graduates=281
+[2026-05-12 13:26:14 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-05-12 13:26:14 UTC]   Transformed ID: applicants=1651 graduates=680
+[2026-05-12 13:26:14 UTC]   Transformed backbone: applicants=345 graduates=193
+[2026-05-12 13:26:14 UTC]   dashboard_data.json written (1834.4 KB)
+[2026-05-12 13:26:14 UTC] Pipeline complete in 22s
+[2026-05-12 13:34:43 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-05-12 13:35:01 UTC]   Extracted Deals: 3881 records
+[2026-05-12 13:35:01 UTC]   Extracted Solutions: 116 records
+[2026-05-12 13:35:01 UTC]   Extracted Products: 4 records
+[2026-05-12 13:35:01 UTC]   Extracted Accounts: 2141 records
+[2026-05-12 13:35:01 UTC]   Extracted Forms: 8 records
+[2026-05-12 13:35:01 UTC]   Extracted Training_Plans: 167 records
+[2026-05-12 13:35:01 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-05-12 13:35:01 UTC]   Transformed PK: applicants=1008 graduates=281
+[2026-05-12 13:35:01 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-05-12 13:35:01 UTC]   Transformed ID: applicants=1651 graduates=680
+[2026-05-12 13:35:01 UTC]   Transformed backbone: applicants=345 graduates=193
+[2026-05-12 13:35:01 UTC]   dashboard_data.json written (1834.4 KB)
+[2026-05-12 13:35:01 UTC] Pipeline complete in 18s
+[2026-05-12 13:48:24 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-05-12 13:48:43 UTC]   Extracted Deals: 3881 records
+[2026-05-12 13:48:43 UTC]   Extracted Solutions: 116 records
+[2026-05-12 13:48:43 UTC]   Extracted Products: 4 records
+[2026-05-12 13:48:43 UTC]   Extracted Accounts: 2141 records
+[2026-05-12 13:48:43 UTC]   Extracted Forms: 8 records
+[2026-05-12 13:48:43 UTC]   Extracted Training_Plans: 167 records
+[2026-05-12 13:48:44 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-05-12 13:48:44 UTC]   Transformed PK: applicants=1008 graduates=281
+[2026-05-12 13:48:44 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-05-12 13:48:44 UTC]   Transformed ID: applicants=1651 graduates=680
+[2026-05-12 13:48:44 UTC]   Transformed backbone: applicants=345 graduates=193
+[2026-05-12 13:48:44 UTC]   dashboard_data.json written (1834.4 KB)
+[2026-05-12 13:48:44 UTC] Pipeline complete in 19s
+[2026-05-12 13:57:15 UTC] Pipeline started. portal=ALL skip_extract=True
+[2026-05-12 13:57:15 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-05-12 13:57:15 UTC]   Transformed PK: applicants=1008 graduates=281
+[2026-05-12 13:57:15 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-05-12 13:57:15 UTC]   Transformed ID: applicants=1651 graduates=680
+[2026-05-12 13:57:15 UTC]   Transformed backbone: applicants=345 graduates=193
+[2026-05-12 13:57:15 UTC]   dashboard_data.json written (1884.6 KB)
+[2026-05-12 13:57:15 UTC]   dashboard_data.json synced to portal/data/
+[2026-05-12 13:57:15 UTC] Pipeline complete in 0s
+[2026-05-18 00:51:27 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-05-18 00:51:53 UTC]   Extracted Deals: 3881 records
+[2026-05-18 00:51:53 UTC]   Extracted Solutions: 116 records
+[2026-05-18 00:51:53 UTC]   Extracted Products: 4 records
+[2026-05-18 00:51:53 UTC]   Extracted Accounts: 2141 records
+[2026-05-18 00:51:53 UTC]   Extracted Forms: 8 records
+[2026-05-18 00:51:53 UTC]   Extracted Training_Plans: 167 records
+[2026-05-18 00:51:54 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-05-18 00:51:54 UTC]   Transformed PK: applicants=1008 graduates=281
+[2026-05-18 00:51:54 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-05-18 00:51:54 UTC]   Transformed ID: applicants=1651 graduates=680
+[2026-05-18 00:51:54 UTC]   Transformed backbone: applicants=345 graduates=193
+[2026-05-18 00:51:54 UTC]   dashboard_data.json written (1884.6 KB)
+[2026-05-18 00:51:54 UTC]   dashboard_data.json synced to portal/data/
+[2026-05-18 00:51:54 UTC] Pipeline complete in 26s
