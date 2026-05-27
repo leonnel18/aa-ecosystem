@@ -2,6 +2,12 @@ const PROXY_BASE = "https://crm-proxy.gideon-valera.workers.dev";
 const GELP_TRAINING_ID = "773031000008276089";
 const TRUNCATE_LEN = 100;
 
+const ELIGIBLE_STAGES = new Set([
+  "Selected",
+  "Attended Training",
+  "Graduated or Post Evaluation Completed",
+]);
+
 const Q_KEYS = [
   "Fokus Penelitian",
   "Area Pengembangan",
@@ -12,7 +18,7 @@ const Q_KEYS = [
 // ── State ──────────────────────────────────────────────────────────────────
 
 let answeredList = [];    // [{ name, stage, q1, q2, q3, q4 }]
-let unansweredList = [];  // [{ name, stage }]
+let unansweredList = [];  // [{ name, email }]
 
 // ── DOM refs ───────────────────────────────────────────────────────────────
 
@@ -81,15 +87,18 @@ function processDeals(deals) {
   });
 
   for (const d of sorted) {
-    const name = `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim();
     const stage = d.Stage ?? "";
+    if (!ELIGIBLE_STAGES.has(stage)) continue;
+
+    const name = `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim();
+    const email = d.Email ?? "";
     const raw = (d.Custom_Responses ?? "").trim();
 
     if (raw) {
       const parsed = parseResponses(raw);
       answeredList.push({ name, stage, ...parsed });
     } else {
-      unansweredList.push({ name, stage });
+      unansweredList.push({ name, email });
     }
   }
 
@@ -206,7 +215,7 @@ function renderUnansweredTable() {
     tr.innerHTML = `
       <td class="num">${i + 1}</td>
       <td><strong>${esc(p.name)}</strong></td>
-      <td><span class="stage-badge">${esc(p.stage)}</span></td>
+      <td>${p.email ? `<a href="mailto:${esc(p.email)}" style="color:var(--primary)">${esc(p.email)}</a>` : '<span style="color:var(--meta);font-size:12px">—</span>'}</td>
     `;
     tbodyUnanswered.appendChild(tr);
   });
@@ -240,8 +249,8 @@ btnDownload.addEventListener("click", () => {
 
   // Sheet 2: Not Answered
   const unansweredRows = [
-    ["Name", "Stage"],
-    ...unansweredList.map((p) => [p.name, p.stage]),
+    ["Name", "Email"],
+    ...unansweredList.map((p) => [p.name, p.email]),
   ];
   const ws2 = XLSX.utils.aoa_to_sheet(unansweredRows);
   XLSX.utils.book_append_sheet(wb, ws2, "Not Answered");
