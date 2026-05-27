@@ -18,7 +18,7 @@ const Q_KEYS = [
 // ── State ──────────────────────────────────────────────────────────────────
 
 let answeredList = [];    // [{ name, stage, q1, q2, q3, q4 }]
-let unansweredList = [];  // [{ name, email }]
+let unansweredList = [];  // [{ name, email, mobile }]
 
 // ── DOM refs ───────────────────────────────────────────────────────────────
 
@@ -92,13 +92,14 @@ function processDeals(deals) {
 
     const name = `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim();
     const email = d.Email ?? "";
+    const mobile = d.Mobile ?? "";
     const raw = (d.Custom_Responses ?? "").trim();
 
     if (raw) {
       const parsed = parseResponses(raw);
       answeredList.push({ name, stage, ...parsed });
     } else {
-      unansweredList.push({ name, email });
+      unansweredList.push({ name, email, mobile });
     }
   }
 
@@ -216,6 +217,7 @@ function renderUnansweredTable() {
       <td class="num">${i + 1}</td>
       <td><strong>${esc(p.name)}</strong></td>
       <td>${p.email ? `<a href="mailto:${esc(p.email)}" style="color:var(--primary)">${esc(p.email)}</a>` : '<span style="color:var(--meta);font-size:12px">—</span>'}</td>
+      <td>${p.mobile ? esc(p.mobile) : '<span style="color:var(--meta);font-size:12px">—</span>'}</td>
     `;
     tbodyUnanswered.appendChild(tr);
   });
@@ -249,8 +251,8 @@ btnDownload.addEventListener("click", () => {
 
   // Sheet 2: Not Answered
   const unansweredRows = [
-    ["Name", "Email"],
-    ...unansweredList.map((p) => [p.name, p.email]),
+    ["Name", "Email", "Mobile"],
+    ...unansweredList.map((p) => [p.name, p.email, p.mobile]),
   ];
   const ws2 = XLSX.utils.aoa_to_sheet(unansweredRows);
   XLSX.utils.book_append_sheet(wb, ws2, "Not Answered");

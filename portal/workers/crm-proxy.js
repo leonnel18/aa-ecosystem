@@ -164,7 +164,7 @@ export default {
         const q          = (url.searchParams.get("q") ?? "").trim().toLowerCase();
         const first      = url.searchParams.get("first") ?? "";
         const last       = url.searchParams.get("last") ?? "";
-        const fields     = "First_Name,Last_Name,Email,Account_Name,Training_Applied,Stage,Graduate_Date,Have_you_applied_the_training_to_run_more_effectiv";
+        const fields     = "First_Name,Last_Name,Email,Mobile,Account_Name,Training_Applied,Stage,Graduate_Date,Have_you_applied_the_training_to_run_more_effectiv,Custom_Responses";
 
         // Paginate through all deals to find matches for this training
         let allData = [];
