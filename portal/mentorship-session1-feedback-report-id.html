@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GELP Session 1 Feedback Report — AktivAsia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --primary: #821545; --primary-light: #f3e8ff; --cta-start: #ff960b; --cta-end: #f93a3a; --bg: #f5f4ee; --white: #ffffff; --text: #131625; --meta: #788099; --border: #e2e0d8; --radius: 16px; --radius-sm: 10px; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.5; }
+    .site-header { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; display: flex; align-items: center; gap: 16px; }
+    .header-logos { display: flex; align-items: center; gap: 12px; }
+    .header-logos img { height: 36px; width: auto; display: block; }
+    .training-banner { background: linear-gradient(135deg, var(--primary) 0%, #5a0e30 100%); color: var(--white); padding: 28px 20px 24px; }
+    @media (min-width: 640px) { .training-banner { padding: 36px 40px 28px; } }
+    .training-banner .type-pill { display: inline-block; border: 1.5px solid rgba(255,255,255,0.4); border-radius: 9999px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 12px; margin-bottom: 12px; opacity: 0.9; }
+    .training-banner h1 { font-size: 24px; font-weight: 800; line-height: 1.25; }
+    @media (min-width: 640px) { .training-banner h1 { font-size: 30px; } }
+    .training-banner .subtitle { font-size: 14px; opacity: 0.75; margin-top: 8px; font-style: italic; }
+    .refreshed { font-size: 12px; opacity: 0.6; margin-top: 10px; }
+    .kpi-strip { background: var(--white); border-bottom: 1px solid var(--border); padding: 16px 20px; display: flex; gap: 12px; flex-wrap: wrap; }
+    @media (min-width: 640px) { .kpi-strip { padding: 16px 40px; } }
+    .kpi-pill { background: var(--bg); border: 1.5px solid var(--border); border-radius: 9999px; padding: 8px 18px; font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 6px; }
+    .kpi-pill .kpi-val { font-size: 18px; font-weight: 800; color: var(--primary); }
+    .kpi-pill .kpi-pct { font-size: 11px; font-weight: 500; color: var(--meta); }
+    .controls-bar { padding: 14px 20px; display: flex; justify-content: flex-end; }
+    @media (min-width: 640px) { .controls-bar { padding: 14px 40px; } }
+    .btn-download { background: linear-gradient(135deg, var(--cta-start), var(--cta-end)); color: var(--white); border: none; border-radius: 9999px; padding: 10px 22px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+    .btn-download:hover { opacity: 0.9; }
+    .tab-nav { display: flex; gap: 0; border-bottom: 2px solid var(--border); padding: 0 20px; background: var(--white); }
+    @media (min-width: 640px) { .tab-nav { padding: 0 40px; } }
+    .tab-btn { background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -2px; padding: 14px 20px; font-family: inherit; font-size: 14px; font-weight: 600; color: var(--meta); cursor: pointer; transition: color 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 8px; }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .tab-badge { background: var(--bg); border: 1.5px solid var(--border); border-radius: 9999px; font-size: 11px; font-weight: 700; padding: 1px 8px; color: var(--text); }
+    .tab-btn.active .tab-badge { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+    .page-wrap { padding: 24px 20px 60px; max-width: 1200px; margin: 0 auto; }
+    @media (min-width: 640px) { .page-wrap { padding: 28px 40px 60px; } }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .section-card { background: var(--white); border-radius: var(--radius); padding: 0; overflow: hidden; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead th { background: var(--bg); color: var(--meta); font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 12px 16px; text-align: left; white-space: nowrap; border-bottom: 1.5px solid var(--border); }
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #fafaf7; }
+    tbody td { padding: 12px 16px; vertical-align: top; color: var(--text); line-height: 1.5; }
+    td.num { color: var(--meta); font-size: 12px; width: 40px; }
+    td.answer { max-width: 200px; }
+    .answer-text { display: inline; }
+    .answer-toggle { background: none; border: none; color: var(--primary); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; padding: 0; margin-left: 4px; white-space: nowrap; }
+    .answer-toggle:hover { text-decoration: underline; }
+    .workbook-badge { display: inline-block; border-radius: 9999px; font-size: 11px; font-weight: 700; padding: 3px 10px; background: #e6f4ea; color: #2e7d32; border: 1.5px solid #a5d6a7; white-space: nowrap; }
+    .status-msg { text-align: center; font-size: 14px; color: var(--meta); padding: 48px 24px; }
+    .status-msg.error { color: #e53e3e; }
+    .btn-retry { background: none; border: 1.5px solid var(--border); border-radius: 9999px; padding: 8px 20px; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--text); cursor: pointer; margin-top: 12px; }
+    .btn-retry:hover { border-color: var(--primary); color: var(--primary); }
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(130,21,69,0.2); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty-state { text-align: center; padding: 48px 24px; color: var(--meta); font-size: 14px; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-logos">
+    <img src="img/koneksi-aa-logo.png" alt="Koneksi &amp; AktivAsia">
+  </div>
+</header>
+
+<div class="training-banner">
+  <div class="type-pill">GELP 2026 · Indonesia</div>
+  <h1>GELP Session 1 Feedback Report</h1>
+  <p class="subtitle">Response tracking for GELP 2026 Mentorship Session 1</p>
+  <p class="refreshed" id="refreshed-at"></p>
+</div>
+
+<div class="kpi-strip">
+  <div class="kpi-pill"><span>Total</span><span class="kpi-val" id="kpi-total">—</span></div>
+  <div class="kpi-pill"><span>Answered</span><span class="kpi-val" id="kpi-answered">—</span><span class="kpi-pct" id="kpi-pct"></span></div>
+  <div class="kpi-pill"><span>Not Answered</span><span class="kpi-val" id="kpi-unanswered">—</span></div>
+</div>
+
+<div class="controls-bar">
+  <button class="btn-download" id="btn-download" disabled>⬇ Download Excel</button>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" data-tab="answered">Answered <span class="tab-badge" id="badge-answered">0</span></button>
+  <button class="tab-btn" data-tab="unanswered">Not Answered <span class="tab-badge" id="badge-unanswered">0</span></button>
+</div>
+
+<div class="page-wrap">
+  <div id="state-loading" class="section-card">
+    <div class="status-msg"><span class="spinner"></span>Loading participant data…</div>
+  </div>
+  <div id="state-error" class="section-card hidden">
+    <div class="status-msg error">Failed to load data. Please try again.<br><button class="btn-retry" id="btn-retry">Retry</button></div>
+  </div>
+
+  <div class="tab-panel active" id="panel-answered">
+    <div class="section-card hidden" id="table-answered-wrap">
+      <div class="table-wrap">
+        <table id="table-answered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Keseluruhan</th>
+              <th>Sesi Pleno</th>
+              <th>Sesi Kelompok</th>
+              <th>Saran Perbaikan</th>
+              <th>Masukan Lainnya</th>
+              <th>Workbook</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-answered"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="section-card hidden" id="empty-answered">
+      <div class="empty-state">No participants have answered yet.</div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="panel-unanswered">
+    <div class="section-card hidden" id="table-unanswered-wrap">
+      <div class="table-wrap">
+        <table id="table-unanswered">
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Email</th><th>Mobile</th></tr>
+          </thead>
+          <tbody id="tbody-unanswered"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="section-card hidden" id="empty-unanswered">
+      <div class="empty-state">All participants have answered!</div>
+    </div>
+  </div>
+</div>
+
+<script src="js/report-mentorship-session1-feedback-id.js"></script>
+</body>
+</html>
