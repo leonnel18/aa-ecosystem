@@ -1,4 +1,4 @@
-const PROXY_BASE      = "https://crm-proxy.gideon-valera.workers.dev";
+const PROXY_BASE       = "https://crm-proxy.gideon-valera.workers.dev";
 const GELP_TRAINING_ID = "773031000008276089";
 const GELP_STAGES = new Set([
   "Selected",
@@ -6,11 +6,12 @@ const GELP_STAGES = new Set([
   "Graduated or Post Evaluation Completed",
 ]);
 
-// participant shape: { id, name, customResponses }
-let allParticipants    = [];
+let allParticipants     = [];
 let selectedParticipant = null;
 let selectedFile        = null;
+let workbookDownloaded  = false;
 let isSubmitting        = false;
+const ratings           = { overall: null, plenary: null, breakout: null };
 
 // ── DOM refs — Part 1 ──────────────────────────────────────────────────────
 const part1        = document.getElementById("part-1");
@@ -25,24 +26,30 @@ const clearNameBtn = document.getElementById("clear-name-btn");
 const fieldName    = document.getElementById("field-name");
 
 // ── DOM refs — Part 2 ──────────────────────────────────────────────────────
-const part2        = document.getElementById("part-2");
-const submitErrP2  = document.getElementById("submit-error-p2");
+const part2       = document.getElementById("part-2");
+const submitErrP2 = document.getElementById("submit-error-p2");
 
 // ── DOM refs — Part 3 ──────────────────────────────────────────────────────
-const part3           = document.getElementById("part-3");
-const fileInput       = document.getElementById("file-input");
-const fileTag         = document.getElementById("selected-file-tag");
-const fileTagText     = document.getElementById("selected-file-text");
-const clearFileBtn    = document.getElementById("clear-file-btn");
-const uploadError     = document.getElementById("upload-error");
+const part3         = document.getElementById("part-3");
+const fileInput     = document.getElementById("file-input");
+const fileTag       = document.getElementById("selected-file-tag");
+const fileTagText   = document.getElementById("selected-file-text");
+const clearFileBtn  = document.getElementById("clear-file-btn");
+const uploadError   = document.getElementById("upload-error");
+
+// ── DOM refs — Part 4 ──────────────────────────────────────────────────────
+const part4       = document.getElementById("part-4");
+const submitErrP4 = document.getElementById("submit-error-p4");
 
 // ── DOM refs — nav ─────────────────────────────────────────────────────────
 const navButtons        = document.getElementById("nav-buttons");
 const btnBack           = document.getElementById("btn-back");
 const btnNext           = document.getElementById("btn-next");
 const btnNextToUpload   = document.getElementById("btn-next-to-upload");
+const btnNextToOther    = document.getElementById("btn-next-to-other");
 const btnSubmitNoFile   = document.getElementById("btn-submit-no-file");
 const btnSubmitWithFile = document.getElementById("btn-submit-with-file");
+const btnSubmitFinal    = document.getElementById("btn-submit-final");
 const successScreen     = document.getElementById("success-screen");
 
 // ── Part 1: Load participants ──────────────────────────────────────────────
@@ -126,55 +133,40 @@ function selectParticipant(p) {
   btnNext.disabled = false;
 }
 
-// ── Navigation: Part 1 → Part 2 ───────────────────────────────────────────
+// ── Part 2: Rating buttons ─────────────────────────────────────────────────
 
-btnNext.addEventListener("click", () => {
-  if (!selectedParticipant) { fieldName.classList.add("has-error"); return; }
-  showPart(2);
+[
+  { groupId: "rating-overall",  key: "overall"  },
+  { groupId: "rating-plenary",  key: "plenary"  },
+  { groupId: "rating-breakout", key: "breakout" },
+].forEach(({ groupId, key }) => {
+  const group = document.getElementById(groupId);
+  group.querySelectorAll(".rating-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      group.querySelectorAll(".rating-btn").forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      ratings[key] = btn.dataset.value;
+      document.getElementById(`field-q-${key === "overall" ? "overall" : key === "plenary" ? "plenary" : "breakout"}`).classList.remove("has-error");
+    });
+  });
 });
-
-// ── Navigation: Part 2 → Part 3 ───────────────────────────────────────────
-
-btnNextToUpload.addEventListener("click", () => {
-  if (!validatePart2()) return;
-  showPart(3);
-});
-
-// ── Navigation: back ──────────────────────────────────────────────────────
-
-btnBack.addEventListener("click", () => {
-  const current = getCurrentPart();
-  if (current === 2) showPart(1);
-  if (current === 3) showPart(2);
-});
-
-function getCurrentPart() {
-  if (!part1.classList.contains("hidden")) return 1;
-  if (!part2.classList.contains("hidden")) return 2;
-  return 3;
-}
-
-function showPart(n) {
-  part1.classList.toggle("hidden", n !== 1);
-  part2.classList.toggle("hidden", n !== 2);
-  part3.classList.toggle("hidden", n !== 3);
-
-  btnBack.classList.toggle("hidden", n === 1);
-  btnNext.classList.toggle("hidden", n !== 1);
-  btnNextToUpload.classList.toggle("hidden", n !== 2);
-  btnSubmitNoFile.classList.toggle("hidden", n !== 3);
-  btnSubmitWithFile.classList.toggle("hidden", n !== 3);
-
-  submitErrP2.classList.add("hidden");
-  uploadError.classList.add("hidden");
-  window.scrollTo(0, 0);
-}
 
 // ── Part 2: Validation ─────────────────────────────────────────────────────
 
 function validatePart2() {
   let valid = true;
-  ["q-overall", "q-plenary", "q-breakout", "q-improvement", "q-other"].forEach((id) => {
+
+  ["overall", "plenary", "breakout"].forEach((key) => {
+    const field = document.getElementById(`field-q-${key}`);
+    if (!ratings[key]) {
+      field.classList.add("has-error");
+      valid = false;
+    } else {
+      field.classList.remove("has-error");
+    }
+  });
+
+  ["q-enjoyed", "q-improvement"].forEach((id) => {
     const textarea = document.getElementById(id);
     const field    = document.getElementById(`field-${id}`);
     if (!textarea.value.trim()) {
@@ -184,6 +176,7 @@ function validatePart2() {
       field.classList.remove("has-error");
     }
   });
+
   return valid;
 }
 
@@ -205,35 +198,25 @@ clearFileBtn.addEventListener("click", () => {
   fileTagText.textContent = "";
 });
 
-// ── Submit: without file ───────────────────────────────────────────────────
+// ── Navigation ─────────────────────────────────────────────────────────────
 
-btnSubmitNoFile.addEventListener("click", async () => {
-  if (isSubmitting) return;
-  await doSubmit(false);
+btnNext.addEventListener("click", () => {
+  if (!selectedParticipant) { fieldName.classList.add("has-error"); return; }
+  showPart(2);
 });
 
-// ── Submit: with file ──────────────────────────────────────────────────────
-
-btnSubmitWithFile.addEventListener("click", async () => {
-  if (isSubmitting) return;
-  await doSubmit(selectedFile ? true : false);
+btnNextToUpload.addEventListener("click", () => {
+  if (!validatePart2()) return;
+  showPart(3);
 });
 
-// ── Core submit logic ──────────────────────────────────────────────────────
+btnSubmitNoFile.addEventListener("click", () => {
+  workbookDownloaded = false;
+  showPart(4);
+});
 
-async function doSubmit(withFile) {
-  isSubmitting = true;
-  uploadError.classList.add("hidden");
-  submitErrP2.classList.add("hidden");
-
-  const activeBtn = withFile ? btnSubmitWithFile : btnSubmitNoFile;
-  activeBtn.disabled = true;
-  activeBtn.innerHTML = '<span class="spinner"></span>Menyimpan…';
-
-  let workbookUploaded = false;
-
-  if (withFile && selectedFile) {
-    // Local download — rename file and trigger browser save
+btnSubmitWithFile.addEventListener("click", () => {
+  if (selectedFile) {
     const originalName = selectedFile.name;
     const dotIdx       = originalName.lastIndexOf(".");
     const ext          = dotIdx !== -1 ? originalName.slice(dotIdx) : "";
@@ -246,58 +229,96 @@ async function doSubmit(withFile) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    workbookUploaded = true;
+    workbookDownloaded = true;
+  } else {
+    workbookDownloaded = false;
   }
+  showPart(4);
+});
 
-  // Build feedback block
-  const overall     = document.getElementById("q-overall").value.trim();
-  const plenary     = document.getElementById("q-plenary").value.trim();
-  const breakout    = document.getElementById("q-breakout").value.trim();
+btnBack.addEventListener("click", () => {
+  const current = getCurrentPart();
+  if (current === 2) showPart(1);
+  if (current === 3) showPart(2);
+  if (current === 4) showPart(3);
+});
+
+function getCurrentPart() {
+  if (!part1.classList.contains("hidden")) return 1;
+  if (!part2.classList.contains("hidden")) return 2;
+  if (!part3.classList.contains("hidden")) return 3;
+  return 4;
+}
+
+function showPart(n) {
+  part1.classList.toggle("hidden", n !== 1);
+  part2.classList.toggle("hidden", n !== 2);
+  part3.classList.toggle("hidden", n !== 3);
+  part4.classList.toggle("hidden", n !== 4);
+
+  btnBack.classList.toggle("hidden", n === 1);
+  btnNext.classList.toggle("hidden", n !== 1);
+  btnNextToUpload.classList.toggle("hidden", n !== 2);
+  btnNextToOther.classList.toggle("hidden", true);
+  btnSubmitNoFile.classList.toggle("hidden", n !== 3);
+  btnSubmitWithFile.classList.toggle("hidden", n !== 3);
+  btnSubmitFinal.classList.toggle("hidden", n !== 4);
+
+  submitErrP2.classList.add("hidden");
+  uploadError.classList.add("hidden");
+  if (submitErrP4) submitErrP4.classList.add("hidden");
+  window.scrollTo(0, 0);
+}
+
+// ── Part 4: Final submit ───────────────────────────────────────────────────
+
+btnSubmitFinal.addEventListener("click", async () => {
+  if (isSubmitting) return;
+  isSubmitting = true;
+  submitErrP4.classList.add("hidden");
+  btnSubmitFinal.disabled = true;
+  btnSubmitFinal.innerHTML = '<span class="spinner"></span>Menyimpan…';
+
+  const enjoyed     = document.getElementById("q-enjoyed").value.trim();
   const improvement = document.getElementById("q-improvement").value.trim();
   const other       = document.getElementById("q-other").value.trim();
 
-  const feedbackBlock = buildFeedbackBlock(overall, plenary, breakout, improvement, other, workbookUploaded);
+  let block =
+    `[Keseluruhan]\n${ratings.overall}\n\n` +
+    `[Sesi Pleno]\n${ratings.plenary}\n\n` +
+    `[Sesi Kelompok]\n${ratings.breakout}\n\n` +
+    `[Menikmati Sesi]\n${enjoyed}\n\n` +
+    `[Saran Perbaikan]\n${improvement}`;
 
-  // Read-then-append: strip any existing feedback block from stored Custom_Responses
+  if (workbookDownloaded) block += `\n\n[Workbook]\nuploaded`;
+  if (other)              block += `\n\n[Masukan Lainnya]\n${other}`;
+
   const existingRaw   = selectedParticipant.customResponses;
   const feedbackStart = existingRaw.indexOf("[Keseluruhan]");
   const strippedBase  = feedbackStart !== -1
     ? existingRaw.slice(0, feedbackStart).trimEnd()
     : existingRaw;
-  const merged = strippedBase ? `${strippedBase}\n\n${feedbackBlock}` : feedbackBlock;
+  const merged = strippedBase ? `${strippedBase}\n\n${block}` : block;
 
   try {
-    const crmRes = await fetch(`${PROXY_BASE}/deals/${selectedParticipant.id}`, {
+    const res = await fetch(`${PROXY_BASE}/deals/${selectedParticipant.id}`, {
       method:  "PUT",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify({ data: [{ Custom_Responses: merged }] }),
     });
-    if (!crmRes.ok) throw new Error(`HTTP ${crmRes.status}`);
-    part3.classList.add("hidden");
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    part4.classList.add("hidden");
     navButtons.classList.add("hidden");
     successScreen.style.display = "block";
     window.scrollTo(0, 0);
   } catch (e) {
-    uploadError.classList.remove("hidden");
-    activeBtn.disabled = false;
-    activeBtn.textContent = withFile
-      ? "Kirim dengan lampiran / Submit with attachment"
-      : "Kirim tanpa lampiran / Submit without attachment";
+    submitErrP4.classList.remove("hidden");
+    btnSubmitFinal.disabled = false;
+    btnSubmitFinal.textContent = "Kirim / Submit";
   } finally {
     isSubmitting = false;
   }
-}
-
-function buildFeedbackBlock(overall, plenary, breakout, improvement, other, workbookUploaded) {
-  let block =
-    `[Keseluruhan]\n${overall}\n\n` +
-    `[Sesi Pleno]\n${plenary}\n\n` +
-    `[Sesi Kelompok]\n${breakout}\n\n` +
-    `[Saran Perbaikan]\n${improvement}\n\n` +
-    `[Masukan Lainnya]\n${other}`;
-  if (workbookUploaded) block += `\n\n[Workbook]\nuploaded`;
-  return block;
-}
+});
 
 // ── Init ───────────────────────────────────────────────────────────────────
 
