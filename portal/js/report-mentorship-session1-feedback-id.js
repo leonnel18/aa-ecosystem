@@ -8,8 +8,8 @@ const ELIGIBLE_STAGES = new Set([
   "Graduated or Post Evaluation Completed",
 ]);
 
-const Q_KEYS  = ["Keseluruhan", "Sesi Pleno", "Sesi Kelompok", "Saran Perbaikan", "Masukan Lainnya", "Workbook"];
-const Q_PROPS = ["q1", "q2", "q3", "q4", "q5", "workbook"];
+const Q_KEYS  = ["Keseluruhan", "Sesi Pleno", "Sesi Kelompok", "Menikmati Sesi", "Saran Perbaikan", "Workbook", "Masukan Lainnya"];
+const Q_PROPS = ["q1", "q2", "q3", "q4", "q5", "workbook", "q6"];
 
 // ── State ──────────────────────────────────────────────────────────────────
 let answeredList   = [];  // [{ name, q1, q2, q3, q4, q5, workbook }]
@@ -96,7 +96,7 @@ function processDeals(deals) {
 
 // ── Parse Custom_Responses ─────────────────────────────────────────────────
 function parseResponses(raw) {
-  const result = { q1: "", q2: "", q3: "", q4: "", q5: "", workbook: "" };
+  const result = { q1: "", q2: "", q3: "", q4: "", q5: "", workbook: "", q6: "" };
 
   for (let i = 0; i < Q_KEYS.length; i++) {
     const header = `[${Q_KEYS[i]}]`;
@@ -149,7 +149,7 @@ function renderAnsweredTable() {
     tr.innerHTML = `
       <td class="num">${i + 1}</td>
       <td><strong>${esc(p.name)}</strong></td>
-      ${["q1","q2","q3","q4","q5"].map((q) => `<td class="answer">${renderAnswerCell(p[q])}</td>`).join("")}
+      ${["q1","q2","q3","q4","q5","q6"].map((q) => `<td class="answer">${renderAnswerCell(p[q])}</td>`).join("")}
       <td>${workbookCell}</td>
     `;
     tbodyAnswered.appendChild(tr);
@@ -220,8 +220,8 @@ btnDownload.addEventListener("click", () => {
   const wb = XLSX.utils.book_new();
 
   const answeredRows = [
-    ["Name", "Keseluruhan", "Sesi Pleno", "Sesi Kelompok", "Saran Perbaikan", "Masukan Lainnya", "Workbook Uploaded"],
-    ...answeredList.map((p) => [p.name, p.q1, p.q2, p.q3, p.q4, p.q5, p.workbook === "uploaded" ? "Yes" : "No"]),
+    ["Name", "Rating Keseluruhan", "Rating Sesi Pleno", "Rating Sesi Kelompok", "Menikmati Sesi", "Saran Perbaikan", "Workbook Uploaded", "Masukan Lainnya"],
+    ...answeredList.map((p) => [p.name, p.q1, p.q2, p.q3, p.q4, p.q5, p.workbook === "uploaded" ? "Yes" : "No", p.q6]),
   ];
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(answeredRows), "Answered");
 
