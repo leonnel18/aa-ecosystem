@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a Bahasa + English feedback form for GELP 2026 Mentorship Session 1, with optional workbook upload to Google Drive, a report page tracking responses, and a new `/drive/upload` route in the existing Cloudflare Worker.
+**Goal:** Build a Bahasa + English feedback form for GELP 2026 Mentorship Session 1, with optional workbook download (saved locally via browser), a report page tracking responses.
 
-**Architecture:** Five deliverables — the feedback form HTML, its JS, the report HTML, its JS, and a new route added to `portal/workers/crm-proxy.js`. The form follows the exact same 3-part flow as `mentorship-intake-id.html`: name search → questions → upload. Responses are written to the existing `Custom_Responses` CRM field using read-then-append so intake form answers are preserved.
+**Architecture:** Four deliverables — the feedback form HTML, its JS, the report HTML, and its JS. No worker changes needed. The workbook "upload" is handled entirely client-side: the browser renames the file and triggers a local download. Responses are written to the existing `Custom_Responses` CRM field using read-then-append so intake form answers are preserved.
 
-**Tech Stack:** Vanilla HTML/CSS/JS, Cloudflare Workers (existing `crm-proxy.js`), Zoho CRM REST API, Google Drive REST API (service account JWT auth), SheetJS for Excel export.
+**Tech Stack:** Vanilla HTML/CSS/JS, Zoho CRM REST API (via existing crm-proxy), SheetJS for Excel export.
 
 ---
 
@@ -15,179 +15,13 @@
 | Action | File | Responsibility |
 |--------|------|---------------|
 | Create | `portal/mentorship-session1-feedback-id.html` | Form HTML — banner, desc block, 3-part layout, success screen |
-| Create | `portal/js/form-mentorship-session1-feedback-id.js` | Form logic — load participants, search, validate, upload, CRM write |
+| Create | `portal/js/form-mentorship-session1-feedback-id.js` | Form logic — load participants, search, validate, local file rename+download, CRM write |
 | Create | `portal/mentorship-session1-feedback-report-id.html` | Report HTML — KPI strip, tabs, table, download button |
 | Create | `portal/js/report-mentorship-session1-feedback-id.js` | Report logic — fetch, parse, render, XLS export |
-| Modify | `portal/workers/crm-proxy.js` | Add `POST /drive/upload` route with Google SA JWT auth |
 
 ---
 
-## Task 1: Add `POST /drive/upload` to crm-proxy.js
-
-**Files:**
-- Modify: `portal/workers/crm-proxy.js`
-
-This task adds Google Drive upload capability to the existing Cloudflare Worker. It requires a Google Service Account JSON key stored as a Worker secret (`GOOGLE_SERVICE_ACCOUNT_JSON`). The JWT signing uses the Web Crypto API available in the Workers runtime — no npm packages needed.
-
-**Context on the existing worker:** `crm-proxy.js` exports a single `fetch` handler that routes on `path` and `request.method`. It already has `getAccessToken(env)` for Zoho with in-memory caching. We add a parallel `getDriveAccessToken(env)` for Google using the same cache pattern. Add the new route just before the final `return jsonResponse({ error: "Not found" }, 404, origin)` line.
-
-- [ ] **Step 1: Add Google Drive token cache variables and `getDriveAccessToken` function**
-
-Open `portal/workers/crm-proxy.js`. After the existing Zoho token cache variables (`let cachedToken` and `let tokenExpiresAt`), add:
-
-```js
-// ── Google Drive token cache ───────────────────────────────────────────────
-let cachedDriveToken    = null;
-let driveTokenExpiresAt = 0;
-
-async function getDriveAccessToken(env) {
-  if (cachedDriveToken && Date.now() < driveTokenExpiresAt - 60_000) return cachedDriveToken;
-
-  const sa = JSON.parse(env.GOOGLE_SERVICE_ACCOUNT_JSON);
-  const now = Math.floor(Date.now() / 1000);
-  const claim = {
-    iss: sa.client_email,
-    scope: "https://www.googleapis.com/auth/drive.file",
-    aud: "https://oauth2.googleapis.com/token",
-    exp: now + 3600,
-    iat: now,
-  };
-
-  // Encode JWT header + payload
-  const header  = btoa(JSON.stringify({ alg: "RS256", typ: "JWT" })).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_");
-  const payload = btoa(JSON.stringify(claim)).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_");
-  const sigInput = `${header}.${payload}`;
-
-  // Import the RSA private key from the service account JSON
-  const pemBody = sa.private_key
-    .replace(/-----BEGIN PRIVATE KEY-----/, "")
-    .replace(/-----END PRIVATE KEY-----/, "")
-    .replace(/\s/g, "");
-  const keyBytes = Uint8Array.from(atob(pemBody), c => c.charCodeAt(0));
-  const cryptoKey = await crypto.subtle.importKey(
-    "pkcs8", keyBytes.buffer,
-    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
-    false, ["sign"]
-  );
-
-  // Sign
-  const sigBytes = await crypto.subtle.sign(
-    "RSASSA-PKCS1-v1_5",
-    cryptoKey,
-    new TextEncoder().encode(sigInput)
-  );
-  const sig = btoa(String.fromCharCode(...new Uint8Array(sigBytes)))
-    .replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_");
-
-  const jwt = `${sigInput}.${sig}`;
-
-  // Exchange JWT for access token
-  const res  = await fetch("https://oauth2.googleapis.com/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-      assertion:  jwt,
-    }),
-  });
-  const json = await res.json();
-  if (!res.ok || !json.access_token) throw new Error("Drive token failed: " + JSON.stringify(json));
-
-  cachedDriveToken    = json.access_token;
-  driveTokenExpiresAt = Date.now() + (json.expires_in ?? 3600) * 1000;
-  return cachedDriveToken;
-}
-```
-
-- [ ] **Step 2: Add `POST /drive/upload` route**
-
-Inside the `try` block of the main `fetch` handler, just before the final `return jsonResponse({ error: "Not found" }, 404, origin)` line, add:
-
-```js
-      // ── POST /drive/upload ────────────────────────────────────────────────
-      if (request.method === "POST" && path === "/drive/upload") {
-        const formData       = await request.formData();
-        const file           = formData.get("file");
-        const participantName = (formData.get("participant_name") ?? "Unknown").trim();
-
-        if (!file) return jsonResponse({ ok: false, error: "No file provided" }, 400, origin);
-
-        // Derive extension from original filename
-        const originalName = file.name ?? "";
-        const dotIdx       = originalName.lastIndexOf(".");
-        const ext          = dotIdx !== -1 ? originalName.slice(dotIdx) : "";
-        const targetName   = `GELP 2026 - Session 1 - ${participantName}${ext}`;
-
-        const driveToken = await getDriveAccessToken(env);
-        const FOLDER_ID  = "1oaw6qnOjzjRXgnL4v8Gj-l1HHtor7OON";
-
-        // Multipart upload to Google Drive
-        const boundary = "----DriveUploadBoundary";
-        const metadata = JSON.stringify({ name: targetName, parents: [FOLDER_ID] });
-        const fileBytes = await file.arrayBuffer();
-
-        const metaPart = `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${metadata}\r\n`;
-        const mediaPart = `--${boundary}\r\nContent-Type: ${file.type || "application/octet-stream"}\r\n\r\n`;
-        const closing   = `\r\n--${boundary}--`;
-
-        const metaBytes  = new TextEncoder().encode(metaPart);
-        const mediaBytes = new TextEncoder().encode(mediaPart);
-        const closeBytes = new TextEncoder().encode(closing);
-
-        const body = new Uint8Array(metaBytes.length + mediaBytes.length + fileBytes.byteLength + closeBytes.length);
-        body.set(metaBytes, 0);
-        body.set(mediaBytes, metaBytes.length);
-        body.set(new Uint8Array(fileBytes), metaBytes.length + mediaBytes.length);
-        body.set(closeBytes, metaBytes.length + mediaBytes.length + fileBytes.byteLength);
-
-        const driveRes = await fetch(
-          "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
-          {
-            method:  "POST",
-            headers: {
-              Authorization:  `Bearer ${driveToken}`,
-              "Content-Type": `multipart/related; boundary=${boundary}`,
-            },
-            body,
-          }
-        );
-        const driveBody = await driveRes.json();
-        if (!driveRes.ok) return jsonResponse({ ok: false, error: driveBody }, driveRes.status, origin);
-        return jsonResponse({ ok: true, fileId: driveBody.id }, 200, origin);
-      }
-```
-
-- [ ] **Step 3: Update the route comment header at the top of the file**
-
-The file has a comment block listing all routes. Add this line to it:
-
-```js
-//   POST /drive/upload              → upload file to Google Drive (service account)
-```
-
-Also add the new secret to the secrets comment:
-
-```js
-//   GOOGLE_SERVICE_ACCOUNT_JSON
-```
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add portal/workers/crm-proxy.js
-git commit -m "feat: add POST /drive/upload route to crm-proxy for Google Drive uploads"
-```
-
-> **One-time setup (do before deploying):**
-> 1. In Google Cloud Console → IAM → Service Accounts → create a service account
-> 2. Create a JSON key for it → download the JSON file
-> 3. Share the Drive folder `1oaw6qnOjzjRXgnL4v8Gj-l1HHtor7OON` with the service account email (Editor role)
-> 4. Run: `cd portal/workers && npx wrangler secret put GOOGLE_SERVICE_ACCOUNT_JSON` and paste the entire JSON content
-> 5. Deploy: `npx wrangler pages deploy portal --project-name aktivasia-portal` (or `wrangler deploy` for the worker)
-
----
-
-## Task 2: Feedback Form HTML (`mentorship-session1-feedback-id.html`)
+## Task 1: Feedback Form HTML (`mentorship-session1-feedback-id.html`)
 
 **Files:**
 - Create: `portal/mentorship-session1-feedback-id.html`
@@ -463,7 +297,7 @@ git commit -m "feat: add GELP Session 1 feedback form HTML skeleton"
 
 ---
 
-## Task 3: Feedback Form JS (`form-mentorship-session1-feedback-id.js`)
+## Task 2: Feedback Form JS (`form-mentorship-session1-feedback-id.js`)
 
 **Files:**
 - Create: `portal/js/form-mentorship-session1-feedback-id.js`
@@ -473,8 +307,16 @@ This is the core logic file. It handles:
 2. Typeahead name search
 3. Part 1 → Part 2 → Part 3 navigation
 4. Validation of Part 2 fields
-5. Optional Drive file upload (Part 3)
+5. Optional workbook local download (Part 3) — renames file client-side and triggers browser download
 6. Read-then-append CRM write
+
+**Local download logic (replaces Drive upload):** When the participant selects a file and clicks "Kirim dengan lampiran", the JS:
+1. Derives the file extension from `selectedFile.name`
+2. Constructs the target filename: `GELP 2026 - Session 1 - {participantName}.{ext}`
+3. Creates an object URL from the file blob
+4. Creates a hidden `<a download="...">` element, sets its `href` to the object URL, clicks it programmatically, then revokes the URL
+5. The browser downloads the file to the user's local Downloads folder with the renamed filename
+6. Then proceeds immediately to the CRM write (no network call for the file)
 
 - [ ] **Step 1: Create the JS file**
 
@@ -721,23 +563,20 @@ async function doSubmit(withFile) {
   let workbookUploaded = false;
 
   if (withFile && selectedFile) {
-    try {
-      const fd = new FormData();
-      fd.append("file", selectedFile, selectedFile.name);
-      fd.append("participant_name", selectedParticipant.name);
-      const upRes = await fetch(`${PROXY_BASE}/drive/upload`, { method: "POST", body: fd });
-      const upJson = await upRes.json();
-      if (!upRes.ok || !upJson.ok) throw new Error(JSON.stringify(upJson));
-      workbookUploaded = true;
-    } catch (e) {
-      uploadError.classList.remove("hidden");
-      activeBtn.disabled = false;
-      activeBtn.textContent = withFile
-        ? "Kirim dengan lampiran / Submit with attachment"
-        : "Kirim tanpa lampiran / Submit without attachment";
-      isSubmitting = false;
-      return;
-    }
+    // Local download — rename file and trigger browser save
+    const originalName = selectedFile.name;
+    const dotIdx       = originalName.lastIndexOf(".");
+    const ext          = dotIdx !== -1 ? originalName.slice(dotIdx) : "";
+    const targetName   = `GELP 2026 - Session 1 - ${selectedParticipant.name}${ext}`;
+    const url          = URL.createObjectURL(selectedFile);
+    const a            = document.createElement("a");
+    a.href             = url;
+    a.download         = targetName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    workbookUploaded = true;
   }
 
   // Build feedback block
@@ -799,12 +638,12 @@ loadParticipants();
 
 ```bash
 git add portal/js/form-mentorship-session1-feedback-id.js
-git commit -m "feat: add GELP Session 1 feedback form JS — load, search, validate, upload, CRM write"
+git commit -m "feat: add GELP Session 1 feedback form JS — load, search, validate, local download, CRM write"
 ```
 
 ---
 
-## Task 4: Report HTML (`mentorship-session1-feedback-report-id.html`)
+## Task 3: Report HTML (`mentorship-session1-feedback-report-id.html`)
 
 **Files:**
 - Create: `portal/mentorship-session1-feedback-report-id.html`
@@ -976,7 +815,7 @@ git commit -m "feat: add GELP Session 1 feedback report HTML skeleton"
 
 ---
 
-## Task 5: Report JS (`report-mentorship-session1-feedback-id.js`)
+## Task 4: Report JS (`report-mentorship-session1-feedback-id.js`)
 
 **Files:**
 - Create: `portal/js/report-mentorship-session1-feedback-id.js`
@@ -1246,24 +1085,9 @@ git commit -m "feat: add GELP Session 1 feedback report JS — fetch, parse, ren
 
 ---
 
-## Task 6: Deploy Worker and Portal
+## Task 5: Deploy Portal
 
-- [ ] **Step 1: Deploy the updated crm-proxy worker**
-
-```bash
-cd portal/workers
-npx wrangler deploy
-```
-
-Expected output: `✓ Deployed crm-proxy ...`
-
-> If `GOOGLE_SERVICE_ACCOUNT_JSON` secret has not been set yet, do that first:
-> ```bash
-> npx wrangler secret put GOOGLE_SERVICE_ACCOUNT_JSON
-> # Paste the full JSON content of the service account key file when prompted
-> ```
-
-- [ ] **Step 2: Deploy the portal to Cloudflare Pages**
+- [ ] **Step 1: Deploy the portal to Cloudflare Pages**
 
 ```bash
 npx wrangler pages deploy portal --project-name aktivasia-portal
@@ -1298,20 +1122,19 @@ git commit -m "feat: deploy GELP Session 1 feedback form and report"
 
 | Spec requirement | Covered by |
 |---|---|
-| Form in Bahasa + English | Task 2 (HTML labels + subtitles) |
-| Name search filter (stage-based) | Task 3 (`GELP_STAGES` filter in `loadParticipants`) |
-| 5 open-text feedback questions | Task 2 (HTML) + Task 3 (validation + payload) |
-| Optional workbook upload | Task 3 (`doSubmit(withFile)` + Part 3 HTML in Task 2) |
-| Drive upload via `/drive/upload` | Task 1 (`crm-proxy.js` new route) |
-| File renamed `GELP 2026 - Session 1 - {name}.{ext}` | Task 1 (`targetName` logic) |
-| Read-then-append CRM write | Task 3 (`strippedBase` + `merged` logic) |
-| `[Workbook]` flag appended when uploaded | Task 3 (`buildFeedbackBlock`) |
-| Report: Answered/Not Answered tabs | Tasks 4 + 5 |
-| Report: Workbook column with green badge | Tasks 4 + 5 (`workbook-badge` class) |
-| Report: Not Answered includes non-intake-form respondents | Task 5 (detection by `[Keseluruhan]` only) |
-| Report: KPI strip | Tasks 4 + 5 |
-| Report: Excel export (2 sheets) | Task 5 (`btnDownload` listener) |
-| XLS filename `GELP_Session1_Feedback_Report_{date}.xlsx` | Task 5 |
+| Form in Bahasa + English | Task 1 (HTML labels + subtitles) |
+| Name search filter (stage-based) | Task 2 (`GELP_STAGES` filter in `loadParticipants`) |
+| 5 open-text feedback questions | Task 1 (HTML) + Task 2 (validation + payload) |
+| Optional workbook local download | Task 2 (`doSubmit(withFile)` + Part 3 HTML in Task 1) |
+| File renamed `GELP 2026 - Session 1 - {name}.{ext}` and saved locally | Task 2 (`targetName` + `URL.createObjectURL` download trigger) |
+| Read-then-append CRM write | Task 2 (`strippedBase` + `merged` logic) |
+| `[Workbook]` flag appended when downloaded | Task 2 (`buildFeedbackBlock`) |
+| Report: Answered/Not Answered tabs | Tasks 3 + 4 |
+| Report: Workbook column with green badge | Tasks 3 + 4 (`workbook-badge` class) |
+| Report: Not Answered includes non-intake-form respondents | Task 4 (detection by `[Keseluruhan]` only) |
+| Report: KPI strip | Tasks 3 + 4 |
+| Report: Excel export (2 sheets) | Task 4 (`btnDownload` listener) |
+| XLS filename `GELP_Session1_Feedback_Report_{date}.xlsx` | Task 4 |
 
 **Placeholder scan:** None found. All code blocks are complete.
 
