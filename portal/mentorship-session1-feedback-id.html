@@ -76,6 +76,11 @@
     .file-upload-area { border: 2px dashed var(--border); border-radius: var(--radius-sm); padding: 20px; text-align: center; cursor: pointer; transition: border-color 0.2s; }
     .file-upload-area:hover { border-color: var(--primary); }
     .file-upload-area input[type="file"] { display: none; }
+    .rating-group { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .rating-btn { width: 44px; height: 44px; border-radius: 9999px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background 0.15s, border-color 0.15s, color 0.15s; }
+    .rating-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .rating-btn.selected { background: var(--primary); border-color: var(--primary); color: var(--white); }
+    .rating-scale-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--meta); margin-top: 4px; }
     .file-upload-label { font-size: 14px; color: var(--meta); cursor: pointer; }
     .file-upload-label span { color: var(--primary); font-weight: 600; text-decoration: underline; }
 
@@ -167,37 +172,64 @@
     <div class="section-subtitle">Session Feedback</div>
 
     <div class="field" id="field-q-overall">
-      <label class="field-label" for="q-overall">1. Bagaimana penilaian Anda secara keseluruhan terhadap sesi ini? <span class="req">*</span></label>
+      <label class="field-label">1. Bagaimana penilaian Anda secara keseluruhan terhadap sesi ini? <span class="req">*</span></label>
       <span class="field-label-en">How would you rate the session overall?</span>
-      <textarea id="q-overall" rows="4" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
-      <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
+      <div class="rating-group" id="rating-overall">
+        <button type="button" class="rating-btn" data-value="1">1</button>
+        <button type="button" class="rating-btn" data-value="2">2</button>
+        <button type="button" class="rating-btn" data-value="3">3</button>
+        <button type="button" class="rating-btn" data-value="4">4</button>
+        <button type="button" class="rating-btn" data-value="5">5</button>
+        <button type="button" class="rating-btn" data-value="6">6</button>
+        <button type="button" class="rating-btn" data-value="7">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>Sangat Buruk / Very Poor</span><span>Sangat Baik / Excellent</span></div>
+      <div class="field-error">Mohon pilih penilaian Anda. / Please select a rating.</div>
     </div>
 
     <div class="field" id="field-q-plenary">
-      <label class="field-label" for="q-plenary">2. Apa yang paling Anda sukai dari Sesi Pleno? <span class="req">*</span></label>
-      <span class="field-label-en">What did you enjoy most about the Plenary Session?</span>
-      <textarea id="q-plenary" rows="4" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
-      <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
+      <label class="field-label">2. Bagaimana penilaian Anda terhadap Sesi Pleno? <span class="req">*</span></label>
+      <span class="field-label-en">How would you rate the Plenary Session?</span>
+      <div class="rating-group" id="rating-plenary">
+        <button type="button" class="rating-btn" data-value="1">1</button>
+        <button type="button" class="rating-btn" data-value="2">2</button>
+        <button type="button" class="rating-btn" data-value="3">3</button>
+        <button type="button" class="rating-btn" data-value="4">4</button>
+        <button type="button" class="rating-btn" data-value="5">5</button>
+        <button type="button" class="rating-btn" data-value="6">6</button>
+        <button type="button" class="rating-btn" data-value="7">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>Sangat Buruk / Very Poor</span><span>Sangat Baik / Excellent</span></div>
+      <div class="field-error">Mohon pilih penilaian Anda. / Please select a rating.</div>
     </div>
 
     <div class="field" id="field-q-breakout">
-      <label class="field-label" for="q-breakout">3. Apa yang paling Anda sukai dari Sesi Kelompok (Breakout)? <span class="req">*</span></label>
-      <span class="field-label-en">What did you enjoy most about the Breakout Session?</span>
-      <textarea id="q-breakout" rows="4" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
+      <label class="field-label">3. Bagaimana penilaian Anda terhadap Sesi Kelompok (Breakout)? <span class="req">*</span></label>
+      <span class="field-label-en">How would you rate the Breakout Session?</span>
+      <div class="rating-group" id="rating-breakout">
+        <button type="button" class="rating-btn" data-value="1">1</button>
+        <button type="button" class="rating-btn" data-value="2">2</button>
+        <button type="button" class="rating-btn" data-value="3">3</button>
+        <button type="button" class="rating-btn" data-value="4">4</button>
+        <button type="button" class="rating-btn" data-value="5">5</button>
+        <button type="button" class="rating-btn" data-value="6">6</button>
+        <button type="button" class="rating-btn" data-value="7">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>Sangat Buruk / Very Poor</span><span>Sangat Baik / Excellent</span></div>
+      <div class="field-error">Mohon pilih penilaian Anda. / Please select a rating.</div>
+    </div>
+
+    <div class="field" id="field-q-enjoyed">
+      <label class="field-label" for="q-enjoyed">4. Apa yang paling Anda sukai dari sesi ini? <span class="req">*</span></label>
+      <span class="field-label-en">What did you enjoy most about the session?</span>
+      <textarea id="q-enjoyed" rows="4" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
       <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
     </div>
 
     <div class="field" id="field-q-improvement">
-      <label class="field-label" for="q-improvement">4. Apa yang dapat kami tingkatkan untuk sesi berikutnya? <span class="req">*</span></label>
+      <label class="field-label" for="q-improvement">5. Apa yang dapat kami tingkatkan untuk sesi berikutnya? <span class="req">*</span></label>
       <span class="field-label-en">What can we improve for the next session?</span>
       <textarea id="q-improvement" rows="4" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
-      <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
-    </div>
-
-    <div class="field" id="field-q-other">
-      <label class="field-label" for="q-other">5. Apakah ada masukan lain yang ingin Anda bagikan? <span class="req">*</span></label>
-      <span class="field-label-en">Any other feedback you'd like to share?</span>
-      <textarea id="q-other" rows="4" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
       <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
     </div>
 
@@ -231,6 +263,22 @@
   </div>
 </div>
 
+<!-- Part 4: Any Other Feedback -->
+<div class="form-wrap hidden" id="part-4">
+  <div class="section-card">
+    <div class="section-title">Masukan Lainnya</div>
+    <div class="section-subtitle">Any Other Feedback (Optional)</div>
+
+    <div class="field" id="field-q-other">
+      <label class="field-label" for="q-other">Apakah ada masukan lain yang ingin Anda bagikan? <span style="color:var(--meta);font-weight:400">(opsional)</span></label>
+      <span class="field-label-en">Any other feedback you'd like to share? (optional)</span>
+      <textarea id="q-other" rows="5" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
+    </div>
+
+    <div id="submit-error-p4" class="status-msg error hidden">Terjadi kesalahan saat menyimpan. Silakan coba lagi. / Something went wrong. Please try again.</div>
+  </div>
+</div>
+
 <!-- Success screen -->
 <div class="success-screen" id="success-screen">
   <div class="icon">🎉</div>
@@ -243,8 +291,10 @@
   <button class="btn btn-back hidden" id="btn-back">← Back</button>
   <button class="btn btn-next" id="btn-next" disabled>Lanjut / Continue →</button>
   <button class="btn btn-submit hidden" id="btn-next-to-upload">Lanjut / Continue →</button>
+  <button class="btn btn-submit hidden" id="btn-next-to-other">Lanjut / Continue →</button>
   <button class="btn btn-submit-no-file hidden" id="btn-submit-no-file">Kirim tanpa lampiran / Submit without attachment</button>
   <button class="btn btn-submit hidden" id="btn-submit-with-file">Kirim dengan lampiran / Submit with attachment</button>
+  <button class="btn btn-submit hidden" id="btn-submit-final">Kirim / Submit</button>
 </div>
 
 <script src="js/form-mentorship-session1-feedback-id.js"></script>
