@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulir Umpan Balik Sesi 1 — GELP 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #821545;
+      --primary-light: #f3e8ff;
+      --cta-start: #ff960b;
+      --cta-end: #f93a3a;
+      --bg: #f5f4ee;
+      --white: #ffffff;
+      --text: #131625;
+      --meta: #788099;
+      --border: #e2e0d8;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --input-h: 52px;
+    }
+
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.5; }
+
+    .site-header { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 20px; display: flex; align-items: center; gap: 16px; }
+    .header-logos { display: flex; align-items: center; gap: 12px; }
+    .header-logos img { height: 36px; width: auto; display: block; }
+
+    .training-banner { background: linear-gradient(135deg, var(--primary) 0%, #5a0e30 100%); color: var(--white); padding: 28px 20px 24px; }
+    .training-banner .type-pill { display: inline-block; border: 1.5px solid rgba(255,255,255,0.4); border-radius: 9999px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 12px; margin-bottom: 12px; opacity: 0.9; }
+    .training-banner h1 { font-size: 24px; font-weight: 800; line-height: 1.25; }
+    @media (min-width: 640px) { .training-banner { padding: 36px 40px 28px; } .training-banner h1 { font-size: 30px; } }
+
+    .desc-block { background: var(--white); border-bottom: 1px solid var(--border); padding: 24px 20px; }
+    @media (min-width: 640px) { .desc-block { padding: 28px 40px; } }
+    .desc-block .desc-body { font-size: 15px; line-height: 1.75; color: var(--text); }
+    .desc-block .desc-body p { margin-bottom: 0.7em; }
+    .desc-block .desc-body p:last-child { margin-bottom: 0; }
+    .desc-block .desc-body ul { padding-left: 1.4em; margin-top: 0.5em; }
+    .desc-block .desc-body li { margin-bottom: 0.3em; }
+
+    .form-wrap { padding: 20px 16px 100px; max-width: 640px; margin: 0 auto; }
+    @media (min-width: 640px) { .form-wrap { padding: 24px 24px 100px; } }
+
+    .section-card { background: var(--white); border-radius: var(--radius); padding: 24px 20px; margin-bottom: 16px; }
+    @media (min-width: 640px) { .section-card { padding: 32px 28px; } }
+    .section-title { font-size: 22px; font-weight: 800; margin-bottom: 4px; color: var(--text); }
+    .section-subtitle { font-size: 14px; color: var(--meta); margin-bottom: 20px; opacity: 0.75; }
+
+    .search-wrap { position: relative; margin-bottom: 6px; }
+    .search-wrap input { width: 100%; min-height: var(--input-h); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; font-family: inherit; font-size: 16px; color: var(--text); background: var(--white); transition: border-color 0.2s; }
+    .search-wrap input:focus { outline: none; border-color: var(--primary); }
+
+    .name-results { display: none; position: absolute; left: 0; right: 0; top: calc(100% + 4px); background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius-sm); box-shadow: 0 4px 16px rgba(0,0,0,.10); max-height: 240px; overflow-y: auto; z-index: 200; }
+    .name-results.open { display: block; }
+    .name-result-item { padding: 12px 16px; cursor: pointer; font-size: 15px; color: var(--text); border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    .name-result-item:last-child { border-bottom: none; }
+    .name-result-item:hover { background: var(--primary-light); color: var(--primary); font-weight: 600; }
+
+    .selected-name-tag { display: none; align-items: center; gap: 8px; margin-top: 8px; padding: 10px 14px; background: var(--primary-light); border: 1.5px solid var(--primary); border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; color: var(--primary); }
+    .selected-name-tag.visible { display: flex; }
+    .selected-name-tag .clear-btn { background: none; border: none; color: var(--primary); font-size: 18px; cursor: pointer; margin-left: auto; padding: 0; line-height: 1; }
+
+    .field { margin-bottom: 20px; }
+    .field-label { font-size: 14px; font-weight: 600; margin-bottom: 2px; display: block; }
+    .field-label-en { font-size: 12px; color: var(--meta); margin-bottom: 6px; display: block; font-style: italic; }
+    .field-label .req { color: var(--primary); margin-left: 2px; }
+
+    textarea { width: 100%; min-height: 110px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; font-family: inherit; font-size: 16px; color: var(--text); background: var(--white); resize: vertical; transition: border-color 0.2s; }
+    textarea:focus { outline: none; border-color: var(--primary); }
+
+    .file-upload-area { border: 2px dashed var(--border); border-radius: var(--radius-sm); padding: 20px; text-align: center; cursor: pointer; transition: border-color 0.2s; }
+    .file-upload-area:hover { border-color: var(--primary); }
+    .file-upload-area input[type="file"] { display: none; }
+    .rating-group { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .rating-btn { width: 44px; height: 44px; border-radius: 9999px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background 0.15s, border-color 0.15s, color 0.15s; }
+    .rating-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .rating-btn.selected { background: var(--primary); border-color: var(--primary); color: var(--white); }
+    .rating-scale-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--meta); margin-top: 4px; }
+    .file-upload-label { font-size: 14px; color: var(--meta); cursor: pointer; }
+    .file-upload-label span { color: var(--primary); font-weight: 600; text-decoration: underline; }
+
+    .field-error { font-size: 12px; color: #e53e3e; margin-top: 4px; display: none; }
+    .field.has-error textarea, .field.has-error input { border-color: #e53e3e; }
+    .field.has-error .field-error { display: block; }
+
+    .status-msg { text-align: center; font-size: 14px; color: var(--meta); padding: 20px 0; }
+    .status-msg.error { color: #e53e3e; }
+
+    .nav-buttons { position: fixed; bottom: 0; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--border); padding: 16px 20px; display: flex; gap: 12px; max-width: 640px; margin: 0 auto; flex-wrap: wrap; }
+    .btn { flex: 1; min-height: 52px; border-radius: 9999px; font-size: 15px; font-weight: 700; border: none; cursor: pointer; transition: opacity 0.2s; font-family: inherit; }
+    .btn:active { opacity: 0.85; }
+    .btn-back { background: var(--bg); color: var(--text); border: 1.5px solid var(--border); }
+    .btn-next { background: linear-gradient(135deg, var(--cta-start), var(--cta-end)); color: var(--white); }
+    .btn-submit { background: linear-gradient(135deg, var(--primary), #5a0e30); color: var(--white); }
+    .btn-submit-no-file { background: var(--bg); color: var(--text); border: 1.5px solid var(--border); font-size: 13px; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .success-screen { display: none; text-align: center; padding: 60px 24px; max-width: 480px; margin: 0 auto; }
+    .success-screen .icon { font-size: 56px; margin-bottom: 20px; }
+    .success-screen h2 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+    .success-screen p { color: var(--meta); font-size: 15px; line-height: 1.6; }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-logos">
+    <img src="img/koneksi-aa-logo.png" alt="Koneksi &amp; AktivAsia">
+  </div>
+</header>
+
+<div class="training-banner">
+  <div class="type-pill">Formulir Umpan Balik / Session Feedback Form</div>
+  <h1>Formulir Umpan Balik — Sesi Mentorship 1 GELP 2026</h1>
+  <p style="font-size:14px;opacity:0.75;margin-top:8px;font-style:italic">Session 1 Feedback Form — GELP 2026 Mentorship Program</p>
+</div>
+
+<div class="desc-block">
+  <div class="desc-body">
+    <p>🎯 Kami mengundang Anda untuk berbagi umpan balik mengenai Sesi Mentorship 1 GELP 2026 yang berlangsung pada 6 Juni 2026.<br><em>We invite you to share feedback on GELP 2026 Mentorship Session 1 held on June 6, 2026.</em></p>
+    <p>📋 Masukan Anda sangat berarti untuk membantu kami mempersiapkan sesi berikutnya dengan lebih baik.<br><em>Your feedback helps us prepare better for the next session.</em></p>
+    <ul>
+      <li>✅ Hanya untuk peserta <strong>GELP 2026</strong> / For GELP 2026 participants only</li>
+      <li>✏️ Semua pertanyaan wajib diisi / All questions are required</li>
+      <li>📎 Upload workbook Anda (opsional) / Upload your workbook (optional)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Part 1: Name Search -->
+<div class="form-wrap" id="part-1">
+  <div class="section-card">
+    <div class="section-title">Cari Nama Anda</div>
+    <div class="section-subtitle">Search your name to get started</div>
+
+    <div id="loading-msg" class="status-msg">Memuat daftar peserta… / Loading participant list…</div>
+    <div id="error-msg" class="status-msg error hidden">Gagal memuat data. Silakan muat ulang halaman. / Failed to load data. Please reload the page.</div>
+
+    <div id="search-area" class="hidden">
+      <div class="field" id="field-name">
+        <label class="field-label" for="name-search">Nama Lengkap <span class="req">*</span></label>
+        <span class="field-label-en">Full Name — ketik untuk mencari / type to search</span>
+        <div class="search-wrap">
+          <input type="text" id="name-search" placeholder="Ketik nama Anda… / Type your name…" autocomplete="off">
+          <div id="name-results" class="name-results" role="listbox"></div>
+        </div>
+        <div id="selected-name-tag" class="selected-name-tag" role="status" aria-live="polite">
+          <span id="selected-name-text"></span>
+          <button type="button" class="clear-btn" id="clear-name-btn" aria-label="Clear selection">×</button>
+        </div>
+        <div class="field-error" id="name-error">Silakan pilih nama Anda dari daftar. / Please select your name from the list.</div>
+      </div>
+      <p style="font-size:13px;color:var(--meta);margin-top:-8px">Nama tidak ada di daftar? Hubungi tim AktivAsia Indonesia Anda. / Name not in the list? Contact your AktivAsia Indonesia team.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Part 2: Feedback Questions -->
+<div class="form-wrap hidden" id="part-2">
+  <div class="section-card">
+    <div class="section-title">Umpan Balik Sesi</div>
+    <div class="section-subtitle">Session Feedback</div>
+
+    <div class="field" id="field-q-overall">
+      <label class="field-label">1. Bagaimana penilaian Anda secara keseluruhan terhadap sesi ini? <span class="req">*</span></label>
+      <span class="field-label-en">How would you rate the session overall?</span>
+      <div class="rating-group" id="rating-overall">
+        <button type="button" class="rating-btn" data-value="1">1</button>
+        <button type="button" class="rating-btn" data-value="2">2</button>
+        <button type="button" class="rating-btn" data-value="3">3</button>
+        <button type="button" class="rating-btn" data-value="4">4</button>
+        <button type="button" class="rating-btn" data-value="5">5</button>
+        <button type="button" class="rating-btn" data-value="6">6</button>
+        <button type="button" class="rating-btn" data-value="7">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>Sangat Buruk / Very Poor</span><span>Sangat Baik / Excellent</span></div>
+      <div class="field-error">Mohon pilih penilaian Anda. / Please select a rating.</div>
+    </div>
+
+    <div class="field" id="field-q-plenary">
+      <label class="field-label">2. Bagaimana penilaian Anda terhadap Sesi Pleno? <span class="req">*</span></label>
+      <span class="field-label-en">How would you rate the Plenary Session?</span>
+      <div class="rating-group" id="rating-plenary">
+        <button type="button" class="rating-btn" data-value="1">1</button>
+        <button type="button" class="rating-btn" data-value="2">2</button>
+        <button type="button" class="rating-btn" data-value="3">3</button>
+        <button type="button" class="rating-btn" data-value="4">4</button>
+        <button type="button" class="rating-btn" data-value="5">5</button>
+        <button type="button" class="rating-btn" data-value="6">6</button>
+        <button type="button" class="rating-btn" data-value="7">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>Sangat Buruk / Very Poor</span><span>Sangat Baik / Excellent</span></div>
+      <div class="field-error">Mohon pilih penilaian Anda. / Please select a rating.</div>
+    </div>
+
+    <div class="field" id="field-q-breakout">
+      <label class="field-label">3. Bagaimana penilaian Anda terhadap Sesi Kelompok (Breakout)? <span class="req">*</span></label>
+      <span class="field-label-en">How would you rate the Breakout Session?</span>
+      <div class="rating-group" id="rating-breakout">
+        <button type="button" class="rating-btn" data-value="1">1</button>
+        <button type="button" class="rating-btn" data-value="2">2</button>
+        <button type="button" class="rating-btn" data-value="3">3</button>
+        <button type="button" class="rating-btn" data-value="4">4</button>
+        <button type="button" class="rating-btn" data-value="5">5</button>
+        <button type="button" class="rating-btn" data-value="6">6</button>
+        <button type="button" class="rating-btn" data-value="7">7</button>
+      </div>
+      <div class="rating-scale-labels"><span>Sangat Buruk / Very Poor</span><span>Sangat Baik / Excellent</span></div>
+      <div class="field-error">Mohon pilih penilaian Anda. / Please select a rating.</div>
+    </div>
+
+    <div class="field" id="field-q-enjoyed">
+      <label class="field-label" for="q-enjoyed">4. Apa yang paling Anda sukai dari sesi ini? <span class="req">*</span></label>
+      <span class="field-label-en">What did you enjoy most about the session?</span>
+      <textarea id="q-enjoyed" rows="4" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
+      <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
+    </div>
+
+    <div class="field" id="field-q-improvement">
+      <label class="field-label" for="q-improvement">5. Apa yang dapat kami tingkatkan untuk sesi berikutnya? <span class="req">*</span></label>
+      <span class="field-label-en">What can we improve for the next session?</span>
+      <textarea id="q-improvement" rows="4" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
+      <div class="field-error">Mohon isi pertanyaan ini. / Please answer this question.</div>
+    </div>
+
+    <div id="submit-error-p2" class="status-msg error hidden">Terjadi kesalahan. Silakan coba lagi. / Something went wrong. Please try again.</div>
+  </div>
+</div>
+
+<!-- Part 3: Workbook -->
+<div class="form-wrap hidden" id="part-3">
+  <div class="section-card">
+    <div class="section-title">Workbook</div>
+    <div class="section-subtitle">Upload Your Workbook</div>
+
+    <div class="desc-body" style="font-size:15px;line-height:1.75">
+      <p>Workbook ini dirancang untuk membantu peserta merefleksikan pengalaman, kebutuhan, dan tujuan pembelajaran selama program. Insight yang Anda bagikan akan membantu kami menyesuaikan materi serta mempersiapkan sesi mentorship berikutnya agar lebih personal, relevan, dan sesuai dengan konteks riset Anda.</p>
+      <p style="margin-top:12px;font-style:italic;color:var(--meta)">This workbook is designed to help participants reflect on their experiences, learning needs, and goals throughout the program. The insights you share will help us tailor the content and prepare upcoming mentorship sessions to be more personalized, relevant, and responsive to your research context.</p>
+      <div style="margin-top:20px;padding:16px 18px;background:var(--primary-light);border:1.5px solid var(--primary);border-radius:var(--radius-sm)">
+        <p style="font-size:14px;font-weight:700;color:var(--primary);margin-bottom:6px">📁 Tautan Unggah / Upload Link</p>
+        <a href="https://drive.google.com/drive/folders/1oaw6qnOjzjRXgnL4v8Gj-l1HHtor7OON?usp=drive_link" target="_blank" rel="noopener" style="color:var(--primary);font-size:14px;word-break:break-all">https://drive.google.com/drive/folders/1oaw6qnOjzjRXgnL4v8Gj-l1HHtor7OON?usp=drive_link</a>
+        <p style="font-size:12px;color:var(--meta);margin-top:8px">Klik tautan di atas untuk mengupload workbook Anda ke Google Drive kami. / Click the link above to upload your workbook to our Google Drive.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Part 4: Any Other Feedback -->
+<div class="form-wrap hidden" id="part-4">
+  <div class="section-card">
+    <div class="section-title">Masukan Lainnya</div>
+    <div class="section-subtitle">Any Other Feedback (Optional)</div>
+
+    <div class="field" id="field-q-other">
+      <label class="field-label" for="q-other">Apakah ada masukan lain yang ingin Anda bagikan? <span style="color:var(--meta);font-weight:400">(opsional)</span></label>
+      <span class="field-label-en">Any other feedback you'd like to share? (optional)</span>
+      <textarea id="q-other" rows="5" placeholder="Ceritakan secara singkat… / Describe briefly…"></textarea>
+    </div>
+
+    <div id="submit-error-p4" class="status-msg error hidden">Terjadi kesalahan saat menyimpan. Silakan coba lagi. / Something went wrong. Please try again.</div>
+  </div>
+</div>
+
+<!-- Success screen -->
+<div class="success-screen" id="success-screen">
+  <div class="icon">🎉</div>
+  <h2>Terima kasih atas umpan balik Anda!</h2>
+  <p>Thank you for your feedback!<br><br>Masukan Anda telah berhasil disimpan dan akan membantu kami mempersiapkan sesi berikutnya.<br><em>Your responses have been saved and will help us prepare the next session.</em></p>
+</div>
+
+<!-- Navigation -->
+<div class="nav-buttons" id="nav-buttons">
+  <button class="btn btn-back hidden" id="btn-back">← Back</button>
+  <button class="btn btn-next" id="btn-next" disabled>Lanjut / Continue →</button>
+  <button class="btn btn-submit hidden" id="btn-next-to-upload">Lanjut / Continue →</button>
+  <button class="btn btn-submit hidden" id="btn-next-to-other">Lanjut / Continue →</button>
+  <button class="btn btn-submit hidden" id="btn-submit-final">Kirim / Submit</button>
+</div>
+
+<script src="js/form-mentorship-session1-feedback-id.js"></script>
+</body>
+</html>
