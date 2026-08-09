@@ -41,7 +41,11 @@ async function loadParticipants() {
     const json = await res.json();
     allParticipants = (json.data ?? [])
       .filter((d) => GELP_STAGES.has(d.Stage))
-      .map((d) => ({ id: d.id, name: `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim() }))
+      .map((d) => ({
+        id:              d.id,
+        name:            `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim(),
+        customResponses: (d.Custom_Responses ?? "").trim(),
+      }))
       .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""));
     loadingMsg.classList.add("hidden");
     searchArea.classList.remove("hidden");
@@ -170,11 +174,18 @@ btnSubmit.addEventListener("click", async () => {
   const q3 = document.getElementById("q3").value.trim();
   const q4 = document.getElementById("q4").value.trim();
 
+  const block = formatPayload(q1, q2, q3, q4);
+
+  // Append-only: never strip or overwrite existing content from this or
+  // any other form (S1, S2, etc) -- always add the new block at the end.
+  const existingRaw = selectedParticipant.customResponses;
+  const merged      = existingRaw ? `${existingRaw}\n\n${block}` : block;
+
   try {
     const res = await fetch(`${PROXY_BASE}/deals/${selectedParticipant.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ data: [{ Custom_Responses: formatPayload(q1, q2, q3, q4) }] }),
+      body: JSON.stringify({ data: [{ Custom_Responses: merged }] }),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     part2.classList.add("hidden");

@@ -24,3 +24,6 @@ Thumbs.db
 .worktrees/
 .wrangler/
 
+# Node
+node_modules/
+

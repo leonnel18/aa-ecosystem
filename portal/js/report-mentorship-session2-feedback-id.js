@@ -8,7 +8,7 @@ const ELIGIBLE_STAGES = new Set([
   "Graduated or Post Evaluation Completed",
 ]);
 
-const Q_KEYS  = ["Keseluruhan", "Sesi Pleno", "Sesi Kelompok", "Menikmati Sesi", "Saran Perbaikan", "Masukan Lainnya"];
+const Q_KEYS  = ["Keseluruhan-S2", "Sesi Pleno-S2", "Sesi Kelompok-S2", "Menikmati Sesi-S2", "Saran Perbaikan-S2", "Masukan Lainnya-S2"];
 const Q_PROPS = ["q1", "q2", "q3", "q4", "q5", "q6"];
 
 // ── State ──────────────────────────────────────────────────────────────────
@@ -84,7 +84,7 @@ function processDeals(deals) {
     const mobile = d.Mobile ?? "";
     const raw    = (d.Custom_Responses ?? "").trim();
 
-    if (raw.includes("[Keseluruhan]")) {
+    if (raw.includes("[Keseluruhan-S2]")) {
       answeredList.push({ name, ...parseResponses(raw) });
     } else {
       unansweredList.push({ name, email, mobile });
@@ -228,7 +228,7 @@ btnDownload.addEventListener("click", () => {
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(unansweredRows), "Not Answered");
 
   const date = new Date().toISOString().slice(0, 10);
-  XLSX.writeFile(wb, `GELP_Session1_Feedback_Report_${date}.xlsx`);
+  XLSX.writeFile(wb, `GELP_Session2_Feedback_Report_${date}.xlsx`);
 });
 
 // ── Retry ──────────────────────────────────────────────────────────────────

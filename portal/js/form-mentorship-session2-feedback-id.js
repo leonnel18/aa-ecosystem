@@ -232,19 +232,19 @@ btnSubmitFinal.addEventListener("click", async () => {
   const other       = document.getElementById("q-other").value.trim();
 
   let block =
-    `[Keseluruhan]\n${ratings.overall}\n\n` +
-    `[Sesi Pleno]\n${ratings.plenary}\n\n` +
-    `[Sesi Kelompok]\n${ratings.breakout}\n\n` +
-    `[Menikmati Sesi]\n${enjoyed}\n\n` +
-    `[Saran Perbaikan]\n${improvement}`;
+    `[Keseluruhan-S2]\n${ratings.overall}\n\n` +
+    `[Sesi Pleno-S2]\n${ratings.plenary}\n\n` +
+    `[Sesi Kelompok-S2]\n${ratings.breakout}\n\n` +
+    `[Menikmati Sesi-S2]\n${enjoyed}\n\n` +
+    `[Saran Perbaikan-S2]\n${improvement}`;
 
-  if (other) block += `\n\n[Masukan Lainnya]\n${other}`;
+  if (other) block += `\n\n[Masukan Lainnya-S2]\n${other}`;
 
   const existingRaw   = selectedParticipant.customResponses;
-  const feedbackStart = existingRaw.indexOf("[Keseluruhan]");
+  const feedbackStart = existingRaw.indexOf("[Keseluruhan-S2]");
   const strippedBase  = feedbackStart !== -1
     ? existingRaw.slice(0, feedbackStart).trimEnd()
-    : existingRaw;
+    : existingRaw.trimEnd();
   const merged = strippedBase ? `${strippedBase}\n\n${block}` : block;
 
   try {

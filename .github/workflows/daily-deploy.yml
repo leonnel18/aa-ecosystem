@@ -1,0 +1,44 @@
+name: Daily pipeline + portal deploy
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # 00:00 UTC = 08:00 Asia/Manila (UTC+8)
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run CRM pipeline (extract -> transform -> write)
+        env:
+          ZOHO_CRM_CLIENT_ID: ${{ secrets.ZOHO_CRM_CLIENT_ID }}
+          ZOHO_CRM_CLIENT_SECRET: ${{ secrets.ZOHO_CRM_CLIENT_SECRET }}
+          ZOHO_CRM_REFRESH_TOKEN: ${{ secrets.ZOHO_CRM_REFRESH_TOKEN }}
+          ZOHO_CRM_REGION: ${{ secrets.ZOHO_CRM_REGION }}
+        run: python tools/orchestrator.py
+
+      - name: Deploy portal to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy portal --project-name aktivasia-portal --commit-dirty=true
+
+      - name: Commit refreshed data + progress log
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/dashboard_data.json portal/data/dashboard_data.json progress.md
+          git diff --cached --quiet || git commit -m "chore: daily CRM data refresh + portal deploy"
+          git push

@@ -1535,7 +1535,8 @@ async function saveTrainingEdit() {
   }
 }
 
-document.getElementById('edit-modal-overlay').addEventListener('click', function(e) {
+const _editOverlay = document.getElementById('edit-modal-overlay');
+if (_editOverlay) _editOverlay.addEventListener('click', function(e) {
   if (e.target === this) closeEditModal();
 });
 

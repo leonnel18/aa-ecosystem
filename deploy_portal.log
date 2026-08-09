@@ -1,0 +1,2575 @@
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (35/35)
+✨ Success! Uploaded 0 files (35 already uploaded) (1.92 sec)
+
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://372176c0.aktivasia-portal.pages.dev
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (35/35)
+✨ Success! Uploaded 0 files (35 already uploaded) (1.03 sec)
+
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://7110a479.aktivasia-portal.pages.dev
+npm notice
+npm notice New minor version of npm available! 11.12.1 -> 11.16.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.16.0
+npm notice To update run: npm install -g npm@11.16.0
+npm notice
+[Tue 06/09/2026  6:00:01.99] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-08 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 3986 -> 3986 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2223 -> 2223 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-08 22:00:30 UTC]   Extracted Deals: 3986 records
+[2026-06-08 22:00:30 UTC]   Extracted Solutions: 120 records
+[2026-06-08 22:00:30 UTC]   Extracted Products: 4 records
+[2026-06-08 22:00:30 UTC]   Extracted Accounts: 2223 records
+[2026-06-08 22:00:30 UTC]   Extracted Forms: 24 records
+[2026-06-08 22:00:30 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1070 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=188 graduates=164 community_impact=159 orgs=45
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=355 graduates=193 community_impact=1047 orgs=216
+[2026-06-08 22:00:30 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-08 22:00:30 UTC]   Transformed PK: applicants=1070 graduates=281
+[2026-06-08 22:00:30 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-06-08 22:00:30 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-08 22:00:30 UTC]   Transformed backbone: applicants=355 graduates=193
+
+-- Step 3: Write --
+  PK          applicants=1070  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 188  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 355  graduates= 193
+[2026-06-08 22:00:30 UTC]   dashboard_data.json written (1923.0 KB)
+[2026-06-08 22:00:30 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-08 22:00:30 UTC] Pipeline complete in 27s
+
+============================================================
+  [DONE] Pipeline complete in 27s
+  data/dashboard_data.json ready for portal
+============================================================
+[Tue 06/09/2026  6:00:30.29] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (34/39)
+Uploading... (35/39)
+Uploading... (37/39)
+Uploading... (39/39)
+✨ Success! Uploaded 5 files (34 already uploaded) (2.37 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://6d481333.aktivasia-portal.pages.dev
+[Wed 06/10/2026  6:00:01.92] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-09 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 3986 -> 3986 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2223 -> 2223 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-09 22:00:30 UTC]   Extracted Deals: 3986 records
+[2026-06-09 22:00:30 UTC]   Extracted Solutions: 120 records
+[2026-06-09 22:00:30 UTC]   Extracted Products: 4 records
+[2026-06-09 22:00:30 UTC]   Extracted Accounts: 2223 records
+[2026-06-09 22:00:30 UTC]   Extracted Forms: 24 records
+[2026-06-09 22:00:30 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1070 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=188 graduates=164 community_impact=159 orgs=45
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=355 graduates=193 community_impact=1047 orgs=216
+[2026-06-09 22:00:30 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-09 22:00:30 UTC]   Transformed PK: applicants=1070 graduates=281
+[2026-06-09 22:00:30 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-06-09 22:00:30 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-09 22:00:30 UTC]   Transformed backbone: applicants=355 graduates=193
+
+-- Step 3: Write --
+  PK          applicants=1070  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 188  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 355  graduates= 193
+[2026-06-09 22:00:31 UTC]   dashboard_data.json written (1923.0 KB)
+[2026-06-09 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-09 22:00:31 UTC] Pipeline complete in 28s
+
+============================================================
+  [DONE] Pipeline complete in 28s
+  data/dashboard_data.json ready for portal
+============================================================
+[Wed 06/10/2026  6:00:31.04] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (4.32 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://1f46a84f.aktivasia-portal.pages.dev
+[Fri 06/12/2026  6:00:01.55] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-11 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 3989 -> 3989 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2225 -> 2225 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-11 22:00:29 UTC]   Extracted Deals: 3989 records
+[2026-06-11 22:00:29 UTC]   Extracted Solutions: 120 records
+[2026-06-11 22:00:29 UTC]   Extracted Products: 4 records
+[2026-06-11 22:00:29 UTC]   Extracted Accounts: 2225 records
+[2026-06-11 22:00:29 UTC]   Extracted Forms: 24 records
+[2026-06-11 22:00:29 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1070 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=188 graduates=164 community_impact=159 orgs=45
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=358 graduates=194 community_impact=1047 orgs=217
+[2026-06-11 22:00:29 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-11 22:00:29 UTC]   Transformed PK: applicants=1070 graduates=281
+[2026-06-11 22:00:29 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-06-11 22:00:29 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-11 22:00:29 UTC]   Transformed backbone: applicants=358 graduates=194
+
+-- Step 3: Write --
+  PK          applicants=1070  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 188  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 358  graduates= 194
+[2026-06-11 22:00:29 UTC]   dashboard_data.json written (1924.6 KB)
+[2026-06-11 22:00:29 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-11 22:00:29 UTC] Pipeline complete in 27s
+
+============================================================
+  [DONE] Pipeline complete in 27s
+  data/dashboard_data.json ready for portal
+============================================================
+[Fri 06/12/2026  6:00:29.55] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (4.77 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://aa3cf512.aktivasia-portal.pages.dev
+npm notice
+npm notice New minor version of npm available! 11.12.1 -> 11.17.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+npm notice To update run: npm install -g npm@11.17.0
+npm notice
+[Sat 06/13/2026  6:00:01.60] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-12 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4016 -> 4016 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2225 -> 2225 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-12 22:00:30 UTC]   Extracted Deals: 4016 records
+[2026-06-12 22:00:30 UTC]   Extracted Solutions: 120 records
+[2026-06-12 22:00:30 UTC]   Extracted Products: 4 records
+[2026-06-12 22:00:30 UTC]   Extracted Accounts: 2225 records
+[2026-06-12 22:00:30 UTC]   Extracted Forms: 24 records
+[2026-06-12 22:00:30 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=188 graduates=164 community_impact=159 orgs=45
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=358 graduates=197 community_impact=1047 orgs=217
+[2026-06-12 22:00:30 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-12 22:00:30 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-06-12 22:00:30 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-06-12 22:00:30 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-12 22:00:30 UTC]   Transformed backbone: applicants=358 graduates=197
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 188  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 358  graduates= 197
+[2026-06-12 22:00:30 UTC]   dashboard_data.json written (1929.6 KB)
+[2026-06-12 22:00:30 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-12 22:00:30 UTC] Pipeline complete in 28s
+
+============================================================
+  [DONE] Pipeline complete in 28s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sat 06/13/2026  6:00:30.61] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.90 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://132985c2.aktivasia-portal.pages.dev
+[Mon 06/15/2026  6:00:02.19] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-14 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4016 -> 4016 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2225 -> 2225 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-14 22:00:30 UTC]   Extracted Deals: 4016 records
+[2026-06-14 22:00:30 UTC]   Extracted Solutions: 120 records
+[2026-06-14 22:00:30 UTC]   Extracted Products: 4 records
+[2026-06-14 22:00:30 UTC]   Extracted Accounts: 2225 records
+[2026-06-14 22:00:30 UTC]   Extracted Forms: 24 records
+[2026-06-14 22:00:30 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=188 graduates=164 community_impact=159 orgs=45
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=358 graduates=197 community_impact=1047 orgs=217
+[2026-06-14 22:00:30 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-14 22:00:30 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-06-14 22:00:30 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-06-14 22:00:30 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-14 22:00:30 UTC]   Transformed backbone: applicants=358 graduates=197
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 188  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 358  graduates= 197
+[2026-06-14 22:00:30 UTC]   dashboard_data.json written (1929.6 KB)
+[2026-06-14 22:00:30 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-14 22:00:30 UTC] Pipeline complete in 28s
+
+============================================================
+  [DONE] Pipeline complete in 28s
+  data/dashboard_data.json ready for portal
+============================================================
+[Mon 06/15/2026  6:00:30.69] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.59 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://080d7a66.aktivasia-portal.pages.dev
+[Wed 06/24/2026  6:00:02.24] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-23 22:00:03 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4016 -> 4016 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2226 -> 2226 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-23 22:00:31 UTC]   Extracted Deals: 4016 records
+[2026-06-23 22:00:31 UTC]   Extracted Solutions: 120 records
+[2026-06-23 22:00:31 UTC]   Extracted Products: 4 records
+[2026-06-23 22:00:31 UTC]   Extracted Accounts: 2226 records
+[2026-06-23 22:00:31 UTC]   Extracted Forms: 24 records
+[2026-06-23 22:00:31 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=188 graduates=164 community_impact=159 orgs=45
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=358 graduates=197 community_impact=1047 orgs=217
+[2026-06-23 22:00:31 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-23 22:00:31 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-06-23 22:00:31 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-06-23 22:00:31 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-23 22:00:31 UTC]   Transformed backbone: applicants=358 graduates=197
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 188  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 358  graduates= 197
+[2026-06-23 22:00:31 UTC]   dashboard_data.json written (1929.6 KB)
+[2026-06-23 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-23 22:00:31 UTC] Pipeline complete in 28s
+
+============================================================
+  [DONE] Pipeline complete in 28s
+  data/dashboard_data.json ready for portal
+============================================================
+[Wed 06/24/2026  6:00:31.34] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.75 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://c700bab7.aktivasia-portal.pages.dev
+npm notice
+npm notice New minor version of npm available! 11.12.1 -> 11.17.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+npm notice To update run: npm install -g npm@11.17.0
+npm notice
+[Thu 06/25/2026  6:00:02.23] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-24 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4016 -> 4016 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2226 -> 2226 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-24 22:00:31 UTC]   Extracted Deals: 4016 records
+[2026-06-24 22:00:31 UTC]   Extracted Solutions: 120 records
+[2026-06-24 22:00:31 UTC]   Extracted Products: 4 records
+[2026-06-24 22:00:31 UTC]   Extracted Accounts: 2226 records
+[2026-06-24 22:00:31 UTC]   Extracted Forms: 24 records
+[2026-06-24 22:00:31 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=188 graduates=164 community_impact=159 orgs=45
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=358 graduates=197 community_impact=1047 orgs=217
+[2026-06-24 22:00:31 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-24 22:00:31 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-06-24 22:00:31 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-06-24 22:00:31 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-24 22:00:31 UTC]   Transformed backbone: applicants=358 graduates=197
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 188  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 358  graduates= 197
+[2026-06-24 22:00:31 UTC]   dashboard_data.json written (1929.6 KB)
+[2026-06-24 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-24 22:00:31 UTC] Pipeline complete in 29s
+
+============================================================
+  [DONE] Pipeline complete in 29s
+  data/dashboard_data.json ready for portal
+============================================================
+[Thu 06/25/2026  6:00:31.91] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (3.32 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://9af0bc72.aktivasia-portal.pages.dev
+[Fri 06/26/2026  6:00:02.01] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-25 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4016 -> 4016 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2226 -> 2226 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-25 22:00:31 UTC]   Extracted Deals: 4016 records
+[2026-06-25 22:00:31 UTC]   Extracted Solutions: 120 records
+[2026-06-25 22:00:31 UTC]   Extracted Products: 4 records
+[2026-06-25 22:00:31 UTC]   Extracted Accounts: 2226 records
+[2026-06-25 22:00:31 UTC]   Extracted Forms: 24 records
+[2026-06-25 22:00:31 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=188 graduates=164 community_impact=159 orgs=45
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=358 graduates=197 community_impact=1047 orgs=217
+[2026-06-25 22:00:31 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-25 22:00:31 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-06-25 22:00:31 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-06-25 22:00:31 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-25 22:00:31 UTC]   Transformed backbone: applicants=358 graduates=197
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 188  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 358  graduates= 197
+[2026-06-25 22:00:31 UTC]   dashboard_data.json written (1929.6 KB)
+[2026-06-25 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-25 22:00:31 UTC] Pipeline complete in 29s
+
+============================================================
+  [DONE] Pipeline complete in 29s
+  data/dashboard_data.json ready for portal
+============================================================
+[Fri 06/26/2026  6:00:31.57] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (4.68 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://6197876b.aktivasia-portal.pages.dev
+[Sun 06/28/2026  6:00:02.04] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-27 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4016 -> 4016 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2226 -> 2226 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-27 22:00:33 UTC]   Extracted Deals: 4016 records
+[2026-06-27 22:00:33 UTC]   Extracted Solutions: 120 records
+[2026-06-27 22:00:33 UTC]   Extracted Products: 4 records
+[2026-06-27 22:00:33 UTC]   Extracted Accounts: 2226 records
+[2026-06-27 22:00:33 UTC]   Extracted Forms: 24 records
+[2026-06-27 22:00:33 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=188 graduates=164 community_impact=159 orgs=45
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=358 graduates=197 community_impact=1047 orgs=217
+[2026-06-27 22:00:33 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-27 22:00:33 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-06-27 22:00:33 UTC]   Transformed KR: applicants=188 graduates=164
+[2026-06-27 22:00:33 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-27 22:00:33 UTC]   Transformed backbone: applicants=358 graduates=197
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 188  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 358  graduates= 197
+[2026-06-27 22:00:33 UTC]   dashboard_data.json written (1929.6 KB)
+[2026-06-27 22:00:33 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-27 22:00:33 UTC] Pipeline complete in 30s
+
+============================================================
+  [DONE] Pipeline complete in 30s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sun 06/28/2026  6:00:33.39] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.60 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://d6daaa2e.aktivasia-portal.pages.dev
+[Mon 06/29/2026  6:00:01.42] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-28 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4043 -> 4043 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2237 -> 2237 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-28 22:00:31 UTC]   Extracted Deals: 4043 records
+[2026-06-28 22:00:31 UTC]   Extracted Solutions: 120 records
+[2026-06-28 22:00:31 UTC]   Extracted Products: 4 records
+[2026-06-28 22:00:31 UTC]   Extracted Accounts: 2237 records
+[2026-06-28 22:00:31 UTC]   Extracted Forms: 24 records
+[2026-06-28 22:00:31 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=518 community_impact=1067 orgs=288
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=164 community_impact=159 orgs=56
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-06-28 22:00:31 UTC]   Transformed PH: applicants=688 graduates=518
+[2026-06-28 22:00:31 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-06-28 22:00:31 UTC]   Transformed KR: applicants=200 graduates=164
+[2026-06-28 22:00:31 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-28 22:00:31 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 688  graduates= 518
+  KR          applicants= 200  graduates= 164
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 373  graduates= 214
+[2026-06-28 22:00:31 UTC]   dashboard_data.json written (1961.0 KB)
+[2026-06-28 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-28 22:00:31 UTC] Pipeline complete in 29s
+
+============================================================
+  [DONE] Pipeline complete in 29s
+  data/dashboard_data.json ready for portal
+============================================================
+[Mon 06/29/2026  6:00:31.42] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (3.29 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://e78103e7.aktivasia-portal.pages.dev
+[Tue 06/30/2026  6:00:01.39] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-29 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4043 -> 4043 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2237 -> 2237 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-29 22:00:30 UTC]   Extracted Deals: 4043 records
+[2026-06-29 22:00:30 UTC]   Extracted Solutions: 120 records
+[2026-06-29 22:00:30 UTC]   Extracted Products: 4 records
+[2026-06-29 22:00:30 UTC]   Extracted Accounts: 2237 records
+[2026-06-29 22:00:30 UTC]   Extracted Forms: 24 records
+[2026-06-29 22:00:30 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=520 community_impact=1067 orgs=288
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=166 community_impact=159 orgs=56
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-06-29 22:00:30 UTC]   Transformed PH: applicants=688 graduates=520
+[2026-06-29 22:00:30 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-06-29 22:00:30 UTC]   Transformed KR: applicants=200 graduates=166
+[2026-06-29 22:00:30 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-29 22:00:30 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 688  graduates= 520
+  KR          applicants= 200  graduates= 166
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 373  graduates= 214
+[2026-06-29 22:00:30 UTC]   dashboard_data.json written (1961.0 KB)
+[2026-06-29 22:00:30 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-29 22:00:30 UTC] Pipeline complete in 28s
+
+============================================================
+  [DONE] Pipeline complete in 28s
+  data/dashboard_data.json ready for portal
+============================================================
+[Tue 06/30/2026  6:00:30.41] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (3.20 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://93b7049c.aktivasia-portal.pages.dev
+[Wed 07/01/2026  6:00:01.43] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-06-30 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4043 -> 4043 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2237 -> 2237 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-06-30 22:00:30 UTC]   Extracted Deals: 4043 records
+[2026-06-30 22:00:30 UTC]   Extracted Solutions: 120 records
+[2026-06-30 22:00:30 UTC]   Extracted Products: 4 records
+[2026-06-30 22:00:30 UTC]   Extracted Accounts: 2237 records
+[2026-06-30 22:00:30 UTC]   Extracted Forms: 24 records
+[2026-06-30 22:00:30 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=688 graduates=520 community_impact=1067 orgs=288
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=166 community_impact=159 orgs=56
+  Transforming ID... applicants=1684 graduates=713 community_impact=14605 orgs=929
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-06-30 22:00:30 UTC]   Transformed PH: applicants=688 graduates=520
+[2026-06-30 22:00:30 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-06-30 22:00:30 UTC]   Transformed KR: applicants=200 graduates=166
+[2026-06-30 22:00:30 UTC]   Transformed ID: applicants=1684 graduates=713
+[2026-06-30 22:00:30 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 688  graduates= 520
+  KR          applicants= 200  graduates= 166
+  ID          applicants=1684  graduates= 713
+  backbone    applicants= 373  graduates= 214
+[2026-06-30 22:00:30 UTC]   dashboard_data.json written (1961.0 KB)
+[2026-06-30 22:00:30 UTC]   dashboard_data.json synced to portal/data/
+[2026-06-30 22:00:30 UTC] Pipeline complete in 28s
+
+============================================================
+  [DONE] Pipeline complete in 28s
+  data/dashboard_data.json ready for portal
+============================================================
+[Wed 07/01/2026  6:00:30.42] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.68 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://2533fea8.aktivasia-portal.pages.dev
+[Thu 07/02/2026  6:00:01.44] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-01 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4107 -> 4107 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2247 -> 2247 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-01 22:00:29 UTC]   Extracted Deals: 4107 records
+[2026-07-01 22:00:29 UTC]   Extracted Solutions: 120 records
+[2026-07-01 22:00:29 UTC]   Extracted Products: 4 records
+[2026-07-01 22:00:29 UTC]   Extracted Accounts: 2247 records
+[2026-07-01 22:00:29 UTC]   Extracted Forms: 24 records
+[2026-07-01 22:00:29 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=166 community_impact=159 orgs=56
+  Transforming ID... applicants=1670 graduates=699 community_impact=14605 orgs=928
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-01 22:00:29 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-01 22:00:29 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-01 22:00:29 UTC]   Transformed KR: applicants=200 graduates=166
+[2026-07-01 22:00:29 UTC]   Transformed ID: applicants=1670 graduates=699
+[2026-07-01 22:00:29 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 166
+  ID          applicants=1670  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-01 22:00:29 UTC]   dashboard_data.json written (1945.3 KB)
+[2026-07-01 22:00:29 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-01 22:00:29 UTC] Pipeline complete in 28s
+
+============================================================
+  [DONE] Pipeline complete in 28s
+  data/dashboard_data.json ready for portal
+============================================================
+[Thu 07/02/2026  6:00:29.96] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.63 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://9f6d809d.aktivasia-portal.pages.dev
+[Fri 07/03/2026  6:00:01.44] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-02 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4107 -> 4107 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2247 -> 2247 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-02 22:00:31 UTC]   Extracted Deals: 4107 records
+[2026-07-02 22:00:31 UTC]   Extracted Solutions: 120 records
+[2026-07-02 22:00:31 UTC]   Extracted Products: 4 records
+[2026-07-02 22:00:31 UTC]   Extracted Accounts: 2247 records
+[2026-07-02 22:00:31 UTC]   Extracted Forms: 24 records
+[2026-07-02 22:00:31 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=166 community_impact=159 orgs=56
+  Transforming ID... applicants=1670 graduates=699 community_impact=14605 orgs=928
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-02 22:00:31 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-02 22:00:31 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-02 22:00:31 UTC]   Transformed KR: applicants=200 graduates=166
+[2026-07-02 22:00:31 UTC]   Transformed ID: applicants=1670 graduates=699
+[2026-07-02 22:00:31 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 166
+  ID          applicants=1670  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-02 22:00:31 UTC]   dashboard_data.json written (1945.3 KB)
+[2026-07-02 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-02 22:00:31 UTC] Pipeline complete in 29s
+
+============================================================
+  [DONE] Pipeline complete in 29s
+  data/dashboard_data.json ready for portal
+============================================================
+[Fri 07/03/2026  6:00:31.51] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.55 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://8c6a8a38.aktivasia-portal.pages.dev
+[Sat 07/04/2026  6:00:01.39] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-03 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4107 -> 4107 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2247 -> 2247 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-03 22:00:31 UTC]   Extracted Deals: 4107 records
+[2026-07-03 22:00:31 UTC]   Extracted Solutions: 120 records
+[2026-07-03 22:00:31 UTC]   Extracted Products: 4 records
+[2026-07-03 22:00:31 UTC]   Extracted Accounts: 2247 records
+[2026-07-03 22:00:31 UTC]   Extracted Forms: 24 records
+[2026-07-03 22:00:31 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=166 community_impact=159 orgs=56
+  Transforming ID... applicants=1670 graduates=699 community_impact=14605 orgs=928
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-03 22:00:31 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-03 22:00:31 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-03 22:00:31 UTC]   Transformed KR: applicants=200 graduates=166
+[2026-07-03 22:00:31 UTC]   Transformed ID: applicants=1670 graduates=699
+[2026-07-03 22:00:31 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 166
+  ID          applicants=1670  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-03 22:00:31 UTC]   dashboard_data.json written (1945.3 KB)
+[2026-07-03 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-03 22:00:31 UTC] Pipeline complete in 30s
+
+============================================================
+  [DONE] Pipeline complete in 30s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sat 07/04/2026  6:00:31.92] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.41 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://925c73b3.aktivasia-portal.pages.dev
+[Sun 07/05/2026  6:00:01.40] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-04 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4107 -> 4107 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2247 -> 2247 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-04 22:00:31 UTC]   Extracted Deals: 4107 records
+[2026-07-04 22:00:31 UTC]   Extracted Solutions: 120 records
+[2026-07-04 22:00:31 UTC]   Extracted Products: 4 records
+[2026-07-04 22:00:31 UTC]   Extracted Accounts: 2247 records
+[2026-07-04 22:00:31 UTC]   Extracted Forms: 24 records
+[2026-07-04 22:00:31 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=166 community_impact=159 orgs=56
+  Transforming ID... applicants=1670 graduates=699 community_impact=14605 orgs=928
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-04 22:00:31 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-04 22:00:31 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-04 22:00:31 UTC]   Transformed KR: applicants=200 graduates=166
+[2026-07-04 22:00:31 UTC]   Transformed ID: applicants=1670 graduates=699
+[2026-07-04 22:00:31 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 166
+  ID          applicants=1670  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-04 22:00:31 UTC]   dashboard_data.json written (1945.3 KB)
+[2026-07-04 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-04 22:00:31 UTC] Pipeline complete in 29s
+
+============================================================
+  [DONE] Pipeline complete in 29s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sun 07/05/2026  6:00:31.59] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.21 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://6d7343a8.aktivasia-portal.pages.dev
+[Mon 07/06/2026  6:00:01.41] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-05 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4107 -> 4107 total
+  Fetching Solutions... 120 -> 120 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2247 -> 2247 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-05 22:00:30 UTC]   Extracted Deals: 4107 records
+[2026-07-05 22:00:30 UTC]   Extracted Solutions: 120 records
+[2026-07-05 22:00:30 UTC]   Extracted Products: 4 records
+[2026-07-05 22:00:30 UTC]   Extracted Accounts: 2247 records
+[2026-07-05 22:00:30 UTC]   Extracted Forms: 24 records
+[2026-07-05 22:00:30 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=166 community_impact=159 orgs=56
+  Transforming ID... applicants=1670 graduates=699 community_impact=14605 orgs=928
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-05 22:00:31 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-05 22:00:31 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-05 22:00:31 UTC]   Transformed KR: applicants=200 graduates=166
+[2026-07-05 22:00:31 UTC]   Transformed ID: applicants=1670 graduates=699
+[2026-07-05 22:00:31 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 166
+  ID          applicants=1670  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-05 22:00:31 UTC]   dashboard_data.json written (1945.3 KB)
+[2026-07-05 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-05 22:00:31 UTC] Pipeline complete in 29s
+
+============================================================
+  [DONE] Pipeline complete in 29s
+  data/dashboard_data.json ready for portal
+============================================================
+[Mon 07/06/2026  6:00:31.14] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.21 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://33e19d1d.aktivasia-portal.pages.dev
+[Tue 07/07/2026  6:00:01.44] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-06 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4107 -> 4107 total
+  Fetching Solutions... 121 -> 121 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2247 -> 2247 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-06 22:00:31 UTC]   Extracted Deals: 4107 records
+[2026-07-06 22:00:31 UTC]   Extracted Solutions: 121 records
+[2026-07-06 22:00:31 UTC]   Extracted Products: 4 records
+[2026-07-06 22:00:31 UTC]   Extracted Accounts: 2247 records
+[2026-07-06 22:00:31 UTC]   Extracted Forms: 24 records
+[2026-07-06 22:00:31 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=166 community_impact=159 orgs=56
+  Transforming ID... applicants=1670 graduates=699 community_impact=14605 orgs=928
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-06 22:00:31 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-06 22:00:31 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-06 22:00:31 UTC]   Transformed KR: applicants=200 graduates=166
+[2026-07-06 22:00:31 UTC]   Transformed ID: applicants=1670 graduates=699
+[2026-07-06 22:00:31 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 166
+  ID          applicants=1670  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-06 22:00:31 UTC]   dashboard_data.json written (1946.3 KB)
+[2026-07-06 22:00:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-06 22:00:31 UTC] Pipeline complete in 29s
+
+============================================================
+  [DONE] Pipeline complete in 29s
+  data/dashboard_data.json ready for portal
+============================================================
+[Tue 07/07/2026  6:00:31.51] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.61 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://b6c269ea.aktivasia-portal.pages.dev
+[Wed 07/08/2026  6:00:01.46] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-07 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4107 -> 4107 total
+  Fetching Solutions... 121 -> 121 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2249 -> 2249 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-07 22:00:27 UTC]   Extracted Deals: 4107 records
+[2026-07-07 22:00:27 UTC]   Extracted Solutions: 121 records
+[2026-07-07 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-07 22:00:27 UTC]   Extracted Accounts: 2249 records
+[2026-07-07 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-07 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=165 community_impact=159 orgs=57
+  Transforming ID... applicants=1670 graduates=699 community_impact=14605 orgs=928
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-07 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-07 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-07 22:00:27 UTC]   Transformed KR: applicants=200 graduates=165
+[2026-07-07 22:00:27 UTC]   Transformed ID: applicants=1670 graduates=699
+[2026-07-07 22:00:27 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 165
+  ID          applicants=1670  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-07 22:00:27 UTC]   dashboard_data.json written (1945.7 KB)
+[2026-07-07 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-07 22:00:27 UTC] Pipeline complete in 26s
+
+============================================================
+  [DONE] Pipeline complete in 26s
+  data/dashboard_data.json ready for portal
+============================================================
+[Wed 07/08/2026  6:00:28.02] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.63 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://c72f3094.aktivasia-portal.pages.dev
+[Thu 07/09/2026  6:00:01.50] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-08 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4106 -> 4106 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2250 -> 2250 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-08 22:00:27 UTC]   Extracted Deals: 4106 records
+[2026-07-08 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-07-08 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-08 22:00:27 UTC]   Extracted Accounts: 2250 records
+[2026-07-08 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-08 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=165 community_impact=159 orgs=57
+  Transforming ID... applicants=1670 graduates=699 community_impact=14605 orgs=928
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-08 22:00:28 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-08 22:00:28 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-08 22:00:28 UTC]   Transformed KR: applicants=200 graduates=165
+[2026-07-08 22:00:28 UTC]   Transformed ID: applicants=1670 graduates=699
+[2026-07-08 22:00:28 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 165
+  ID          applicants=1670  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-08 22:00:28 UTC]   dashboard_data.json written (1946.6 KB)
+[2026-07-08 22:00:28 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-08 22:00:28 UTC] Pipeline complete in 26s
+
+============================================================
+  [DONE] Pipeline complete in 26s
+  data/dashboard_data.json ready for portal
+============================================================
+[Thu 07/09/2026  6:00:28.24] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.39 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://c71cfc46.aktivasia-portal.pages.dev
+npm notice
+npm notice New minor version of npm available! 11.12.1 -> 11.18.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.18.0
+npm notice To update run: npm install -g npm@11.18.0
+npm notice
+[Fri 07/10/2026  6:00:01.51] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-09 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4106 -> 4106 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2250 -> 2250 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-09 22:00:27 UTC]   Extracted Deals: 4106 records
+[2026-07-09 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-07-09 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-09 22:00:27 UTC]   Extracted Accounts: 2250 records
+[2026-07-09 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-09 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=166 community_impact=159 orgs=57
+  Transforming ID... applicants=1670 graduates=699 community_impact=14605 orgs=928
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-09 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-09 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-09 22:00:27 UTC]   Transformed KR: applicants=200 graduates=166
+[2026-07-09 22:00:27 UTC]   Transformed ID: applicants=1670 graduates=699
+[2026-07-09 22:00:27 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 166
+  ID          applicants=1670  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-09 22:00:27 UTC]   dashboard_data.json written (1949.0 KB)
+[2026-07-09 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-09 22:00:27 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Fri 07/10/2026  6:00:27.42] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (3.26 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://a059342a.aktivasia-portal.pages.dev
+[Sat 07/11/2026  6:00:01.47] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-10 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4109 -> 4109 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2252 -> 2252 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-10 22:00:27 UTC]   Extracted Deals: 4109 records
+[2026-07-10 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-07-10 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-10 22:00:27 UTC]   Extracted Accounts: 2252 records
+[2026-07-10 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-10 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=173 community_impact=159 orgs=57
+  Transforming ID... applicants=1673 graduates=699 community_impact=14605 orgs=931
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-10 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-10 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-10 22:00:27 UTC]   Transformed KR: applicants=200 graduates=173
+[2026-07-10 22:00:27 UTC]   Transformed ID: applicants=1673 graduates=699
+[2026-07-10 22:00:27 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 173
+  ID          applicants=1673  graduates= 699
+  backbone    applicants= 373  graduates= 214
+[2026-07-10 22:00:27 UTC]   dashboard_data.json written (1967.6 KB)
+[2026-07-10 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-10 22:00:27 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sat 07/11/2026  6:00:27.42] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.19 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://c7109a77.aktivasia-portal.pages.dev
+[Mon 07/13/2026  6:00:01.42] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-12 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4111 -> 4111 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2253 -> 2253 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-12 22:00:27 UTC]   Extracted Deals: 4111 records
+[2026-07-12 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-07-12 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-12 22:00:27 UTC]   Extracted Accounts: 2253 records
+[2026-07-12 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-12 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1675 graduates=698 community_impact=14605 orgs=932
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-12 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-12 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-12 22:00:27 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-12 22:00:27 UTC]   Transformed ID: applicants=1675 graduates=698
+[2026-07-12 22:00:27 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1675  graduates= 698
+  backbone    applicants= 373  graduates= 214
+[2026-07-12 22:00:27 UTC]   dashboard_data.json written (1972.5 KB)
+[2026-07-12 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-12 22:00:27 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Mon 07/13/2026  6:00:27.61] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.99 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://3643c587.aktivasia-portal.pages.dev
+[Tue 07/14/2026  6:00:01.47] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-13 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4113 -> 4113 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2255 -> 2255 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-13 22:00:28 UTC]   Extracted Deals: 4113 records
+[2026-07-13 22:00:28 UTC]   Extracted Solutions: 122 records
+[2026-07-13 22:00:28 UTC]   Extracted Products: 4 records
+[2026-07-13 22:00:28 UTC]   Extracted Accounts: 2255 records
+[2026-07-13 22:00:28 UTC]   Extracted Forms: 24 records
+[2026-07-13 22:00:28 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1677 graduates=698 community_impact=14605 orgs=934
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-13 22:00:28 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-13 22:00:28 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-13 22:00:28 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-13 22:00:28 UTC]   Transformed ID: applicants=1677 graduates=698
+[2026-07-13 22:00:28 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1677  graduates= 698
+  backbone    applicants= 373  graduates= 214
+[2026-07-13 22:00:28 UTC]   dashboard_data.json written (1973.4 KB)
+[2026-07-13 22:00:28 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-13 22:00:28 UTC] Pipeline complete in 26s
+
+============================================================
+  [DONE] Pipeline complete in 26s
+  data/dashboard_data.json ready for portal
+============================================================
+[Tue 07/14/2026  6:00:28.61] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (2.58 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://d03cad50.aktivasia-portal.pages.dev
+[Wed 07/15/2026  6:00:01.46] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-14 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4117 -> 4117 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2259 -> 2259 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-14 22:00:27 UTC]   Extracted Deals: 4117 records
+[2026-07-14 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-07-14 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-14 22:00:27 UTC]   Extracted Accounts: 2259 records
+[2026-07-14 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-14 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1681 graduates=698 community_impact=14605 orgs=938
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-14 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-14 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-14 22:00:27 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-14 22:00:27 UTC]   Transformed ID: applicants=1681 graduates=698
+[2026-07-14 22:00:27 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1681  graduates= 698
+  backbone    applicants= 373  graduates= 214
+[2026-07-14 22:00:27 UTC]   dashboard_data.json written (1974.7 KB)
+[2026-07-14 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-14 22:00:27 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Wed 07/15/2026  6:00:27.81] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (38/39)
+Uploading... (39/39)
+✨ Success! Uploaded 1 files (38 already uploaded) (3.78 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://00ba491c.aktivasia-portal.pages.dev
+[Sat 07/18/2026  6:00:02.41] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-17 22:00:03 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4122 -> 4122 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2261 -> 2261 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-17 22:00:32 UTC]   Extracted Deals: 4122 records
+[2026-07-17 22:00:32 UTC]   Extracted Solutions: 122 records
+[2026-07-17 22:00:32 UTC]   Extracted Products: 4 records
+[2026-07-17 22:00:32 UTC]   Extracted Accounts: 2261 records
+[2026-07-17 22:00:32 UTC]   Extracted Forms: 24 records
+[2026-07-17 22:00:32 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1686 graduates=698 community_impact=14605 orgs=940
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-17 22:00:32 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-17 22:00:32 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-17 22:00:32 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-17 22:00:32 UTC]   Transformed ID: applicants=1686 graduates=698
+[2026-07-17 22:00:32 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1686  graduates= 698
+  backbone    applicants= 373  graduates= 214
+[2026-07-17 22:00:32 UTC]   dashboard_data.json written (1975.4 KB)
+[2026-07-17 22:00:32 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-17 22:00:32 UTC] Pipeline complete in 28s
+
+============================================================
+  [DONE] Pipeline complete in 28s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sat 07/18/2026  6:00:32.35] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mFailed to fetch auth token: 400 Bad Request[0m
+
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mIn a non-interactive environment, it's necessary to set a CLOUDFLARE_API_TOKEN environment variable for wrangler to work. Please go to https://developers.cloudflare.com/fundamentals/api/get-started/create-token/ for instructions on how to create an api token, and assign its value to CLOUDFLARE_API_TOKEN.[0m
+
+
+🪵  Logs were written to "C:\Users\Rimuru\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-07-17_22-00-35_028.log"
+npm notice
+npm notice New minor version of npm available! 11.12.1 -> 11.18.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.18.0
+npm notice To update run: npm install -g npm@11.18.0
+npm notice
+[Sun 07/19/2026  6:00:02.33] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-18 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4124 -> 4124 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2261 -> 2261 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-18 22:00:28 UTC]   Extracted Deals: 4124 records
+[2026-07-18 22:00:28 UTC]   Extracted Solutions: 122 records
+[2026-07-18 22:00:28 UTC]   Extracted Products: 4 records
+[2026-07-18 22:00:28 UTC]   Extracted Accounts: 2261 records
+[2026-07-18 22:00:28 UTC]   Extracted Forms: 24 records
+[2026-07-18 22:00:28 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1688 graduates=711 community_impact=14605 orgs=940
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-18 22:00:28 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-18 22:00:28 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-18 22:00:28 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-18 22:00:28 UTC]   Transformed ID: applicants=1688 graduates=711
+[2026-07-18 22:00:28 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1688  graduates= 711
+  backbone    applicants= 373  graduates= 214
+[2026-07-18 22:00:28 UTC]   dashboard_data.json written (1986.8 KB)
+[2026-07-18 22:00:28 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-18 22:00:28 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sun 07/19/2026  6:00:28.38] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mFailed to fetch auth token: 400 Bad Request[0m
+
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mIn a non-interactive environment, it's necessary to set a CLOUDFLARE_API_TOKEN environment variable for wrangler to work. Please go to https://developers.cloudflare.com/fundamentals/api/get-started/create-token/ for instructions on how to create an api token, and assign its value to CLOUDFLARE_API_TOKEN.[0m
+
+
+🪵  Logs were written to "C:\Users\Rimuru\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-07-18_22-00-29_185.log"
+[Mon 07/20/2026  6:00:01.34] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-19 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4124 -> 4124 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2261 -> 2261 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-19 22:00:30 UTC]   Extracted Deals: 4124 records
+[2026-07-19 22:00:30 UTC]   Extracted Solutions: 122 records
+[2026-07-19 22:00:30 UTC]   Extracted Products: 4 records
+[2026-07-19 22:00:30 UTC]   Extracted Accounts: 2261 records
+[2026-07-19 22:00:30 UTC]   Extracted Forms: 24 records
+[2026-07-19 22:00:30 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1688 graduates=711 community_impact=14605 orgs=940
+  Transforming backbone... applicants=373 graduates=214 community_impact=1047 orgs=217
+[2026-07-19 22:00:30 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-19 22:00:30 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-19 22:00:30 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-19 22:00:30 UTC]   Transformed ID: applicants=1688 graduates=711
+[2026-07-19 22:00:30 UTC]   Transformed backbone: applicants=373 graduates=214
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1688  graduates= 711
+  backbone    applicants= 373  graduates= 214
+[2026-07-19 22:00:30 UTC]   dashboard_data.json written (1986.8 KB)
+[2026-07-19 22:00:30 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-19 22:00:30 UTC] Pipeline complete in 28s
+
+============================================================
+  [DONE] Pipeline complete in 28s
+  data/dashboard_data.json ready for portal
+============================================================
+[Mon 07/20/2026  6:00:30.70] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mFailed to fetch auth token: 400 Bad Request[0m
+
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mIn a non-interactive environment, it's necessary to set a CLOUDFLARE_API_TOKEN environment variable for wrangler to work. Please go to https://developers.cloudflare.com/fundamentals/api/get-started/create-token/ for instructions on how to create an api token, and assign its value to CLOUDFLARE_API_TOKEN.[0m
+
+
+🪵  Logs were written to "C:\Users\Rimuru\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-07-19_22-00-31_485.log"
+[Tue 07/21/2026  6:00:01.36] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-20 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4147 -> 4147 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2283 -> 2283 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-20 22:00:28 UTC]   Extracted Deals: 4147 records
+[2026-07-20 22:00:28 UTC]   Extracted Solutions: 122 records
+[2026-07-20 22:00:28 UTC]   Extracted Products: 4 records
+[2026-07-20 22:00:28 UTC]   Extracted Accounts: 2283 records
+[2026-07-20 22:00:28 UTC]   Extracted Forms: 24 records
+[2026-07-20 22:00:28 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1711 graduates=711 community_impact=14605 orgs=962
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-07-20 22:00:28 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-20 22:00:28 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-20 22:00:28 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-20 22:00:28 UTC]   Transformed ID: applicants=1711 graduates=711
+[2026-07-20 22:00:28 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1711  graduates= 711
+  backbone    applicants= 372  graduates= 213
+[2026-07-20 22:00:28 UTC]   dashboard_data.json written (1994.8 KB)
+[2026-07-20 22:00:28 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-20 22:00:28 UTC] Pipeline complete in 26s
+
+============================================================
+  [DONE] Pipeline complete in 26s
+  data/dashboard_data.json ready for portal
+============================================================
+[Tue 07/21/2026  6:00:28.33] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mFailed to fetch auth token: 400 Bad Request[0m
+
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mIn a non-interactive environment, it's necessary to set a CLOUDFLARE_API_TOKEN environment variable for wrangler to work. Please go to https://developers.cloudflare.com/fundamentals/api/get-started/create-token/ for instructions on how to create an api token, and assign its value to CLOUDFLARE_API_TOKEN.[0m
+
+
+🪵  Logs were written to "C:\Users\Rimuru\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-07-20_22-00-29_096.log"
+[Wed 07/22/2026  6:00:01.96] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-21 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4151 -> 4151 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-21 22:00:27 UTC]   Extracted Deals: 4151 records
+[2026-07-21 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-07-21 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-21 22:00:27 UTC]   Extracted Accounts: 2286 records
+[2026-07-21 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-21 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1715 graduates=711 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-07-21 22:00:28 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-21 22:00:28 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-21 22:00:28 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-21 22:00:28 UTC]   Transformed ID: applicants=1715 graduates=711
+[2026-07-21 22:00:28 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1715  graduates= 711
+  backbone    applicants= 372  graduates= 213
+[2026-07-21 22:00:28 UTC]   dashboard_data.json written (1996.2 KB)
+[2026-07-21 22:00:28 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-21 22:00:28 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Wed 07/22/2026  6:00:28.18] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (3.98 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://bffdc613.aktivasia-portal.pages.dev
+[Thu 07/23/2026  6:00:01.98] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-22 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4151 -> 4151 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-22 22:00:27 UTC]   Extracted Deals: 4151 records
+[2026-07-22 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-07-22 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-22 22:00:27 UTC]   Extracted Accounts: 2286 records
+[2026-07-22 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-22 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1715 graduates=711 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-07-22 22:00:28 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-22 22:00:28 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-22 22:00:28 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-22 22:00:28 UTC]   Transformed ID: applicants=1715 graduates=711
+[2026-07-22 22:00:28 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1715  graduates= 711
+  backbone    applicants= 372  graduates= 213
+[2026-07-22 22:00:28 UTC]   dashboard_data.json written (1996.2 KB)
+[2026-07-22 22:00:28 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-22 22:00:28 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Thu 07/23/2026  6:00:28.27] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (3.34 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://95d1bd60.aktivasia-portal.pages.dev
+[Fri 07/24/2026  6:00:01.99] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-23 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4151 -> 4151 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-23 22:00:33 UTC]   Extracted Deals: 4151 records
+[2026-07-23 22:00:33 UTC]   Extracted Solutions: 122 records
+[2026-07-23 22:00:33 UTC]   Extracted Products: 4 records
+[2026-07-23 22:00:33 UTC]   Extracted Accounts: 2286 records
+[2026-07-23 22:00:33 UTC]   Extracted Forms: 24 records
+[2026-07-23 22:00:33 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1715 graduates=711 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-07-23 22:00:33 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-23 22:00:33 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-23 22:00:33 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-23 22:00:33 UTC]   Transformed ID: applicants=1715 graduates=711
+[2026-07-23 22:00:33 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1715  graduates= 711
+  backbone    applicants= 372  graduates= 213
+[2026-07-23 22:00:33 UTC]   dashboard_data.json written (1996.2 KB)
+[2026-07-23 22:00:33 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-23 22:00:33 UTC] Pipeline complete in 31s
+
+============================================================
+  [DONE] Pipeline complete in 31s
+  data/dashboard_data.json ready for portal
+============================================================
+[Fri 07/24/2026  6:00:33.58] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (2.47 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://28dd9186.aktivasia-portal.pages.dev
+[Mon 07/27/2026  6:00:01.37] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-26 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-26 22:00:26 UTC]   Extracted Deals: 4153 records
+[2026-07-26 22:00:26 UTC]   Extracted Solutions: 122 records
+[2026-07-26 22:00:26 UTC]   Extracted Products: 4 records
+[2026-07-26 22:00:26 UTC]   Extracted Accounts: 2286 records
+[2026-07-26 22:00:26 UTC]   Extracted Forms: 24 records
+[2026-07-26 22:00:26 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-07-26 22:00:26 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-26 22:00:26 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-26 22:00:26 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-26 22:00:26 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-07-26 22:00:26 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-07-26 22:00:26 UTC]   dashboard_data.json written (2023.6 KB)
+[2026-07-26 22:00:26 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-26 22:00:26 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Mon 07/27/2026  6:00:26.92] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (3.68 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://41795e1c.aktivasia-portal.pages.dev
+npm notice
+npm notice New minor version of npm available! 11.12.1 -> 11.18.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.18.0
+npm notice To update run: npm install -g npm@11.18.0
+npm notice
+[Tue 07/28/2026  6:00:01.19] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-27 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200^C[Wed 07/29/2026  6:00:01.19] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-28 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-28 22:00:27 UTC]   Extracted Deals: 4153 records
+[2026-07-28 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-07-28 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-28 22:00:27 UTC]   Extracted Accounts: 2286 records
+[2026-07-28 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-28 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-07-28 22:00:28 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-28 22:00:28 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-28 22:00:28 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-28 22:00:28 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-07-28 22:00:28 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-07-28 22:00:28 UTC]   dashboard_data.json written (2023.6 KB)
+[2026-07-28 22:00:28 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-28 22:00:28 UTC] Pipeline complete in 26s
+
+============================================================
+  [DONE] Pipeline complete in 26s
+  data/dashboard_data.json ready for portal
+============================================================
+[Wed 07/29/2026  6:00:28.20] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (41/43)
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 2 files (41 already uploaded) (3.54 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://ee4f66ee.aktivasia-portal.pages.dev
+[Thu 07/30/2026  6:00:01.40] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-29 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals...[2026-07-29 22:00:22 UTC]   [FAIL] Extract failed: HTTPSConnectionPool(host='accounts.zoho.in', port=443): Max retries exceeded with url: /oauth/v2/token?refresh_token=1000.c32dfe71dcaaf591e6b6906053d6c554.e02ee4e0376977177821164392d5ae9d&client_id=1000.W4UPK12SWF551HS4XKSVH83FF76MRK&client_secret=d1e3416bae330241da73c726c2ed67cbb4bfad3c6c&grant_type=refresh_token (Caused by ConnectTimeoutError(<HTTPSConnection(host='accounts.zoho.in', port=443) at 0x1da6ba65940>, 'Connection to accounts.zoho.in timed out. (connect timeout=None)'))
+[Thu 07/30/2026  6:00:22.92] Pipeline FAILED with error 1, aborting deploy. 
+[Fri 07/31/2026  6:00:01.41] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-30 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-30 22:00:27 UTC]   Extracted Deals: 4153 records
+[2026-07-30 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-07-30 22:00:27 UTC]   Extracted Products: 4 records
+[2026-07-30 22:00:27 UTC]   Extracted Accounts: 2286 records
+[2026-07-30 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-07-30 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-07-30 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-30 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-30 22:00:27 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-30 22:00:27 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-07-30 22:00:27 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-07-30 22:00:27 UTC]   dashboard_data.json written (2023.6 KB)
+[2026-07-30 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-30 22:00:27 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Fri 07/31/2026  6:00:27.68] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (2.92 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://e050b7ed.aktivasia-portal.pages.dev
+[Sat 08/01/2026  6:00:01.40] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-07-31 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-07-31 22:00:26 UTC]   Extracted Deals: 4153 records
+[2026-07-31 22:00:26 UTC]   Extracted Solutions: 122 records
+[2026-07-31 22:00:26 UTC]   Extracted Products: 4 records
+[2026-07-31 22:00:26 UTC]   Extracted Accounts: 2286 records
+[2026-07-31 22:00:26 UTC]   Extracted Forms: 24 records
+[2026-07-31 22:00:26 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-07-31 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-07-31 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-07-31 22:00:27 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-07-31 22:00:27 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-07-31 22:00:27 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-07-31 22:00:27 UTC]   dashboard_data.json written (2023.6 KB)
+[2026-07-31 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-07-31 22:00:27 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sat 08/01/2026  6:00:27.18] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (2.35 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://5c0deb26.aktivasia-portal.pages.dev
+[Sun 08/02/2026  6:00:01.40] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-08-01 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-08-01 22:00:27 UTC]   Extracted Deals: 4153 records
+[2026-08-01 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-08-01 22:00:27 UTC]   Extracted Products: 4 records
+[2026-08-01 22:00:27 UTC]   Extracted Accounts: 2286 records
+[2026-08-01 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-08-01 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-08-01 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-08-01 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-08-01 22:00:27 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-08-01 22:00:27 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-08-01 22:00:27 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-08-01 22:00:27 UTC]   dashboard_data.json written (2023.6 KB)
+[2026-08-01 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-08-01 22:00:27 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sun 08/02/2026  6:00:27.67] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (3.26 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://0f544145.aktivasia-portal.pages.dev
+[Mon 08/03/2026  6:00:01.42] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-08-02 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-08-02 22:00:27 UTC]   Extracted Deals: 4153 records
+[2026-08-02 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-08-02 22:00:27 UTC]   Extracted Products: 4 records
+[2026-08-02 22:00:27 UTC]   Extracted Accounts: 2286 records
+[2026-08-02 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-08-02 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-08-02 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-08-02 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-08-02 22:00:27 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-08-02 22:00:27 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-08-02 22:00:27 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-08-02 22:00:27 UTC]   dashboard_data.json written (2023.6 KB)
+[2026-08-02 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-08-02 22:00:27 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Mon 08/03/2026  6:00:27.60] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (2.35 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://942aaea8.aktivasia-portal.pages.dev
+[Tue 08/04/2026  6:00:01.24] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-08-03 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 122 -> 122 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-08-03 22:00:27 UTC]   Extracted Deals: 4153 records
+[2026-08-03 22:00:27 UTC]   Extracted Solutions: 122 records
+[2026-08-03 22:00:27 UTC]   Extracted Products: 4 records
+[2026-08-03 22:00:27 UTC]   Extracted Accounts: 2286 records
+[2026-08-03 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-08-03 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-08-03 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-08-03 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-08-03 22:00:27 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-08-03 22:00:27 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-08-03 22:00:27 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-08-03 22:00:27 UTC]   dashboard_data.json written (2023.6 KB)
+[2026-08-03 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-08-03 22:00:27 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Tue 08/04/2026  6:00:27.50] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0 (update available 4.118.0)
+──────────────────────────────────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (5.59 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://1d2edaee.aktivasia-portal.pages.dev
+[Wed 08/05/2026  6:00:01.27] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-08-04 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals...[2026-08-04 22:00:22 UTC]   [FAIL] Extract failed: HTTPSConnectionPool(host='accounts.zoho.in', port=443): Max retries exceeded with url: /oauth/v2/token?refresh_token=1000.c32dfe71dcaaf591e6b6906053d6c554.e02ee4e0376977177821164392d5ae9d&client_id=1000.W4UPK12SWF551HS4XKSVH83FF76MRK&client_secret=d1e3416bae330241da73c726c2ed67cbb4bfad3c6c&grant_type=refresh_token (Caused by ConnectTimeoutError(<HTTPSConnection(host='accounts.zoho.in', port=443) at 0x1445ea75940>, 'Connection to accounts.zoho.in timed out. (connect timeout=None)'))
+[Wed 08/05/2026  6:00:22.72] Pipeline FAILED with error 1, aborting deploy. 
+[Thu 08/06/2026  6:00:01.28] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-08-05 22:00:01 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 124 -> 124 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-08-05 22:00:26 UTC]   Extracted Deals: 4153 records
+[2026-08-05 22:00:26 UTC]   Extracted Solutions: 124 records
+[2026-08-05 22:00:26 UTC]   Extracted Products: 4 records
+[2026-08-05 22:00:26 UTC]   Extracted Accounts: 2286 records
+[2026-08-05 22:00:26 UTC]   Extracted Forms: 24 records
+[2026-08-05 22:00:26 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-08-05 22:00:26 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-08-05 22:00:26 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-08-05 22:00:26 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-08-05 22:00:26 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-08-05 22:00:26 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-08-05 22:00:26 UTC]   dashboard_data.json written (2025.7 KB)
+[2026-08-05 22:00:26 UTC]   dashboard_data.json synced to portal/data/
+[2026-08-05 22:00:26 UTC] Pipeline complete in 25s
+
+============================================================
+  [DONE] Pipeline complete in 25s
+  data/dashboard_data.json ready for portal
+============================================================
+[Thu 08/06/2026  6:00:27.02] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (2.53 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://0617c56a.aktivasia-portal.pages.dev
+[Fri 08/07/2026  6:00:01.75] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-08-06 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 124 -> 124 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-08-06 22:00:28 UTC]   Extracted Deals: 4153 records
+[2026-08-06 22:00:28 UTC]   Extracted Solutions: 124 records
+[2026-08-06 22:00:28 UTC]   Extracted Products: 4 records
+[2026-08-06 22:00:28 UTC]   Extracted Accounts: 2286 records
+[2026-08-06 22:00:28 UTC]   Extracted Forms: 24 records
+[2026-08-06 22:00:28 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-08-06 22:00:28 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-08-06 22:00:28 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-08-06 22:00:28 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-08-06 22:00:28 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-08-06 22:00:28 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-08-06 22:00:28 UTC]   dashboard_data.json written (2025.7 KB)
+[2026-08-06 22:00:28 UTC]   dashboard_data.json synced to portal/data/
+[2026-08-06 22:00:28 UTC] Pipeline complete in 26s
+
+============================================================
+  [DONE] Pipeline complete in 26s
+  data/dashboard_data.json ready for portal
+============================================================
+[Fri 08/07/2026  6:00:28.39] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (2.81 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://ed70d3dd.aktivasia-portal.pages.dev
+[Sat 08/08/2026  6:00:01.72] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-08-07 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 124 -> 124 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-08-07 22:00:28 UTC]   Extracted Deals: 4153 records
+[2026-08-07 22:00:28 UTC]   Extracted Solutions: 124 records
+[2026-08-07 22:00:28 UTC]   Extracted Products: 4 records
+[2026-08-07 22:00:28 UTC]   Extracted Accounts: 2286 records
+[2026-08-07 22:00:28 UTC]   Extracted Forms: 24 records
+[2026-08-07 22:00:28 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-08-07 22:00:29 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-08-07 22:00:29 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-08-07 22:00:29 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-08-07 22:00:29 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-08-07 22:00:29 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-08-07 22:00:29 UTC]   dashboard_data.json written (2025.7 KB)
+[2026-08-07 22:00:29 UTC]   dashboard_data.json synced to portal/data/
+[2026-08-07 22:00:29 UTC] Pipeline complete in 27s
+
+============================================================
+  [DONE] Pipeline complete in 27s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sat 08/08/2026  6:00:29.20] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (4.19 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://4986603d.aktivasia-portal.pages.dev
+[Sun 08/09/2026  6:00:01.76] Running pipeline... 
+============================================================
+  aa-ecosystem - Pipeline Run
+  Portal: ALL  |  Skip extract: False
+============================================================
+[2026-08-08 22:00:02 UTC] Pipeline started. portal=ALL skip_extract=False
+
+-- Step 1: Extract --
+  Fetching Deals... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2400 2600 2800 3000 3200 3400 3600 3800 4000 4153 -> 4153 total
+  Fetching Solutions... 124 -> 124 total
+  Fetching Products... 4 -> 4 total
+  Fetching Accounts... 200 400 600 800 1000 1200 1400 1600 1800 2000 2200 2286 -> 2286 total
+  Fetching Forms... 24 -> 24 total
+  Fetching Training_Plans... 167 -> 167 total
+[2026-08-08 22:00:27 UTC]   Extracted Deals: 4153 records
+[2026-08-08 22:00:27 UTC]   Extracted Solutions: 124 records
+[2026-08-08 22:00:27 UTC]   Extracted Products: 4 records
+[2026-08-08 22:00:27 UTC]   Extracted Accounts: 2286 records
+[2026-08-08 22:00:27 UTC]   Extracted Forms: 24 records
+[2026-08-08 22:00:27 UTC]   Extracted Training_Plans: 167 records
+
+-- Step 2: Transform --
+  Transforming PH... applicants=748 graduates=586 community_impact=1067 orgs=299
+  Transforming PK... applicants=1097 graduates=281 community_impact=114 orgs=302
+  Transforming KR... applicants=200 graduates=176 community_impact=159 orgs=57
+  Transforming ID... applicants=1717 graduates=737 community_impact=14605 orgs=965
+  Transforming backbone... applicants=372 graduates=213 community_impact=1047 orgs=217
+[2026-08-08 22:00:27 UTC]   Transformed PH: applicants=748 graduates=586
+[2026-08-08 22:00:27 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-08-08 22:00:27 UTC]   Transformed KR: applicants=200 graduates=176
+[2026-08-08 22:00:27 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-08-08 22:00:27 UTC]   Transformed backbone: applicants=372 graduates=213
+
+-- Step 3: Write --
+  PK          applicants=1097  graduates= 281
+  PH          applicants= 748  graduates= 586
+  KR          applicants= 200  graduates= 176
+  ID          applicants=1717  graduates= 737
+  backbone    applicants= 372  graduates= 213
+[2026-08-08 22:00:27 UTC]   dashboard_data.json written (2025.7 KB)
+[2026-08-08 22:00:27 UTC]   dashboard_data.json synced to portal/data/
+[2026-08-08 22:00:27 UTC] Pipeline complete in 24s
+
+============================================================
+  [DONE] Pipeline complete in 24s
+  data/dashboard_data.json ready for portal
+============================================================
+[Sun 08/09/2026  6:00:27.42] Pipeline complete. Deploying portal... 
+
+ ⛅️ wrangler 4.85.0
+───────────────────
+Uploading... (42/43)
+Uploading... (43/43)
+✨ Success! Uploaded 1 files (42 already uploaded) (2.26 sec)
+
+✨ Uploading _headers
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://e93e34b5.aktivasia-portal.pages.dev

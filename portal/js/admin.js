@@ -27,7 +27,8 @@ function switchTab(view) {
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function dealName(d) {
-  return `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim();
+  const fromParts = `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim();
+  return fromParts || (d.Deal_Name ?? "");
 }
 
 function dealOrg(d) {
