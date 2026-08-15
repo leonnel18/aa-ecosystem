@@ -41,7 +41,11 @@ TOKEN_CACHE = os.path.join(os.path.dirname(__file__), "..", "data", "token_crm.j
 
 def _refresh():
     """Exchange refresh token for a new access token and cache it."""
-    resp = requests.post(ACCOUNTS_URL, params={
+    # NB: credentials go in the POST body (data=), never as URL query
+    # params (params=) — query params can end up logged in full by
+    # connection-level DEBUG logging (e.g. urllib3), while a request body
+    # is not logged that way.
+    resp = requests.post(ACCOUNTS_URL, data={
         "refresh_token": REFRESH_TOKEN,
         "client_id":     CLIENT_ID,
         "client_secret": CLIENT_SECRET,

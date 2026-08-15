@@ -1,0 +1,15 @@
+{
+	"deployment": {
+		"name": "crm-proxy",
+		"stack": "node18",
+		"type": "advancedio",
+		"env_variables": {
+			"ZOHO_CLIENT_ID": "",
+			"ZOHO_CLIENT_SECRET": "",
+			"ZOHO_REFRESH_TOKEN": ""
+		}
+	},
+	"execution": {
+		"main": "index.js"
+	}
+}

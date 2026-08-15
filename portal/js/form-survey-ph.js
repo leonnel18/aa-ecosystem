@@ -5,7 +5,7 @@
 
 "use strict";
 
-const PROXY_BASE = "https://crm-proxy.gideon-valera.workers.dev";
+const PROXY_BASE = "https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy";
 
 // Post-training confidence ratings per training type (1-7 scale)
 const POST_RATINGS_CONFIG = {

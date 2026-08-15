@@ -18,6 +18,7 @@ import json
 import argparse
 from datetime import date, datetime, timedelta
 from collections import defaultdict
+from typing import Optional
 
 TMP_DIR = os.path.join(os.path.dirname(__file__), "..", ".tmp")
 
@@ -110,7 +111,7 @@ def _load(module: str) -> list:
         return json.load(f)
 
 
-def _parse_likert(value) -> int | None:
+def _parse_likert(value) -> Optional[int]:
     """Extract leading integer from Zoho picklist value e.g. '4 - Agree' → 4."""
     if not value:
         return None
@@ -118,19 +119,19 @@ def _parse_likert(value) -> int | None:
     return int(m.group(1)) if m else None
 
 
-def _avg(values: list) -> float | None:
+def _avg(values: list) -> Optional[float]:
     nums = [v for v in values if v is not None]
     return round(sum(nums) / len(nums), 2) if nums else None
 
 
-def _lookup_id(field_value) -> str | None:
+def _lookup_id(field_value) -> Optional[str]:
     """Extract id from a Zoho lookup field value (dict with 'id' key)."""
     if isinstance(field_value, dict):
         return field_value.get("id")
     return None
 
 
-def _year_from_date(date_str: str | None) -> int | None:
+def _year_from_date(date_str: Optional[str]) -> Optional[int]:
     if not date_str:
         return None
     try:
@@ -139,7 +140,7 @@ def _year_from_date(date_str: str | None) -> int | None:
         return None
 
 
-def _age_group(dob_str: str | None) -> str:
+def _age_group(dob_str: Optional[str]) -> str:
     if not dob_str:
         return "Unknown"
     try:
@@ -729,7 +730,7 @@ def build_report_4(deals: list, solutions_by_id: dict, portal: str) -> dict:
     }
 
 
-def _deal_portal(deal: dict, solutions_by_id: dict) -> str | None:
+def _deal_portal(deal: dict, solutions_by_id: dict) -> Optional[str]:
     """Resolve which portal a Deal belongs to via Training_Applied → Solutions.Organised_By."""
     sol_id = _lookup_id(deal.get("Training_Applied"))
     if not sol_id:

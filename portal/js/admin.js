@@ -1,6 +1,6 @@
 "use strict";
 
-const PROXY_BASE  = "https://crm-proxy.gideon-valera.workers.dev";
+const PROXY_BASE  = "https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy";
 const PORTAL_BASE = "https://aktivasia-portal.pages.dev";
 
 const params      = new URLSearchParams(window.location.search);

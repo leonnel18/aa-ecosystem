@@ -1,0 +1,22 @@
+{
+	"deployment": {
+		"name": "monitor-job",
+		"stack": "python_3_9",
+		"type": "cron",
+		"env_variables": {
+			"ZOHO_CRM_CLIENT_ID": "",
+			"ZOHO_CRM_CLIENT_SECRET": "",
+			"ZOHO_CRM_REFRESH_TOKEN": "",
+			"ZOHO_CRM_REDIRECT_URI": "",
+			"ZOHO_CRM_REGION": "",
+			"GMAIL_CLIENT_ID": "",
+			"GMAIL_CLIENT_SECRET": "",
+			"GMAIL_REFRESH_TOKEN": "",
+			"GMAIL_SENDER": "",
+			"MONITOR_RECIPIENT": ""
+		}
+	},
+	"execution": {
+		"main": "main.py"
+	}
+}

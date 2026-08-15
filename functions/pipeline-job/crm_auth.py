@@ -7,11 +7,20 @@ Caches tokens in data/token_crm.json; refreshes only when expired.
 
 import os
 import json
+import logging
 import requests
 from datetime import datetime, timezone
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# The Catalyst Python cron runtime defaults the root logger to DEBUG, which
+# makes urllib3 log full request URLs (including query params). Never send
+# secrets as query params (see _refresh() below, which uses a POST body
+# instead) — this logger level is a second, defense-in-depth guard so a
+# future request naively built with params= doesn't leak credentials again.
+logging.getLogger("urllib3").setLevel(logging.WARNING)
+logging.getLogger("requests").setLevel(logging.WARNING)
 
 CLIENT_ID     = os.getenv("ZOHO_CRM_CLIENT_ID")
 CLIENT_SECRET = os.getenv("ZOHO_CRM_CLIENT_SECRET")
@@ -41,7 +50,11 @@ TOKEN_CACHE = os.path.join(os.path.dirname(__file__), "..", "data", "token_crm.j
 
 def _refresh():
     """Exchange refresh token for a new access token and cache it."""
-    resp = requests.post(ACCOUNTS_URL, params={
+    # NB: credentials go in the POST body (data=), never as URL query
+    # params (params=) — query params can end up logged in full by
+    # connection-level DEBUG logging (e.g. urllib3), while a request body
+    # is not logged that way.
+    resp = requests.post(ACCOUNTS_URL, data={
         "refresh_token": REFRESH_TOKEN,
         "client_id":     CLIENT_ID,
         "client_secret": CLIENT_SECRET,

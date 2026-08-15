@@ -2,7 +2,7 @@
  * app.js — AktivAsia Team Portal
  */
 
-const DATA_URL = '../data/dashboard_data.json';
+const DATA_URL = 'https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy/dashboard-data';
 
 const FLAG_URLS = {
   PH: 'https://flagcdn.com/w80/ph.png',
@@ -1356,7 +1356,7 @@ if (document.readyState === 'loading') {
 
 // ── Edit modal — constants ─────────────────────────────────────────────────
 
-const EDIT_PROXY = 'https://crm-proxy.gideon-valera.workers.dev';
+const EDIT_PROXY = 'https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy';
 
 const EDIT_FIELDS = [
   'Solution_Title','Training_Title_Plan','Training_Type','Organised_By','Format',

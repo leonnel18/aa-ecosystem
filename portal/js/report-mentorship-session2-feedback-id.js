@@ -1,4 +1,4 @@
-const PROXY_BASE       = "https://crm-proxy.gideon-valera.workers.dev";
+const PROXY_BASE       = "https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy";
 const GELP_TRAINING_ID = "773031000008276089";
 const TRUNCATE_LEN     = 100;
 

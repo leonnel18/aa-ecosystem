@@ -1,13 +1,15 @@
 """
-orchestrator.py — Full pipeline runner
+orchestrator.py — Full pipeline runner (Catalyst cron function copy)
 
 Runs: crm_extract → transform → data_writer in sequence.
-Logs each step with timestamps to progress.md.
+Logs each step with timestamps via print() — Catalyst captures function
+stdout/stderr in its own function logs, so there is no progress.md here
+(that file only exists in the original repo copy under tools/).
 
 Usage:
-  python tools/orchestrator.py                    # full run, all portals
-  python tools/orchestrator.py --portal PH        # single portal (skips extract, reuses .tmp/)
-  python tools/orchestrator.py --skip-extract     # reuse existing .tmp/ raw files
+  python orchestrator.py                    # full run, all portals
+  python orchestrator.py --portal PH        # single portal (skips extract, reuses .tmp/)
+  python orchestrator.py --skip-extract     # reuse existing .tmp/ raw files
 """
 
 import os
@@ -16,9 +18,7 @@ import json
 import argparse
 from datetime import datetime, timezone
 
-PROGRESS_FILE = os.path.join(os.path.dirname(__file__), "..", "progress.md")
-
-# Add tools/ to path so imports work when run from project root
+# Add this directory to path so imports work regardless of invocation cwd
 sys.path.insert(0, os.path.dirname(__file__))
 import crm_extract
 import transform
@@ -27,10 +27,7 @@ import data_writer
 
 def log(msg: str):
     ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-    line = f"[{ts}] {msg}"
-    print(line)
-    with open(PROGRESS_FILE, "a") as f:
-        f.write(line + "\n")
+    print(f"[{ts}] {msg}")
 
 
 def run_pipeline(portal: str = None, skip_extract: bool = False):
@@ -52,7 +49,7 @@ def run_pipeline(portal: str = None, skip_extract: bool = False):
                 log(f"  Extracted {mod}: {count} records")
         except Exception as e:
             log(f"  [FAIL] Extract failed: {e}")
-            sys.exit(1)
+            raise
     else:
         print("\n-- Step 1: Extract (skipped - using existing .tmp/ files) --")
 
@@ -67,7 +64,7 @@ def run_pipeline(portal: str = None, skip_extract: bool = False):
                 f"graduates={r1['total_graduates']}")
     except Exception as e:
         log(f"  [FAIL] Transform failed: {e}")
-        sys.exit(1)
+        raise
 
     # ── Step 3: Write ────────────────────────────────────────────
     if portal:
@@ -81,13 +78,19 @@ def run_pipeline(portal: str = None, skip_extract: bool = False):
             log(f"  dashboard_data.json written ({size_kb:.1f} KB)")
         except Exception as e:
             log(f"  [FAIL] Data write failed: {e}")
-            sys.exit(1)
+            raise
 
-        # Sync to portal/data/ so Wrangler deploy serves the latest data
-        import shutil
-        portal_data_path = os.path.join(os.path.dirname(__file__), "..", "portal", "data", "dashboard_data.json")
-        shutil.copy2(out, portal_data_path)
-        log(f"  dashboard_data.json synced to portal/data/")
+        # Upload to Catalyst File Store (portaldata folder) so the portal
+        # can be served the latest data. Local filesystem is not shared
+        # between this Job and the Slate client, so a local copy (the old
+        # Wrangler-era shutil.copy2 into portal/data/) is not possible here.
+        try:
+            import filestore_upload
+            filestore_upload.upload_dashboard_data(out)
+            log("  dashboard_data.json uploaded to File Store (portaldata)")
+        except Exception as e:
+            log(f"  [FAIL] File Store upload failed: {e}")
+            raise
 
     elapsed = (datetime.now(timezone.utc) - start).seconds
     log(f"Pipeline complete in {elapsed}s")
