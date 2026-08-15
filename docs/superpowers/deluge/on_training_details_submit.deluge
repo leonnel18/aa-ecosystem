@@ -38,35 +38,9 @@ crmPayload.put("Post_Survey_Close_Date", input.Post_Survey_Close_Date.toString("
 crmResponse = zoho.crm.createRecord("Solutions", crmPayload);
 solutionId = crmResponse.get("id");
 
-// ── 3. Clone Pre-Application form ─────────────────────────────────────────────
-preClonePayload = map();
-preClonePayload.put("form_link_name", preFormLinkName);
-preClonePayload.put("form_name", input.Training_Title + " - Application Form");
-
-preCloneResponse = invokeurl
-[
-    url: "https://creator.zoho.in/api/v2/aktivasia/aa-training-hub/form/Application_Form/clone"
-    type: POST
-    parameters: preClonePayload.toString()
-    connection: "zoho_creator_connection"
-];
-
-preFormLink = "https://creatorapp.zoho.in/aktivasia/aa-training-hub/form/" + preFormLinkName;
-
-// ── 4. Clone Post-Training Survey form ────────────────────────────────────────
-postClonePayload = map();
-postClonePayload.put("form_link_name", postFormLinkName);
-postClonePayload.put("form_name", input.Training_Title + " - Post Training Survey");
-
-postCloneResponse = invokeurl
-[
-    url: "https://creator.zoho.in/api/v2/aktivasia/aa-training-hub/form/Post_Training_Survey/clone"
-    type: POST
-    parameters: postClonePayload.toString()
-    connection: "zoho_creator_connection"
-];
-
-postFormLink = "https://creatorapp.zoho.in/aktivasia/aa-training-hub/form/" + postFormLinkName;
+// ── 3. Build form links with solution ID as URL parameter ─────────────────────
+preFormLink = "https://creatorapp.zoho.in/aktivasia/aa-training-hub/#Form:Application_Form?Training_Applied=" + solutionId;
+postFormLink = "https://creatorapp.zoho.in/aktivasia/aa-training-hub/#Form:Post_Training_Survey?Training_Applied=" + solutionId;
 
 // ── 5. Update CRM Solutions record with form links ────────────────────────────
 updatePayload = map();

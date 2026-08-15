@@ -24,7 +24,7 @@ from dotenv import load_dotenv
 from crm_auth import auth_headers, API_BASE
 
 # ── New fields: Solutions module ────────────────────────────────────────────
-# 4 date fields for form availability windows
+# 4 date fields for form availability windows + Custom_Questions JSON store
 SOLUTIONS_NEW_FIELDS = [
     {
         "field_label": "Application Form Open Date",
@@ -45,6 +45,12 @@ SOLUTIONS_NEW_FIELDS = [
         "field_label": "Post Survey Close Date",
         "api_name":    "Post_Survey_Close_Date",
         "data_type":   "date",
+    },
+    {
+        "field_label": "Custom Questions",
+        "api_name":    "Custom_Questions",
+        "data_type":   "textarea",
+        "textarea":    {"type": "large"},
     },
 ]
 
