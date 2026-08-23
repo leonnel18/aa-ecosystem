@@ -18,8 +18,10 @@ pages that don't exist yet — out of scope for this plan per Gino's decision
 to build them separately, likely as native Zoho Forms:
   - post-training survey, generalized beyond the current PH-only
     portal/trainingsurvey-ph.html
-  - 6-month Impact Evaluation form (no page exists at all yet)
   - Google Drive training-photos folder link
+
+The 6-month Impact Evaluation form (P1/P2) is no longer a placeholder — Gino
+supplied the live Zoho Form URL on 2026-08-21. See IMPACT_EVAL_FORM_URL.
 """
 
 PORTAL_BASE = "https://aktivasia-portal.pages.dev"
@@ -41,8 +43,21 @@ ASSOCIATE_TRAINING_FORM = f"{PORTAL_BASE}/create-training.html"
 # grep-able (TBD_ prefix) so a stale placeholder in a sent email is obvious in
 # review rather than looking like a real, broken link.
 POST_TRAINING_EVAL_FORM_PLACEHOLDER = "TBD_POST_TRAINING_SURVEY_LINK"
-IMPACT_EVAL_FORM_PLACEHOLDER = "TBD_IMPACT_EVAL_FORM_LINK"
 GOOGLE_DRIVE_PHOTO_FOLDER_PLACEHOLDER = "TBD_GOOGLE_DRIVE_LINK"
+
+# Real, live form (supplied by Gino 2026-08-21) — replaces the former
+# TBD_IMPACT_EVAL_FORM_LINK placeholder. Native Zoho Form, not a portal page.
+#
+# NOTE the form's own name says "FoundationalPH": it appears to be scoped to
+# the PH Foundational training, while P1/P2 go to graduates of every country
+# (PK/PH/KR/ID/Regional) and every training type. Confirm with Gino whether
+# one shared form is intended, or whether this needs to become a per-country
+# / per-training-type mapping the way application_form_link() already is.
+IMPACT_EVAL_FORM_URL = (
+    "https://forms.zohopublic.in/aktivasiaforms/form/"
+    "6MImpactEvaluationFormFoundationalPH/formperma/"
+    "ZWN4mpZk-PSBOscki3THqQm7r2CsUJ1mEGX_UlZNy6c"
+)
 
 
 def application_form_link(country: str) -> str:
@@ -74,5 +89,8 @@ def google_drive_photo_folder_link(training_id: str) -> str:
 
 
 def impact_eval_form_link(deal_id: str) -> str:
-    """P1/P2 — placeholder until the 6-month Impact Evaluation form exists."""
-    return IMPACT_EVAL_FORM_PLACEHOLDER
+    """P1/P2 — the 6-month Impact Evaluation form. `deal_id` is currently
+    unused (the form is a single shared link, not per-participant), but is
+    kept in the signature so a prefilled/per-Deal URL can be swapped in
+    without touching either email template."""
+    return IMPACT_EVAL_FORM_URL

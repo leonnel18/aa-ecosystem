@@ -65,6 +65,37 @@ def _fmt_date(val) -> str:
     return str(val)[:10] if val else "—"
 
 
+def _clean_name(val) -> str:
+    """Normalise one CRM name field for use in participant-facing copy.
+
+    Three real problems in live Deals data, all found in a 2026-08-21 dry run
+    against production, all of which reached the rendered email as-is:
+
+      * the field is present but null -- `deal.get("First_Name", "")` returns
+        None, not "", because the KEY EXISTS; the f-string then renders the
+        literal string "None" ("Dear None," / a subject ending in ", None")
+      * names stored "Last, First" leave a trailing comma, so a subject line
+        reads "..., Hsin-Ping," with a doubled comma
+      * stray surrounding whitespace
+
+    Returns "" for anything unusable, so callers can branch on falsiness
+    rather than having to re-check for None themselves."""
+    return str(val or "").strip().strip(",").strip()
+
+
+def _participant_names(deal: dict) -> tuple[str, str]:
+    """(first_name, full_name) for a participant Deal, both safe to render.
+
+    Either may be "" -- P1/P2 drop the name from the subject and fall back to
+    a nameless greeting in that case, rather than emitting "Dear ," or a
+    dangling comma. Falls back to the last name alone when only that is
+    present, since a bare surname still greets the person correctly."""
+    first = _clean_name(deal.get("First_Name"))
+    last  = _clean_name(deal.get("Last_Name"))
+    full  = " ".join(p for p in (first, last) if p)
+    return (first or last), full
+
+
 def _bar() -> str:
     """Thin full-width maroon divider bar — used at the very top, between
     content and footer, and at the very bottom, matching the reference
@@ -302,13 +333,13 @@ def c6_email(training: dict) -> tuple[str, str]:
 # ── P1 — 6-month post-evaluation (daily, until deadline) ───────────────────
 
 def p1_email(deal: dict, deadline, training_name: str) -> tuple[str, str]:
-    first_name = deal.get("First_Name", "")
-    full_name  = f"{first_name} {deal.get('Last_Name', '')}".strip()
+    first_name, full_name = _participant_names(deal)
     deal_id    = deal.get("id", "")
     eval_link  = links.impact_eval_form_link(deal_id)
-    subj = f"💭 A few minutes for your Impact Evaluation, {first_name}"
+    subj = (f"💭 A few minutes for your Impact Evaluation, {first_name}"
+            if first_name else "💭 A few minutes for your Impact Evaluation")
     body = _wrap(f"""
-      <p>Dear {escape(full_name)},</p>
+      <p>Dear {escape(full_name) if full_name else "friend"},</p>
       <p>It's been half a year since the <strong>{escape(training_name)}</strong> training wrapped up, and we've been
          thinking about you and wondering how things have unfolded on your end. 🌱</p>
       <p>We'd love to hear what you've been up to. Since we last saw you, have you run a campaign you're
@@ -335,13 +366,13 @@ def p1_email(deal: dict, deadline, training_name: str) -> tuple[str, str]:
 # ── P2 — 6-month post-evaluation, overdue (weekly) ──────────────────────────
 
 def p2_email(deal: dict, deadline, training_name: str) -> tuple[str, str]:
-    first_name = deal.get("First_Name", "")
-    full_name  = f"{first_name} {deal.get('Last_Name', '')}".strip()
+    first_name, full_name = _participant_names(deal)
     deal_id    = deal.get("id", "")
     eval_link  = links.impact_eval_form_link(deal_id)
-    subj = f"⏳ Still open: your Impact Evaluation Form, {first_name}"
+    subj = (f"⏳ Still open: your Impact Evaluation Form, {first_name}"
+            if first_name else "⏳ Still open: your Impact Evaluation Form")
     body = _wrap(f"""
-      <p>Dear {escape(full_name)},</p>
+      <p>Dear {escape(full_name) if full_name else "friend"},</p>
       <p>We're reaching out again about your Impact Evaluation Form for the <strong>{escape(training_name)}</strong> training.</p>
       <p>The deadline was <strong>{deadline.isoformat()}</strong>, and while it has now passed, the form is still open and
          we would very much value your response. 🙏</p>
@@ -352,6 +383,6 @@ def p2_email(deal: dict, deadline, training_name: str) -> tuple[str, str]:
       {_btn(eval_link, "Complete your form here")}
       <p>Thank you, and we hope you're well.</p>
       <p>With gratitude and solidarity,<br>AktivAsia Regional Team</p>
-      {_footer("gino@aktivasia.org")}
+      {_footer("regional@aktivasia.org")}
     """)
     return subj, body

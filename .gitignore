@@ -28,3 +28,6 @@ Thumbs.db
 node_modules/
 
 deploy_portal.log
+
+# Python virtualenv
+.venv/

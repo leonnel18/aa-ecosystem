@@ -31,6 +31,25 @@ def _load_checks_package():
 
 _load_checks_package()
 
+
+def _load_module_by_path(name, filename):
+    """Import one module out of functions/reminder-job/ WITHOUT putting that
+    directory on sys.path — same motivation as _load_checks_package() above
+    (see the sys.path comment: a bare `gmail_sender` there would shadow
+    tools/gmail_sender.py in tests/test_gmail_sender.py)."""
+    spec = importlib.util.spec_from_file_location(
+        name, os.path.join(_REMINDER_JOB_DIR, filename))
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+# links must land in sys.modules first — email_templates does a bare
+# `import links` at module level, which would otherwise fail here.
+_load_module_by_path("links", "links.py")
+email_templates = _load_module_by_path("email_templates", "email_templates.py")
+
 from datetime import date, timedelta
 
 from checks import (
@@ -363,3 +382,62 @@ def test_p2_stops_once_completed():
                       graduate_date=grad, six_fields={"E_Building_Connections_6": "5 - Strongly Agree"})
     result = p2_impact_eval_overdue.due([deal], state={}, today=today)
     assert result == []
+
+
+# ── P2 — bounded cadence (added 2026-08-21) ─────────────────────────────────
+# Without MAX_DAYS_PAST_DEADLINE, the first production run swept up 81 real
+# graduates whose deadlines were 182-287 days past, none of whom had ever
+# received a P1. These pin the cap so that can't come back.
+
+def _p2_deal_due_at(days_past: int):
+    """A graduated Deal whose P2 deadline is exactly `days_past` days ago,
+    landing on a weekly boundary so only the cap decides the outcome."""
+    grad = date(2026, 1, 15)
+    deadline = add_months(grad, 6) + timedelta(days=7)
+    deal = make_deal("d1", training_id="s1",
+                     stage="Graduated or Post Evaluation Completed", graduate_date=grad)
+    return deal, deadline + timedelta(days=days_past)
+
+def test_p2_fires_on_last_weekly_boundary_within_cap():
+    cap = p2_impact_eval_overdue.MAX_DAYS_PAST_DEADLINE
+    last = cap - (cap % 7)  # 56 -> day 56, the final nudge
+    deal, today = _p2_deal_due_at(last)
+    assert len(p2_impact_eval_overdue.due([deal], state={}, today=today)) == 1
+
+def test_p2_suppressed_past_cap():
+    deal, today = _p2_deal_due_at(p2_impact_eval_overdue.MAX_DAYS_PAST_DEADLINE + 7)
+    assert p2_impact_eval_overdue.due([deal], state={}, today=today) == []
+
+def test_p2_suppressed_for_long_historical_backlog():
+    # 203 days = the median of the real 2026-08-21 production backlog
+    deal, today = _p2_deal_due_at(203)
+    assert p2_impact_eval_overdue.due([deal], state={}, today=today) == []
+
+
+# ── P1/P2 participant name rendering (added 2026-08-21) ─────────────────────
+# Live Deals carry First_Name=None and "Last, First" values; both reached the
+# rendered email verbatim ("Dear None,", a doubled comma in the subject).
+
+def test_null_first_name_does_not_render_none():
+    deal = {"id": "d1", "First_Name": None, "Last_Name": None, "Email": "x@y.org"}
+    subj, body = email_templates.p2_email(deal, date(2026, 8, 14), "Some Training")
+    assert "None" not in subj
+    assert "Dear friend," in body
+    assert "Dear None" not in body
+
+def test_null_first_name_drops_trailing_subject_comma():
+    deal = {"id": "d1", "First_Name": None, "Last_Name": None, "Email": "x@y.org"}
+    subj, _ = email_templates.p1_email(deal, date(2026, 8, 28), "Some Training")
+    assert subj == "💭 A few minutes for your Impact Evaluation"
+
+def test_last_name_only_still_greets_by_name():
+    deal = {"id": "d1", "First_Name": None, "Last_Name": "Cruz", "Email": "x@y.org"}
+    subj, body = email_templates.p1_email(deal, date(2026, 8, 28), "Some Training")
+    assert subj.endswith("Cruz")
+    assert "Dear Cruz," in body
+
+def test_trailing_comma_stripped_from_name():
+    deal = {"id": "d1", "First_Name": "Po-Jen,", "Last_Name": "Wu", "Email": "x@y.org"}
+    subj, body = email_templates.p2_email(deal, date(2026, 8, 14), "Some Training")
+    assert subj.endswith("Po-Jen")
+    assert "Dear Po-Jen Wu," in body
