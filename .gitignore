@@ -15,8 +15,11 @@ __pycache__/
 # Data files (may contain PII)
 data/*.json
 data/*.csv
-# Exception: config file (no PII)
+# Exceptions: no PII
 !data/email_config.json
+# dashboard_data.json is the aggregated, published portal payload — the
+# single source of truth committed daily by the pipeline (see CLAUDE.md)
+!data/dashboard_data.json
 
 # OS
 .DS_Store
