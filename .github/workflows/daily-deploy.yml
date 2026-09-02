@@ -5,6 +5,9 @@ on:
     - cron: "0 0 * * *"  # 00:00 UTC = 08:00 Asia/Manila (UTC+8)
   workflow_dispatch: {}
 
+permissions:
+  contents: write  # needed so the final step can push the refreshed dashboard_data.json + progress.md
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
