@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T06:21:04",
+  "generated_at": "2026-09-03T02:40:37",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -30358,8 +30358,8 @@
           },
           "by_age_group": {
             "Unknown": 926,
-            "18-24": 199,
-            "25-34": 468,
+            "18-24": 198,
+            "25-34": 469,
             "45+": 18,
             "<18": 11,
             "35-44": 95
@@ -34632,8 +34632,8 @@
           },
           "by_age_group": {
             "Unknown": 926,
-            "18-24": 199,
-            "25-34": 468,
+            "18-24": 198,
+            "25-34": 469,
             "45+": 18,
             "<18": 11,
             "35-44": 95
@@ -36432,11 +36432,11 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 446,
+        "total_applicants": 449,
         "total_graduates": 213,
         "total_ongoing": 24,
         "application_funnel": {
-          "total_applicants": 446,
+          "total_applicants": 449,
           "attended_training": 213,
           "graduated": 213,
           "impact_evaluation_completed": 12
@@ -36474,12 +36474,12 @@
           },
           {
             "year": "2026",
-            "applicants": 169,
+            "applicants": 172,
             "graduates": 23
           }
         ],
         "community_impact": 1047,
-        "touched_organizations": 282,
+        "touched_organizations": 285,
         "training_categories": {
           "completed": [
             {
@@ -36487,7 +36487,7 @@
               "type": "Foundational",
               "start_date": "2026-10-12",
               "end_date": "2026-08-21",
-              "applicants": 74,
+              "applicants": 77,
               "graduates": 0
             },
             {
@@ -36797,7 +36797,7 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-08-21",
-            "applicants": 74,
+            "applicants": 77,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -37667,6 +37667,15 @@
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 1
+          },
+          {
+            "name": "Earthwise Institute",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
           },
           {
             "name": "Ecolery Bangladesh",
@@ -38587,6 +38596,15 @@
             "graduate_count": 0
           },
           {
+            "name": "KoSIF",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Komisi untuk Orang Hilang dan Korban Tindak Kekerasan (KontraS)",
             "training": "Regional Campaign Strategy and Organising Training (CSO)",
             "training_type": "Foundational",
@@ -38639,6 +38657,15 @@
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 1
+          },
+          {
+            "name": "Korea Sustainability Investing Forum",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
           },
           {
             "name": "Korean Federation of Environmental Movements (KFEM) - Korea",
@@ -40049,18 +40076,18 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Male": 131,
-            "Female": 248,
+            "Male": 132,
+            "Female": 250,
             "Non-binary": 6,
             "Transgender": 1,
             "Unknown": 56,
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 125,
+            "25-34": 126,
             "18-24": 29,
+            "35-44": 71,
             "<18": 5,
-            "35-44": 69,
             "45+": 34,
             "Unknown": 184
           }
@@ -40322,22 +40349,22 @@
             "training_name": "PowerShift Asia",
             "likert": {
               "strategy_tactics": {
-                "pre": 5.57,
+                "pre": 5.49,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 5.31,
+                "pre": 5.27,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 5.43,
+                "pre": 5.38,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.78,
+                "pre": 5.68,
                 "post": null,
                 "6m": null
               }
@@ -41975,18 +42002,18 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Male": 131,
-            "Female": 248,
+            "Male": 132,
+            "Female": 250,
             "Non-binary": 6,
             "Transgender": 1,
             "Unknown": 56,
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 125,
+            "25-34": 126,
             "18-24": 29,
+            "35-44": 71,
             "<18": 5,
-            "35-44": 69,
             "45+": 34,
             "Unknown": 184
           },
@@ -41997,10 +42024,12 @@
             "West Deowbhog, Fatullah, Narayanganj Sadar-1400, Narayanganj": 1,
             "Jl. Raya Penelokan, Kintamani, Bangli, Bali": 1,
             "Cempaka St. Blok H7/No.1, Bogor Regency, West Java, 16610": 1,
+            "Saint Sever": 1,
             "Perum Pns, Gang Pertama, Blok A No. 466, Rt 21, Juata Permai, Tarakan Utara, Tarakan, North Kalimantan, 77116, Indonesia": 1,
             "Dhaka": 8,
             "South Jakarta": 2,
             "Juya Kazi Bhuiyan Bari, Bamon Shundor, Mirsharai, Darogar Hat, Chattogram-4322": 1,
+            "Gangnam-Gu": 1,
             "Kacang Street No. 12. Medan Baru. Medan City. North Sumatera.": 1,
             "Gg. Abadi, Rt.10/Rw.1, Batu Ampar, Kec. Kramat Jati, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13520": 1,
             "Feni": 1,
@@ -42015,6 +42044,7 @@
             "Komplek Telkom C2/2, Ciputat Timur, Tangerang Selatan": 1,
             "Kanagawa Sagamihara-Shi Midori Ward Nishihashimoto 1-21-14": 1,
             "Jl Ganesha Indah Blok Ga No 10": 1,
+            "3f, 650-1 Nonhyeon-Ro, Gangnam-Gu, Seoul": 1,
             "Kakinokizaka 2-4-3-203, Meguro, Tokyo 152-0022": 1,
             "Kab. Sumedang": 1,
             "Jl. Raya Sesetan Gg.Lumba-Lumba No.4b, Denpasar, Bali": 1,
