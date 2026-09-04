@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T02:40:37",
+  "generated_at": "2026-09-04T02:37:12",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36432,11 +36432,11 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 449,
+        "total_applicants": 450,
         "total_graduates": 213,
         "total_ongoing": 24,
         "application_funnel": {
-          "total_applicants": 449,
+          "total_applicants": 450,
           "attended_training": 213,
           "graduated": 213,
           "impact_evaluation_completed": 12
@@ -36474,12 +36474,12 @@
           },
           {
             "year": "2026",
-            "applicants": 172,
+            "applicants": 173,
             "graduates": 23
           }
         ],
         "community_impact": 1047,
-        "touched_organizations": 285,
+        "touched_organizations": 286,
         "training_categories": {
           "completed": [
             {
@@ -36487,7 +36487,7 @@
               "type": "Foundational",
               "start_date": "2026-10-12",
               "end_date": "2026-08-21",
-              "applicants": 77,
+              "applicants": 78,
               "graduates": 0
             },
             {
@@ -36797,7 +36797,7 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-08-21",
-            "applicants": 77,
+            "applicants": 78,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -39658,6 +39658,15 @@
             "graduate_count": 0
           },
           {
+            "name": "Trend Asia",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Tsunami and Disaster Mitigation Research Center (TDMRC) Universitas Syiah Kuala (USK) - Aceh",
             "training": "Gender Equity Leadership Program",
             "training_type": "Feminist Leadership",
@@ -40076,7 +40085,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Male": 132,
+            "Male": 133,
             "Female": 250,
             "Non-binary": 6,
             "Transgender": 1,
@@ -40084,7 +40093,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 126,
+            "25-34": 127,
             "18-24": 29,
             "35-44": 71,
             "<18": 5,
@@ -40349,22 +40358,22 @@
             "training_name": "PowerShift Asia",
             "likert": {
               "strategy_tactics": {
-                "pre": 5.49,
+                "pre": 5.47,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 5.27,
+                "pre": 5.24,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 5.38,
+                "pre": 5.35,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.68,
+                "pre": 5.67,
                 "post": null,
                 "6m": null
               }
@@ -42002,7 +42011,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Male": 132,
+            "Male": 133,
             "Female": 250,
             "Non-binary": 6,
             "Transgender": 1,
@@ -42010,7 +42019,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 126,
+            "25-34": 127,
             "18-24": 29,
             "35-44": 71,
             "<18": 5,
@@ -42018,6 +42027,7 @@
             "Unknown": 184
           },
           "by_region": {
+            "Jl. Amil, No. 7, West Pejaten Ps. Minggu, South Jakarta": 1,
             "Tangerang": 1,
             "Glagaharum, Rt. 11 Rw. 03, Porong District, Sidoarjo, East Java": 1,
             "Chattogram": 1,
