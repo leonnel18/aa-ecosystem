@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T02:37:12",
+  "generated_at": "2026-09-05T02:38:20",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -10069,8 +10069,8 @@
             "18-24": 95,
             "45+": 28,
             "<18": 6,
-            "35-44": 40,
-            "25-34": 139
+            "35-44": 42,
+            "25-34": 137
           }
         }
       },
@@ -12701,8 +12701,8 @@
             "18-24": 95,
             "45+": 28,
             "<18": 6,
-            "35-44": 40,
-            "25-34": 139
+            "35-44": 42,
+            "25-34": 137
           },
           "by_region": {
             "Unknown": 356,
@@ -36432,11 +36432,11 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 450,
+        "total_applicants": 456,
         "total_graduates": 213,
         "total_ongoing": 24,
         "application_funnel": {
-          "total_applicants": 450,
+          "total_applicants": 456,
           "attended_training": 213,
           "graduated": 213,
           "impact_evaluation_completed": 12
@@ -36474,12 +36474,12 @@
           },
           {
             "year": "2026",
-            "applicants": 173,
+            "applicants": 179,
             "graduates": 23
           }
         ],
         "community_impact": 1047,
-        "touched_organizations": 286,
+        "touched_organizations": 291,
         "training_categories": {
           "completed": [
             {
@@ -36487,7 +36487,7 @@
               "type": "Foundational",
               "start_date": "2026-10-12",
               "end_date": "2026-08-21",
-              "applicants": 78,
+              "applicants": 84,
               "graduates": 0
             },
             {
@@ -36797,7 +36797,7 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-08-21",
-            "applicants": 78,
+            "applicants": 84,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -37728,7 +37728,7 @@
             "training_type": "Foundational",
             "year": "2026",
             "total_impact": 0,
-            "applicant_count": 2,
+            "applicant_count": 3,
             "graduate_count": 0
           },
           {
@@ -38389,6 +38389,15 @@
             "graduate_count": 0
           },
           {
+            "name": "Indonesia Center for Environmental Law (ICEL)",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Indonesia for Global Justice",
             "training": "PowerShift Asia",
             "training_type": "Foundational",
@@ -38684,6 +38693,15 @@
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 1
+          },
+          {
+            "name": "Kpop4planet",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
           },
           {
             "name": "LIA Social Impact Consulting",
@@ -39044,6 +39062,15 @@
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 1
+          },
+          {
+            "name": "PLANiT",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
           },
           {
             "name": "PT. Jaringan Sumber Daya",
@@ -39469,6 +39496,15 @@
             "graduate_count": 1
           },
           {
+            "name": "Solutions for Our Climate",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Solutions for Our Climate (SFOC)",
             "training": "CSF 2018 Regional",
             "training_type": "Foundational",
@@ -39847,6 +39883,15 @@
             "graduate_count": 0
           },
           {
+            "name": "Wahana Lingkungan Hidup Indonesia (WALHI) Riau",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Wahana Visi Indonesia (WVI)",
             "training": "Gender Equity Leadership Program",
             "training_type": "Feminist Leadership",
@@ -40085,16 +40130,16 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Male": 133,
-            "Female": 250,
+            "Female": 255,
+            "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
             "Unknown": 56,
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 127,
-            "18-24": 29,
+            "25-34": 132,
+            "18-24": 30,
             "35-44": 71,
             "<18": 5,
             "45+": 34,
@@ -40358,22 +40403,22 @@
             "training_name": "PowerShift Asia",
             "likert": {
               "strategy_tactics": {
-                "pre": 5.47,
+                "pre": 5.38,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 5.24,
+                "pre": 5.14,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 5.35,
+                "pre": 5.2,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.67,
+                "pre": 5.63,
                 "post": null,
                 "6m": null
               }
@@ -42011,23 +42056,29 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Male": 133,
-            "Female": 250,
+            "Female": 255,
+            "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
             "Unknown": 56,
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 127,
-            "18-24": 29,
+            "25-34": 132,
+            "18-24": 30,
             "35-44": 71,
             "<18": 5,
             "45+": 34,
             "Unknown": 184
           },
           "by_region": {
+            "Kota Pekanbaru, Riau, Indonesia": 1,
+            "1911-104, 99 Seongshin-Ro, Deogyang-Gu, Goyang-Si, Gyeonggi-Do": 1,
+            "Rawamangun, Jakarta": 1,
+            "Taman Firdaus Xii Blok D No 4. Jl Koja 2 Rt 03/12 Kel Jatiasih Bekasi Selatan 17423": 1,
+            "1300, Yangjae-Daero, Gangdong-Gu, Seoul, Republic Of Korea": 1,
             "Jl. Amil, No. 7, West Pejaten Ps. Minggu, South Jakarta": 1,
+            "Jl Laut Arafuru Ii Blok U No.6 Kota Depok 16417": 1,
             "Tangerang": 1,
             "Glagaharum, Rt. 11 Rw. 03, Porong District, Sidoarjo, East Java": 1,
             "Chattogram": 1,
