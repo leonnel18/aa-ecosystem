@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T02:38:20",
+  "generated_at": "2026-09-06T02:35:18",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -30358,8 +30358,8 @@
           },
           "by_age_group": {
             "Unknown": 926,
-            "18-24": 198,
-            "25-34": 469,
+            "18-24": 197,
+            "25-34": 470,
             "45+": 18,
             "<18": 11,
             "35-44": 95
@@ -34632,8 +34632,8 @@
           },
           "by_age_group": {
             "Unknown": 926,
-            "18-24": 198,
-            "25-34": 469,
+            "18-24": 197,
+            "25-34": 470,
             "45+": 18,
             "<18": 11,
             "35-44": 95
@@ -36432,11 +36432,11 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 456,
+        "total_applicants": 457,
         "total_graduates": 213,
         "total_ongoing": 24,
         "application_funnel": {
-          "total_applicants": 456,
+          "total_applicants": 457,
           "attended_training": 213,
           "graduated": 213,
           "impact_evaluation_completed": 12
@@ -36474,12 +36474,12 @@
           },
           {
             "year": "2026",
-            "applicants": 179,
+            "applicants": 180,
             "graduates": 23
           }
         ],
         "community_impact": 1047,
-        "touched_organizations": 291,
+        "touched_organizations": 292,
         "training_categories": {
           "completed": [
             {
@@ -36487,7 +36487,7 @@
               "type": "Foundational",
               "start_date": "2026-10-12",
               "end_date": "2026-08-21",
-              "applicants": 84,
+              "applicants": 85,
               "graduates": 0
             },
             {
@@ -36797,7 +36797,7 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-08-21",
-            "applicants": 84,
+            "applicants": 85,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -40090,6 +40090,15 @@
             "graduate_count": 0
           },
           {
+            "name": "Youth Coalition for Sexual and Reproductive Rights (YCSRR)",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Youth Empowering Youth Initiative Inc. (YEY)",
             "training": "Regional Campaign Strategy and Organising Training (CSO)",
             "training_type": "Foundational",
@@ -40130,7 +40139,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 255,
+            "Female": 256,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
@@ -40138,7 +40147,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 132,
+            "25-34": 133,
             "18-24": 30,
             "35-44": 71,
             "<18": 5,
@@ -40408,17 +40417,17 @@
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 5.14,
+                "pre": 5.13,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 5.2,
+                "pre": 5.18,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.63,
+                "pre": 5.61,
                 "post": null,
                 "6m": null
               }
@@ -42056,7 +42065,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 255,
+            "Female": 256,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
@@ -42064,7 +42073,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 132,
+            "25-34": 133,
             "18-24": 30,
             "35-44": 71,
             "<18": 5,
@@ -42077,6 +42086,7 @@
             "Rawamangun, Jakarta": 1,
             "Taman Firdaus Xii Blok D No 4. Jl Koja 2 Rt 03/12 Kel Jatiasih Bekasi Selatan 17423": 1,
             "1300, Yangjae-Daero, Gangdong-Gu, Seoul, Republic Of Korea": 1,
+            "Jakarta": 11,
             "Jl. Amil, No. 7, West Pejaten Ps. Minggu, South Jakarta": 1,
             "Jl Laut Arafuru Ii Blok U No.6 Kota Depok 16417": 1,
             "Tangerang": 1,
@@ -42097,7 +42107,6 @@
             "Bekasi Timur Regensi Blok I8 No.1. Jalan Kenari 7": 1,
             "Flat: A2, Building: 13, National Housing Apartment Complex, Road: 5, Block: G, Section: 2, Mirpur: 2, Dhaka 1213": 1,
             "East Jakarta": 1,
-            "Jakarta": 10,
             "Kota Ambon": 2,
             "Jl. Alam Segar Vii No.14, Rt.6/Rw.16, Pd. Pinang, Kec. Kebayoran Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12310": 1,
             "Dr.Para, Feni Sadar, Feni, Chattogram": 1,
