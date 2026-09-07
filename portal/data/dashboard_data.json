@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-06T02:35:18",
+  "generated_at": "2026-09-07T02:33:08",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -10066,11 +10066,11 @@
           },
           "by_age_group": {
             "Unknown": 440,
-            "18-24": 95,
+            "18-24": 94,
             "45+": 28,
             "<18": 6,
             "35-44": 42,
-            "25-34": 137
+            "25-34": 138
           }
         }
       },
@@ -12698,11 +12698,11 @@
           },
           "by_age_group": {
             "Unknown": 440,
-            "18-24": 95,
+            "18-24": 94,
             "45+": 28,
             "<18": 6,
             "35-44": 42,
-            "25-34": 137
+            "25-34": 138
           },
           "by_region": {
             "Unknown": 356,
@@ -36516,7 +36516,7 @@
           {
             "type": "Feminist Leadership",
             "conducted": 3,
-            "total_planned": 3
+            "total_planned": 4
           },
           {
             "type": "Foundational",
@@ -36576,7 +36576,7 @@
             {
               "type": "Feminist Leadership",
               "conducted": 1,
-              "total_planned": 1
+              "total_planned": 2
             },
             {
               "type": "Foundational",
@@ -36813,6 +36813,22 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-10-16",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
+          {
+            "id": "773031000013599001",
+            "name": "Gender Equity Leadership Program - Symposium",
+            "type": "Feminist Leadership",
+            "date": "2026-09-09",
+            "end_date": "2026-09-11",
             "applicants": 0,
             "graduates": 0,
             "status": "Upcoming",
@@ -42496,10 +42512,21 @@
         },
         "year_2": {
           "target_activities": 0,
-          "actual_activities": 2,
+          "actual_activities": 3,
           "target_participants": 0,
           "actual_participants": 0,
           "rows": [
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Gender Equity Leadership Program - Symposium",
+              "actual_date": "2026-09-09",
+              "actual_end_date": "2026-09-11",
+              "actual_participants": 0,
+              "status": "Upcoming"
+            },
             {
               "plan_title": null,
               "plan_date": null,
