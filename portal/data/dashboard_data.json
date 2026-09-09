@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T02:46:15",
+  "generated_at": "2026-09-09T02:46:08",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36432,11 +36432,11 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 457,
+        "total_applicants": 458,
         "total_graduates": 213,
         "total_ongoing": 24,
         "application_funnel": {
-          "total_applicants": 457,
+          "total_applicants": 458,
           "attended_training": 213,
           "graduated": 213,
           "impact_evaluation_completed": 12
@@ -36474,7 +36474,7 @@
           },
           {
             "year": "2026",
-            "applicants": 180,
+            "applicants": 181,
             "graduates": 23
           }
         ],
@@ -36487,7 +36487,7 @@
               "type": "Foundational",
               "start_date": "2026-10-12",
               "end_date": "2026-08-21",
-              "applicants": 85,
+              "applicants": 86,
               "graduates": 0
             },
             {
@@ -36507,7 +36507,16 @@
               "graduates": 13
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "Gender Equity Leadership Program - Symposium",
+              "type": "Feminist Leadership",
+              "start_date": "2026-09-09",
+              "end_date": "2026-09-11",
+              "applicants": 0,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -36515,7 +36524,7 @@
         "trainings_by_type": [
           {
             "type": "Feminist Leadership",
-            "conducted": 3,
+            "conducted": 4,
             "total_planned": 4
           },
           {
@@ -36575,7 +36584,7 @@
           "2026": [
             {
               "type": "Feminist Leadership",
-              "conducted": 1,
+              "conducted": 2,
               "total_planned": 2
             },
             {
@@ -36787,7 +36796,7 @@
           },
           "2026": {
             "planned": 4,
-            "conducted": 3
+            "conducted": 4
           }
         },
         "actual_trainings": [
@@ -36797,7 +36806,7 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-08-21",
-            "applicants": 85,
+            "applicants": 86,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -36831,7 +36840,7 @@
             "end_date": "2026-09-11",
             "applicants": 0,
             "graduates": 0,
-            "status": "Upcoming",
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -40151,11 +40160,11 @@
             "graduate_count": 0
           }
         ],
-        "unattributed_applicants": 19,
+        "unattributed_applicants": 20,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 256,
+            "Female": 257,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
@@ -40163,7 +40172,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 133,
+            "25-34": 134,
             "18-24": 30,
             "35-44": 71,
             "<18": 5,
@@ -40428,22 +40437,22 @@
             "training_name": "PowerShift Asia",
             "likert": {
               "strategy_tactics": {
-                "pre": 5.38,
+                "pre": 5.36,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 5.13,
+                "pre": 5.1,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 5.18,
+                "pre": 5.15,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.61,
+                "pre": 5.58,
                 "post": null,
                 "6m": null
               }
@@ -42081,7 +42090,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 256,
+            "Female": 257,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
@@ -42089,7 +42098,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 133,
+            "25-34": 134,
             "18-24": 30,
             "35-44": 71,
             "<18": 5,
@@ -42097,6 +42106,7 @@
             "Unknown": 184
           },
           "by_region": {
+            "Seoul": 8,
             "Kota Pekanbaru, Riau, Indonesia": 1,
             "1911-104, 99 Seongshin-Ro, Deogyang-Gu, Goyang-Si, Gyeonggi-Do": 1,
             "Rawamangun, Jakarta": 1,
@@ -42139,7 +42149,6 @@
             "Present: Uttor Fakirpur, Maijdee, Noakhali": 1,
             "Rengas Besar St. 35c Jakarta": 1,
             "2-10-55 Oyakita,Ebina,Kanagawa Japan": 1,
-            "Seoul": 7,
             "Jl. Rambutan 6 Blok D10/32, Kab. Tangerang, Banten.": 1,
             "Jalan T.Bintaran Nomor 7 Koto Baru, Kuta Alam Banda Aceh": 1,
             "Cempaka Putih Residance A15, South Tangerang": 1,
@@ -42525,7 +42534,7 @@
               "actual_date": "2026-09-09",
               "actual_end_date": "2026-09-11",
               "actual_participants": 0,
-              "status": "Upcoming"
+              "status": "Completed"
             },
             {
               "plan_title": null,
