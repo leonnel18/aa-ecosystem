@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T02:47:51",
+  "generated_at": "2026-09-11T02:40:54",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -30358,8 +30358,8 @@
           },
           "by_age_group": {
             "Unknown": 926,
-            "18-24": 197,
-            "25-34": 469,
+            "18-24": 196,
+            "25-34": 470,
             "45+": 18,
             "<18": 11,
             "35-44": 96
@@ -34632,8 +34632,8 @@
           },
           "by_age_group": {
             "Unknown": 926,
-            "18-24": 197,
-            "25-34": 469,
+            "18-24": 196,
+            "25-34": 470,
             "45+": 18,
             "<18": 11,
             "35-44": 96
@@ -36434,7 +36434,7 @@
       "report_1_overview": {
         "total_applicants": 458,
         "total_graduates": 213,
-        "total_ongoing": 24,
+        "total_ongoing": 49,
         "application_funnel": {
           "total_applicants": 458,
           "attended_training": 213,
