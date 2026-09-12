@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T02:40:54",
+  "generated_at": "2026-09-12T02:50:35",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5518,7 +5518,7 @@
           {
             "type": "Foundational",
             "conducted": 30,
-            "total_planned": 30
+            "total_planned": 31
           },
           {
             "type": "Training of Trainers",
@@ -5596,7 +5596,7 @@
             {
               "type": "Foundational",
               "conducted": 2,
-              "total_planned": 2
+              "total_planned": 3
             }
           ]
         },
@@ -5850,6 +5850,22 @@
           }
         },
         "actual_trainings": [
+          {
+            "id": "773031000013632023",
+            "name": "PAGBIRIK: BICOL YOUTH CAMPAIGNERS' TRAINING",
+            "type": "Foundational",
+            "date": "2026-10-01",
+            "end_date": "2026-10-04",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
           {
             "id": "773031000009937009",
             "name": "KASARIG: Strengthening Youth Participation and Campaigns",
@@ -12986,10 +13002,22 @@
         },
         "year_2": {
           "target_activities": 0,
-          "actual_activities": 0,
+          "actual_activities": 1,
           "target_participants": 0,
           "actual_participants": 0,
-          "rows": []
+          "rows": [
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "PAGBIRIK: BICOL YOUTH CAMPAIGNERS' TRAINING",
+              "actual_date": "2026-10-01",
+              "actual_end_date": "2026-10-04",
+              "actual_participants": 0,
+              "status": "Upcoming"
+            }
+          ]
         },
         "archive": {
           "target_activities": 23,
@@ -15142,8 +15170,8 @@
             "Unknown": 122,
             "45+": 13,
             "35-44": 18,
-            "25-34": 42,
-            "18-24": 5
+            "25-34": 43,
+            "18-24": 4
           }
         }
       },
@@ -17210,8 +17238,8 @@
             "Unknown": 122,
             "45+": 13,
             "35-44": 18,
-            "25-34": 42,
-            "18-24": 5
+            "25-34": 43,
+            "18-24": 4
           },
           "by_region": {
             "\uc8fc\uacf5\ub85c 99": 1,
@@ -30359,10 +30387,10 @@
           "by_age_group": {
             "Unknown": 926,
             "18-24": 196,
-            "25-34": 470,
+            "25-34": 469,
             "45+": 18,
             "<18": 11,
-            "35-44": 96
+            "35-44": 97
           }
         }
       },
@@ -34633,10 +34661,10 @@
           "by_age_group": {
             "Unknown": 926,
             "18-24": 196,
-            "25-34": 470,
+            "25-34": 469,
             "45+": 18,
             "<18": 11,
-            "35-44": 96
+            "35-44": 97
           },
           "by_region": {
             "Unknown": 136,
@@ -36483,6 +36511,14 @@
         "training_categories": {
           "completed": [
             {
+              "name": "Gender Equity Leadership Program - Symposium",
+              "type": "Feminist Leadership",
+              "start_date": "2026-09-09",
+              "end_date": "2026-09-11",
+              "applicants": 0,
+              "graduates": 0
+            },
+            {
               "name": "PowerShift Asia",
               "type": "Foundational",
               "start_date": "2026-10-12",
@@ -36497,26 +36533,9 @@
               "end_date": "2026-06-12",
               "applicants": 11,
               "graduates": 8
-            },
-            {
-              "name": "2026 Taiwan Campaign Strategy Workshop",
-              "type": "Foundational",
-              "start_date": "2026-06-09",
-              "end_date": "2026-06-11",
-              "applicants": 17,
-              "graduates": 13
             }
           ],
-          "ongoing": [
-            {
-              "name": "Gender Equity Leadership Program - Symposium",
-              "type": "Feminist Leadership",
-              "start_date": "2026-09-09",
-              "end_date": "2026-09-11",
-              "applicants": 0,
-              "graduates": 0
-            }
-          ],
+          "ongoing": [],
           "upcoming": []
         }
       },
