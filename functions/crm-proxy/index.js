@@ -15,7 +15,9 @@
 //   GET  /solutions/:id?fields=...   -> GET  /crm/v6/Solutions/:id?fields=...
 //   GET  /accounts/search?q=         -> GET  /crm/v6/Accounts/search
 //   POST /accounts                   -> POST /crm/v6/Accounts
-//   GET  /deals/search                -> paginated GET /crm/v6/Deals, filtered locally
+//   GET  /deals/search?training_id=|training_name=&q=
+//                                     -> paginated GET /crm/v6/Deals, filtered locally
+//                                        (training_name is resolved to Solution id(s) first)
 //   POST /deals                      -> POST /crm/v6/Deals  (creates application Deal)
 //   PUT  /deals/:id                  -> PUT  /crm/v6/Deals/:id
 //   PATCH /deals/:id/stage           -> PUT  /crm/v6/Deals/:id (Stage only)
@@ -233,13 +235,43 @@ module.exports = async (req, res) => {
 			return sendJson(res, body, crmRes.status, origin);
 		}
 
-		// ── GET /deals/search?training_id=&q= (or legacy &first=&last=) ──
+		// ── GET /deals/search?training_id=|training_name=&q= (or legacy &first=&last=) ──
+		// training_name is resolved to one or more Solution ids by a case-insensitive
+		// match on Solution_Title, for callers (e.g. a Zoho Forms Prefill-Webhook) that
+		// only know the training's display name, not its CRM record id.
 		if (req.method === "GET" && path === "/deals/search") {
 			const trainingId = url.searchParams.get("training_id") ?? "";
+			const trainingName = (url.searchParams.get("training_name") ?? "").trim().toLowerCase();
 			const q = (url.searchParams.get("q") ?? "").trim().toLowerCase();
 			const first = url.searchParams.get("first") ?? "";
 			const last = url.searchParams.get("last") ?? "";
 			const fields = "Deal_Name,First_Name,Last_Name,Email,Mobile,Account_Name,Training_Applied,Stage,Graduate_Date,Have_you_applied_the_training_to_run_more_effectiv,Custom_Responses";
+
+			let trainingIds = null;
+			if (!trainingId && trainingName) {
+				let solData = [];
+				let solPage = 1;
+				let solMore = true;
+				while (solMore) {
+					const solRes = await fetch(`${CRM_BASE}/Solutions?fields=id,Solution_Title&per_page=200&page=${solPage}`, { headers: auth });
+					const solBody = await solRes.json();
+					solData.push(...(solBody.data ?? []));
+					solMore = solBody.info?.more_records === true;
+					solPage++;
+				}
+				trainingIds = new Set(
+					solData
+						.filter((s) => (s.Solution_Title ?? "").trim().toLowerCase() === trainingName)
+						.map((s) => s.id)
+				);
+				if (trainingIds.size === 0) return sendJson(res, { data: [] }, 200, origin);
+			}
+
+			const matchesTraining = (d) => {
+				if (trainingId) return d.Training_Applied?.id === trainingId;
+				if (trainingIds) return trainingIds.has(d.Training_Applied?.id);
+				return true;
+			};
 
 			let allData = [];
 			let page = 1;
@@ -256,7 +288,7 @@ module.exports = async (req, res) => {
 			let matches;
 			if (q) {
 				matches = allData.filter((d) => {
-					if (d.Training_Applied?.id !== trainingId) return false;
+					if (!matchesTraining(d)) return false;
 					const fromParts = `${d.First_Name ?? ""} ${d.Last_Name ?? ""}`.trim();
 					const fullName = (fromParts || d.Deal_Name || "").toLowerCase();
 					const email = (d.Email ?? "").toLowerCase();
@@ -264,13 +296,13 @@ module.exports = async (req, res) => {
 				});
 			} else if (first || last) {
 				const match = allData.find((d) =>
-					d.Training_Applied?.id === trainingId &&
+					matchesTraining(d) &&
 					d.First_Name?.toLowerCase() === first.toLowerCase() &&
 					d.Last_Name?.toLowerCase() === last.toLowerCase()
 				);
 				matches = match ? [match] : [];
 			} else {
-				matches = allData.filter((d) => d.Training_Applied?.id === trainingId);
+				matches = allData.filter(matchesTraining);
 			}
 
 			return sendJson(res, { data: matches }, 200, origin);
