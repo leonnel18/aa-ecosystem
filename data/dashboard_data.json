@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T03:01:51",
+  "generated_at": "2026-09-17T03:05:11",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5852,7 +5852,7 @@
         "actual_trainings": [
           {
             "id": "773031000013632023",
-            "name": "PAGBIRIK: BICOL YOUTH CAMPAIGNERS' TRAINING",
+            "name": "Pagbirik: Bicol Youth Campaigner's Training",
             "type": "Foundational",
             "date": "2026-10-01",
             "end_date": "2026-10-04",
@@ -13011,7 +13011,7 @@
               "plan_date": null,
               "plan_end_date": null,
               "target_participants": null,
-              "actual_title": "PAGBIRIK: BICOL YOUTH CAMPAIGNERS' TRAINING",
+              "actual_title": "Pagbirik: Bicol Youth Campaigner's Training",
               "actual_date": "2026-10-01",
               "actual_end_date": "2026-10-04",
               "actual_participants": 0,
