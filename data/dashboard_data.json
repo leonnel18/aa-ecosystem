@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T03:05:11",
+  "generated_at": "2026-09-18T02:53:05",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36460,11 +36460,11 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 458,
+        "total_applicants": 459,
         "total_graduates": 213,
         "total_ongoing": 50,
         "application_funnel": {
-          "total_applicants": 458,
+          "total_applicants": 459,
           "attended_training": 213,
           "graduated": 213,
           "impact_evaluation_completed": 12
@@ -36502,12 +36502,12 @@
           },
           {
             "year": "2026",
-            "applicants": 181,
+            "applicants": 182,
             "graduates": 23
           }
         ],
         "community_impact": 1047,
-        "touched_organizations": 292,
+        "touched_organizations": 293,
         "training_categories": {
           "completed": [
             {
@@ -36523,7 +36523,7 @@
               "type": "Foundational",
               "start_date": "2026-10-12",
               "end_date": "2026-08-21",
-              "applicants": 86,
+              "applicants": 87,
               "graduates": 0
             },
             {
@@ -36825,7 +36825,7 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-08-21",
-            "applicants": 86,
+            "applicants": 87,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -37177,6 +37177,15 @@
             "training": "Feminist Leadership Training",
             "training_type": "Feminist Leadership",
             "year": "2022",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
+            "name": "Aksi Ekologi dan Emansipasi Rakyat/AEER (Action for Ecology and People's Emancipation)",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 0
@@ -40183,7 +40192,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 257,
+            "Female": 258,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
@@ -40191,9 +40200,9 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 134,
             "18-24": 30,
-            "35-44": 71,
+            "25-34": 134,
+            "35-44": 72,
             "<18": 5,
             "45+": 34,
             "Unknown": 184
@@ -40456,22 +40465,22 @@
             "training_name": "PowerShift Asia",
             "likert": {
               "strategy_tactics": {
-                "pre": 5.36,
+                "pre": 5.32,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 5.1,
+                "pre": 5.09,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 5.15,
+                "pre": 5.14,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.58,
+                "pre": 5.55,
                 "post": null,
                 "6m": null
               }
@@ -42109,7 +42118,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 257,
+            "Female": 258,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
@@ -42117,14 +42126,15 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "25-34": 134,
             "18-24": 30,
-            "35-44": 71,
+            "25-34": 134,
+            "35-44": 72,
             "<18": 5,
             "45+": 34,
             "Unknown": 184
           },
           "by_region": {
+            "Jalan Tebet Timur Dalam 14b, Tebet, Jakarta Selatan, Dki Jakarta": 1,
             "Seoul": 8,
             "Kota Pekanbaru, Riau, Indonesia": 1,
             "1911-104, 99 Seongshin-Ro, Deogyang-Gu, Goyang-Si, Gyeonggi-Do": 1,
