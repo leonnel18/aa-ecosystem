@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T03:01:06",
+  "generated_at": "2026-09-22T03:00:11",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36460,11 +36460,11 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 459,
+        "total_applicants": 460,
         "total_graduates": 213,
         "total_ongoing": 51,
         "application_funnel": {
-          "total_applicants": 459,
+          "total_applicants": 460,
           "attended_training": 213,
           "graduated": 213,
           "impact_evaluation_completed": 12
@@ -36502,12 +36502,12 @@
           },
           {
             "year": "2026",
-            "applicants": 182,
+            "applicants": 183,
             "graduates": 23
           }
         ],
         "community_impact": 1047,
-        "touched_organizations": 293,
+        "touched_organizations": 294,
         "training_categories": {
           "completed": [
             {
@@ -36523,7 +36523,7 @@
               "type": "Foundational",
               "start_date": "2026-10-12",
               "end_date": "2026-08-21",
-              "applicants": 87,
+              "applicants": 88,
               "graduates": 0
             },
             {
@@ -36825,7 +36825,7 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-08-21",
-            "applicants": 87,
+            "applicants": 88,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -37177,6 +37177,15 @@
             "training": "Feminist Leadership Training",
             "training_type": "Feminist Leadership",
             "year": "2022",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
+            "name": "Aksi Ekologi dan Emansipasi Rakyat (AEER)",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 0
@@ -40192,7 +40201,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 258,
+            "Female": 259,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
@@ -40200,7 +40209,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "18-24": 30,
+            "18-24": 31,
             "25-34": 134,
             "35-44": 72,
             "<18": 5,
@@ -40465,22 +40474,22 @@
             "training_name": "PowerShift Asia",
             "likert": {
               "strategy_tactics": {
-                "pre": 5.32,
+                "pre": 5.3,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 5.09,
+                "pre": 5.08,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 5.14,
+                "pre": 5.11,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.55,
+                "pre": 5.52,
                 "post": null,
                 "6m": null
               }
@@ -42118,7 +42127,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 258,
+            "Female": 259,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
@@ -42126,7 +42135,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "18-24": 30,
+            "18-24": 31,
             "25-34": 134,
             "35-44": 72,
             "<18": 5,
@@ -42135,6 +42144,7 @@
           },
           "by_region": {
             "Jalan Tebet Timur Dalam 14b, Tebet, Jakarta Selatan, Dki Jakarta": 1,
+            "Depok": 4,
             "Seoul": 8,
             "Kota Pekanbaru, Riau, Indonesia": 1,
             "1911-104, 99 Seongshin-Ro, Deogyang-Gu, Goyang-Si, Gyeonggi-Do": 1,
@@ -42185,7 +42195,6 @@
             "Padang": 1,
             "House 212, Block D, Bashundhara R/A, Dhaka": 1,
             "Rangpur": 1,
-            "Depok": 3,
             "Jl. Cumi-Cumi No. 249, Palangka Raya, Kalimantan Tengah": 1,
             "0158,Maqbul Ahmed Sarang Bari,Village:-Courtpara, Post Office:- Kumira(4314),Sitakundu, Chattogram": 1,
             "Nilkhet Rd, Dhaka University, Dhaka-1000": 1,
