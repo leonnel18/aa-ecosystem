@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T03:00:21",
+  "generated_at": "2026-09-24T02:51:37",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5434,11 +5434,11 @@
     "PH": {
       "portal": "PH",
       "report_1_overview": {
-        "total_applicants": 748,
+        "total_applicants": 751,
         "total_graduates": 586,
         "total_ongoing": 0,
         "application_funnel": {
-          "total_applicants": 748,
+          "total_applicants": 751,
           "attended_training": 586,
           "graduated": 586,
           "impact_evaluation_completed": 5
@@ -5471,12 +5471,12 @@
           },
           {
             "year": "2026",
-            "applicants": 44,
+            "applicants": 47,
             "graduates": 20
           }
         ],
         "community_impact": 1067,
-        "touched_organizations": 299,
+        "touched_organizations": 302,
         "training_categories": {
           "completed": [
             {
@@ -5856,7 +5856,7 @@
             "type": "Foundational",
             "date": "2026-10-01",
             "end_date": "2026-10-04",
-            "applicants": 0,
+            "applicants": 3,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -6743,6 +6743,15 @@
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 1
+          },
+          {
+            "name": "Aquinian Herals",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
           },
           {
             "name": "Association of Young Environmental Journalists (AYEJ) - Dumaguete",
@@ -9436,6 +9445,15 @@
             "graduate_count": 1
           },
           {
+            "name": "Sitio Tico Tico Youth Organization",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Society of Sustainability Practitioners Philippines (SSP)",
             "training": "12-REalTalk: A Movement Building Workshop on Renewable Energy Luzon Leg",
             "training_type": "Foundational",
@@ -9749,6 +9767,15 @@
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 1
+          },
+          {
+            "name": "The Kindness Station",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
           },
           {
             "name": "The United Nations Population Fun (UNIFPA)",
@@ -10070,7 +10097,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Male": 318,
+            "Male": 321,
             "Female": 358,
             "Prefer not to answer": 5,
             "Transgender": 6,
@@ -10081,12 +10108,12 @@
             "Other": 2
           },
           "by_age_group": {
+            "18-24": 96,
+            "25-34": 138,
             "Unknown": 440,
-            "18-24": 94,
             "45+": 28,
             "<18": 6,
-            "35-44": 43,
-            "25-34": 137
+            "35-44": 43
           }
         }
       },
@@ -10763,6 +10790,31 @@
               "building_connection": {
                 "pre": 5.43,
                 "post": 6.67,
+                "6m": null
+              }
+            }
+          },
+          {
+            "training_name": "Pagbirik: Bicol Youth Campaigner's Training",
+            "likert": {
+              "strategy_tactics": {
+                "pre": 5.33,
+                "post": null,
+                "6m": null
+              },
+              "communication_strategy": {
+                "pre": 5.33,
+                "post": null,
+                "6m": null
+              },
+              "facilitating_workshop": {
+                "pre": 6.0,
+                "post": null,
+                "6m": null
+              },
+              "building_connection": {
+                "pre": 6.0,
+                "post": null,
                 "6m": null
               }
             }
@@ -12702,7 +12754,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Male": 318,
+            "Male": 321,
             "Female": 358,
             "Prefer not to answer": 5,
             "Transgender": 6,
@@ -12713,14 +12765,17 @@
             "Other": 2
           },
           "by_age_group": {
+            "18-24": 96,
+            "25-34": 138,
             "Unknown": 440,
-            "18-24": 94,
             "45+": 28,
             "<18": 6,
-            "35-44": 43,
-            "25-34": 137
+            "35-44": 43
           },
           "by_region": {
+            "Legazpi City": 1,
+            "Bigaa, Lgeazpi City": 1,
+            "Castilla, Sorsogon": 1,
             "Unknown": 356,
             "Block 23 Lot 23": 1,
             "Naga City": 12,
@@ -42905,7 +42960,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3762,
+        "total_applicants": 3765,
         "total_graduates": 1780
       },
       "per_country": {
@@ -42914,7 +42969,7 @@
           "total_graduates": 281
         },
         "PH": {
-          "total_applicants": 748,
+          "total_applicants": 751,
           "total_graduates": 586
         },
         "KR": {
