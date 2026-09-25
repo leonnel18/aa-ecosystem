@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T02:51:37",
+  "generated_at": "2026-09-25T03:08:03",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36517,7 +36517,7 @@
       "report_1_overview": {
         "total_applicants": 460,
         "total_graduates": 213,
-        "total_ongoing": 51,
+        "total_ongoing": 49,
         "application_funnel": {
           "total_applicants": 460,
           "attended_training": 213,
