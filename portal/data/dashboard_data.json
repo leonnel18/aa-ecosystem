@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T03:08:03",
+  "generated_at": "2026-09-26T03:11:43",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5434,11 +5434,11 @@
     "PH": {
       "portal": "PH",
       "report_1_overview": {
-        "total_applicants": 751,
+        "total_applicants": 755,
         "total_graduates": 586,
         "total_ongoing": 0,
         "application_funnel": {
-          "total_applicants": 751,
+          "total_applicants": 755,
           "attended_training": 586,
           "graduated": 586,
           "impact_evaluation_completed": 5
@@ -5471,12 +5471,12 @@
           },
           {
             "year": "2026",
-            "applicants": 47,
+            "applicants": 51,
             "graduates": 20
           }
         ],
         "community_impact": 1067,
-        "touched_organizations": 302,
+        "touched_organizations": 305,
         "training_categories": {
           "completed": [
             {
@@ -5856,7 +5856,7 @@
             "type": "Foundational",
             "date": "2026-10-01",
             "end_date": "2026-10-04",
-            "applicants": 3,
+            "applicants": 7,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -6743,6 +6743,15 @@
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 1
+          },
+          {
+            "name": "Aquinian Herald",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
           },
           {
             "name": "Aquinian Herals",
@@ -9481,6 +9490,15 @@
             "graduate_count": 1
           },
           {
+            "name": "St. Expeditus Medical Emergency Response Services, Inc. (SEMERS)",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "St. Isidore Parish Youth Ministry (SIPYM )",
             "training": "ICSC Level 1 (July 2024)",
             "training_type": "Foundational",
@@ -9976,6 +9994,15 @@
             "graduate_count": 1
           },
           {
+            "name": "Youth Ambassadors of Albay Province (YAAP)",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Youth Empowering Youth (YEY) - Pakistan",
             "training": "Reboot PH Bacolod Chapter (Level 1) March 2024",
             "training_type": "Foundational",
@@ -10093,11 +10120,11 @@
             "graduate_count": 0
           }
         ],
-        "unattributed_applicants": 48,
+        "unattributed_applicants": 49,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Male": 321,
+            "Male": 325,
             "Female": 358,
             "Prefer not to answer": 5,
             "Transgender": 6,
@@ -10108,8 +10135,8 @@
             "Other": 2
           },
           "by_age_group": {
-            "18-24": 96,
-            "25-34": 138,
+            "18-24": 97,
+            "25-34": 141,
             "Unknown": 440,
             "45+": 28,
             "<18": 6,
@@ -10798,22 +10825,22 @@
             "training_name": "Pagbirik: Bicol Youth Campaigner's Training",
             "likert": {
               "strategy_tactics": {
-                "pre": 5.33,
+                "pre": 4.86,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 5.33,
+                "pre": 4.43,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 6.0,
+                "pre": 5.14,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 6.0,
+                "pre": 5.71,
                 "post": null,
                 "6m": null
               }
@@ -12754,7 +12781,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Male": 321,
+            "Male": 325,
             "Female": 358,
             "Prefer not to answer": 5,
             "Transgender": 6,
@@ -12765,14 +12792,18 @@
             "Other": 2
           },
           "by_age_group": {
-            "18-24": 96,
-            "25-34": 138,
+            "18-24": 97,
+            "25-34": 141,
             "Unknown": 440,
             "45+": 28,
             "<18": 6,
             "35-44": 43
           },
           "by_region": {
+            "Oas": 1,
+            "Olv, Bibincahan, Sorsogon City": 1,
+            "Purok 3, Palanog, Camalig, Albay": 1,
+            "Zone 4, Villa Petrona Libon, Albay": 1,
             "Legazpi City": 1,
             "Bigaa, Lgeazpi City": 1,
             "Castilla, Sorsogon": 1,
@@ -30443,9 +30474,9 @@
             "Unknown": 926,
             "18-24": 195,
             "25-34": 470,
-            "45+": 18,
+            "45+": 19,
             "<18": 11,
-            "35-44": 97
+            "35-44": 96
           }
         }
       },
@@ -34717,9 +34748,9 @@
             "Unknown": 926,
             "18-24": 195,
             "25-34": 470,
-            "45+": 18,
+            "45+": 19,
             "<18": 11,
-            "35-44": 97
+            "35-44": 96
           },
           "by_region": {
             "Unknown": 136,
@@ -42960,7 +42991,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3765,
+        "total_applicants": 3769,
         "total_graduates": 1780
       },
       "per_country": {
@@ -42969,7 +43000,7 @@
           "total_graduates": 281
         },
         "PH": {
-          "total_applicants": 751,
+          "total_applicants": 755,
           "total_graduates": 586
         },
         "KR": {
