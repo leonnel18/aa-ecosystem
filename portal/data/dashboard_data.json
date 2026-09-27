@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T03:11:43",
+  "generated_at": "2026-09-27T03:18:59",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5434,11 +5434,11 @@
     "PH": {
       "portal": "PH",
       "report_1_overview": {
-        "total_applicants": 755,
+        "total_applicants": 767,
         "total_graduates": 586,
         "total_ongoing": 0,
         "application_funnel": {
-          "total_applicants": 755,
+          "total_applicants": 767,
           "attended_training": 586,
           "graduated": 586,
           "impact_evaluation_completed": 5
@@ -5471,12 +5471,12 @@
           },
           {
             "year": "2026",
-            "applicants": 51,
+            "applicants": 63,
             "graduates": 20
           }
         ],
         "community_impact": 1067,
-        "touched_organizations": 305,
+        "touched_organizations": 309,
         "training_categories": {
           "completed": [
             {
@@ -5856,7 +5856,7 @@
             "type": "Foundational",
             "date": "2026-10-01",
             "end_date": "2026-10-04",
-            "applicants": 7,
+            "applicants": 19,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -6673,6 +6673,24 @@
             "graduate_count": 3
           },
           {
+            "name": "Alyansa ng Nagkakaisang Iskolar ng Bayan",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
+            "name": "Alyansan Ng Nagkakaisang Iskolar ng Bayan",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Angat Buhay - San Rafael",
             "training": "05-Pamitinan 5",
             "training_type": "Foundational",
@@ -6750,7 +6768,7 @@
             "training_type": "Foundational",
             "year": "2026",
             "total_impact": 0,
-            "applicant_count": 1,
+            "applicant_count": 2,
             "graduate_count": 0
           },
           {
@@ -8203,6 +8221,15 @@
             "graduate_count": 0
           },
           {
+            "name": "JJC Tabaco",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 5,
+            "graduate_count": 0
+          },
+          {
             "name": "Juan Health PH",
             "training": "09-Pamitinan 9 Mag Aktibar Kita!: Campaigners\u2019 Training for Young Just Energy Transition Advocates f",
             "training_type": "Foundational",
@@ -8336,6 +8363,15 @@
             "total_impact": 0,
             "applicant_count": 3,
             "graduate_count": 2
+          },
+          {
+            "name": "Kaya Natin Youth Albay",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
           },
           {
             "name": "Kidlikasan.Kabataan.Kalikasan.",
@@ -9792,7 +9828,7 @@
             "training_type": "Foundational",
             "year": "2026",
             "total_impact": 0,
-            "applicant_count": 1,
+            "applicant_count": 4,
             "graduate_count": 0
           },
           {
@@ -10124,22 +10160,22 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Male": 325,
-            "Female": 358,
+            "Male": 333,
+            "Female": 361,
+            "Non-binary": 19,
             "Prefer not to answer": 5,
             "Transgender": 6,
-            "Non-binary": 18,
             "Queer/Gay": 1,
             "Unknown": 39,
             "Nonbinary": 1,
             "Other": 2
           },
           "by_age_group": {
-            "18-24": 97,
-            "25-34": 141,
+            "18-24": 106,
+            "25-34": 142,
+            "<18": 8,
             "Unknown": 440,
             "45+": 28,
-            "<18": 6,
             "35-44": 43
           }
         }
@@ -10825,22 +10861,22 @@
             "training_name": "Pagbirik: Bicol Youth Campaigner's Training",
             "likert": {
               "strategy_tactics": {
-                "pre": 4.86,
+                "pre": 4.95,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 4.43,
+                "pre": 4.21,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 5.14,
+                "pre": 4.89,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.71,
+                "pre": 5.47,
                 "post": null,
                 "6m": null
               }
@@ -12781,25 +12817,37 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Male": 325,
-            "Female": 358,
+            "Male": 333,
+            "Female": 361,
+            "Non-binary": 19,
             "Prefer not to answer": 5,
             "Transgender": 6,
-            "Non-binary": 18,
             "Queer/Gay": 1,
             "Unknown": 39,
             "Nonbinary": 1,
             "Other": 2
           },
           "by_age_group": {
-            "18-24": 97,
-            "25-34": 141,
+            "18-24": 106,
+            "25-34": 142,
+            "<18": 8,
             "Unknown": 440,
             "45+": 28,
-            "<18": 6,
             "35-44": 43
           },
           "by_region": {
+            "Matagbac, Tabaco City": 1,
+            "Bacolod Tabaco City, Albay": 1,
+            "Buenavista West District, Sorsogon City": 1,
+            "Rawis Bacon, District, Sorsogon City": 1,
+            "Sitio 1, San Vicente, Castilla, Sorsogon": 1,
+            "Kilicao, Daraga, Albay": 1,
+            "San Juan, Tabaco City, Albay": 1,
+            "Brgy. Bon-Ot Big, Matnog, Sorsogon": 1,
+            "Ligao City": 1,
+            "P4 Bacolod St. Gajo, Tiwi, Albay": 1,
+            "Osiao, Bacon District, Sorsogon City": 1,
+            "P-4, Divino Rostro, Tabaco City": 1,
             "Oas": 1,
             "Olv, Bibincahan, Sorsogon City": 1,
             "Purok 3, Palanog, Camalig, Albay": 1,
@@ -42991,7 +43039,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3769,
+        "total_applicants": 3781,
         "total_graduates": 1780
       },
       "per_country": {
@@ -43000,7 +43048,7 @@
           "total_graduates": 281
         },
         "PH": {
-          "total_applicants": 755,
+          "total_applicants": 767,
           "total_graduates": 586
         },
         "KR": {
