@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T03:18:59",
+  "generated_at": "2026-09-28T03:16:06",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -13804,11 +13804,11 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 200,
+        "total_applicants": 201,
         "total_graduates": 176,
         "total_ongoing": 4,
         "application_funnel": {
-          "total_applicants": 200,
+          "total_applicants": 201,
           "attended_training": 176,
           "graduated": 176,
           "impact_evaluation_completed": 16
@@ -13836,12 +13836,12 @@
           },
           {
             "year": "2026",
-            "applicants": 13,
+            "applicants": 14,
             "graduates": 11
           }
         ],
         "community_impact": 159,
-        "touched_organizations": 57,
+        "touched_organizations": 58,
         "training_categories": {
           "completed": [
             {
@@ -14282,7 +14282,7 @@
             "type": "Foundational",
             "date": "2026-11-30",
             "end_date": "2026-12-04",
-            "applicants": 0,
+            "applicants": 1,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -14502,6 +14502,15 @@
           }
         ],
         "organizations": [
+          {
+            "name": "Aurora",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
           {
             "name": "Big Wave (Big Wave) - Seoul",
             "training": "Pado Power 3 Fellowship",
@@ -15290,7 +15299,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 121,
+            "Female": 122,
             "Male": 49,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -15301,7 +15310,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 122,
+            "Unknown": 123,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -15532,6 +15541,31 @@
               "building_connection": {
                 "pre": 4.15,
                 "post": 5.55,
+                "6m": null
+              }
+            }
+          },
+          {
+            "training_name": "Pado Power Fellowship Batch 7",
+            "likert": {
+              "strategy_tactics": {
+                "pre": 4.0,
+                "post": null,
+                "6m": null
+              },
+              "communication_strategy": {
+                "pre": 3.0,
+                "post": null,
+                "6m": null
+              },
+              "facilitating_workshop": {
+                "pre": 3.0,
+                "post": null,
+                "6m": null
+              },
+              "building_connection": {
+                "pre": 3.0,
+                "post": null,
                 "6m": null
               }
             }
@@ -17358,7 +17392,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 121,
+            "Female": 122,
             "Male": 49,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -17369,13 +17403,14 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 122,
+            "Unknown": 123,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
             "18-24": 4
           },
           "by_region": {
+            "Karachi": 1,
             "\uc8fc\uacf5\ub85c 99": 1,
             "\uacbd\uae30\ub3c4 \uc548\uc0b0\uc2dc \uc0c1\ub85d\uad6c": 1,
             "\ub2f9\uc9c4\uc2dc": 2,
@@ -43039,7 +43074,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3781,
+        "total_applicants": 3782,
         "total_graduates": 1780
       },
       "per_country": {
@@ -43052,7 +43087,7 @@
           "total_graduates": 586
         },
         "KR": {
-          "total_applicants": 200,
+          "total_applicants": 201,
           "total_graduates": 176
         },
         "ID": {
