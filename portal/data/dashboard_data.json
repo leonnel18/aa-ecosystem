@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T03:16:06",
+  "generated_at": "2026-09-29T03:53:55",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5434,11 +5434,11 @@
     "PH": {
       "portal": "PH",
       "report_1_overview": {
-        "total_applicants": 767,
+        "total_applicants": 769,
         "total_graduates": 586,
         "total_ongoing": 0,
         "application_funnel": {
-          "total_applicants": 767,
+          "total_applicants": 769,
           "attended_training": 586,
           "graduated": 586,
           "impact_evaluation_completed": 5
@@ -5471,12 +5471,12 @@
           },
           {
             "year": "2026",
-            "applicants": 63,
+            "applicants": 65,
             "graduates": 20
           }
         ],
         "community_impact": 1067,
-        "touched_organizations": 309,
+        "touched_organizations": 311,
         "training_categories": {
           "completed": [
             {
@@ -5856,7 +5856,7 @@
             "type": "Foundational",
             "date": "2026-10-01",
             "end_date": "2026-10-04",
-            "applicants": 19,
+            "applicants": 21,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -6608,6 +6608,15 @@
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 1
+          },
+          {
+            "name": "ANIB (Alyansa ng mga Nagkakaisang Iskolar ng Bayan)",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
           },
           {
             "name": "Administration of City Local Environment and Natural Resources Office (CLENRO)",
@@ -9526,6 +9535,15 @@
             "graduate_count": 1
           },
           {
+            "name": "St. Expeditus Medical Emergency Response Services Inc.",
+            "training": "Pagbirik: Bicol Youth Campaigner's Training",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "St. Expeditus Medical Emergency Response Services, Inc. (SEMERS)",
             "training": "Pagbirik: Bicol Youth Campaigner's Training",
             "training_type": "Foundational",
@@ -10160,7 +10178,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Male": 333,
+            "Male": 335,
             "Female": 361,
             "Non-binary": 19,
             "Prefer not to answer": 5,
@@ -10171,7 +10189,7 @@
             "Other": 2
           },
           "by_age_group": {
-            "18-24": 106,
+            "18-24": 108,
             "25-34": 142,
             "<18": 8,
             "Unknown": 440,
@@ -10861,22 +10879,22 @@
             "training_name": "Pagbirik: Bicol Youth Campaigner's Training",
             "likert": {
               "strategy_tactics": {
-                "pre": 4.95,
+                "pre": 5.05,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 4.21,
+                "pre": 4.29,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 4.89,
+                "pre": 4.9,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.47,
+                "pre": 5.62,
                 "post": null,
                 "6m": null
               }
@@ -12817,7 +12835,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Male": 333,
+            "Male": 335,
             "Female": 361,
             "Non-binary": 19,
             "Prefer not to answer": 5,
@@ -12828,7 +12846,7 @@
             "Other": 2
           },
           "by_age_group": {
-            "18-24": 106,
+            "18-24": 108,
             "25-34": 142,
             "<18": 8,
             "Unknown": 440,
@@ -12836,10 +12854,12 @@
             "35-44": 43
           },
           "by_region": {
+            "Gabao Bibincahan, Soorsogon City \u2014 Sorsogon": 1,
             "Matagbac, Tabaco City": 1,
             "Bacolod Tabaco City, Albay": 1,
             "Buenavista West District, Sorsogon City": 1,
             "Rawis Bacon, District, Sorsogon City": 1,
+            "Camalig, Albay": 1,
             "Sitio 1, San Vicente, Castilla, Sorsogon": 1,
             "Kilicao, Daraga, Albay": 1,
             "San Juan, Tabaco City, Albay": 1,
@@ -30555,8 +30575,8 @@
           },
           "by_age_group": {
             "Unknown": 926,
-            "18-24": 195,
-            "25-34": 470,
+            "18-24": 194,
+            "25-34": 471,
             "45+": 19,
             "<18": 11,
             "35-44": 96
@@ -34829,8 +34849,8 @@
           },
           "by_age_group": {
             "Unknown": 926,
-            "18-24": 195,
-            "25-34": 470,
+            "18-24": 194,
+            "25-34": 471,
             "45+": 19,
             "<18": 11,
             "35-44": 96
@@ -43074,7 +43094,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3782,
+        "total_applicants": 3784,
         "total_graduates": 1780
       },
       "per_country": {
@@ -43083,7 +43103,7 @@
           "total_graduates": 281
         },
         "PH": {
-          "total_applicants": 767,
+          "total_applicants": 769,
           "total_graduates": 586
         },
         "KR": {
