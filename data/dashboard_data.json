@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T03:41:53",
+  "generated_at": "2026-10-01T03:47:51",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5504,7 +5504,16 @@
               "graduates": 37
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "Pagbirik: Bicol Youth Campaigner's Training",
+              "type": "Foundational",
+              "start_date": "2026-10-01",
+              "end_date": "2026-10-04",
+              "applicants": 21,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -5517,7 +5526,7 @@
           },
           {
             "type": "Foundational",
-            "conducted": 30,
+            "conducted": 31,
             "total_planned": 31
           },
           {
@@ -5595,7 +5604,7 @@
           "2026": [
             {
               "type": "Foundational",
-              "conducted": 2,
+              "conducted": 3,
               "total_planned": 3
             }
           ]
@@ -5846,7 +5855,7 @@
           },
           "2026": {
             "planned": 0,
-            "conducted": 2
+            "conducted": 3
           }
         },
         "actual_trainings": [
@@ -5858,7 +5867,7 @@
             "end_date": "2026-10-04",
             "applicants": 21,
             "graduates": 0,
-            "status": "Upcoming",
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -13169,7 +13178,7 @@
               "actual_date": "2026-10-01",
               "actual_end_date": "2026-10-04",
               "actual_participants": 0,
-              "status": "Upcoming"
+              "status": "Completed"
             }
           ]
         },
@@ -13824,11 +13833,11 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 201,
+        "total_applicants": 203,
         "total_graduates": 176,
         "total_ongoing": 4,
         "application_funnel": {
-          "total_applicants": 201,
+          "total_applicants": 203,
           "attended_training": 176,
           "graduated": 176,
           "impact_evaluation_completed": 16
@@ -13856,12 +13865,12 @@
           },
           {
             "year": "2026",
-            "applicants": 14,
+            "applicants": 16,
             "graduates": 11
           }
         ],
         "community_impact": 159,
-        "touched_organizations": 58,
+        "touched_organizations": 60,
         "training_categories": {
           "completed": [
             {
@@ -14302,7 +14311,7 @@
             "type": "Foundational",
             "date": "2026-11-30",
             "end_date": "2026-12-04",
-            "applicants": 1,
+            "applicants": 3,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -15207,6 +15216,15 @@
             "graduate_count": 3
           },
           {
+            "name": "\uadf8\ub9b0\ud53c\uc2a4 \uc11c\uc6b8\uc0ac\ubb34\uc18c",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "\uae30\ud6c4\uc704\uae30 \ubcf4\ub839\ud589\ub3d9",
             "training": "Pado Power Fellowship Batch 6",
             "training_type": "Foundational",
@@ -15288,6 +15306,15 @@
             "graduate_count": 1
           },
           {
+            "name": "\uc7ac\ub2e8\ubc95\uc778 \uadf8\ub9b0\ud53c\uc2a4",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "\ucc9c\uc548\uae30\ub3c5\uad50\uccad\ub144\ud68c(\ucc9c\uc548ymca)",
             "training": "Pado Power Fellowship Batch 6",
             "training_type": "Foundational",
@@ -15319,8 +15346,8 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 122,
-            "Male": 49,
+            "Female": 123,
+            "Male": 50,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -15330,7 +15357,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 123,
+            "Unknown": 125,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -15569,22 +15596,22 @@
             "training_name": "Pado Power Fellowship Batch 7",
             "likert": {
               "strategy_tactics": {
-                "pre": 4.0,
+                "pre": 5.0,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 3.0,
+                "pre": 3.67,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 3.0,
+                "pre": 5.0,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 3.0,
+                "pre": 5.0,
                 "post": null,
                 "6m": null
               }
@@ -17412,8 +17439,8 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 122,
-            "Male": 49,
+            "Female": 123,
+            "Male": 50,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -17423,13 +17450,15 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 123,
+            "Unknown": 125,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
             "18-24": 4
           },
           "by_region": {
+            "\uc5f0\uc218\uad6c": 1,
+            "\ud654\ub791\ub85c 449-7": 1,
             "Karachi": 1,
             "\uc8fc\uacf5\ub85c 99": 1,
             "\uacbd\uae30\ub3c4 \uc548\uc0b0\uc2dc \uc0c1\ub85d\uad6c": 1,
@@ -17757,7 +17786,7 @@
               "actual_date": null,
               "actual_end_date": null,
               "actual_participants": null,
-              "status": "Upcoming"
+              "status": "Missed"
             },
             {
               "plan_title": "Coalition collaboration training Y2 - GreenSteel - Oct-26",
@@ -17768,7 +17797,7 @@
               "actual_date": null,
               "actual_end_date": null,
               "actual_participants": null,
-              "status": "Upcoming"
+              "status": "Missed"
             },
             {
               "plan_title": "Advisory group meeting Y2 #3 - Oct-26",
@@ -17779,7 +17808,7 @@
               "actual_date": null,
               "actual_end_date": null,
               "actual_participants": null,
-              "status": "Upcoming"
+              "status": "Missed"
             },
             {
               "plan_title": "Pado Power Fellowship #7 - Nov-26",
@@ -36027,7 +36056,7 @@
               "actual_date": null,
               "actual_end_date": null,
               "actual_participants": null,
-              "status": "Ongoing"
+              "status": "Missed"
             },
             {
               "plan_title": "Belantara 5",
@@ -36038,7 +36067,7 @@
               "actual_date": null,
               "actual_end_date": null,
               "actual_participants": null,
-              "status": "Upcoming"
+              "status": "Missed"
             },
             {
               "plan_title": "TOT 1 (KALIMANTAN)",
@@ -36049,7 +36078,7 @@
               "actual_date": null,
               "actual_end_date": null,
               "actual_participants": null,
-              "status": "Upcoming"
+              "status": "Missed"
             },
             {
               "plan_title": "Belantara 7",
@@ -43094,7 +43123,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3784,
+        "total_applicants": 3786,
         "total_graduates": 1780
       },
       "per_country": {
@@ -43107,7 +43136,7 @@
           "total_graduates": 586
         },
         "KR": {
-          "total_applicants": 201,
+          "total_applicants": 203,
           "total_graduates": 176
         },
         "ID": {
