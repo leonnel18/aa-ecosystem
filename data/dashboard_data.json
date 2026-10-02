@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T03:47:51",
+  "generated_at": "2026-10-02T03:46:23",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36737,20 +36737,20 @@
               "graduates": 0
             },
             {
-              "name": "PowerShift Asia",
-              "type": "Foundational",
-              "start_date": "2026-10-12",
-              "end_date": "2026-08-21",
-              "applicants": 88,
-              "graduates": 0
-            },
-            {
               "name": "2026 Taiwan Campaign Strategy and Organising Fellowship - Refresher",
               "type": "Foundational",
               "start_date": "2026-06-12",
               "end_date": "2026-06-12",
               "applicants": 11,
               "graduates": 8
+            },
+            {
+              "name": "2026 Taiwan Campaign Strategy Workshop",
+              "type": "Foundational",
+              "start_date": "2026-06-09",
+              "end_date": "2026-06-11",
+              "applicants": 17,
+              "graduates": 13
             }
           ],
           "ongoing": [],
@@ -37042,7 +37042,7 @@
             "name": "PowerShift Asia",
             "type": "Foundational",
             "date": "2026-10-12",
-            "end_date": "2026-08-21",
+            "end_date": "2026-10-17",
             "applicants": 88,
             "graduates": 0,
             "status": "Upcoming",
@@ -40427,8 +40427,8 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "18-24": 31,
-            "25-34": 134,
+            "18-24": 30,
+            "25-34": 135,
             "35-44": 72,
             "<18": 5,
             "45+": 34,
@@ -42353,8 +42353,8 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "18-24": 31,
-            "25-34": 134,
+            "18-24": 30,
+            "25-34": 135,
             "35-44": 72,
             "<18": 5,
             "45+": 34,
@@ -42799,7 +42799,7 @@
               "target_participants": null,
               "actual_title": "PowerShift Asia",
               "actual_date": "2026-10-12",
-              "actual_end_date": "2026-08-21",
+              "actual_end_date": "2026-10-17",
               "actual_participants": 0,
               "status": "Upcoming"
             },
