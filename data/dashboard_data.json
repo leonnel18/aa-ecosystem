@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T03:59:02",
+  "generated_at": "2026-10-05T03:44:01",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5480,6 +5480,14 @@
         "training_categories": {
           "completed": [
             {
+              "name": "Pagbirik: Bicol Youth Campaigner's Training",
+              "type": "Foundational",
+              "start_date": "2026-10-01",
+              "end_date": "2026-10-04",
+              "applicants": 21,
+              "graduates": 0
+            },
+            {
               "name": "KASARIG: Strengthening Youth Participation and Campaigns",
               "type": "Foundational",
               "start_date": "2026-04-24",
@@ -5494,26 +5502,9 @@
               "end_date": "2026-01-25",
               "applicants": 22,
               "graduates": 15
-            },
-            {
-              "name": "Pandayan with Local Groups in Calbayog, Samar",
-              "type": "Foundational",
-              "start_date": "2025-11-28",
-              "end_date": "2025-11-29",
-              "applicants": 37,
-              "graduates": 37
             }
           ],
-          "ongoing": [
-            {
-              "name": "Pagbirik: Bicol Youth Campaigner's Training",
-              "type": "Foundational",
-              "start_date": "2026-10-01",
-              "end_date": "2026-10-04",
-              "applicants": 21,
-              "graduates": 0
-            }
-          ],
+          "ongoing": [],
           "upcoming": []
         }
       },
