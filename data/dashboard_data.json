@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T03:44:01",
+  "generated_at": "2026-10-06T04:32:14",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -13824,11 +13824,11 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 203,
+        "total_applicants": 204,
         "total_graduates": 176,
         "total_ongoing": 4,
         "application_funnel": {
-          "total_applicants": 203,
+          "total_applicants": 204,
           "attended_training": 176,
           "graduated": 176,
           "impact_evaluation_completed": 16
@@ -13856,12 +13856,12 @@
           },
           {
             "year": "2026",
-            "applicants": 16,
+            "applicants": 17,
             "graduates": 11
           }
         ],
         "community_impact": 159,
-        "touched_organizations": 60,
+        "touched_organizations": 61,
         "training_categories": {
           "completed": [
             {
@@ -14302,7 +14302,7 @@
             "type": "Foundational",
             "date": "2026-11-30",
             "end_date": "2026-12-04",
-            "applicants": 3,
+            "applicants": 4,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -15216,6 +15216,15 @@
             "graduate_count": 0
           },
           {
+            "name": "\uae30\ud6c4\uc194\ub8e8\uc158",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "\uae30\ud6c4\uc704\uae30 \ubcf4\ub839\ud589\ub3d9",
             "training": "Pado Power Fellowship Batch 6",
             "training_type": "Foundational",
@@ -15337,7 +15346,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 123,
+            "Female": 124,
             "Male": 50,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -15348,7 +15357,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 125,
+            "Unknown": 126,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -15587,12 +15596,12 @@
             "training_name": "Pado Power Fellowship Batch 7",
             "likert": {
               "strategy_tactics": {
-                "pre": 5.0,
+                "pre": 4.75,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 3.67,
+                "pre": 4.0,
                 "post": null,
                 "6m": null
               },
@@ -15602,7 +15611,7 @@
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.0,
+                "pre": 4.75,
                 "post": null,
                 "6m": null
               }
@@ -17430,7 +17439,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 123,
+            "Female": 124,
             "Male": 50,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -17441,13 +17450,14 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 125,
+            "Unknown": 126,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
             "18-24": 4
           },
           "by_region": {
+            "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 5,
             "\uc5f0\uc218\uad6c": 1,
             "\ud654\ub791\ub85c 449-7": 1,
             "Karachi": 1,
@@ -17484,7 +17494,6 @@
             "\uace0\uc591\uc2dc": 1,
             "\uad11\uc9c4\uad6c": 1,
             "\uc11c\uc6b8\uc2dc": 23,
-            "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 4,
             "\uc11c\ub300\ubb38\uad6c": 1,
             "\uacc4\uc591\uad6c": 1,
             "\ud654\uc131\uc2dc": 1,
@@ -36669,11 +36678,11 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 460,
+        "total_applicants": 612,
         "total_graduates": 240,
-        "total_ongoing": 27,
+        "total_ongoing": 179,
         "application_funnel": {
-          "total_applicants": 460,
+          "total_applicants": 612,
           "attended_training": 240,
           "graduated": 240,
           "impact_evaluation_completed": 12
@@ -36711,7 +36720,7 @@
           },
           {
             "year": "2026",
-            "applicants": 183,
+            "applicants": 335,
             "graduates": 50
           }
         ],
@@ -36759,6 +36768,11 @@
             "type": "Foundational",
             "conducted": 12,
             "total_planned": 14
+          },
+          {
+            "type": "Unknown",
+            "conducted": 0,
+            "total_planned": 1
           }
         ],
         "trainings_by_type_by_year": {
@@ -36819,6 +36833,11 @@
               "type": "Foundational",
               "conducted": 2,
               "total_planned": 4
+            },
+            {
+              "type": "Unknown",
+              "conducted": 0,
+              "total_planned": 1
             }
           ]
         },
@@ -37051,6 +37070,22 @@
             "date": "2026-10-12",
             "end_date": "2026-10-16",
             "applicants": 0,
+            "graduates": 0,
+            "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
+          {
+            "id": "773031000014581001",
+            "name": "Bangkok Climate Action Week 2026 (BKKCAW)",
+            "type": "Unknown",
+            "date": "2026-10-07",
+            "end_date": "2026-10-08",
+            "applicants": 152,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -40406,24 +40441,24 @@
             "graduate_count": 0
           }
         ],
-        "unattributed_applicants": 20,
+        "unattributed_applicants": 172,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
+            "Unknown": 208,
             "Female": 259,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
-            "Unknown": 56,
             "Prefer not to answer": 4
           },
           "by_age_group": {
+            "Unknown": 336,
             "18-24": 30,
             "25-34": 135,
             "35-44": 72,
             "<18": 5,
-            "45+": 34,
-            "Unknown": 184
+            "45+": 34
           }
         }
       },
@@ -40475,6 +40510,31 @@
               "building_connection": {
                 "pre": 5.33,
                 "post": 6.0,
+                "6m": null
+              }
+            }
+          },
+          {
+            "training_name": "Bangkok Climate Action Week 2026 (BKKCAW)",
+            "likert": {
+              "strategy_tactics": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "communication_strategy": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "facilitating_workshop": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "building_connection": {
+                "pre": null,
+                "post": null,
                 "6m": null
               }
             }
@@ -42336,22 +42396,23 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
+            "Unknown": 208,
             "Female": 259,
             "Male": 134,
             "Non-binary": 6,
             "Transgender": 1,
-            "Unknown": 56,
             "Prefer not to answer": 4
           },
           "by_age_group": {
+            "Unknown": 336,
             "18-24": 30,
             "25-34": 135,
             "35-44": 72,
             "<18": 5,
-            "45+": 34,
-            "Unknown": 184
+            "45+": 34
           },
           "by_region": {
+            "Unknown": 198,
             "Jalan Tebet Timur Dalam 14b, Tebet, Jakarta Selatan, Dki Jakarta": 1,
             "Depok": 4,
             "Seoul": 8,
@@ -42428,7 +42489,6 @@
             "Comilla": 1,
             "Easton Park Jatingor Bandung Indonesia": 1,
             "Kota Tangerang": 1,
-            "Unknown": 46,
             "No. 7-3, Ln. 143, Sec. 1, Xinsheng S. Rd., Da\u2019an Dist.": 1,
             "No. 59, Hongshulin Rd., Tamsui Dist., New Taipei City": 1,
             "New Taipei City": 6,
@@ -42768,7 +42828,7 @@
         },
         "year_2": {
           "target_activities": 0,
-          "actual_activities": 3,
+          "actual_activities": 4,
           "target_participants": 0,
           "actual_participants": 0,
           "rows": [
@@ -42782,6 +42842,17 @@
               "actual_end_date": "2026-09-11",
               "actual_participants": 0,
               "status": "Completed"
+            },
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Bangkok Climate Action Week 2026 (BKKCAW)",
+              "actual_date": "2026-10-07",
+              "actual_end_date": "2026-10-08",
+              "actual_participants": 0,
+              "status": "Upcoming"
             },
             {
               "plan_title": null,
@@ -43114,7 +43185,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3786,
+        "total_applicants": 3787,
         "total_graduates": 1780
       },
       "per_country": {
@@ -43127,7 +43198,7 @@
           "total_graduates": 586
         },
         "KR": {
-          "total_applicants": 203,
+          "total_applicants": 204,
           "total_graduates": 176
         },
         "ID": {
