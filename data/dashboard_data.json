@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T04:32:14",
+  "generated_at": "2026-10-07T03:57:57",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36753,7 +36753,16 @@
               "graduates": 13
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "Bangkok Climate Action Week 2026 (BKKCAW)",
+              "type": "Unknown",
+              "start_date": "2026-10-07",
+              "end_date": "2026-10-08",
+              "applicants": 152,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -36771,7 +36780,7 @@
           },
           {
             "type": "Unknown",
-            "conducted": 0,
+            "conducted": 1,
             "total_planned": 1
           }
         ],
@@ -36836,7 +36845,7 @@
             },
             {
               "type": "Unknown",
-              "conducted": 0,
+              "conducted": 1,
               "total_planned": 1
             }
           ]
@@ -37043,7 +37052,7 @@
           },
           "2026": {
             "planned": 4,
-            "conducted": 4
+            "conducted": 5
           }
         },
         "actual_trainings": [
@@ -37087,7 +37096,7 @@
             "end_date": "2026-10-08",
             "applicants": 152,
             "graduates": 0,
-            "status": "Upcoming",
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -42852,7 +42861,7 @@
               "actual_date": "2026-10-07",
               "actual_end_date": "2026-10-08",
               "actual_participants": 0,
-              "status": "Upcoming"
+              "status": "Completed"
             },
             {
               "plan_title": null,
