@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T04:11:05",
+  "generated_at": "2026-10-09T04:16:45",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36729,6 +36729,14 @@
         "training_categories": {
           "completed": [
             {
+              "name": "Bangkok Climate Action Week 2026 (BKKCAW)",
+              "type": "Unknown",
+              "start_date": "2026-10-07",
+              "end_date": "2026-10-08",
+              "applicants": 152,
+              "graduates": 0
+            },
+            {
               "name": "Gender Equity Leadership Program - Symposium",
               "type": "Feminist Leadership",
               "start_date": "2026-09-09",
@@ -36743,26 +36751,9 @@
               "end_date": "2026-06-12",
               "applicants": 11,
               "graduates": 8
-            },
-            {
-              "name": "2026 Taiwan Campaign Strategy Workshop",
-              "type": "Foundational",
-              "start_date": "2026-06-09",
-              "end_date": "2026-06-11",
-              "applicants": 17,
-              "graduates": 13
             }
           ],
-          "ongoing": [
-            {
-              "name": "Bangkok Climate Action Week 2026 (BKKCAW)",
-              "type": "Unknown",
-              "start_date": "2026-10-07",
-              "end_date": "2026-10-08",
-              "applicants": 152,
-              "graduates": 0
-            }
-          ],
+          "ongoing": [],
           "upcoming": []
         }
       },
