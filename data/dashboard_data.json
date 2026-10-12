@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T03:36:27",
+  "generated_at": "2026-10-12T04:00:32",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5518,7 +5518,7 @@
           {
             "type": "Foundational",
             "conducted": 31,
-            "total_planned": 31
+            "total_planned": 32
           },
           {
             "type": "Training of Trainers",
@@ -5596,7 +5596,7 @@
             {
               "type": "Foundational",
               "conducted": 3,
-              "total_planned": 3
+              "total_planned": 4
             }
           ]
         },
@@ -5850,6 +5850,22 @@
           }
         },
         "actual_trainings": [
+          {
+            "id": "773031000014649001",
+            "name": "Youth Leadership Training for Active Citizen Science on Sustainable Transport",
+            "type": "Foundational",
+            "date": "2026-10-23",
+            "end_date": "2026-10-24",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
           {
             "id": "773031000013632023",
             "name": "Pagbirik: Bicol Youth Campaigner's Training",
@@ -13156,7 +13172,7 @@
         },
         "year_2": {
           "target_activities": 0,
-          "actual_activities": 1,
+          "actual_activities": 2,
           "target_participants": 0,
           "actual_participants": 0,
           "rows": [
@@ -13170,6 +13186,17 @@
               "actual_end_date": "2026-10-04",
               "actual_participants": 0,
               "status": "Completed"
+            },
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Youth Leadership Training for Active Citizen Science on Sustainable Transport",
+              "actual_date": "2026-10-23",
+              "actual_end_date": "2026-10-24",
+              "actual_participants": 0,
+              "status": "Upcoming"
             }
           ]
         },
@@ -36753,7 +36780,24 @@
               "graduates": 8
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "PowerShift Asia",
+              "type": "Foundational",
+              "start_date": "2026-10-12",
+              "end_date": "2026-10-17",
+              "applicants": 88,
+              "graduates": 0
+            },
+            {
+              "name": "Climate Finance Training",
+              "type": "Foundational",
+              "start_date": "2026-10-12",
+              "end_date": "2026-10-16",
+              "applicants": 0,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -36766,7 +36810,7 @@
           },
           {
             "type": "Foundational",
-            "conducted": 12,
+            "conducted": 14,
             "total_planned": 14
           },
           {
@@ -36831,7 +36875,7 @@
             },
             {
               "type": "Foundational",
-              "conducted": 2,
+              "conducted": 4,
               "total_planned": 4
             },
             {
@@ -37043,7 +37087,7 @@
           },
           "2026": {
             "planned": 4,
-            "conducted": 5
+            "conducted": 7
           }
         },
         "actual_trainings": [
@@ -37055,7 +37099,7 @@
             "end_date": "2026-10-17",
             "applicants": 88,
             "graduates": 0,
-            "status": "Upcoming",
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -37071,7 +37115,7 @@
             "end_date": "2026-10-16",
             "applicants": 0,
             "graduates": 0,
-            "status": "Upcoming",
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -42863,7 +42907,7 @@
               "actual_date": "2026-10-12",
               "actual_end_date": "2026-10-17",
               "actual_participants": 0,
-              "status": "Upcoming"
+              "status": "Completed"
             },
             {
               "plan_title": null,
@@ -42874,7 +42918,7 @@
               "actual_date": "2026-10-12",
               "actual_end_date": "2026-10-16",
               "actual_participants": 0,
-              "status": "Upcoming"
+              "status": "Completed"
             }
           ]
         },
