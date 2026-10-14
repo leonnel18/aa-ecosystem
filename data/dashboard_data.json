@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T05:10:04",
+  "generated_at": "2026-10-14T03:16:29",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5435,12 +5435,12 @@
       "portal": "PH",
       "report_1_overview": {
         "total_applicants": 769,
-        "total_graduates": 588,
+        "total_graduates": 589,
         "total_ongoing": 0,
         "application_funnel": {
           "total_applicants": 769,
-          "attended_training": 588,
-          "graduated": 588,
+          "attended_training": 589,
+          "graduated": 589,
           "impact_evaluation_completed": 5
         },
         "yoy_trend": [
@@ -5472,7 +5472,7 @@
           {
             "year": "2026",
             "applicants": 65,
-            "graduates": 22
+            "graduates": 23
           }
         ],
         "community_impact": 1067,
@@ -5485,7 +5485,7 @@
               "start_date": "2026-10-01",
               "end_date": "2026-10-04",
               "applicants": 21,
-              "graduates": 2
+              "graduates": 3
             },
             {
               "name": "KASARIG: Strengthening Youth Participation and Campaigns",
@@ -5873,7 +5873,7 @@
             "date": "2026-10-01",
             "end_date": "2026-10-04",
             "applicants": 21,
-            "graduates": 2,
+            "graduates": 3,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -10070,7 +10070,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Youth Empowering Youth (YEY) - Pakistan",
@@ -10901,17 +10901,17 @@
               },
               "communication_strategy": {
                 "pre": 4.29,
-                "post": 6.5,
+                "post": 6.33,
                 "6m": null
               },
               "facilitating_workshop": {
                 "pre": 4.9,
-                "post": 7.0,
+                "post": 6.67,
                 "6m": null
               },
               "building_connection": {
                 "pre": 5.62,
-                "post": 6.5,
+                "post": 6.33,
                 "6m": null
               }
             }
@@ -11688,6 +11688,15 @@
                 "next_workshop_suggestion": "none",
                 "testimonial": "This training was particularly valuable to me because it helped me understand that creating meaningful change requires more than just passion and good intentions. It requires awareness, strategic thinking, and the courage to speak up for what is right. I also learned the importance of having a clear purpose as a leader while taking care of myself in the process, because I cannot effectively serve others if I lose myself along the way. Overall, this training encouraged me to become a more intentional, responsible, and purpose-driven advocate.",
                 "applicant_name": "Christ Paraiso"
+              },
+              {
+                "what_went_well": "Everything, from the activities, speakers and free time.",
+                "sum_up_learning": "Simply, I learned new knowledge.",
+                "action_plan": "First, re-echo to the youth of our community. Secondly, make a plan of action regarding the current issue in our community that is climate/energy related. Lastly, to put the plan into action.",
+                "improvement_suggestion": "N/A",
+                "next_workshop_suggestion": "More discussions about Energy.",
+                "testimonial": null,
+                "applicant_name": "Jay Mhar Madridano"
               }
             ]
           },
@@ -13209,7 +13218,7 @@
           "target_activities": 0,
           "actual_activities": 2,
           "target_participants": 0,
-          "actual_participants": 2,
+          "actual_participants": 3,
           "rows": [
             {
               "plan_title": null,
@@ -13219,7 +13228,7 @@
               "actual_title": "Pagbirik: Bicol Youth Campaigner's Training",
               "actual_date": "2026-10-01",
               "actual_end_date": "2026-10-04",
-              "actual_participants": 2,
+              "actual_participants": 3,
               "status": "Completed"
             },
             {
@@ -13886,11 +13895,11 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 205,
+        "total_applicants": 207,
         "total_graduates": 176,
         "total_ongoing": 4,
         "application_funnel": {
-          "total_applicants": 205,
+          "total_applicants": 207,
           "attended_training": 176,
           "graduated": 176,
           "impact_evaluation_completed": 16
@@ -13918,12 +13927,12 @@
           },
           {
             "year": "2026",
-            "applicants": 18,
+            "applicants": 20,
             "graduates": 11
           }
         ],
         "community_impact": 159,
-        "touched_organizations": 62,
+        "touched_organizations": 63,
         "training_categories": {
           "completed": [
             {
@@ -14364,7 +14373,7 @@
             "type": "Foundational",
             "date": "2026-11-30",
             "end_date": "2026-12-04",
-            "applicants": 5,
+            "applicants": 7,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -15143,6 +15152,15 @@
             "graduate_count": 1
           },
           {
+            "name": "Solutions for Our Climate",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Solutions for Our Climate (SFOC)",
             "training": "Pado Power 1 Fellowship",
             "training_type": "Foundational",
@@ -15283,7 +15301,7 @@
             "training_type": "Foundational",
             "year": "2026",
             "total_impact": 0,
-            "applicant_count": 1,
+            "applicant_count": 2,
             "graduate_count": 0
           },
           {
@@ -15417,7 +15435,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 125,
+            "Female": 127,
             "Male": 50,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -15428,7 +15446,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 127,
+            "Unknown": 129,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -15667,22 +15685,22 @@
             "training_name": "Pado Power Fellowship Batch 7",
             "likert": {
               "strategy_tactics": {
-                "pre": 4.8,
+                "pre": 4.57,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 4.0,
+                "pre": 3.86,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 4.8,
+                "pre": 4.86,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 4.8,
+                "pre": 5.0,
                 "post": null,
                 "6m": null
               }
@@ -17510,7 +17528,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 125,
+            "Female": 127,
             "Male": 50,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -17521,15 +17539,16 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 127,
+            "Unknown": 129,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
             "18-24": 4
           },
           "by_region": {
+            "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 6,
+            "Seoul": 62,
             "\ud310\uad50\ub300\uc7a5\ub85c7\uae38 69": 1,
-            "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 5,
             "\uc5f0\uc218\uad6c": 1,
             "\ud654\ub791\ub85c 449-7": 1,
             "Karachi": 1,
@@ -17560,7 +17579,6 @@
             "Jung-Gu": 1,
             "\uc744\uc9c0\ub85c 15\uae38": 1,
             "\uacbd\uae30\ub3c4": 3,
-            "Seoul": 61,
             "\uc11c\uc6b8": 4,
             "\uc11c\uc6b8\ud2b9\ubcc4": 1,
             "\uace0\uc591\uc2dc": 1,
@@ -43274,8 +43292,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3788,
-        "total_graduates": 1782
+        "total_applicants": 3790,
+        "total_graduates": 1783
       },
       "per_country": {
         "PK": {
@@ -43284,10 +43302,10 @@
         },
         "PH": {
           "total_applicants": 769,
-          "total_graduates": 588
+          "total_graduates": 589
         },
         "KR": {
-          "total_applicants": 205,
+          "total_applicants": 207,
           "total_graduates": 176
         },
         "ID": {
