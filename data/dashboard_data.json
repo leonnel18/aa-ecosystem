@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T03:16:29",
+  "generated_at": "2026-10-15T02:54:44",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5435,12 +5435,12 @@
       "portal": "PH",
       "report_1_overview": {
         "total_applicants": 769,
-        "total_graduates": 589,
+        "total_graduates": 591,
         "total_ongoing": 0,
         "application_funnel": {
           "total_applicants": 769,
-          "attended_training": 589,
-          "graduated": 589,
+          "attended_training": 591,
+          "graduated": 591,
           "impact_evaluation_completed": 5
         },
         "yoy_trend": [
@@ -5472,7 +5472,7 @@
           {
             "year": "2026",
             "applicants": 65,
-            "graduates": 23
+            "graduates": 25
           }
         ],
         "community_impact": 1067,
@@ -5485,7 +5485,7 @@
               "start_date": "2026-10-01",
               "end_date": "2026-10-04",
               "applicants": 21,
-              "graduates": 3
+              "graduates": 5
             },
             {
               "name": "KASARIG: Strengthening Youth Participation and Campaigns",
@@ -5873,7 +5873,7 @@
             "date": "2026-10-01",
             "end_date": "2026-10-04",
             "applicants": 21,
-            "graduates": 3,
+            "graduates": 5,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -6704,7 +6704,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Alyansan Ng Nagkakaisang Iskolar ng Bayan",
@@ -8252,7 +8252,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 5,
-            "graduate_count": 1
+            "graduate_count": 2
           },
           {
             "name": "Juan Health PH",
@@ -10896,22 +10896,22 @@
             "likert": {
               "strategy_tactics": {
                 "pre": 5.05,
-                "post": 6.0,
+                "post": 6.4,
                 "6m": null
               },
               "communication_strategy": {
                 "pre": 4.29,
-                "post": 6.33,
+                "post": 6.6,
                 "6m": null
               },
               "facilitating_workshop": {
                 "pre": 4.9,
-                "post": 6.67,
+                "post": 6.8,
                 "6m": null
               },
               "building_connection": {
                 "pre": 5.62,
-                "post": 6.33,
+                "post": 6.6,
                 "6m": null
               }
             }
@@ -11672,6 +11672,15 @@
             "training_name": "Pagbirik: Bicol Youth Campaigner's Training",
             "responses": [
               {
+                "what_went_well": "All",
+                "sum_up_learning": "Perspective shifting",
+                "action_plan": "Move\nMake a Difference \nChange",
+                "improvement_suggestion": "NA",
+                "next_workshop_suggestion": "NA",
+                "testimonial": null,
+                "applicant_name": "Jayson Patrick Bueno"
+              },
+              {
                 "what_went_well": "guest speakers and socials night",
                 "sum_up_learning": "i learned new things with the appropriate guidance of reboot and aktivasia",
                 "action_plan": "find renewable energy alternatives \nconducted project on climate action \nbe part of a positive change in this world full of climate change",
@@ -11679,6 +11688,15 @@
                 "next_workshop_suggestion": "local tours hehe",
                 "testimonial": "it honed not just my leadership skills but also my knowledge in renewable energy",
                 "applicant_name": "Gilan Francheska Borlagdan"
+              },
+              {
+                "what_went_well": "Session and the Guest Speaker",
+                "sum_up_learning": "PAGBIRIK taught me that effective climate advocacy goes beyond passion and awareness\u2014it requires strategic campaigning, power analysis, collective action, and sustained community organizing to create meaningful change.",
+                "action_plan": "1. Apply the campaign planning tools I learned, particularly problem identification, SWOT analysis, power analysis, and stakeholder mapping, to identify pressing climate and renewable energy issues in my community and develop realistic, strategic responses.\n2. Engage fellow youth leaders, student organizations, and community stakeholders in discussions and initiatives that promote climate justice, renewable energy, and a just energy transition in Bicol.\n3. Strengthen connections with fellow PAGBIRIK campaigners and explore opportunities for collaborative campaigns, knowledge-sharing, and sustained collective action beyond the training.",
+                "improvement_suggestion": "Put a breaker or energy exercise time to time for the participants maintain its focus.",
+                "next_workshop_suggestion": "I would like the next workshop to include more hands-on campaign simulations, community-based case studies, and practical sessions on campaign implementation, monitoring, and evaluation. It would also be valuable to hear from experienced grassroots organizers, climate justice advocates, and renewable energy practitioners who can share real campaign experiences, including challenges in engaging local government units and mobilizing communities. Additionally, I hope to see more discussions on translating campaign strategies into concrete local policy changes, building effective youth-led coalitions, and sustaining advocacy initiatives beyond short-term activities. A follow-up mentoring session would also help participants assess their progress, address challenges, and strengthen collaboration among Bicolano campaigners.",
+                "testimonial": "As a student leader, PAGBIRIK was valuable to me because it helped me realize that leadership and advocacy require more than passion and the willingness to speak up; they require a clear strategy, an understanding of power, and the ability to organize people toward a common goal. It challenged me to think beyond individual initiatives and consider how I can use my position and influence to contribute to meaningful climate action in my community and across my community. I am leaving the training with a better understanding of how to turn my concerns into concrete, collective action.",
+                "applicant_name": "Eduardo Lasam"
               },
               {
                 "what_went_well": "buddy time/sharing of ideas and learnings",
@@ -12585,6 +12603,12 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "Eduardo Lasam",
+            "training_name": "Pagbirik: Bicol Youth Campaigner's Training",
+            "testimonial": "As a student leader, PAGBIRIK was valuable to me because it helped me realize that leadership and advocacy require more than passion and the willingness to speak up; they require a clear strategy, an understanding of power, and the ability to organize people toward a common goal. It challenged me to think beyond individual initiatives and consider how I can use my position and influence to contribute to meaningful climate action in my community and across my community. I am leaving the training with a better understanding of how to turn my concerns into concrete, collective action.",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Christ Paraiso",
             "training_name": "Pagbirik: Bicol Youth Campaigner's Training",
             "testimonial": "This training was particularly valuable to me because it helped me understand that creating meaningful change requires more than just passion and good intentions. It requires awareness, strategic thinking, and the courage to speak up for what is right. I also learned the importance of having a clear purpose as a leader while taking care of myself in the process, because I cannot effectively serve others if I lose myself along the way. Overall, this training encouraged me to become a more intentional, responsible, and purpose-driven advocate.",
@@ -13218,7 +13242,7 @@
           "target_activities": 0,
           "actual_activities": 2,
           "target_participants": 0,
-          "actual_participants": 3,
+          "actual_participants": 5,
           "rows": [
             {
               "plan_title": null,
@@ -13228,7 +13252,7 @@
               "actual_title": "Pagbirik: Bicol Youth Campaigner's Training",
               "actual_date": "2026-10-01",
               "actual_end_date": "2026-10-04",
-              "actual_participants": 3,
+              "actual_participants": 5,
               "status": "Completed"
             },
             {
@@ -13895,11 +13919,11 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 207,
+        "total_applicants": 208,
         "total_graduates": 176,
         "total_ongoing": 4,
         "application_funnel": {
-          "total_applicants": 207,
+          "total_applicants": 208,
           "attended_training": 176,
           "graduated": 176,
           "impact_evaluation_completed": 16
@@ -13927,7 +13951,7 @@
           },
           {
             "year": "2026",
-            "applicants": 20,
+            "applicants": 21,
             "graduates": 11
           }
         ],
@@ -14373,7 +14397,7 @@
             "type": "Foundational",
             "date": "2026-11-30",
             "end_date": "2026-12-04",
-            "applicants": 7,
+            "applicants": 8,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -15301,7 +15325,7 @@
             "training_type": "Foundational",
             "year": "2026",
             "total_impact": 0,
-            "applicant_count": 2,
+            "applicant_count": 3,
             "graduate_count": 0
           },
           {
@@ -15435,7 +15459,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 127,
+            "Female": 128,
             "Male": 50,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -15446,7 +15470,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 129,
+            "Unknown": 130,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -15685,22 +15709,22 @@
             "training_name": "Pado Power Fellowship Batch 7",
             "likert": {
               "strategy_tactics": {
-                "pre": 4.57,
+                "pre": 4.62,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 3.86,
+                "pre": 3.88,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 4.86,
+                "pre": 4.88,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.0,
+                "pre": 5.12,
                 "post": null,
                 "6m": null
               }
@@ -17528,7 +17552,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 127,
+            "Female": 128,
             "Male": 50,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -17539,7 +17563,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 129,
+            "Unknown": 130,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -17548,6 +17572,7 @@
           "by_region": {
             "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 6,
             "Seoul": 62,
+            "\uc11c\uc6b8\uc2dc": 24,
             "\ud310\uad50\ub300\uc7a5\ub85c7\uae38 69": 1,
             "\uc5f0\uc218\uad6c": 1,
             "\ud654\ub791\ub85c 449-7": 1,
@@ -17583,7 +17608,6 @@
             "\uc11c\uc6b8\ud2b9\ubcc4": 1,
             "\uace0\uc591\uc2dc": 1,
             "\uad11\uc9c4\uad6c": 1,
-            "\uc11c\uc6b8\uc2dc": 23,
             "\uc11c\ub300\ubb38\uad6c": 1,
             "\uacc4\uc591\uad6c": 1,
             "\ud654\uc131\uc2dc": 1,
@@ -43292,8 +43316,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3790,
-        "total_graduates": 1783
+        "total_applicants": 3791,
+        "total_graduates": 1785
       },
       "per_country": {
         "PK": {
@@ -43302,10 +43326,10 @@
         },
         "PH": {
           "total_applicants": 769,
-          "total_graduates": 589
+          "total_graduates": 591
         },
         "KR": {
-          "total_applicants": 207,
+          "total_applicants": 208,
           "total_graduates": 176
         },
         "ID": {
