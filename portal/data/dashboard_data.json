@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T02:54:44",
+  "generated_at": "2026-10-16T02:52:30",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -13919,11 +13919,11 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 208,
+        "total_applicants": 211,
         "total_graduates": 176,
         "total_ongoing": 4,
         "application_funnel": {
-          "total_applicants": 208,
+          "total_applicants": 211,
           "attended_training": 176,
           "graduated": 176,
           "impact_evaluation_completed": 16
@@ -13951,12 +13951,12 @@
           },
           {
             "year": "2026",
-            "applicants": 21,
+            "applicants": 24,
             "graduates": 11
           }
         ],
         "community_impact": 159,
-        "touched_organizations": 63,
+        "touched_organizations": 66,
         "training_categories": {
           "completed": [
             {
@@ -14397,7 +14397,7 @@
             "type": "Foundational",
             "date": "2026-11-30",
             "end_date": "2026-12-04",
-            "applicants": 8,
+            "applicants": 11,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -15104,6 +15104,15 @@
             "graduate_count": 2
           },
           {
+            "name": "Ocean Energy Pathway",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "Pacific Environment (PE) - San Francisco",
             "training": "Pado Power 3 Fellowship",
             "training_type": "Foundational",
@@ -15374,6 +15383,24 @@
             "graduate_count": 1
           },
           {
+            "name": "\uc0ac\ub2e8\ubc95\uc778 \ub125\uc2a4\ud2b8",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
+            "name": "\uc0ac\ub2e8\ubc95\uc778 \ub125\uc2a4\ud2b8 Next Group",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "\uc0ac\ub2e8\ubc95\uc778 \ucda9\ub0a8\uae30\ud6c4\uc5d0\ub108\uc9c0\uc2dc\ubbfc\uc7ac\ub2e8",
             "training": "Pado Power Fellowship Batch 6",
             "training_type": "Foundational",
@@ -15459,8 +15486,8 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Female": 128,
-            "Male": 50,
+            "Female": 130,
+            "Male": 51,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -15470,7 +15497,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 130,
+            "Unknown": 133,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -15709,22 +15736,22 @@
             "training_name": "Pado Power Fellowship Batch 7",
             "likert": {
               "strategy_tactics": {
-                "pre": 4.62,
+                "pre": 4.55,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 3.88,
+                "pre": 3.73,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 4.88,
+                "pre": 4.73,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.12,
+                "pre": 4.91,
                 "post": null,
                 "6m": null
               }
@@ -17552,8 +17579,8 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Female": 128,
-            "Male": 50,
+            "Female": 130,
+            "Male": 51,
             "Unknown": 7,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -17563,7 +17590,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 130,
+            "Unknown": 133,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -17571,9 +17598,11 @@
           },
           "by_region": {
             "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 6,
-            "Seoul": 62,
+            "Seoul": 63,
             "\uc11c\uc6b8\uc2dc": 24,
+            "\uc11c\uc6b8\uc2dc \uc1a1\ud30c\uad6c": 1,
             "\ud310\uad50\ub300\uc7a5\ub85c7\uae38 69": 1,
+            "\uc11c\uc6b8": 5,
             "\uc5f0\uc218\uad6c": 1,
             "\ud654\ub791\ub85c 449-7": 1,
             "Karachi": 1,
@@ -17604,7 +17633,6 @@
             "Jung-Gu": 1,
             "\uc744\uc9c0\ub85c 15\uae38": 1,
             "\uacbd\uae30\ub3c4": 3,
-            "\uc11c\uc6b8": 4,
             "\uc11c\uc6b8\ud2b9\ubcc4": 1,
             "\uace0\uc591\uc2dc": 1,
             "\uad11\uc9c4\uad6c": 1,
@@ -43316,7 +43344,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3791,
+        "total_applicants": 3794,
         "total_graduates": 1785
       },
       "per_country": {
@@ -43329,7 +43357,7 @@
           "total_graduates": 591
         },
         "KR": {
-          "total_applicants": 208,
+          "total_applicants": 211,
           "total_graduates": 176
         },
         "ID": {
