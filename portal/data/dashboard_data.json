@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T02:44:02",
+  "generated_at": "2026-10-18T02:45:23",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36840,13 +36840,13 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 612,
-        "total_graduates": 240,
-        "total_ongoing": 179,
+        "total_applicants": 613,
+        "total_graduates": 263,
+        "total_ongoing": 157,
         "application_funnel": {
-          "total_applicants": 612,
-          "attended_training": 240,
-          "graduated": 240,
+          "total_applicants": 613,
+          "attended_training": 263,
+          "graduated": 263,
           "impact_evaluation_completed": 12
         },
         "yoy_trend": [
@@ -36882,14 +36882,22 @@
           },
           {
             "year": "2026",
-            "applicants": 335,
-            "graduates": 50
+            "applicants": 336,
+            "graduates": 73
           }
         ],
         "community_impact": 1047,
         "touched_organizations": 294,
         "training_categories": {
           "completed": [
+            {
+              "name": "PowerShift Asia",
+              "type": "Foundational",
+              "start_date": "2026-10-12",
+              "end_date": "2026-10-17",
+              "applicants": 89,
+              "graduates": 23
+            },
             {
               "name": "Climate Finance Training",
               "type": "Foundational",
@@ -36905,26 +36913,9 @@
               "end_date": "2026-10-08",
               "applicants": 152,
               "graduates": 0
-            },
-            {
-              "name": "Gender Equity Leadership Program - Symposium",
-              "type": "Feminist Leadership",
-              "start_date": "2026-09-09",
-              "end_date": "2026-09-11",
-              "applicants": 0,
-              "graduates": 0
             }
           ],
-          "ongoing": [
-            {
-              "name": "PowerShift Asia",
-              "type": "Foundational",
-              "start_date": "2026-10-12",
-              "end_date": "2026-10-17",
-              "applicants": 88,
-              "graduates": 0
-            }
-          ],
+          "ongoing": [],
           "upcoming": []
         }
       },
@@ -37224,8 +37215,8 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-10-17",
-            "applicants": 88,
-            "graduates": 0,
+            "applicants": 89,
+            "graduates": 23,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -37819,7 +37810,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Carbon Addons",
@@ -38035,7 +38026,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Coastal Livelihood and Environmental Action Network (CLEAN)",
@@ -38071,7 +38062,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Core Science - Indonesia",
@@ -38935,7 +38926,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "International Lawyers Assisting Workers Network (ILAW) - Washington D.C.",
@@ -38962,7 +38953,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "JAAGO Foundation Trust",
@@ -38980,7 +38971,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Japan Center for a Sustainable Environment and Society (JACSES) - Japan",
@@ -39088,7 +39079,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Komisi untuk Orang Hilang dan Korban Tindak Kekerasan (KontraS)",
@@ -39151,7 +39142,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Korean Federation of Environmental Movements (KFEM) - Korea",
@@ -39178,7 +39169,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "LIA Social Impact Consulting",
@@ -39475,7 +39466,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Nuclear-Free Bataan Movement (NFBM) - Bataan",
@@ -39520,7 +39511,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Oxfam Pilipinas",
@@ -39547,7 +39538,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "PT. Jaringan Sumber Daya",
@@ -39637,7 +39628,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Partner Indonesia",
@@ -39646,7 +39637,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Pascasarjana Universitas Sebelas Maret (UNS) - Surakarta",
@@ -39817,7 +39808,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 2,
-            "graduate_count": 0
+            "graduate_count": 2
           },
           {
             "name": "Reboot PH",
@@ -39889,7 +39880,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Rudat Institute",
@@ -39979,7 +39970,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Solutions for Our Climate (SFOC)",
@@ -40177,7 +40168,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Tsunami and Disaster Mitigation Research Center (TDMRC) Universitas Syiah Kuala (USK) - Aceh",
@@ -40366,7 +40357,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Wahana Visi Indonesia (WVI)",
@@ -40612,11 +40603,11 @@
             "graduate_count": 0
           }
         ],
-        "unattributed_applicants": 172,
+        "unattributed_applicants": 173,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Unknown": 208,
+            "Unknown": 209,
             "Female": 259,
             "Male": 134,
             "Non-binary": 6,
@@ -40624,7 +40615,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "Unknown": 336,
+            "Unknown": 337,
             "18-24": 29,
             "25-34": 136,
             "35-44": 71,
@@ -40915,22 +40906,22 @@
             "likert": {
               "strategy_tactics": {
                 "pre": 5.3,
-                "post": null,
+                "post": 5.74,
                 "6m": null
               },
               "communication_strategy": {
                 "pre": 5.08,
-                "post": null,
+                "post": 5.61,
                 "6m": null
               },
               "facilitating_workshop": {
                 "pre": 5.11,
-                "post": null,
+                "post": 6.13,
                 "6m": null
               },
               "building_connection": {
                 "pre": 5.52,
-                "post": null,
+                "post": 6.04,
                 "6m": null
               }
             }
@@ -41344,6 +41335,218 @@
                 "next_workshop_suggestion": null,
                 "testimonial": null,
                 "applicant_name": "Wiriya Kingwatcharapong"
+              }
+            ]
+          },
+          {
+            "training_name": "PowerShift Asia",
+            "responses": [
+              {
+                "what_went_well": "The best aspect was the opportunity to learn from and connect with campaigners from across Asia, each bringing different experiences, perspectives, and approaches.",
+                "sum_up_learning": "Effective campaigning is not just about having strong evidence or a good strategy, but about understanding people, building collective power, and turning ideas into coordinated action.",
+                "action_plan": "Database sharing to Indonesian team",
+                "improvement_suggestion": "I really appreciated the open ended questions and interactive discussions, as they encouraged diverse perspectives and critical thinking. However, I sometimes felt that certain sessions ended without a clear synthesis of the key takeaways or learning points. It would be helpful to have a brief wrap up after each exercise on the knowledge base.",
+                "next_workshop_suggestion": "including a short introductory session on finance fundamentals, particularly for participants without a finance background. This could cover how financial institutions work, the differences between corporate and project finance, the roles of different types of investors and lenders, and how financial decisions are made. A few simple, real world case sharings could help participants connect these concepts to campaign strategies and identify potential leverage points.",
+                "testimonial": null,
+                "applicant_name": "Yedan Li (Ginger)"
+              },
+              {
+                "what_went_well": "My roommate",
+                "sum_up_learning": "This training helped clarify climate finance campaign terms and I learned about the 4 countries.",
+                "action_plan": "Sharing session with SFOC. Sharing about the training with my Unit and managers. Follow-up on relevant tools learned.",
+                "improvement_suggestion": "More knowledge sharing from the facilitators and correcting exercises",
+                "next_workshop_suggestion": "Clearer communication beforehand: roommates, schedule change, mentorship + less artificial campaign group formation.",
+                "testimonial": null,
+                "applicant_name": "Juliette Knighton"
+              },
+              {
+                "what_went_well": "I think every session is good and full suprissed. I loved this workshop because nothing used presentation, but Facilitator have many idea about packaging every session. For me, the best aspect in session is, my buddy (Makiko), session about how strategic campaign.",
+                "sum_up_learning": "First, i learn about how mapping the stakeholder, do financial research, and mapping media to analysis.",
+                "action_plan": "First, i want to mapping the actor in my case, maybe with csearch ini annual report company.\nSecond, I want to make strategy campign and search colaboration with other organization\nThird, I want to make a campaign with target investor and the bank",
+                "improvement_suggestion": "I think, for the next time, have a translattor and no used bottle plastic in our training hehehe",
+                "next_workshop_suggestion": "I think to the next workshop , facilitator give a material before workshop and dont the day, so participant get learn about issue.",
+                "testimonial": "I learn many things, from the session i undertsand campign not only about design, any material for who target and what the risk.",
+                "applicant_name": "Sri Depi Surya Azizah"
+              },
+              {
+                "what_went_well": "Loved the \u201cFinance Research is Fun\u201d session the most. Before the training, I knew nothing about the finance sector. Thanks to the session that taught us from A to Z of financing a project, now I know the difference between debt and equity, guarantee and insurance.",
+                "sum_up_learning": "How to become a climate finance campaigner 101",
+                "action_plan": "Apply all the toolkits that I have learned to my everyday work, especially for the strategy building.",
+                "improvement_suggestion": "Gender balance. Certain country\u2019s group had a majority of male participants, the other was mostly women. I think this created unconscious imbalance in opportunities of speaking out and active engagement.",
+                "next_workshop_suggestion": "A session on how to understand financial data (financial statement, annual general stakeholder meeting document, etc.)",
+                "testimonial": "I knew nothing about climate finance campaign before, but now, I can build my own campaign from scratch.",
+                "applicant_name": "Ja Hyun Kim"
+              },
+              {
+                "what_went_well": "I really appreciate the buddy group as it was one of my goals to this training, to be connected with other organisation and know what they're doing.\nAlso, some guest speakers really clear in delivering the context and appreciate their improvisation to make the session engage well. Speakers helping out audiences that confuse to give clearer direction.",
+                "sum_up_learning": "It's great experience that combine both for cross country connections!",
+                "action_plan": "1. Have a sharing session in the team about the tools and how to do the campaign. \n2. Apply the create media to pressure methodology in our campaign and PR approach\n3. Be connected with partner that could support the campaign database",
+                "improvement_suggestion": "I think some of the session feel rushed and packed, be on time is necessary but having to be put in strict time bound with lots exercise did not fully helping to understand the purpose or it's not giving clear output and takeaways. facilitator keep asking lot of question and received answers, but it leaves some audience hanging with small context or the actual correct answer or theory.",
+                "next_workshop_suggestion": "A comprehensive and balance session between group work - study case - and delivering the theory.",
+                "testimonial": "It's really wonderful experience to be connected with other country that works towar\nds the same goal and be able to get support and giving support through meet ups.",
+                "applicant_name": "Nuha Izzatunnisaa"
+              },
+              {
+                "what_went_well": "specific, engaging, and intuitive exercise",
+                "sum_up_learning": "We need strategic and diverse approaches",
+                "action_plan": "Share the learnings with my team memebers,\nsuggest more diverse, engaging tactics for our team",
+                "improvement_suggestion": "I understand the engaging activities are important, but sometimes it felt like too much activities without enough / clear explanation and instructions",
+                "next_workshop_suggestion": "more written materials to review on (felt burdened to write everything down since many of the contents were missing in the handbook)",
+                "testimonial": "I could learn new contexts from other countries which has widened my knowledge a lot. \nI also thought strategy is really boring now I am excited to plan a new campaign.",
+                "applicant_name": "Danyeong Seo"
+              },
+              {
+                "what_went_well": "many session and exercise that mede me organizing knowledge and reflection about the campaign work.",
+                "sum_up_learning": "it was really insightful and enjoyable.",
+                "action_plan": "I want to see my campaign projects, integrated with new highlights that I took from this training.",
+                "improvement_suggestion": "if have not enough time, better to found a exercise simple and efficient, but not reduction the main point.",
+                "next_workshop_suggestion": "it is will good, if any some reading books and any campaign case study that's make participants imagined the material.",
+                "testimonial": "this training very helpful to organizing the knowledge of campaign projects.",
+                "applicant_name": "Rizki Maulana Hakim"
+              },
+              {
+                "what_went_well": "Speed dating session (but I think you should ensure that eveybody already researched their case first)",
+                "sum_up_learning": "Since I dont have the basic in both finance and campaign, these all are new insights for me. I learned to cut down the problem to a bite-size issue, planning strategy & tactics for it, and making it real & safe by also mapping the potential risk and challenges.",
+                "action_plan": "Continuing the Anti-AZEC team's plan.",
+                "improvement_suggestion": "I think the order of the materials needs to be improved. Also, one day one focus material & don't mix it up.",
+                "next_workshop_suggestion": "More readings materials before the workshop, so that we all can have the same level of basic knowledge/standing on the same foundation.",
+                "testimonial": null,
+                "applicant_name": "Ni Made Amanda Putri Paramerta_"
+              },
+              {
+                "what_went_well": "1. Energizer and Daily Review \n2. The Training Materials",
+                "sum_up_learning": "I learned how collective learning and action can make an impact",
+                "action_plan": "1. Do more research before designing a project.\n2. Collaborate with related organisations and activists while implementing a campaign or project.",
+                "improvement_suggestion": "1. Perhaps fewer activities. The Activities were one after another and continuous. It was really tiresome.",
+                "next_workshop_suggestion": "1. Visual Materials or online content.",
+                "testimonial": "The training provided an opportunity for me to meet fellow activists from diverse backgrounds and various nations. I learned from their journeys and experiences, which made it a great opportunity for me.",
+                "applicant_name": "Nayeem Hossain"
+              },
+              {
+                "what_went_well": "a specific session or excercise",
+                "sum_up_learning": "Although I was unable to take in all the material presented, I did pick up on some points that will be very useful to apply within the organisation, such as when creating campaign materials, mapping stakeholders, issuing press releases, and so on.",
+                "action_plan": "Following up on the campaign in collaboration with the team by commencing (1) research, (2) engaging with the affected communities, and (3) determining the next strategies and tactics. Building connections with colleagues from Japan and South Korea is a vital asset for the campaign\u2019s long-term success.",
+                "improvement_suggestion": "A special session for sharing the issues and campaigns being worked on by each organisation, so that connections can be identified from the outset.",
+                "next_workshop_suggestion": "Overall, everything went well and it was great fun. These sessions managed to take quite complex issues and present them in a way that was accessible, light-hearted and easy to understand. Perhaps just one more session would be needed to discuss in greater depth the work carried out by each organisation, whether it be campaigns or other initiatives.",
+                "testimonial": "The most important aspect of this training, apart from improving skills and knowledge relating to campaigns, is the cross-country networking. It was organised in a very enjoyable way, even though the issues discussed were relatively serious. As a result, the research carried out by the organisation I work for can truly be translated into strategies and campaigns, as much of that research refers to funding from Japan and South Korea.",
+                "applicant_name": "Asri Widayati"
+              },
+              {
+                "what_went_well": "A lot ot interactions like group works, discussions, energizers and activities",
+                "sum_up_learning": "Finance campaigning we need to focus on for ensuring just transition",
+                "action_plan": "- Reflection session with my volunteers to share my learning from powershift asia training .\n- Strengthen my research skills by using   new tools and tacktics \n- Target financers through the help of other country's campaigners and do the media mapping more efffectively .",
+                "improvement_suggestion": "It's better to know when any session is finished through discussions and groups, the summary or best practices that we may apply beyond our learnings .",
+                "next_workshop_suggestion": "- Research methodology for initiating a finance campaign (More detailed)",
+                "testimonial": "This training is very relevant to our works and it really strengthen my confidence and capacity for investigating and researching more effectively. Additionally, as we are working as a bridge between youth and policymakers, this training also helped us in building our capacity of young people to understand the ecosystem because we will arrange reflection sessions from our learnings.",
+                "applicant_name": "Md Tanjid Hasan"
+              },
+              {
+                "what_went_well": "To know many expertiser which related to climate",
+                "sum_up_learning": "Funny but still hard to organize campaign",
+                "action_plan": "Share many cases that I found.",
+                "improvement_suggestion": "First of all, I got guided that there will be related to imagine my own objectives that how to develop. When I attended, there are not matching people which related my objectives. When I said, just think affordable groups that I related. This made me really embarrassed. Even they know already that attendees work, i felt that there are not considering well about objectives. \n\nFor the next time, please consider well about affordablility of objectives.",
+                "next_workshop_suggestion": "Don't know well",
+                "testimonial": "Still dont know well about efficiency, but it is really funny and i think this is more affordable to new employee.",
+                "applicant_name": "Jae Hyuk Lee"
+              },
+              {
+                "what_went_well": "As a guest Daily review Moderator",
+                "sum_up_learning": "I learned how to strengthen community-led advocacy for a just energy transition by connecting energy finance & the real experiences of affected communities.",
+                "action_plan": "1. Organize knowledge sharing sessions with young climate activists in Bangladesh to share the key learnings from the training.\n2. Strengthen youth-led advocacy for renewable energy, climate finance accountability & a just and inclusive energy transition.\n3. Engage local communities and youth networks in documenting the impacts of fossil fuel projects and promoting community centered energy solutions.",
+                "improvement_suggestion": "Some time need more times in Group activists",
+                "next_workshop_suggestion": "For the next workshop, I would recommend adding field visits to renewable energy projects, community-led energy initiatives, and relevant organizations in other countries. This would help participants learn how different countries work in the energy sector, exchange practical experiences, and explore opportunities for cross-country collaboration toward a just and sustainable energy transition.",
+                "testimonial": "This training was a valuable learning experience that deepened my understanding of energy transition & the role of communities in challenging fossil fuel dependence. Connecting with climate activists from across Asia helped me exchange experiences, build solidarity, and explore opportunities for regional collaboration. I am inspired to apply these learnings to strengthen youth-led advocacy for a just, inclusive, and sustainable energy transition in Bangladesh.",
+                "applicant_name": "Soyed Zhadul Alom Opu"
+              },
+              {
+                "what_went_well": "buddy time, interactive discussion, build a campaign and tactic & risk session",
+                "sum_up_learning": "new perspective and approach on develop finance campaign strategy",
+                "action_plan": "Discussing with managers and cross internal divisions (if needed)\nConsolidate and share knowledge with coalition (Bersihkan bankmu) to review and advance the strategy",
+                "improvement_suggestion": "I think everyday's session too packed for us and some session have a really quick time for a discussion",
+                "next_workshop_suggestion": "legal protection on digital and offline campaign (due to political situation in Indonesia)\nHow to incorporate / integrate financial research / data with human and biodiversity perspectives (because we will have carbon tax and biodiversity tax!)",
+                "testimonial": "This training has provided me with new perspectives and approach on how we could leverage our financing campaign. Additionally, we also can collaborate with other friends from other countries that surprisingly fight for same good cause!",
+                "applicant_name": "Anastasia Kriestella"
+              },
+              {
+                "what_went_well": "Encouraging us to do relational meetings was great. As a curious person, it was like having a free pass to ask personal questions without offending the person.",
+                "sum_up_learning": "It is worth doing the hard work.",
+                "action_plan": "Mapping the stakeholders. \nRelational meetings during events.",
+                "improvement_suggestion": "More examples and specificity before exercises, asking questions \u2026 etc \nEnvironment to listen. Sometimes it was difficult concentrating as people would not follow the norms (e.g. talking over when others talked)",
+                "next_workshop_suggestion": "Easy reading materials before joining the training. \nDetailed explanations of what would be covered during training.",
+                "testimonial": null,
+                "applicant_name": "Noelle Henry Adachi"
+              },
+              {
+                "what_went_well": "I had the opportunity to learn how to make a campaign and process, as well as different terms.",
+                "sum_up_learning": "Process of making a campaign",
+                "action_plan": "Strategizing and making tactics for the campaign.\nResearching stakeholders and targets for the campaign",
+                "improvement_suggestion": "I expected that considering you have received a detailed information of our work, you would have connected the match among us, and divided the teams beforehand. \nHowever, I didn't find a match, so I doubt that I will be able to continue this campaign. I would appreciate to check people's matches and consider if they are truly a match. If possible, I hope you could divide the teams instead of having people to do a \"quick dating(?)\" and let them figure everything out. If their work is not matching to any, I believe it would be better not to invite them to the campaign. \nYet, I am still grateful for the opportunity as I was able to know different people, whom I may be able to work with other works aside of the campaign in the future.",
+                "next_workshop_suggestion": "Examples of how data based research organizations, policy adocating organizations, and campaign based organizations each played their role and made a campaign work. This will give a better idea of how to collaborate despite our different characteristics among organizations.",
+                "testimonial": null,
+                "applicant_name": "Young Hae Hwang"
+              },
+              {
+                "what_went_well": "The interactive sessions were really fun, engaging, and a great way to learn - especially the finance role play, case study of Aurora Energy, village creation and destruction. I also enjoyed getting to know individual participants well through the buddy times, the relational meetings, the cultural night and having fellow participants lead the daily reviews.",
+                "sum_up_learning": "There are always more things to learn, especially from meeting new people with different experiences and backgrounds.",
+                "action_plan": "Continue working with partners and colleagues on the Celukan Bawang campaign and see how my org can support the campaign. I think some of my campaign work has been in a \"comfort zone\", and I will re-evalute these campaigns.",
+                "improvement_suggestion": "I submitted my campaign plan in the application as something I thought I would work on individually based on the training. I think there were many people under this assumption and did not realize they would have to choose from a few choices - as the matchmaking was set up so that Japanese/Korean members would match up with Indonesian/Bangladeshi groups, so choices came down to a handful of campaigns. This was not clear coming into the trianing.\n\nIt was also a lot of information in 5 days, some time just in 1 day. It felt like, especially for newer campaigners, like they were moving on before they were familiar with or understood fully what they just learned. Perhaps one idea is to focus on one session and make it a more specific training. spending the full 5 days on that one session.",
+                "next_workshop_suggestion": "Maybe more time on each session and less sessions. Also a bit more facilitation to encourage new people to step up and speak (signalling some people to step back as well).",
+                "testimonial": null,
+                "applicant_name": "Makiko Arima"
+              },
+              {
+                "what_went_well": "Fasilitators always ahve a crativebapproach in every session",
+                "sum_up_learning": "I will applied the campaign strategy that i've got from here to setup my next campaign ini my orgz.",
+                "action_plan": "1. Will do the actor mapping, setup a target, create campaign strategy, and setup campaign tactics.",
+                "improvement_suggestion": "I think wee need more time in every collaboration session",
+                "next_workshop_suggestion": "We have more time with group and collaboration session",
+                "testimonial": "This was an inspiring experience, broadened my perspective, and built meaningfull connection with climate activist from another country.",
+                "applicant_name": "Andi Haidar"
+              },
+              {
+                "what_went_well": "Making too many activity that make me understand and make me remember all the things.",
+                "sum_up_learning": "How to think a Champaign and make it actionable and achievable.",
+                "action_plan": "1. I will share my learning with my collogue\n2. Using the connection will make our champaign successful \n3. Will make revised the learning by week or months",
+                "improvement_suggestion": "May be on the workshop time length, its hard to do continuous activity mostly 10 hours.",
+                "next_workshop_suggestion": "Our finance speakers have been fantastic! To make the presentations even more impactful, I\u2019d love to see a bit more focus and structure in the next sessions. A little extra preparation will help their great insights shine even brighter!",
+                "testimonial": "Cause it was so participatory and realistic.",
+                "applicant_name": "Mahmudul Hasan"
+              },
+              {
+                "what_went_well": "All of exercise and role playing",
+                "sum_up_learning": "Being engaged and prepared is a must.",
+                "action_plan": "1. Using role play format to make other who dont have solid financial background.\n2. Using the method for organising ways to spread my research outcomes through media and campaigns",
+                "improvement_suggestion": "All participants might not understand english, so it would be that facilitators come from each countries of participants and giving them explanations in their own languages.",
+                "next_workshop_suggestion": "Would be great if facilitators can explain more clearly in english. ( i know we have language barriers tho)",
+                "testimonial": "I was able to get a confidence in speaking and organising the structure of campaign",
+                "applicant_name": "Seon Ah Oh"
+              },
+              {
+                "what_went_well": "The best aspect of the workshop was the interactive sessions, sharing experiences with participants from different countries, and learning practical strategies for energy transition and JUST ENERGY TRANSITION campaigning. The buddy time and group discussions helped me build meaningful connections and gain new perspectives.",
+                "sum_up_learning": "I learned that meaningful change happens when communities unite, use strategic communication, and build collective power to protect their rights, challenge injustice, and demand a just energy transition.",
+                "action_plan": "1. Strengthen community engagement in Bangladesh by listening to local people\u2019s experiences and concerns about energy projects and their impacts on land, livelihoods, and rights.\n\n2. Apply strategic media and communication tools to raise public awareness and build pressure for a just energy transition.\n\n3. Share the workshop learnings with youth, colleagues, and campaign partners to build collective action and explore opportunities for collaboration.",
+                "improvement_suggestion": "I would suggest more time for country-specific campaign planning and opportunities to exchange experiences, share challenges, and explore how the strategies can be applied in our local contexts.",
+                "next_workshop_suggestion": "I would like the next workshop to focus more on consumer energy injustice, including unfair electricity pricing, energy affordability, and predatory costs that place an unfair burden on consumers, especially low-income households. Practical case studies and campaign exercises on challenging unjust pricing structures and advocating for affordable, transparent, and equitable energy services would be particularly valuable.",
+                "testimonial": "This training was particularly valuable to me because it helped me better understand the links between investors, finance, and development, as well as how investment decisions can sometimes lead to environmental destruction, land loss, and community displacement. As someone working on energy transition in Bangladesh, I gained new perspectives on challenging unjust energy systems, protecting consumers from predatory costs, and ensuring that development serves people rather than only investors\u2019 interests. The learning and connections will help me strengthen advocacy for a just, accountable, and people-centered energy transition.",
+                "applicant_name": "Most. Marufa Aktar"
+              },
+              {
+                "what_went_well": "Exercise",
+                "sum_up_learning": "In our training, I learned everything from A to Z about planning and executing an effective campaign.",
+                "action_plan": "Learning exchange session, how to deal with media and set target",
+                "improvement_suggestion": "Start the session around 9:00 AM",
+                "next_workshop_suggestion": "Demonstrate a campaign during the training",
+                "testimonial": "Before this training, I had a good understanding of executing campaigns, but this session truly completed the picture for finance campaigns. I learned how to effectively handle implementation, targeting right stakeholder, navigate complexities and solve critical problem areas. I now feel fully confident in my ability to plan and execute a successful finance campaign from start to finish.",
+                "applicant_name": "Oyachkuruny Khan Akash"
+              },
+              {
+                "what_went_well": "Best aspect was the group discussions of all the sessions.",
+                "sum_up_learning": "I have learned that we all are in the same boat in front of fossil fuel companies.",
+                "action_plan": "1. I'll share the experience with my campaign team and prepare a campaign plan.\n2. I'll try to contact to the JICA authority for raising our concern in the upcoming Bangladesh Energy Conference.\n3. I'll take support from the Japanese civil society.",
+                "improvement_suggestion": "More details about the characteristics of the financiers and different ways to reach them.",
+                "next_workshop_suggestion": "Any successful campaigner who have experience of doing movement against can be a guest speaker.",
+                "testimonial": "Because I'm an energy campaigner and this training gives me many point of views  that I never imagined before.",
+                "applicant_name": "Sadia Rowshon Adhora"
               }
             ]
           },
@@ -42269,6 +42472,108 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "Sri Depi Surya Azizah",
+            "training_name": "PowerShift Asia",
+            "testimonial": "I learn many things, from the session i undertsand campign not only about design, any material for who target and what the risk.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Ja Hyun Kim",
+            "training_name": "PowerShift Asia",
+            "testimonial": "I knew nothing about climate finance campaign before, but now, I can build my own campaign from scratch.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Nuha Izzatunnisaa",
+            "training_name": "PowerShift Asia",
+            "testimonial": "It's really wonderful experience to be connected with other country that works towar\nds the same goal and be able to get support and giving support through meet ups.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Danyeong Seo",
+            "training_name": "PowerShift Asia",
+            "testimonial": "I could learn new contexts from other countries which has widened my knowledge a lot. \nI also thought strategy is really boring now I am excited to plan a new campaign.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Rizki Maulana Hakim",
+            "training_name": "PowerShift Asia",
+            "testimonial": "this training very helpful to organizing the knowledge of campaign projects.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Nayeem Hossain",
+            "training_name": "PowerShift Asia",
+            "testimonial": "The training provided an opportunity for me to meet fellow activists from diverse backgrounds and various nations. I learned from their journeys and experiences, which made it a great opportunity for me.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Asri Widayati",
+            "training_name": "PowerShift Asia",
+            "testimonial": "The most important aspect of this training, apart from improving skills and knowledge relating to campaigns, is the cross-country networking. It was organised in a very enjoyable way, even though the issues discussed were relatively serious. As a result, the research carried out by the organisation I work for can truly be translated into strategies and campaigns, as much of that research refers to funding from Japan and South Korea.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Md Tanjid Hasan",
+            "training_name": "PowerShift Asia",
+            "testimonial": "This training is very relevant to our works and it really strengthen my confidence and capacity for investigating and researching more effectively. Additionally, as we are working as a bridge between youth and policymakers, this training also helped us in building our capacity of young people to understand the ecosystem because we will arrange reflection sessions from our learnings.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Jae Hyuk Lee",
+            "training_name": "PowerShift Asia",
+            "testimonial": "Still dont know well about efficiency, but it is really funny and i think this is more affordable to new employee.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Soyed Zhadul Alom Opu",
+            "training_name": "PowerShift Asia",
+            "testimonial": "This training was a valuable learning experience that deepened my understanding of energy transition & the role of communities in challenging fossil fuel dependence. Connecting with climate activists from across Asia helped me exchange experiences, build solidarity, and explore opportunities for regional collaboration. I am inspired to apply these learnings to strengthen youth-led advocacy for a just, inclusive, and sustainable energy transition in Bangladesh.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Anastasia Kriestella",
+            "training_name": "PowerShift Asia",
+            "testimonial": "This training has provided me with new perspectives and approach on how we could leverage our financing campaign. Additionally, we also can collaborate with other friends from other countries that surprisingly fight for same good cause!",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Andi Haidar",
+            "training_name": "PowerShift Asia",
+            "testimonial": "This was an inspiring experience, broadened my perspective, and built meaningfull connection with climate activist from another country.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Mahmudul Hasan",
+            "training_name": "PowerShift Asia",
+            "testimonial": "Cause it was so participatory and realistic.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Seon Ah Oh",
+            "training_name": "PowerShift Asia",
+            "testimonial": "I was able to get a confidence in speaking and organising the structure of campaign",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Most. Marufa Aktar",
+            "training_name": "PowerShift Asia",
+            "testimonial": "This training was particularly valuable to me because it helped me better understand the links between investors, finance, and development, as well as how investment decisions can sometimes lead to environmental destruction, land loss, and community displacement. As someone working on energy transition in Bangladesh, I gained new perspectives on challenging unjust energy systems, protecting consumers from predatory costs, and ensuring that development serves people rather than only investors\u2019 interests. The learning and connections will help me strengthen advocacy for a just, accountable, and people-centered energy transition.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Oyachkuruny Khan Akash",
+            "training_name": "PowerShift Asia",
+            "testimonial": "Before this training, I had a good understanding of executing campaigns, but this session truly completed the picture for finance campaigns. I learned how to effectively handle implementation, targeting right stakeholder, navigate complexities and solve critical problem areas. I now feel fully confident in my ability to plan and execute a successful finance campaign from start to finish.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Sadia Rowshon Adhora",
+            "training_name": "PowerShift Asia",
+            "testimonial": "Because I'm an energy campaigner and this training gives me many point of views  that I never imagined before.",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Elaine Joyce Borejon",
             "training_name": "Regional Campaign Strategy and Organising Training (CSO)",
             "testimonial": "Yes, in general, AktivAsia\u2019s training has been valuable for me because i am being enabled to be more strategic and purposive in campaigns. :)",
@@ -42567,7 +42872,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Unknown": 208,
+            "Unknown": 209,
             "Female": 259,
             "Male": 134,
             "Non-binary": 6,
@@ -42575,7 +42880,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "Unknown": 336,
+            "Unknown": 337,
             "18-24": 29,
             "25-34": 136,
             "35-44": 71,
@@ -42583,7 +42888,7 @@
             "45+": 35
           },
           "by_region": {
-            "Unknown": 198,
+            "Unknown": 199,
             "Jalan Tebet Timur Dalam 14b, Tebet, Jakarta Selatan, Dki Jakarta": 1,
             "Depok": 4,
             "Seoul": 8,
@@ -43001,7 +43306,7 @@
           "target_activities": 0,
           "actual_activities": 4,
           "target_participants": 0,
-          "actual_participants": 0,
+          "actual_participants": 23,
           "rows": [
             {
               "plan_title": null,
@@ -43033,7 +43338,7 @@
               "actual_title": "PowerShift Asia",
               "actual_date": "2026-10-12",
               "actual_end_date": "2026-10-17",
-              "actual_participants": 0,
+              "actual_participants": 23,
               "status": "Completed"
             },
             {
