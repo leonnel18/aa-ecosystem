@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T02:45:23",
+  "generated_at": "2026-10-19T02:58:31",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -36841,12 +36841,12 @@
       "portal": "backbone",
       "report_1_overview": {
         "total_applicants": 613,
-        "total_graduates": 263,
-        "total_ongoing": 157,
+        "total_graduates": 264,
+        "total_ongoing": 156,
         "application_funnel": {
           "total_applicants": 613,
-          "attended_training": 263,
-          "graduated": 263,
+          "attended_training": 264,
+          "graduated": 264,
           "impact_evaluation_completed": 12
         },
         "yoy_trend": [
@@ -36883,7 +36883,7 @@
           {
             "year": "2026",
             "applicants": 336,
-            "graduates": 73
+            "graduates": 74
           }
         ],
         "community_impact": 1047,
@@ -36896,7 +36896,7 @@
               "start_date": "2026-10-12",
               "end_date": "2026-10-17",
               "applicants": 89,
-              "graduates": 23
+              "graduates": 24
             },
             {
               "name": "Climate Finance Training",
@@ -37216,7 +37216,7 @@
             "date": "2026-10-12",
             "end_date": "2026-10-17",
             "applicants": 89,
-            "graduates": 23,
+            "graduates": 24,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -38305,7 +38305,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Formasi Disabilitas",
@@ -40906,22 +40906,22 @@
             "likert": {
               "strategy_tactics": {
                 "pre": 5.3,
-                "post": 5.74,
+                "post": 5.58,
                 "6m": null
               },
               "communication_strategy": {
                 "pre": 5.08,
-                "post": 5.61,
+                "post": 5.5,
                 "6m": null
               },
               "facilitating_workshop": {
                 "pre": 5.11,
-                "post": 6.13,
+                "post": 6.04,
                 "6m": null
               },
               "building_connection": {
                 "pre": 5.52,
-                "post": 6.04,
+                "post": 6.0,
                 "6m": null
               }
             }
@@ -41511,6 +41511,15 @@
                 "next_workshop_suggestion": "Our finance speakers have been fantastic! To make the presentations even more impactful, I\u2019d love to see a bit more focus and structure in the next sessions. A little extra preparation will help their great insights shine even brighter!",
                 "testimonial": "Cause it was so participatory and realistic.",
                 "applicant_name": "Mahmudul Hasan"
+              },
+              {
+                "what_went_well": "creating the norms together",
+                "sum_up_learning": "Through practical strategy sessions and inspiring connections with deeply motivated peers including facilitators, this training is a powerful foundation for all my future campaigns.",
+                "action_plan": "1. Combine the basic strategies I learned with my senior team members' experience to understand how they make decisions and apply it to their work.\n2. Leverage community/collaboration power more effectively.\n3.To maintain high energy and motivation like the people who I met in this training.",
+                "improvement_suggestion": "maybe more even the number of participants between fund countries and recipients next time",
+                "next_workshop_suggestion": "Sufficient preparation time and research sessions before group decision-making activities.",
+                "testimonial": "I had started working on tasks before fully establishing my fundamentals. taking the time to learn core strategies, paired with experienced facilitators, made this training an invaluable and deeply insightful experience.Also it allowed me to build meaningful connections with both the participants and the facilitators, creating a strong support network for the future.",
+                "applicant_name": "Mie Sato"
               },
               {
                 "what_went_well": "All of exercise and role playing",
@@ -42550,6 +42559,12 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "Mie Sato",
+            "training_name": "PowerShift Asia",
+            "testimonial": "I had started working on tasks before fully establishing my fundamentals. taking the time to learn core strategies, paired with experienced facilitators, made this training an invaluable and deeply insightful experience.Also it allowed me to build meaningful connections with both the participants and the facilitators, creating a strong support network for the future.",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Seon Ah Oh",
             "training_name": "PowerShift Asia",
             "testimonial": "I was able to get a confidence in speaking and organising the structure of campaign",
@@ -43306,7 +43321,7 @@
           "target_activities": 0,
           "actual_activities": 4,
           "target_participants": 0,
-          "actual_participants": 23,
+          "actual_participants": 24,
           "rows": [
             {
               "plan_title": null,
@@ -43338,7 +43353,7 @@
               "actual_title": "PowerShift Asia",
               "actual_date": "2026-10-12",
               "actual_end_date": "2026-10-17",
-              "actual_participants": 23,
+              "actual_participants": 24,
               "status": "Completed"
             },
             {
