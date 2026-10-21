@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T03:08:21",
+  "generated_at": "2026-10-21T03:02:35",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -13984,7 +13984,16 @@
               "graduates": 17
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
+              "type": "Foundational",
+              "start_date": "2026-10-21",
+              "end_date": "2026-10-21",
+              "applicants": 0,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -13992,8 +14001,8 @@
         "trainings_by_type": [
           {
             "type": "Foundational",
-            "conducted": 11,
-            "total_planned": 12
+            "conducted": 12,
+            "total_planned": 13
           },
           {
             "type": "Public Narrative",
@@ -14003,7 +14012,7 @@
           {
             "type": "Training of Trainers",
             "conducted": 1,
-            "total_planned": 1
+            "total_planned": 2
           }
         ],
         "trainings_by_type_by_year": {
@@ -14048,8 +14057,13 @@
           "2026": [
             {
               "type": "Foundational",
-              "conducted": 1,
-              "total_planned": 2
+              "conducted": 2,
+              "total_planned": 3
+            },
+            {
+              "type": "Training of Trainers",
+              "conducted": 0,
+              "total_planned": 1
             }
           ]
         },
@@ -14387,7 +14401,7 @@
           },
           "2026": {
             "planned": 14,
-            "conducted": 1
+            "conducted": 2
           }
         },
         "actual_trainings": [
@@ -14400,6 +14414,38 @@
             "applicants": 13,
             "graduates": 0,
             "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
+          {
+            "id": "773031000014651039",
+            "name": "Facilitation skill workshop PPF7",
+            "type": "Training of Trainers",
+            "date": "2026-10-23",
+            "end_date": "2026-10-23",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
+          {
+            "id": "773031000014720047",
+            "name": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
+            "type": "Foundational",
+            "date": "2026-10-21",
+            "end_date": "2026-10-21",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -17924,10 +17970,32 @@
         },
         "year_2": {
           "target_activities": 13,
-          "actual_activities": 1,
+          "actual_activities": 3,
           "target_participants": 0,
           "actual_participants": 0,
           "rows": [
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
+              "actual_date": "2026-10-21",
+              "actual_end_date": "2026-10-21",
+              "actual_participants": 0,
+              "status": "Completed"
+            },
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Facilitation skill workshop PPF7",
+              "actual_date": "2026-10-23",
+              "actual_end_date": "2026-10-23",
+              "actual_participants": 0,
+              "status": "Upcoming"
+            },
             {
               "plan_title": null,
               "plan_date": null,
@@ -36842,7 +36910,7 @@
       "report_1_overview": {
         "total_applicants": 613,
         "total_graduates": 264,
-        "total_ongoing": 156,
+        "total_ongoing": 155,
         "application_funnel": {
           "total_applicants": 613,
           "attended_training": 264,
