@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T03:01:29",
+  "generated_at": "2026-10-23T03:05:35",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5504,7 +5504,16 @@
               "graduates": 15
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "Youth Leadership Training for Active Citizen Science on Sustainable Transport",
+              "type": "Foundational",
+              "start_date": "2026-10-23",
+              "end_date": "2026-10-24",
+              "applicants": 0,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -5517,7 +5526,7 @@
           },
           {
             "type": "Foundational",
-            "conducted": 31,
+            "conducted": 32,
             "total_planned": 32
           },
           {
@@ -5595,7 +5604,7 @@
           "2026": [
             {
               "type": "Foundational",
-              "conducted": 3,
+              "conducted": 4,
               "total_planned": 4
             }
           ]
@@ -5846,7 +5855,7 @@
           },
           "2026": {
             "planned": 0,
-            "conducted": 3
+            "conducted": 4
           }
         },
         "actual_trainings": [
@@ -5858,7 +5867,7 @@
             "end_date": "2026-10-24",
             "applicants": 0,
             "graduates": 0,
-            "status": "Upcoming",
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -13264,7 +13273,7 @@
               "actual_date": "2026-10-23",
               "actual_end_date": "2026-10-24",
               "actual_participants": 0,
-              "status": "Upcoming"
+              "status": "Completed"
             }
           ]
         },
@@ -13919,13 +13928,13 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 215,
-        "total_graduates": 178,
+        "total_applicants": 218,
+        "total_graduates": 180,
         "total_ongoing": 4,
         "application_funnel": {
-          "total_applicants": 215,
-          "attended_training": 178,
-          "graduated": 178,
+          "total_applicants": 218,
+          "attended_training": 180,
+          "graduated": 180,
           "impact_evaluation_completed": 16
         },
         "yoy_trend": [
@@ -13946,17 +13955,17 @@
           },
           {
             "year": "2025",
-            "applicants": 91,
-            "graduates": 78
+            "applicants": 90,
+            "graduates": 77
           },
           {
             "year": "2026",
-            "applicants": 28,
-            "graduates": 13
+            "applicants": 32,
+            "graduates": 16
           }
         ],
         "community_impact": 159,
-        "touched_organizations": 68,
+        "touched_organizations": 69,
         "training_categories": {
           "completed": [
             {
@@ -13964,16 +13973,16 @@
               "type": "Foundational",
               "start_date": "2026-10-21",
               "end_date": "2026-10-21",
-              "applicants": 2,
-              "graduates": 2
+              "applicants": 6,
+              "graduates": 6
             },
             {
               "name": "Pado Power Fellowship Batch 6",
               "type": "Foundational",
               "start_date": "2026-07-02",
               "end_date": "2026-07-10",
-              "applicants": 13,
-              "graduates": 11
+              "applicants": 12,
+              "graduates": 10
             },
             {
               "name": "GreenKoreaUnited Campaign Strategy Workshop",
@@ -13984,7 +13993,16 @@
               "graduates": 10
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "Facilitation skill workshop PPF7",
+              "type": "Training of Trainers",
+              "start_date": "2026-10-23",
+              "end_date": "2026-10-23",
+              "applicants": 0,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -14002,7 +14020,7 @@
           },
           {
             "type": "Training of Trainers",
-            "conducted": 1,
+            "conducted": 2,
             "total_planned": 2
           }
         ],
@@ -14053,7 +14071,7 @@
             },
             {
               "type": "Training of Trainers",
-              "conducted": 0,
+              "conducted": 1,
               "total_planned": 1
             }
           ]
@@ -14392,7 +14410,7 @@
           },
           "2026": {
             "planned": 14,
-            "conducted": 2
+            "conducted": 3
           }
         },
         "actual_trainings": [
@@ -14402,7 +14420,7 @@
             "type": "Foundational",
             "date": "2026-11-30",
             "end_date": "2026-12-04",
-            "applicants": 13,
+            "applicants": 14,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -14420,7 +14438,7 @@
             "end_date": "2026-10-23",
             "applicants": 0,
             "graduates": 0,
-            "status": "Upcoming",
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -14434,8 +14452,8 @@
             "type": "Foundational",
             "date": "2026-10-21",
             "end_date": "2026-10-21",
-            "applicants": 2,
-            "graduates": 2,
+            "applicants": 6,
+            "graduates": 6,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -14450,8 +14468,8 @@
             "type": "Foundational",
             "date": "2026-07-02",
             "end_date": "2026-07-10",
-            "applicants": 13,
-            "graduates": 11,
+            "applicants": 12,
+            "graduates": 10,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -14482,8 +14500,8 @@
             "type": "Foundational",
             "date": "2025-12-08",
             "end_date": "2025-12-12",
-            "applicants": 22,
-            "graduates": 17,
+            "applicants": 21,
+            "graduates": 16,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -14683,9 +14701,9 @@
           },
           {
             "name": "Big Wave (Big Wave) - Seoul",
-            "training": "Pado Power Fellowship Batch 5",
+            "training": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
             "training_type": "Foundational",
-            "year": "2025",
+            "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 1
@@ -15474,6 +15492,15 @@
             "graduate_count": 1
           },
           {
+            "name": "\uc778\ucc9c\ub179\uc0c9\uc5f0\ud569",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "\uc7ac\ub2e8\ubc95\uc778 \uadf8\ub9b0\ud53c\uc2a4",
             "training": "Pado Power Fellowship Batch 7",
             "training_type": "Foundational",
@@ -15506,8 +15533,17 @@
             "training_type": "Foundational",
             "year": "2026",
             "total_impact": 0,
-            "applicant_count": 2,
-            "graduate_count": 2
+            "applicant_count": 1,
+            "graduate_count": 1
+          },
+          {
+            "name": "\ucda9\ub0a8\ud658\uacbd\uc6b4\ub3d9\uc5f0\ud569",
+            "training": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 1
           },
           {
             "name": "\ucf00\uc774\ud31d\ud3ec\ud50c\ub798\ub2db(Kpop4planet)",
@@ -15537,12 +15573,12 @@
             "graduate_count": 0
           }
         ],
-        "unattributed_applicants": 2,
+        "unattributed_applicants": 4,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Unknown": 9,
-            "Female": 132,
+            "Unknown": 11,
+            "Female": 133,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -15552,7 +15588,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 137,
+            "Unknown": 140,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -15741,23 +15777,23 @@
             "training_name": "Pado Power Fellowship Batch 5",
             "likert": {
               "strategy_tactics": {
-                "pre": 3.71,
+                "pre": 3.75,
                 "post": 5.12,
                 "6m": null
               },
               "communication_strategy": {
                 "pre": 4.1,
-                "post": 5.18,
+                "post": 5.19,
                 "6m": null
               },
               "facilitating_workshop": {
                 "pre": 3.9,
-                "post": 4.88,
+                "post": 4.81,
                 "6m": null
               },
               "building_connection": {
-                "pre": 5.1,
-                "post": 5.29,
+                "pre": 5.15,
+                "post": 5.31,
                 "6m": null
               }
             }
@@ -15766,23 +15802,23 @@
             "training_name": "Pado Power Fellowship Batch 6",
             "likert": {
               "strategy_tactics": {
-                "pre": 4.38,
-                "post": 5.36,
+                "pre": 4.25,
+                "post": 5.3,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 4.54,
-                "post": 5.64,
+                "pre": 4.42,
+                "post": 5.6,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 4.46,
-                "post": 4.91,
+                "pre": 4.33,
+                "post": 4.9,
                 "6m": null
               },
               "building_connection": {
-                "pre": 4.15,
-                "post": 5.55,
+                "pre": 4.08,
+                "post": 5.5,
                 "6m": null
               }
             }
@@ -15791,22 +15827,22 @@
             "training_name": "Pado Power Fellowship Batch 7",
             "likert": {
               "strategy_tactics": {
-                "pre": 4.31,
+                "pre": 4.07,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 3.69,
+                "pre": 3.57,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 4.46,
+                "pre": 4.21,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 4.62,
+                "pre": 4.36,
                 "post": null,
                 "6m": null
               }
@@ -15891,22 +15927,22 @@
             "training_name": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
             "likert": {
               "strategy_tactics": {
-                "pre": null,
+                "pre": 4.5,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": null,
+                "pre": 5.0,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": null,
+                "pre": 5.0,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": null,
+                "pre": 4.5,
                 "post": null,
                 "6m": null
               }
@@ -16434,15 +16470,6 @@
                 "applicant_name": "\uc6d0\ud574\ubbfc"
               },
               {
-                "what_went_well": "\ubaa8\ub4e0 \uc2dc\uac04\uc774 \uc88b\uc558\uc9c0\ub9cc, \uc624\uc804 \uccab \uc2dc\uac04\uc744 \uad00\uacc4\uad6c\ucd95 \ud68c\uc758 \uc2dc\uac04\uc73c\ub85c \uc2dc\uc791\ud560 \uc218 \uc788\uc5b4\uc11c \uc88b\uc558\uc5b4\uc694!! \ub2e4\uc591\ud55c \ub3d9\ub8cc\ub4e4\uacfc \uc774\uc57c\uae30 \ub098\ub20c \uc218 \uc788\ub294 \uae30\ud68c\ub97c \ub9ce\uc774 \uc8fc\uc154\uc11c \uac10\uc0ac\ud569\ub2c8\ub2e4.",
-                "sum_up_learning": "\ub530\ub73b\ud558\uace0 \uc138\uc2ec\ud558\uace0 \uc751\uc6d0\uc744 \ub4e0\ub4e0\ud558\uac8c \ubc1b\uc558\uc5b4\uc694.",
-                "action_plan": "SMART \ubaa9\ud45c \ubd84\uc11d, \ud575\uc2ec \uc804\ub7b5 \uacbd\ub85c \uadf8\ub9ac\uae30, \uad00\uacc4 \uad6c\ucd95 \ud68c\uc758",
-                "improvement_suggestion": "\uc5c6\uc5b4\uc694\u314e\u314e \uc644\ubcbd\ud588\uc2b5\ub2c8\ub2e4!!",
-                "next_workshop_suggestion": "\ud65c\ub3d9\uac00 \ucd08\ub144\ucc28\uc77c \ub54c \uc5b4\ub5bb\uac8c \uc801\uc751\ud588\uace0 \ubc30\uc6cc\ub098\uac14\ub294\uc9c0 \ucd08\uccad \uc5f0\uc0ac\ub2d8\uc774 \uc774\uc57c\uae30\ub97c \ub4e4\ub824 \uc8fc\uc2dc\uba74 \uc88b\uc744 \uac83 \uac19\uc544\uc694.",
-                "testimonial": "\uc88b\uc740 \ub3d9\ub8cc\ub97c \ub9cc\ub0a0 \uc218 \uc788\ub294 \uadc0\ud55c \uc790\ub9ac\uc600\uc5b4\uc694. \ub2e4\uc591\ud55c \uad00\uc2ec\uc0ac\uc640 \uace0\ubbfc\ub4e4\uc744 \ud568\uaed8 \uc774\uc57c\uae30 \ub098\ub204\uba70 \uc628\uc804\ud788 \ud658\uacbd \uc6b4\ub3d9\uacfc \ucea0\ud398\uc778\uc5d0 \ubab0\uc785\ud560 \uc11c \uc788\uc5b4\uc11c \uc88b\uc558\uc2b5\ub2c8\ub2e4. \ubb34\uc5c7\ubcf4\ub2e4 \uc138\uc2ec\ud558\uace0 \ub530\ub73b\ud558\uac8c \ucc59\uaca8 \uc8fc\uc2e0 \ud37c\uc2e4\ub9ac\ud14c\uc774\ud130\uaed8 \uae4a\uc740 \uac10\uc0ac\ub97c \ub4dc\ub824\uc694\u2661",
-                "applicant_name": "\ud64d\ub2e4\uc608"
-              },
-              {
                 "what_went_well": "\ud1a0\ub860\uc778\uc6d0\uc774 4\uba85\uc774\uc5b4\uc11c \ubaa8\ub450 \uc758\uacac\uc744 \ub9d0\ud558\uae30\uc5d0 \uc801\ub2f9\ud588\uc2b5\ub2c8\ub2e4. \ub610\ud55c \ub9e4\uc77c \uc544\uce68 \uc9dd\uc9c0\uc5b4 \uc774\uc57c\uae30\ub97c \ud560 \uc218 \uc788\ub294 \uc2dc\uac04\uc774 \uc788\uc5b4 \ub300\uc0c1\uacfc \uae4a\uac8c \uc774\uc57c\uae30\ud574\ubcfc \uc218 \uc788\uc5c8\uc2b5\ub2c8\ub2e4.",
                 "sum_up_learning": "\ud65c\ub3d9 \ubc29\ud5a5 \uc2dc\uac01\ud654",
                 "action_plan": "\ucea0\ud398\uc778 \uc804\ub7b5 \uc218\ub9bd\ubc29\ubc95\uc5d0 \ub300\ud574 \uc804\ubc18\uc801\uc73c\ub85c \uc0b4\ud3b4\ubd10 \uc81c \uc0ac\uc5c5\uc744 \uc810\uac80\ud558\ub294 \ub370\uc5d0 \uc88b\uc744 \uac83 \uac19\uc544\uc694.",
@@ -16545,15 +16572,6 @@
                 "next_workshop_suggestion": null,
                 "testimonial": null,
                 "applicant_name": "\ubc15\uae30\ub0a8"
-              },
-              {
-                "what_went_well": "SMART \uae30\ubc95",
-                "sum_up_learning": "\ubb38\uc11c\ud654\ub97c \ud1b5\ud574 \ubaa9\ud45c\uc640 \uc804\ub7b5, \uc804\uc220 \uc218\ub9bd\uc758 \uccb4\uacc4\ud654",
-                "action_plan": "SMART \uae30\ubc95\n\uc774\uc288 \ucabc\uac1c\uae30",
-                "improvement_suggestion": "\uc790\uae30 \uc18c\uac1c \ud504\ub85c\uadf8\ub7a8: \uc790\uc2e0\uc744 \uc0c1\uc9d5\ud558\ub294 \ub3d9\ubb3c \ub9d0\ud558\uae30?",
-                "next_workshop_suggestion": null,
-                "testimonial": "\uba38\ub9ac \uc18d\uc73c\ub85c\ub9cc \uc138\uc6e0\ub358 \uc0ac\uc5c5\ubaa9\ud45c\uc640 \uc804\ub7b5, \uc804\uc220 \ub4f1\uc744 \ubb38\uc11c\ub85c \uc815\ub9ac\ud574 \uc911\uc694\ud55c \uc0ac\ud56d\uc744 \ube60\ub728\ub9ac\uc9c0 \uc54a\uace0 \ub354 \uccb4\uacc4\uc801\uc778 \ud65c\ub3d9\uc744 \uac00\ub2a5\ucf00 \ud568",
-                "applicant_name": "\uc720\uc885\uc900"
               },
               {
                 "what_went_well": "\uac00\uc0c1\uc758 \ubc1c\uc804\uc18c\ub97c \ud1b5\ud574 \uc774\ud734 \ucabc\uac1c\uae30\uc640 \ud30c\uc6cc \ub9f5\ud551",
@@ -16778,6 +16796,24 @@
             "training_name": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
             "responses": [
               {
+                "what_went_well": "\ud568\uaed8 \ubaa8\uc5ec\uc788\uc5b4\ub3c4 \ubb38\uc81c\uc5d0 \ub300\ud55c \uad6c\uccb4\uc801\uc778 \ub17c\uc758\ub294 \ud558\uae30 \uc5b4\ub824\uc6e0\ub294\ub370 \uc2dc\uac04\uc774 \ub9c8\ub828\ub418\uc5b4 \uc88b\uc558\uc2b5\ub2c8\ub2e4",
+                "sum_up_learning": null,
+                "action_plan": null,
+                "improvement_suggestion": "\ub2e4\ub4e4 \ud558\uace0 \uc2f6\uc740 \ub9d0\uc774 \ub9ce\uc544\ubcf4\uc600\uc2b5\ub2c8\ub2e4. \ucd94\ud6c4\uc5d0 \ube44\uc2b7\ud55c \uae30\ud68c\uac00 \uc8fc\uc5b4\uc9c4\ub2e4\uba74 \ud65c\ub3d9 \uc804\ud6c4\ub85c \ud5c8\uc2ec\ud0c4\ud68c\ud558\uac8c \uc774\uc57c\uae30\ud558\ub294 \uc2dc\uac04\uc774 \uc788\uc5b4\ub3c4 \uc88b\uaca0\uc2b5\ub2c8\ub2e4.",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "\uc548\ud61c\uc131"
+              },
+              {
+                "what_went_well": "\uc774\uc288\ub97c \ucabc\uac1c\ub294 \uacfc\uc815\uc5d0\uc11c \uac00\uc774\ub4dc\uac00 \uba85\ud655\ud574\uc11c \ub17c\uc758\uac00 \ub2e4\ub978 \ubc29\ud5a5\uc73c\ub85c \uc0c8\uc9c0\uc54a\uace0 \uc758\uacac\ub4e4\uc774 \ubaa8\uc5ec\uc9c8 \uc218 \uc788\uc5c8\ub2e4",
+                "sum_up_learning": "\ucd94\uc6b8\ub54c\ub294 \ub2e8\uc5f4\uacf5\uc0ac\uac00 \uc544\ub2c8\ub77c \ubcf4\uc77c\ub7ec\ub97c \uace0\uccd0\ubcf4\uc790",
+                "action_plan": "\uace0\ub85c \ud3d0\uc1c4 \uad00\ub828 \ucea0\ud398\uc778\uc5d0\uc11c \ub2ec\uc131\uac00\ub2a5\ud55c \ucea0\ud398\uc778 \ubd84\uc11d",
+                "improvement_suggestion": "\ub530\ub85c \uc5c6\uc2b5\ub2c8\ub2e4. \uac10\uc0ac\ud569\ub2c8\ub2e4.",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "\uc815\uae30\ucd98"
+              },
+              {
                 "what_went_well": "1\uc77c\ucc28 1\ubd80\uc640 2\ubd80 \ubaa8\ub450 \uc88b\uc558\uc2b5\ub2c8\ub2e4\ub9cc, 2\ubd80 \uc870\ubcc4\uacfc\uc81c(\uc561\ud2f0\ube0c \uc544\uc2dc\uc544 \uc8fc\uc7ac)\uc5d0\uc11c 5~6\uc778 \uaddc\ubaa8\ub85c \uc880\ub354 \uae4a\uc740 \uc774\uc57c\uae30\ub97c \ub098\ub20c \uc218 \uc788\uc5b4\uc11c \uc88b\uc558\uc2b5\ub2c8\ub2e4.",
                 "sum_up_learning": "\ub124\ud2b8\uc6cc\ud06c \ub0b4 \ud55c \ubd84 \ud55c \ubd84\uc774 \uc804\ubb38\uac00\uc774\ub2c8, \u2018\uac19\uc740 \ubc29\ud5a5\u2019\uc744 \ubcf4\uace0 \uc788\ub354\ub77c\ub3c4 \ucea0\ud398\uc778\uc758 \uc138\uc138\ud55c \uae30\ud68d\uc5d0 \uc788\uc5b4\uc11c\ub294 \ud55c \ubd84 \ud55c \ubd84\uc5d0\uac8c \uac1c\ubcc4 \uc5f0\ub77d\uc744 \ub4dc\ub9ac\ub294 \uac8c \uc88b\uaca0\ub2e4.",
                 "action_plan": "\ucca0\uac15 \uc0b0\uc5c5 \uc678 \uc774\uc288\uc640 \uc5f0\uacc4\u00b7\uc5f0\ub300\ud558\uc5ec \uae30\uc5c5 \uacf5\uc2dc\uc5d0 \ub300\ud55c \uc5ec\ub860 \uc555\ubc15\uc744 \uac00\ud560 \uc218 \uc788\uc744\uc9c0\ub3c4\u2026?",
@@ -16794,6 +16830,24 @@
                 "next_workshop_suggestion": null,
                 "testimonial": null,
                 "applicant_name": "\uae40\ubbfc"
+              },
+              {
+                "what_went_well": "\ubaa8\ub460\ubcc4 \ub17c\uc758",
+                "sum_up_learning": null,
+                "action_plan": null,
+                "improvement_suggestion": "\uac01 \uc81c\ucca0\uc18c \uc18c\uc7ac \uc9c0\uc5ed\ubcc4 \ubc1c\ud45c \uc2dc\uac04 \ud655\ubcf4",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "\uc720\uc885\uc900"
+              },
+              {
+                "what_went_well": "\uc774\uc288 \ucabc\uac1c\uae30 \uc2dc\uac04\uc5d0 \ub9c9\ud790 \ub54c\ub9c8\ub2e4 \ud37c\uc2e4\ub2d8\uc774 \uc798 \uc774\ub04c\uc5b4 \uc8fc\uc154\uc11c \uc88b\uc558\uc2b5\ub2c8\ub2e4.",
+                "sum_up_learning": "\ud53c\ubd80\uc5d0 \uc640\ub2ff\uace0 \uc804\ub7b5\uc801\uc774\uba70 \uc2b9\ub9ac\ud560 \uc218 \uc788\ub294 \uc774\uc288\ub97c \uc120\ud0dd\ud55c\ub2e4.",
+                "action_plan": "\uccad\ub144 \ub300\uc0c1\uc73c\ub85c \uc9c4\ud589\ud558\ub294 \ud0c4\uc18c\ubc30\ucd9c\ub7c9 \uc2a4\ud130\ub514 \ubaa8\uc784\uc5d0\uc11c \uccad\ub144\ub4e4\uc758 \uc694\uad6c\ub97c \uba54\uc2dc\uc9c0\ud654\ud558\ub294 \uc6cc\ud06c\uc20d\uc5d0 \uc801\uc6a9\ud574\ubcfc \uc218 \uc788\uc744 \uac83 \uac19\uc544\uc694.",
+                "improvement_suggestion": "\ud3ec\uc2a4\ud2b8\uc787\uc73c\ub85c \uac08\ub798\ub97c \ub098\ub20c \ub54c \uc5b4\ub5bb\uac8c \uc791\uc131\ud558\uace0 \ubcf4\ub4dc\uc5d0 \ubd99\uc5ec\uc57c \ud560\uc9c0 \uc870\uae08 \uc5b4\ub835\uac8c \ub290\uaef4\uc838\uc11c \uc7a5\ud45c\ub97c \uc778\uc1c4\ubb3c\ub85c \ub098\ub220 \uc8fc\uc2dc\uba74 \ucc38\uace0\ud558\ub294\ub370 \ub9ce\uc740 \ub3c4\uc6c0\uc774 \ub420 \uac83 \uac19\uc544\uc694.",
+                "next_workshop_suggestion": "\ud65c\ub3d9\uac00 \ucd08\ub144\ucc28\uc77c \ub54c \uc5b4\ub5bb\uac8c \uc801\uc751\ud588\uace0 \ubc30\uc6cc\ub098\uac14\ub294\uc9c0 \ucd08\uccad \uc5f0\uc0ac\ub2d8\uc774 \uc774\uc57c\uae30\ub97c \ub4e4\ub824 \uc8fc\uc2dc\uba74 \uc88b\uc744 \uac83 \uac19\uc544\uc694.",
+                "testimonial": "\uc774\ubc88  \ud2b8\ub808\uc774\ub2dd\uc774 \uc5ec\ub7ec \ub2e4\ub978 \ub2e8\uccb4\uc758 \ud65c\ub3d9\uac00\ubd84\ub4e4\uacfc \ud568\uaed8 \ud574\ubcf4\ub294 \uc774\uc288 \ucabc\uac1c\uae30 \ud65c\ub3d9\uc774\uc5b4\uc11c, \uc774\uc288\uc5d0 \ub300\ud55c \ub2e4\uc591\ud55c \uad00\uc810\uacfc \uad00\uc2ec\uc0ac\ub97c \ud655\uc778\ud560 \uc218 \uc788\uc5b4\uc11c \ub9ce\uc774 \ubc30\uc6e0\uace0 \uc18c\uc18d \ub2e8\uccb4 \ud65c\ub3d9\uc5d0\ub3c4 \ucc38\uace0\ud574 \ubcfc \uc218 \uc788\uc744 \uac83 \uac19\uc544\uc694.",
+                "applicant_name": "\ud64d\ub2e4\uc608"
               }
             ]
           }
@@ -17426,12 +17480,6 @@
             "source": "Post-survey"
           },
           {
-            "applicant_name": "\ud64d\ub2e4\uc608",
-            "training_name": "Pado Power Fellowship Batch 5",
-            "testimonial": "\uc88b\uc740 \ub3d9\ub8cc\ub97c \ub9cc\ub0a0 \uc218 \uc788\ub294 \uadc0\ud55c \uc790\ub9ac\uc600\uc5b4\uc694. \ub2e4\uc591\ud55c \uad00\uc2ec\uc0ac\uc640 \uace0\ubbfc\ub4e4\uc744 \ud568\uaed8 \uc774\uc57c\uae30 \ub098\ub204\uba70 \uc628\uc804\ud788 \ud658\uacbd \uc6b4\ub3d9\uacfc \ucea0\ud398\uc778\uc5d0 \ubab0\uc785\ud560 \uc11c \uc788\uc5b4\uc11c \uc88b\uc558\uc2b5\ub2c8\ub2e4. \ubb34\uc5c7\ubcf4\ub2e4 \uc138\uc2ec\ud558\uace0 \ub530\ub73b\ud558\uac8c \ucc59\uaca8 \uc8fc\uc2e0 \ud37c\uc2e4\ub9ac\ud14c\uc774\ud130\uaed8 \uae4a\uc740 \uac10\uc0ac\ub97c \ub4dc\ub824\uc694\u2661",
-            "source": "Post-survey"
-          },
-          {
             "applicant_name": "\ubc15\ud55c",
             "training_name": "Pado Power Fellowship Batch 5",
             "testimonial": "\uadf8\ub3d9\uc548 \ub9c8\uad6c\uc7a1\uc774\ub85c \ud588\ub358 \ud65c\ub3d9\uc744 \uccb4\uacc4\uc801\uc73c\ub85c \ubc14\ub77c\ubcfc \uc218 \uc788\ub3c4\ub85d \uc54c\ub824\uc900 \uac10\uc0ac\ud55c \uad50\uc721!",
@@ -17483,12 +17531,6 @@
             "applicant_name": "\uc784\uc218\uc9c4",
             "training_name": "Pado Power Fellowship Batch 6",
             "testimonial": "\uc2dc\uc791 \uc804 \uae34 \uc2dc\uac04\uc744 \ud22c\uc790\ud574\uc57c\ud558\ub294 \ubd80\ub2f4\uc744 \uc2f9 \uc78a\uac8c \ud574\uc8fc\ub294 \ud2b9\ubcc4\ud55c \uc2dc\uac04\uc774\uc5c8\uc2b5\ub2c8\ub2e4. \uc55e\uc73c\ub85c\uc758 \uacc4\ud68d\uc744 \uc138\uc6b0\uace0 \uc9c4\ud589\ud558\ub294\ub370 \uc720\uc775\ud558\uac8c \uc0ac\uc6a9\ub420\uc218 \uc788\uc744\uac83 \uac19\uc2b5\ub2c8\ub2e4",
-            "source": "Post-survey"
-          },
-          {
-            "applicant_name": "\uc720\uc885\uc900",
-            "training_name": "Pado Power Fellowship Batch 6",
-            "testimonial": "\uba38\ub9ac \uc18d\uc73c\ub85c\ub9cc \uc138\uc6e0\ub358 \uc0ac\uc5c5\ubaa9\ud45c\uc640 \uc804\ub7b5, \uc804\uc220 \ub4f1\uc744 \ubb38\uc11c\ub85c \uc815\ub9ac\ud574 \uc911\uc694\ud55c \uc0ac\ud56d\uc744 \ube60\ub728\ub9ac\uc9c0 \uc54a\uace0 \ub354 \uccb4\uacc4\uc801\uc778 \ud65c\ub3d9\uc744 \uac00\ub2a5\ucf00 \ud568",
             "source": "Post-survey"
           },
           {
@@ -17624,6 +17666,12 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "\ud64d\ub2e4\uc608",
+            "training_name": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
+            "testimonial": "\uc774\ubc88  \ud2b8\ub808\uc774\ub2dd\uc774 \uc5ec\ub7ec \ub2e4\ub978 \ub2e8\uccb4\uc758 \ud65c\ub3d9\uac00\ubd84\ub4e4\uacfc \ud568\uaed8 \ud574\ubcf4\ub294 \uc774\uc288 \ucabc\uac1c\uae30 \ud65c\ub3d9\uc774\uc5b4\uc11c, \uc774\uc288\uc5d0 \ub300\ud55c \ub2e4\uc591\ud55c \uad00\uc810\uacfc \uad00\uc2ec\uc0ac\ub97c \ud655\uc778\ud560 \uc218 \uc788\uc5b4\uc11c \ub9ce\uc774 \ubc30\uc6e0\uace0 \uc18c\uc18d \ub2e8\uccb4 \ud65c\ub3d9\uc5d0\ub3c4 \ucc38\uace0\ud574 \ubcfc \uc218 \uc788\uc744 \uac83 \uac19\uc544\uc694.",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Nara Kim",
             "training_name": "PPF Batch 4",
             "testimonial": "Depends what kind of testimonial I need to provide but I think the training is very useful so hope I could help you to encourage others! Let me know what you need!",
@@ -17688,8 +17736,8 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Unknown": 9,
-            "Female": 132,
+            "Unknown": 11,
+            "Female": 133,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -17699,14 +17747,15 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 137,
+            "Unknown": 140,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
             "18-24": 4
           },
           "by_region": {
-            "Unknown": 42,
+            "Unknown": 44,
+            "\uae40\ud3ec\uc2dc \uace0\ucd0c\uc74d \uc218\uae30\ub85c": 1,
             "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 6,
             "Seoul": 63,
             "\uc11c\uc6b8\uc2dc": 24,
@@ -17789,7 +17838,7 @@
           "target_activities": 15,
           "actual_activities": 5,
           "target_participants": 0,
-          "actual_participants": 45,
+          "actual_participants": 43,
           "rows": [
             {
               "plan_title": null,
@@ -17821,7 +17870,7 @@
               "actual_title": "Pado Power Fellowship Batch 5",
               "actual_date": "2025-12-08",
               "actual_end_date": "2025-12-12",
-              "actual_participants": 17,
+              "actual_participants": 16,
               "status": "Completed"
             },
             {
@@ -17843,7 +17892,7 @@
               "actual_title": "Pado Power Fellowship Batch 6",
               "actual_date": "2026-07-02",
               "actual_end_date": "2026-07-10",
-              "actual_participants": 11,
+              "actual_participants": 10,
               "status": "Completed"
             },
             {
@@ -18017,7 +18066,7 @@
           "target_activities": 13,
           "actual_activities": 3,
           "target_participants": 0,
-          "actual_participants": 2,
+          "actual_participants": 6,
           "rows": [
             {
               "plan_title": null,
@@ -18027,7 +18076,7 @@
               "actual_title": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
               "actual_date": "2026-10-21",
               "actual_end_date": "2026-10-21",
-              "actual_participants": 2,
+              "actual_participants": 6,
               "status": "Completed"
             },
             {
@@ -18039,7 +18088,7 @@
               "actual_date": "2026-10-23",
               "actual_end_date": "2026-10-23",
               "actual_participants": 0,
-              "status": "Upcoming"
+              "status": "Completed"
             },
             {
               "plan_title": null,
@@ -43789,8 +43838,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3798,
-        "total_graduates": 1787
+        "total_applicants": 3801,
+        "total_graduates": 1789
       },
       "per_country": {
         "PK": {
@@ -43802,8 +43851,8 @@
           "total_graduates": 591
         },
         "KR": {
-          "total_applicants": 215,
-          "total_graduates": 178
+          "total_applicants": 218,
+          "total_graduates": 180
         },
         "ID": {
           "total_applicants": 1717,
