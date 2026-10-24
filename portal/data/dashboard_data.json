@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T03:05:35",
+  "generated_at": "2026-10-24T03:01:43",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -13928,11 +13928,11 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 218,
+        "total_applicants": 219,
         "total_graduates": 180,
         "total_ongoing": 4,
         "application_funnel": {
-          "total_applicants": 218,
+          "total_applicants": 219,
           "attended_training": 180,
           "graduated": 180,
           "impact_evaluation_completed": 16
@@ -13960,14 +13960,22 @@
           },
           {
             "year": "2026",
-            "applicants": 32,
+            "applicants": 33,
             "graduates": 16
           }
         ],
         "community_impact": 159,
-        "touched_organizations": 69,
+        "touched_organizations": 70,
         "training_categories": {
           "completed": [
+            {
+              "name": "Facilitation skill workshop PPF7",
+              "type": "Training of Trainers",
+              "start_date": "2026-10-23",
+              "end_date": "2026-10-23",
+              "applicants": 0,
+              "graduates": 0
+            },
             {
               "name": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
               "type": "Foundational",
@@ -13983,26 +13991,9 @@
               "end_date": "2026-07-10",
               "applicants": 12,
               "graduates": 10
-            },
-            {
-              "name": "GreenKoreaUnited Campaign Strategy Workshop",
-              "type": "Foundational",
-              "start_date": "2025-12-18",
-              "end_date": "2025-12-19",
-              "applicants": 10,
-              "graduates": 10
             }
           ],
-          "ongoing": [
-            {
-              "name": "Facilitation skill workshop PPF7",
-              "type": "Training of Trainers",
-              "start_date": "2026-10-23",
-              "end_date": "2026-10-23",
-              "applicants": 0,
-              "graduates": 0
-            }
-          ],
+          "ongoing": [],
           "upcoming": []
         }
       },
@@ -14420,7 +14411,7 @@
             "type": "Foundational",
             "date": "2026-11-30",
             "end_date": "2026-12-04",
-            "applicants": 14,
+            "applicants": 15,
             "graduates": 0,
             "status": "Upcoming",
             "pre_app_link": "",
@@ -15420,6 +15411,15 @@
             "graduate_count": 1
           },
           {
+            "name": "\ub179\uc0c9\uc5f0\ud569",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 0
+          },
+          {
             "name": "\ub179\uc0c9\uc804\ud658\uc5f0\uad6c\uc18c",
             "training": "Pado Power Fellowship Batch 6",
             "training_type": "Foundational",
@@ -15578,7 +15578,7 @@
         "demographics": {
           "by_gender": {
             "Unknown": 11,
-            "Female": 133,
+            "Female": 134,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -15588,7 +15588,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 140,
+            "Unknown": 141,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -15827,22 +15827,22 @@
             "training_name": "Pado Power Fellowship Batch 7",
             "likert": {
               "strategy_tactics": {
-                "pre": 4.07,
+                "pre": 3.93,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 3.57,
+                "pre": 3.53,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 4.21,
+                "pre": 4.2,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 4.36,
+                "pre": 4.27,
                 "post": null,
                 "6m": null
               }
@@ -17737,7 +17737,7 @@
         "demographics": {
           "by_gender": {
             "Unknown": 11,
-            "Female": 133,
+            "Female": 134,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -17747,7 +17747,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 140,
+            "Unknown": 141,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -17755,6 +17755,7 @@
           },
           "by_region": {
             "Unknown": 44,
+            "\uc774\ubb38\ub3d9": 1,
             "\uae40\ud3ec\uc2dc \uace0\ucd0c\uc74d \uc218\uae30\ub85c": 1,
             "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 6,
             "Seoul": 63,
@@ -43838,7 +43839,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3801,
+        "total_applicants": 3802,
         "total_graduates": 1789
       },
       "per_country": {
@@ -43851,7 +43852,7 @@
           "total_graduates": 591
         },
         "KR": {
-          "total_applicants": 218,
+          "total_applicants": 219,
           "total_graduates": 180
         },
         "ID": {
