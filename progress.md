@@ -2387,3 +2387,11 @@ cron in the Catalyst console).
 [2026-10-26 05:47:08 UTC]   dashboard_data.json written (2094.3 KB)
 [2026-10-26 05:47:08 UTC]   dashboard_data.json synced to portal/data/
 [2026-10-26 05:47:08 UTC] Pipeline complete in 45s
+
+## [2026-10-26] Hid the "Training Forms" portal tab
+
+Hid the tab in `portal/portal.html` and `portal/backbone.html` (`style="display:none"`
+on the nav link; section markup and `renderTrainingFormsTab()` left intact).
+Reason: Create Training builds post-survey links as `trainingsurvey-<country>.html`,
+but only `trainingsurvey-ph.html` exists, so PK/KR/ID/Regional survey links 404.
+Restore by removing the inline style once those survey pages exist.
