@@ -2342,3 +2342,18 @@ Key architecture decisions:
 [2026-10-25 02:55:13 UTC]   dashboard_data.json written (2094.3 KB)
 [2026-10-25 02:55:13 UTC]   dashboard_data.json synced to portal/data/
 [2026-10-25 02:55:13 UTC] Pipeline complete in 41s
+
+## [2026-10-26] Portal data source switched back to the daily GitHub Actions copy
+
+Found the live portal showing data from 2026-08-09: `portal/js/app.js` loaded
+only from Catalyst `crm-proxy/dashboard-data`, which serves the File Store copy
+uploaded by Catalyst `pipeline-job`, and that upload hasn't happened since
+2026-08-09. Meanwhile the GitHub Actions workflow (`daily-deploy.yml`) has run
+successfully every day (latest 2026-10-25) and deploys a fresh
+`portal/data/dashboard_data.json` with the portal to Cloudflare Pages.
+
+`app.js` now loads `data/dashboard_data.json` (same origin) first and falls
+back to the Catalyst endpoint only if that fails. Verified locally in Chromium:
+index, PH portal and backbone render the 2026-10-25 data with no JS errors.
+Still open: why Catalyst `pipeline-job` stopped uploading (check its logs and
+cron in the Catalyst console).
