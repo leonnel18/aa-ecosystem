@@ -2357,3 +2357,18 @@ back to the Catalyst endpoint only if that fails. Verified locally in Chromium:
 index, PH portal and backbone render the 2026-10-25 data with no JS errors.
 Still open: why Catalyst `pipeline-job` stopped uploading (check its logs and
 cron in the Catalyst console).
+[2026-10-26 02:53:22 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-10-26 02:54:04 UTC]   Extracted Deals: 4445 records
+[2026-10-26 02:54:04 UTC]   Extracted Solutions: 131 records
+[2026-10-26 02:54:04 UTC]   Extracted Products: 4 records
+[2026-10-26 02:54:04 UTC]   Extracted Accounts: 2381 records
+[2026-10-26 02:54:04 UTC]   Extracted Forms: 24 records
+[2026-10-26 02:54:04 UTC]   Extracted Training_Plans: 167 records
+[2026-10-26 02:54:04 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-10-26 02:54:04 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-10-26 02:54:04 UTC]   Transformed KR: applicants=219 graduates=180
+[2026-10-26 02:54:04 UTC]   Transformed ID: applicants=1717 graduates=737
+[2026-10-26 02:54:04 UTC]   Transformed backbone: applicants=613 graduates=264
+[2026-10-26 02:54:04 UTC]   dashboard_data.json written (2094.3 KB)
+[2026-10-26 02:54:04 UTC]   dashboard_data.json synced to portal/data/
+[2026-10-26 02:54:04 UTC] Pipeline complete in 42s
