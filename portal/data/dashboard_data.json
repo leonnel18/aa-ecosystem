@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T03:49:19",
+  "generated_at": "2026-11-01T03:58:09",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -18321,7 +18321,7 @@
               "actual_date": null,
               "actual_end_date": null,
               "actual_participants": null,
-              "status": "Upcoming"
+              "status": "Missed"
             },
             {
               "plan_title": "Coalition collaboration training Y2 - KBF - Dec-26",
@@ -36591,7 +36591,7 @@
               "actual_date": null,
               "actual_end_date": null,
               "actual_participants": null,
-              "status": "Upcoming"
+              "status": "Missed"
             },
             {
               "plan_title": "TOT 4",
