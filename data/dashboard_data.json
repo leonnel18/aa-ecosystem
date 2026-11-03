@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T04:01:31",
+  "generated_at": "2026-11-03T05:02:51",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -18713,7 +18713,7 @@
           {
             "type": "Foundational",
             "conducted": 28,
-            "total_planned": 28
+            "total_planned": 29
           },
           {
             "type": "Training of Trainers",
@@ -18810,7 +18810,7 @@
             {
               "type": "Foundational",
               "conducted": 2,
-              "total_planned": 2
+              "total_planned": 3
             },
             {
               "type": "Unknown",
@@ -19161,6 +19161,22 @@
           }
         },
         "actual_trainings": [
+          {
+            "id": "773031000015296023",
+            "name": "Belantara Lestara 2026",
+            "type": "Foundational",
+            "date": "2026-11-10",
+            "end_date": "2026-11-14",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
           {
             "id": "773031000012179005",
             "name": "Semesta",
@@ -36534,10 +36550,21 @@
         },
         "year_2": {
           "target_activities": 9,
-          "actual_activities": 0,
+          "actual_activities": 1,
           "target_participants": 0,
           "actual_participants": 0,
           "rows": [
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Belantara Lestara 2026",
+              "actual_date": "2026-11-10",
+              "actual_end_date": "2026-11-14",
+              "actual_participants": 0,
+              "status": "Upcoming"
+            },
             {
               "plan_title": "TOT 3",
               "plan_date": "2026-09-01",
