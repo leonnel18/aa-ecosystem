@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T04:35:52",
+  "generated_at": "2026-11-05T04:50:55",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -14072,11 +14072,11 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 222,
+        "total_applicants": 224,
         "total_graduates": 183,
         "total_ongoing": 4,
         "application_funnel": {
-          "total_applicants": 222,
+          "total_applicants": 224,
           "attended_training": 183,
           "graduated": 183,
           "impact_evaluation_completed": 16
@@ -14104,14 +14104,22 @@
           },
           {
             "year": "2026",
-            "applicants": 36,
+            "applicants": 38,
             "graduates": 19
           }
         ],
         "community_impact": 159,
-        "touched_organizations": 70,
+        "touched_organizations": 71,
         "training_categories": {
           "completed": [
+            {
+              "name": "Campaign Clinic for Climate Action NOW (PPF6 Follow up Workshop)",
+              "type": "Foundational",
+              "start_date": "2026-10-30",
+              "end_date": "2026-10-30",
+              "applicants": 0,
+              "graduates": 0
+            },
             {
               "name": "Facilitation skill workshop PPF7",
               "type": "Training of Trainers",
@@ -14127,17 +14135,18 @@
               "end_date": "2026-10-21",
               "applicants": 9,
               "graduates": 9
-            },
-            {
-              "name": "Pado Power Fellowship Batch 6",
-              "type": "Foundational",
-              "start_date": "2026-07-02",
-              "end_date": "2026-07-10",
-              "applicants": 12,
-              "graduates": 10
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "Campaign Clinic for IGT (PPF6 Follow up Workshop)",
+              "type": "Foundational",
+              "start_date": "2026-11-05",
+              "end_date": "2026-11-05",
+              "applicants": 0,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -14145,8 +14154,8 @@
         "trainings_by_type": [
           {
             "type": "Foundational",
-            "conducted": 12,
-            "total_planned": 13
+            "conducted": 14,
+            "total_planned": 16
           },
           {
             "type": "Public Narrative",
@@ -14201,8 +14210,8 @@
           "2026": [
             {
               "type": "Foundational",
-              "conducted": 2,
-              "total_planned": 3
+              "conducted": 4,
+              "total_planned": 6
             },
             {
               "type": "Training of Trainers",
@@ -14545,7 +14554,7 @@
           },
           "2026": {
             "planned": 14,
-            "conducted": 3
+            "conducted": 5
           }
         },
         "actual_trainings": [
@@ -14555,9 +14564,57 @@
             "type": "Foundational",
             "date": "2026-11-30",
             "end_date": "2026-12-04",
-            "applicants": 15,
+            "applicants": 17,
             "graduates": 0,
             "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
+          {
+            "id": "773031000015392009",
+            "name": "Campaign Clinic for YSHS KFEM (PPF6 Follow up Workshop)",
+            "type": "Foundational",
+            "date": "2026-11-10",
+            "end_date": "2026-11-10",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
+          {
+            "id": "773031000015367008",
+            "name": "Campaign Clinic for IGT (PPF6 Follow up Workshop)",
+            "type": "Foundational",
+            "date": "2026-11-05",
+            "end_date": "2026-11-05",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Completed",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
+          {
+            "id": "773031000015363009",
+            "name": "Campaign Clinic for Climate Action NOW (PPF6 Follow up Workshop)",
+            "type": "Foundational",
+            "date": "2026-10-30",
+            "end_date": "2026-10-30",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -15555,6 +15612,15 @@
             "graduate_count": 1
           },
           {
+            "name": "\ub179\uc0c9\uad50\ud1b5\uc6b4\ub3d9",
+            "training": "Pado Power Fellowship Batch 7",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 2,
+            "graduate_count": 0
+          },
+          {
             "name": "\ub179\uc0c9\uc5f0\ud569",
             "training": "Pado Power Fellowship Batch 7",
             "training_type": "Foundational",
@@ -15721,8 +15787,8 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
+            "Female": 136,
             "Unknown": 14,
-            "Female": 134,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -15732,7 +15798,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 144,
+            "Unknown": 146,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -15971,22 +16037,22 @@
             "training_name": "Pado Power Fellowship Batch 7",
             "likert": {
               "strategy_tactics": {
-                "pre": 3.93,
+                "pre": 4.06,
                 "post": null,
                 "6m": null
               },
               "communication_strategy": {
-                "pre": 3.53,
+                "pre": 3.65,
                 "post": null,
                 "6m": null
               },
               "facilitating_workshop": {
-                "pre": 4.2,
+                "pre": 4.29,
                 "post": null,
                 "6m": null
               },
               "building_connection": {
-                "pre": 4.27,
+                "pre": 4.24,
                 "post": null,
                 "6m": null
               }
@@ -17913,8 +17979,8 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
+            "Female": 136,
             "Unknown": 14,
-            "Female": 134,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -17924,19 +17990,20 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 144,
+            "Unknown": 146,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
             "18-24": 4
           },
           "by_region": {
+            "\uc11c\uc6b8\uc2dc": 25,
+            "\uc5f0\ub0a8\ub3d9": 1,
             "Unknown": 47,
             "\uc774\ubb38\ub3d9": 1,
             "\uae40\ud3ec\uc2dc \uace0\ucd0c\uc74d \uc218\uae30\ub85c": 1,
             "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 6,
             "Seoul": 63,
-            "\uc11c\uc6b8\uc2dc": 24,
             "\uc11c\uc6b8\uc2dc \uc1a1\ud30c\uad6c": 1,
             "\ud310\uad50\ub300\uc7a5\ub85c7\uae38 69": 1,
             "\uc11c\uc6b8": 5,
@@ -18242,7 +18309,7 @@
         },
         "year_2": {
           "target_activities": 13,
-          "actual_activities": 3,
+          "actual_activities": 6,
           "target_participants": 0,
           "actual_participants": 9,
           "rows": [
@@ -18267,6 +18334,39 @@
               "actual_end_date": "2026-10-23",
               "actual_participants": 0,
               "status": "Completed"
+            },
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Campaign Clinic for Climate Action NOW (PPF6 Follow up Workshop)",
+              "actual_date": "2026-10-30",
+              "actual_end_date": "2026-10-30",
+              "actual_participants": 0,
+              "status": "Completed"
+            },
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Campaign Clinic for IGT (PPF6 Follow up Workshop)",
+              "actual_date": "2026-11-05",
+              "actual_end_date": "2026-11-05",
+              "actual_participants": 0,
+              "status": "Completed"
+            },
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Campaign Clinic for YSHS KFEM (PPF6 Follow up Workshop)",
+              "actual_date": "2026-11-10",
+              "actual_end_date": "2026-11-10",
+              "actual_participants": 0,
+              "status": "Upcoming"
             },
             {
               "plan_title": null,
@@ -44043,7 +44143,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3816,
+        "total_applicants": 3818,
         "total_graduates": 1803
       },
       "per_country": {
@@ -44056,7 +44156,7 @@
           "total_graduates": 602
         },
         "KR": {
-          "total_applicants": 222,
+          "total_applicants": 224,
           "total_graduates": 183
         },
         "ID": {
