@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T04:50:55",
+  "generated_at": "2026-11-06T04:50:36",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -14113,6 +14113,14 @@
         "training_categories": {
           "completed": [
             {
+              "name": "Campaign Clinic for IGT (PPF6 Follow up Workshop)",
+              "type": "Foundational",
+              "start_date": "2026-11-05",
+              "end_date": "2026-11-05",
+              "applicants": 0,
+              "graduates": 0
+            },
+            {
               "name": "Campaign Clinic for Climate Action NOW (PPF6 Follow up Workshop)",
               "type": "Foundational",
               "start_date": "2026-10-30",
@@ -14127,22 +14135,14 @@
               "end_date": "2026-10-23",
               "applicants": 0,
               "graduates": 0
-            },
-            {
-              "name": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
-              "type": "Foundational",
-              "start_date": "2026-10-21",
-              "end_date": "2026-10-21",
-              "applicants": 9,
-              "graduates": 9
             }
           ],
           "ongoing": [
             {
-              "name": "Campaign Clinic for IGT (PPF6 Follow up Workshop)",
+              "name": "Peer Learning Session \ubc30\uc6c0\ub098\ub214\ud130 \uc138\uc158 \ud53c\ub4dc\ubc31",
               "type": "Foundational",
-              "start_date": "2026-11-05",
-              "end_date": "2026-11-05",
+              "start_date": "2026-11-06",
+              "end_date": "2026-11-06",
               "applicants": 0,
               "graduates": 0
             }
@@ -14154,8 +14154,8 @@
         "trainings_by_type": [
           {
             "type": "Foundational",
-            "conducted": 14,
-            "total_planned": 16
+            "conducted": 15,
+            "total_planned": 17
           },
           {
             "type": "Public Narrative",
@@ -14210,8 +14210,8 @@
           "2026": [
             {
               "type": "Foundational",
-              "conducted": 4,
-              "total_planned": 6
+              "conducted": 5,
+              "total_planned": 7
             },
             {
               "type": "Training of Trainers",
@@ -14554,7 +14554,7 @@
           },
           "2026": {
             "planned": 14,
-            "conducted": 5
+            "conducted": 6
           }
         },
         "actual_trainings": [
@@ -14583,6 +14583,22 @@
             "applicants": 0,
             "graduates": 0,
             "status": "Upcoming",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": ""
+          },
+          {
+            "id": "773031000015463002",
+            "name": "Peer Learning Session \ubc30\uc6c0\ub098\ub214\ud130 \uc138\uc158 \ud53c\ub4dc\ubc31",
+            "type": "Foundational",
+            "date": "2026-11-06",
+            "end_date": "2026-11-06",
+            "applicants": 0,
+            "graduates": 0,
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -18309,7 +18325,7 @@
         },
         "year_2": {
           "target_activities": 13,
-          "actual_activities": 6,
+          "actual_activities": 7,
           "target_participants": 0,
           "actual_participants": 9,
           "rows": [
@@ -18354,6 +18370,17 @@
               "actual_title": "Campaign Clinic for IGT (PPF6 Follow up Workshop)",
               "actual_date": "2026-11-05",
               "actual_end_date": "2026-11-05",
+              "actual_participants": 0,
+              "status": "Completed"
+            },
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Peer Learning Session \ubc30\uc6c0\ub098\ub214\ud130 \uc138\uc158 \ud53c\ub4dc\ubc31",
+              "actual_date": "2026-11-06",
+              "actual_end_date": "2026-11-06",
               "actual_participants": 0,
               "status": "Completed"
             },
