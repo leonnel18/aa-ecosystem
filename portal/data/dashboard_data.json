@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T04:50:36",
+  "generated_at": "2026-11-07T04:19:58",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -14113,6 +14113,14 @@
         "training_categories": {
           "completed": [
             {
+              "name": "Peer Learning Session \ubc30\uc6c0\ub098\ub214\ud130 \uc138\uc158 \ud53c\ub4dc\ubc31",
+              "type": "Foundational",
+              "start_date": "2026-11-06",
+              "end_date": "2026-11-06",
+              "applicants": 0,
+              "graduates": 0
+            },
+            {
               "name": "Campaign Clinic for IGT (PPF6 Follow up Workshop)",
               "type": "Foundational",
               "start_date": "2026-11-05",
@@ -14127,26 +14135,9 @@
               "end_date": "2026-10-30",
               "applicants": 0,
               "graduates": 0
-            },
-            {
-              "name": "Facilitation skill workshop PPF7",
-              "type": "Training of Trainers",
-              "start_date": "2026-10-23",
-              "end_date": "2026-10-23",
-              "applicants": 0,
-              "graduates": 0
             }
           ],
-          "ongoing": [
-            {
-              "name": "Peer Learning Session \ubc30\uc6c0\ub098\ub214\ud130 \uc138\uc158 \ud53c\ub4dc\ubc31",
-              "type": "Foundational",
-              "start_date": "2026-11-06",
-              "end_date": "2026-11-06",
-              "applicants": 0,
-              "graduates": 0
-            }
-          ],
+          "ongoing": [],
           "upcoming": []
         }
       },
