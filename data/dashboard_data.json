@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T04:18:41",
+  "generated_at": "2026-11-10T05:44:26",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -14137,7 +14137,16 @@
               "graduates": 0
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "Campaign Clinic for YSHS KFEM (PPF6 Follow up Workshop)",
+              "type": "Foundational",
+              "start_date": "2026-11-10",
+              "end_date": "2026-11-10",
+              "applicants": 0,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -14145,7 +14154,7 @@
         "trainings_by_type": [
           {
             "type": "Foundational",
-            "conducted": 15,
+            "conducted": 16,
             "total_planned": 17
           },
           {
@@ -14201,7 +14210,7 @@
           "2026": [
             {
               "type": "Foundational",
-              "conducted": 5,
+              "conducted": 6,
               "total_planned": 7
             },
             {
@@ -14545,7 +14554,7 @@
           },
           "2026": {
             "planned": 14,
-            "conducted": 6
+            "conducted": 7
           }
         },
         "actual_trainings": [
@@ -14573,7 +14582,7 @@
             "end_date": "2026-11-10",
             "applicants": 0,
             "graduates": 0,
-            "status": "Upcoming",
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -18384,7 +18393,7 @@
               "actual_date": "2026-11-10",
               "actual_end_date": "2026-11-10",
               "actual_participants": 0,
-              "status": "Upcoming"
+              "status": "Completed"
             },
             {
               "plan_title": null,
@@ -18822,7 +18831,16 @@
               "graduates": 18
             }
           ],
-          "ongoing": [],
+          "ongoing": [
+            {
+              "name": "Belantara Lestara 2026",
+              "type": "Foundational",
+              "start_date": "2026-11-10",
+              "end_date": "2026-11-14",
+              "applicants": 0,
+              "graduates": 0
+            }
+          ],
           "upcoming": []
         }
       },
@@ -18830,7 +18848,7 @@
         "trainings_by_type": [
           {
             "type": "Foundational",
-            "conducted": 28,
+            "conducted": 29,
             "total_planned": 29
           },
           {
@@ -18927,7 +18945,7 @@
           "2026": [
             {
               "type": "Foundational",
-              "conducted": 2,
+              "conducted": 3,
               "total_planned": 3
             },
             {
@@ -19275,7 +19293,7 @@
           },
           "2026": {
             "planned": 10,
-            "conducted": 3
+            "conducted": 4
           }
         },
         "actual_trainings": [
@@ -19287,7 +19305,7 @@
             "end_date": "2026-11-14",
             "applicants": 0,
             "graduates": 0,
-            "status": "Upcoming",
+            "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
             "app_open_date": "",
@@ -36681,7 +36699,7 @@
               "actual_date": "2026-11-10",
               "actual_end_date": "2026-11-14",
               "actual_participants": 0,
-              "status": "Upcoming"
+              "status": "Completed"
             },
             {
               "plan_title": "TOT 3",
