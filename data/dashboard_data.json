@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T04:41:14",
+  "generated_at": "2026-11-15T04:31:25",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -10206,8 +10206,8 @@
           },
           "by_age_group": {
             "Unknown": 451,
-            "18-24": 108,
-            "25-34": 142,
+            "18-24": 107,
+            "25-34": 143,
             "<18": 8,
             "45+": 28,
             "35-44": 43
@@ -13084,8 +13084,8 @@
           },
           "by_age_group": {
             "Unknown": 451,
-            "18-24": 108,
-            "25-34": 142,
+            "18-24": 107,
+            "25-34": 143,
             "<18": 8,
             "45+": 28,
             "35-44": 43
@@ -18752,13 +18752,13 @@
     "ID": {
       "portal": "ID",
       "report_1_overview": {
-        "total_applicants": 1717,
-        "total_graduates": 737,
+        "total_applicants": 1721,
+        "total_graduates": 741,
         "total_ongoing": 0,
         "application_funnel": {
-          "total_applicants": 1717,
-          "attended_training": 737,
-          "graduated": 737,
+          "total_applicants": 1721,
+          "attended_training": 741,
+          "graduated": 741,
           "impact_evaluation_completed": 20
         },
         "yoy_trend": [
@@ -18799,14 +18799,22 @@
           },
           {
             "year": "2026",
-            "applicants": 67,
-            "graduates": 58
+            "applicants": 71,
+            "graduates": 62
           }
         ],
         "community_impact": 14605,
         "touched_organizations": 965,
         "training_categories": {
           "completed": [
+            {
+              "name": "Belantara Lestara 2026",
+              "type": "Foundational",
+              "start_date": "2026-11-10",
+              "end_date": "2026-11-14",
+              "applicants": 4,
+              "graduates": 4
+            },
             {
               "name": "Semesta",
               "type": "Foundational",
@@ -18822,26 +18830,9 @@
               "end_date": "2026-07-18",
               "applicants": 19,
               "graduates": 13
-            },
-            {
-              "name": "TOT 2 (SULAWESI)",
-              "type": "Unknown",
-              "start_date": "2026-05-04",
-              "end_date": "2026-05-08",
-              "applicants": 18,
-              "graduates": 18
             }
           ],
-          "ongoing": [
-            {
-              "name": "Belantara Lestara 2026",
-              "type": "Foundational",
-              "start_date": "2026-11-10",
-              "end_date": "2026-11-14",
-              "applicants": 0,
-              "graduates": 0
-            }
-          ],
+          "ongoing": [],
           "upcoming": []
         }
       },
@@ -19304,8 +19295,8 @@
             "type": "Foundational",
             "date": "2026-11-10",
             "end_date": "2026-11-14",
-            "applicants": 0,
-            "graduates": 0,
+            "applicants": 4,
+            "graduates": 4,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -31243,11 +31234,11 @@
             "graduate_count": 1
           }
         ],
-        "unattributed_applicants": 23,
+        "unattributed_applicants": 27,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Unknown": 5,
+            "Unknown": 9,
             "Female": 642,
             "Male": 1051,
             "Laki-laki": 1,
@@ -31258,7 +31249,7 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 926,
+            "Unknown": 930,
             "18-24": 187,
             "25-34": 472,
             "45+": 21,
@@ -31315,6 +31306,31 @@
               "building_connection": {
                 "pre": 5.54,
                 "post": 6.2,
+                "6m": null
+              }
+            }
+          },
+          {
+            "training_name": "Belantara Lestara 2026",
+            "likert": {
+              "strategy_tactics": {
+                "pre": null,
+                "post": 6.0,
+                "6m": null
+              },
+              "communication_strategy": {
+                "pre": null,
+                "post": 6.25,
+                "6m": null
+              },
+              "facilitating_workshop": {
+                "pre": null,
+                "post": 6.0,
+                "6m": null
+              },
+              "building_connection": {
+                "pre": null,
+                "post": 5.75,
                 "6m": null
               }
             }
@@ -32617,6 +32633,47 @@
                 "next_workshop_suggestion": "Pelatihan Aktivasia sangat menyenangkan dan penuh dengan pengetahuan baru yang membekas di ingatan. Saya sangat suka metode yang digunakan dalam pelatihan ini. Kawan-kawan lain sepertinya perlu mulai mencoba untuk mengadopsi hal ini, karena ini merupakan pelatihan paling membekas bagi saya dalam hal meningkatkan kapasitas dan pengetahuan. Saya diajak untuk melatih diri saya langsung untuk berpikir kritis dan membangun solidaritas berkelompok.",
                 "testimonial": "Overall semua seru banget!!!?",
                 "applicant_name": "Aulia Novirta"
+              }
+            ]
+          },
+          {
+            "training_name": "Belantara Lestara 2026",
+            "responses": [
+              {
+                "what_went_well": "materi yang di isi oleh Aktivis2 Indonesia yang keren, diskusi kelompok, dan masih banyak lagi",
+                "sum_up_learning": "saya bersyukur sekali bisa mendapatkan pengalaman 5 hari yang sangat berharga ini.",
+                "action_plan": "merancang sistem pada kegiatan yang akan saya lakukan di daerah saya",
+                "improvement_suggestion": "semoga kedepannya pelatihan ini bisa lebih luas lagi.. kalau bisa setiap daerah di Indonesia memiliki perwakilann masing2",
+                "next_workshop_suggestion": "Lestara memiliki sistem pelatihan yang sangat unik dan menginspirasi, banyak Hal yang dulu nya tidak saya pelajari, namun pada Lestara ini kita mengetahui aspek lingkungan yang tidak hanya berbicara pada ekosistem tetapi seluruh aspek yang mempengaruhi nya, bahkan sampai berbicara tentang pengaruh sistem pemerintahan. Lestara juga merupakan pelatihan yang sangat menghargai ruang bebas dan ketepatan waktu.",
+                "testimonial": null,
+                "applicant_name": "Ni'matul Ma'wa"
+              },
+              {
+                "what_went_well": "Setiap sesinya selalu di sisipkan dengan pengalaman langsung sehingga setiap sesi tidak kaku",
+                "sum_up_learning": "Fasilitasi yang baik adalah fasilitasi yang mendengarkan pengalaman peserta",
+                "action_plan": "Saya akan membuat kampanye dan melakukan fasilitasi di wilayah saya",
+                "improvement_suggestion": "Sudah sangat cukupp",
+                "next_workshop_suggestion": null,
+                "testimonial": "Pelatihannya sangat menyenangkan, terimakasih sudah menemani proses betumbuh saya ??",
+                "applicant_name": "Hanania Rahima Putrina K"
+              },
+              {
+                "what_went_well": "Materi kampanye, dan fasil",
+                "sum_up_learning": "Aku paham dan aku terapkan",
+                "action_plan": "Seting menaikan isu isu permasalahan lingkungan",
+                "improvement_suggestion": "Terkait isu sosial keren deh",
+                "next_workshop_suggestion": "Menurut saya berguna sekali karena saya di ipm memang fokus tidak hanya tanam tanam pohon tapi saya ngin fokus isu isu yg berbau politik apa lagi kebijakan pemerintah",
+                "testimonial": "No",
+                "applicant_name": "Muflif Naufal"
+              },
+              {
+                "what_went_well": "Semuanya terbaik",
+                "sum_up_learning": "Pembelajaran dengan sistem terbuka bukan hanya menerima informasi saya namun bagaimana kita bisa memahami nya.",
+                "action_plan": "Insyaallah pelatihan di daerah, dan ikut membantu kegiatan yang di selenggarakan.",
+                "improvement_suggestion": "-",
+                "next_workshop_suggestion": "Karna pelatihan ini menggunakan sistem terbuka, bebas, dan menarik untuk di implementasi di daerah saya.",
+                "testimonial": "-",
+                "applicant_name": "Ayu Syafitri"
               }
             ]
           },
@@ -34737,6 +34794,24 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "Hanania Rahima Putrina K",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Pelatihannya sangat menyenangkan, terimakasih sudah menemani proses betumbuh saya ??",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Muflif Naufal",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "No",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Ayu Syafitri",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "-",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Donny Fadri Riwandi",
             "training_name": "Belantara X Setara 2025",
             "testimonial": "Tidak ada",
@@ -35521,7 +35596,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Unknown": 5,
+            "Unknown": 9,
             "Female": 642,
             "Male": 1051,
             "Laki-laki": 1,
@@ -35532,7 +35607,7 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 926,
+            "Unknown": 930,
             "18-24": 187,
             "25-34": 472,
             "45+": 21,
@@ -35540,7 +35615,7 @@
             "35-44": 100
           },
           "by_region": {
-            "Unknown": 136,
+            "Unknown": 140,
             "Jalan M. Said": 1,
             "Desa Panaragan Sukamaju.Kec. Tulang Bawang Tengah.Kab. Tulang Bawang Barat.Prov Lampung": 1,
             "Bandar Lampung": 10,
@@ -36689,7 +36764,7 @@
           "target_activities": 9,
           "actual_activities": 1,
           "target_participants": 0,
-          "actual_participants": 0,
+          "actual_participants": 4,
           "rows": [
             {
               "plan_title": null,
@@ -36699,7 +36774,7 @@
               "actual_title": "Belantara Lestara 2026",
               "actual_date": "2026-11-10",
               "actual_end_date": "2026-11-14",
-              "actual_participants": 0,
+              "actual_participants": 4,
               "status": "Completed"
             },
             {
@@ -41121,8 +41196,8 @@
           "by_age_group": {
             "Unknown": 337,
             "18-24": 28,
-            "25-34": 137,
-            "35-44": 71,
+            "25-34": 135,
+            "35-44": 73,
             "<18": 5,
             "45+": 35
           }
@@ -43401,8 +43476,8 @@
           "by_age_group": {
             "Unknown": 337,
             "18-24": 28,
-            "25-34": 137,
-            "35-44": 71,
+            "25-34": 135,
+            "35-44": 73,
             "<18": 5,
             "45+": 35
           },
@@ -44180,8 +44255,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3819,
-        "total_graduates": 1803
+        "total_applicants": 3823,
+        "total_graduates": 1807
       },
       "per_country": {
         "PK": {
@@ -44197,8 +44272,8 @@
           "total_graduates": 183
         },
         "ID": {
-          "total_applicants": 1717,
-          "total_graduates": 737
+          "total_applicants": 1721,
+          "total_graduates": 741
         }
       }
     }
