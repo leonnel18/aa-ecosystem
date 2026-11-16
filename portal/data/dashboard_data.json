@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T04:31:25",
+  "generated_at": "2026-11-16T04:28:10",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -18752,13 +18752,13 @@
     "ID": {
       "portal": "ID",
       "report_1_overview": {
-        "total_applicants": 1721,
-        "total_graduates": 741,
+        "total_applicants": 1731,
+        "total_graduates": 751,
         "total_ongoing": 0,
         "application_funnel": {
-          "total_applicants": 1721,
-          "attended_training": 741,
-          "graduated": 741,
+          "total_applicants": 1731,
+          "attended_training": 751,
+          "graduated": 751,
           "impact_evaluation_completed": 20
         },
         "yoy_trend": [
@@ -18799,8 +18799,8 @@
           },
           {
             "year": "2026",
-            "applicants": 71,
-            "graduates": 62
+            "applicants": 81,
+            "graduates": 72
           }
         ],
         "community_impact": 14605,
@@ -18812,8 +18812,8 @@
               "type": "Foundational",
               "start_date": "2026-11-10",
               "end_date": "2026-11-14",
-              "applicants": 4,
-              "graduates": 4
+              "applicants": 14,
+              "graduates": 14
             },
             {
               "name": "Semesta",
@@ -19295,8 +19295,8 @@
             "type": "Foundational",
             "date": "2026-11-10",
             "end_date": "2026-11-14",
-            "applicants": 4,
-            "graduates": 4,
+            "applicants": 14,
+            "graduates": 14,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -31234,11 +31234,11 @@
             "graduate_count": 1
           }
         ],
-        "unattributed_applicants": 27,
+        "unattributed_applicants": 37,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Unknown": 9,
+            "Unknown": 19,
             "Female": 642,
             "Male": 1051,
             "Laki-laki": 1,
@@ -31249,7 +31249,7 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 930,
+            "Unknown": 940,
             "18-24": 187,
             "25-34": 472,
             "45+": 21,
@@ -31315,22 +31315,22 @@
             "likert": {
               "strategy_tactics": {
                 "pre": null,
-                "post": 6.0,
+                "post": 5.93,
                 "6m": null
               },
               "communication_strategy": {
                 "pre": null,
-                "post": 6.25,
+                "post": 5.93,
                 "6m": null
               },
               "facilitating_workshop": {
                 "pre": null,
-                "post": 6.0,
+                "post": 5.79,
                 "6m": null
               },
               "building_connection": {
                 "pre": null,
-                "post": 5.75,
+                "post": 5.5,
                 "6m": null
               }
             }
@@ -32640,6 +32640,60 @@
             "training_name": "Belantara Lestara 2026",
             "responses": [
               {
+                "what_went_well": "penyampaian materi yang sangat baik dengan berbagai metode menyenangkan, kegiatan hal baru seperti maskeran bersama dan masih banyak lagi",
+                "sum_up_learning": "menyenangkan berasa belajar sambil healing.",
+                "action_plan": "aku akan menganalisa sekolah mana yang cocok untuk aku terapkan eco smart school, habis itu merancang seluruh hal untuk pelatihan tersebut",
+                "improvement_suggestion": "mungkin boleh diberikan kotak saran, jadi bisa membantu kk fasil cepat mengevaluasi sesuatu jika teman teman peserta butuh sesuatu.",
+                "next_workshop_suggestion": "saya lebih mengerti dan memahami terkait menjaga lingkungan, dan saya jadi lebih tau cara untuk memfasilitasi dengan baik dan menyenangkan.",
+                "testimonial": "cukup",
+                "applicant_name": "Otiska Ramadani"
+              },
+              {
+                "what_went_well": "materi yang disampaikan terpahami,waktu dengan teman\u201d sangat seru dan menyenangkan,bisa mengenal lebih dalam aktivis\u201dindonesia",
+                "sum_up_learning": "mempelajari tentang keadilanekologis dan antar generasi,kepemimpinan perempuan,pangan serta perubahan iklimnya,dan lebih banyak belajar tentang kampanye di pelatihan juga belajar kedisiplinan dari waktu,keaktifan,kreativitas,kebersamaan,memembangun relasi,serta mengasah otak untuk berpendapat",
+                "action_plan": "aktif untuk mengikuti kampanye\u201d baik dari digital maupun nyata ,menerapkan metode\u201ddaur dan etiologi pembelajaran sebagai fasilitasi,menggunakan energi terbarukan dan ramah lingkungan menjauhi apa yang menyebabkan kerusakan",
+                "improvement_suggestion": "tidak ada,semua sudah bestt",
+                "next_workshop_suggestion": "dikarenakan saya yang awalnya belum tahu apa itu ekologis,apa itu kampanye dan dan sebagian lainnya menjadi mengetahui sehingga saya bisa melihat dari materi\u201dpelatihan tersebut ataupun non materi yang reevan dari kehidupan saya,saya menjadi tahu bahwa betapa pentingnya kita sebagai manusia untuk menjaga lingkungan negara kita ini",
+                "testimonial": "tidak ada,semua sudah jelas",
+                "applicant_name": "Fairuz Athiyyah Salsabila"
+              },
+              {
+                "what_went_well": "konsep fasilitatornya dan waktu bersama teman",
+                "sum_up_learning": "untuk di materi yang tentang lingkungan overall sudah paham dari lama, tapi yang materi yang diisi aktivasia sangat membuat pikiran terbuka dan memang pemabawaan materinya yang sangat berbeda dari beberapa pelatihan yang saya ikuti sebelumnya",
+                "action_plan": "akan saya share ke teman bidang saya dan bisa saya terapkan ke lingkungan sekitar rumah saya yang sedang mengahadapi isu mata air",
+                "improvement_suggestion": "dari segi materi",
+                "next_workshop_suggestion": "menyuarakan isu lingkungan bisa dilakukan melalui tahap litigasi dan non-litigasi karena di pelatihan ini menekankan kampanye yang artinya itu melalui tahap non litigasi, bagi saya tahap ini adalah tahap yang bisa saya terapkan dalam menyuarakan isu lingkungan karena background saya bukan orang yang mendalami ilmu hukum dan tahap ini bisa disebarkan dan diterapkan ke masyarakat luas",
+                "testimonial": "sangat pengen tau proses persiapannya yang sangat matang ini karena sangat kagum dengan isi acaranya",
+                "applicant_name": "Rijal Fikri M"
+              },
+              {
+                "what_went_well": "Segala hal yang berkaitan dengan pembelajarannya sudah maksimal dan baik sekali",
+                "sum_up_learning": "brilliant, take your time and feel it",
+                "action_plan": "melaksanakan persiapan untuk penerapan eco smart school dan pelatihan fasilitator",
+                "improvement_suggestion": "Ruang istirahat si kalo bisa dipertimbangkan lagi",
+                "next_workshop_suggestion": "saya menemukan berbagai cara yang super interactive, dan hal hal baik untuk menjalin kedekatan terhadap fasil dan peserta",
+                "testimonial": "kalo bisa, bantu kami disetiap wilayah untuk mengkoordinir dan melaksanakan program lanjutan dari lestara ini, sebab kalo per individu ataupun per regional mungkin cukup sulit untuk kami melaksanakannya",
+                "applicant_name": "Muhd Ikram Habibi"
+              },
+              {
+                "what_went_well": "Materinya sangat bagus, fasiilitator nya keren\", malam karya nya juga bagus, metode yg digunakan fasilitator juga bagus keren",
+                "sum_up_learning": "Pelatihan LESTARA ini menambah insight baru bagi saya soal Lingkungan, kampanye, transisi energi, keterampilan fasilitator dan materi lain nya.",
+                "action_plan": "Dalam tiga bulan ke depan, saya akan mulai mengimplementasikan ilmu yang diperoleh dari pelatihan LESTARA dengan mengangkat isu lingkungan yang ada di sekitar saya, menginisiasi aksi lingkungan sederhana yang melibatkan komunitas. Saya ingin membuat pelatihan juga,dan Saya juga ingin mulai membangun kolaborasi dengan berbagai pihak.",
+                "improvement_suggestion": "Adda beberapa materi kadang kelebihan waktu nya jdi harus bisa sesuai dengan jadwal atau tepat waktu",
+                "next_workshop_suggestion": "Pelatihan LESTARA sangat bermanfaat bagi saya karena memberikan pengetahuan dan pengalaman baru tentang lingkungan, transisi energi, kampanye, keteraampilan fasilitator da materi lain nya, pelatihan ini juga memperluas jaringan bisa kenal dengan temen\" dri berbagai wilayah yg ada di Indonesia, membangun semangat kolaborasi, serta meningkatkan kepercayaan diri saya. Dan materi\" nya memiliki korelasi erat dengaan kehidupan sehari hari saya.",
+                "testimonial": "Terimaakasih banyak untuk kakak\" panitia, kakak\" fasilitator untuk 5 hari ini, dan terimakasih untuk temen\" peserta?? Kegiatan ini sangat sangatt bermanfaat",
+                "applicant_name": "Prima Putra Pratama"
+              },
+              {
+                "what_went_well": "semua nya terbaik",
+                "sum_up_learning": "Saya belajar bahwa menjaga lingkungan bukan hanya tentang kepedulian, tetapi juga tentang keberanian untuk memahami masalah, menyuarakan pendapat, dan mengambil tindakan nyata",
+                "action_plan": "Saya ingin mulai menerapkan ilmu yang didapat dengan mengajak teman-teman di lingkungan IPM untuk lebih peduli terhadap isu lingkungan, membuat kampanye sederhana, serta menyebarkan edukasi tentang pentingnya menjaga lingkungan dan energi berkelanjutan",
+                "improvement_suggestion": "-",
+                "next_workshop_suggestion": "Pelatihan ini memberikan banyak pengalaman dan pengetahuan baru bagi saya, khususnya dalam memahami isu lingkungan hidup, transisi energi, dan pentingnya peran anak muda dalam menjaga lingkungan. Selain mendapatkan materi, saya juga belajar menyampaikan pendapat, berdiskusi, dan melihat suatu permasalahan dari sudut pandang yang berbeda",
+                "testimonial": "Terima kasih sudah memberikan kesempatan untuk mengikuti kegiatan LESTARA. Semoga kegiatan seperti ini bisa terus dilaksanakan dan menjangkau lebih banyak pelajar agar semakin banyak anak muda yang peduli dan berani mengambil peran dalam menjaga lingkungan",
+                "applicant_name": "Nuril Fathia Maulidiyah"
+              },
+              {
                 "what_went_well": "materi yang di isi oleh Aktivis2 Indonesia yang keren, diskusi kelompok, dan masih banyak lagi",
                 "sum_up_learning": "saya bersyukur sekali bisa mendapatkan pengalaman 5 hari yang sangat berharga ini.",
                 "action_plan": "merancang sistem pada kegiatan yang akan saya lakukan di daerah saya",
@@ -32647,6 +32701,42 @@
                 "next_workshop_suggestion": "Lestara memiliki sistem pelatihan yang sangat unik dan menginspirasi, banyak Hal yang dulu nya tidak saya pelajari, namun pada Lestara ini kita mengetahui aspek lingkungan yang tidak hanya berbicara pada ekosistem tetapi seluruh aspek yang mempengaruhi nya, bahkan sampai berbicara tentang pengaruh sistem pemerintahan. Lestara juga merupakan pelatihan yang sangat menghargai ruang bebas dan ketepatan waktu.",
                 "testimonial": null,
                 "applicant_name": "Ni'matul Ma'wa"
+              },
+              {
+                "what_went_well": "Sebelum memulai materi ada activity yg dilakukan",
+                "sum_up_learning": "Keadilan ekologis harus ditegakkan bersama-sama dengan cara mengkonversi energi dan pangan berkelanjutan yang dapat kita gaungkan melalui kampanye dan proses belajar yang menyenangkan",
+                "action_plan": "Merancang kampanye kemudian melakukan fasilitasi dibeberapa sekolah",
+                "improvement_suggestion": "Adakan sesi lebih dekat dengan alam",
+                "next_workshop_suggestion": "Menambah wawasan tentang lingkungan, merencakan kampanye, dan membuat pelatihan yg menarik serta aman",
+                "testimonial": "Apakah kedepannya bisa berkolaborasi dengan kakak kakak aktivasia untuk di wilayah kami",
+                "applicant_name": "Fathanmuhammad Azzaini"
+              },
+              {
+                "what_went_well": "metode, dan juga bertemu dengan teman",
+                "sum_up_learning": "beragam",
+                "action_plan": "tentunya selama 3 bulan kedepan saya akan mulai merancang terkait gambaran fasilitator dan kampanye",
+                "improvement_suggestion": "dari segi waktu yang padet sehingga terkesan diburu-buru",
+                "next_workshop_suggestion": "karena tidak hanya satu pembahasan saja, terlbih ada belajar energi terbarukan, dll",
+                "testimonial": null,
+                "applicant_name": "Putri Novayanti"
+              },
+              {
+                "what_went_well": "Waktu bounding sama teman\u00b2, materi daging semua, dan metode",
+                "sum_up_learning": "Insight yang sangat amat amat banyak tentunya, dengan ilmu yg ku dapat, aku bisa melakukan hal yg sama namun dengan lingkup yang kecil",
+                "action_plan": "Mengajak teman, dan ngo lain di Papua terutama papsel untuk melakukan kampanye",
+                "improvement_suggestion": "Manajemen waktu, dan waktu peserta mempraktikkan simulasi fasilitator",
+                "next_workshop_suggestion": "Saya sudah banyak mengikuti kegiatan pelatihan fasilitator lain, namun saya rasa di pelatihan ini saya belajar lebih banyak hal di banding pelatihan sebelumnya, seperti bagaimana berkampanye, baik melalui media atau offline. Dan banyak metode yang di ajarkan secara mendalam.",
+                "testimonial": "Apakah masih ada kemungkinan aku bergabung menjadi bagian dari gerakan seperti ini?",
+                "applicant_name": "M. Adri Ramadhan"
+              },
+              {
+                "what_went_well": "Materi yang diawali dengan bermain sebagai pemahaman",
+                "sum_up_learning": "Pelatihan ini membuat saya belajar bahwa menjadi seorang fasilitator bukan sekadar menyampaikan materi, tetapi juga mampu membangun ruang diskusi yang partisipatif, mendengarkan berbagai perspektif, dan mendorong peserta untuk berpikir kritis serta menemukan solusi bersama.",
+                "action_plan": "Dalam 3 bulan ke depan, saya akan mulai menerapkan ilmu yang saya dapatkan dengan terlibat aktif dalam kegiatan diskusi organisasi. Saya ingin melatih kemampuan memfasilitasi diskusi, menyusun pertanyaan yang mendorong peserta berpikir kritis, serta menciptakan ruang belajar yang partisipatif dan terbuka. Selain itu, saya akan terus meningkatkan kemampuan komunikasi, belajar mengelola dinamika kelompok, dan melakukan evaluasi terhadap setiap proses fasilitasi agar ke depannya saya dapat menjadi fasilitator yang lebih baik.",
+                "improvement_suggestion": "Sudah bagus buanget",
+                "next_workshop_suggestion": "Yang pertama karena ini menjadi pengalaman saya pertama mengikuti pelatihan fasilitator, dan saya sangat bersyukur bisa mengikuti pelatihan ini karena saya belajar banyak hal mulai dari pemahaman tentang lingkungan sampai belajar bagaimana menjadi fasilitator yang baik dan tidak membosankan",
+                "testimonial": "Tantangan terbesar apa yang dihadapi sebagai seorang fasilitator?\nDan bagaimana caranya mengatasinya",
+                "applicant_name": "Muhammad Farhan Alfar"
               },
               {
                 "what_went_well": "Setiap sesinya selalu di sisipkan dengan pengalaman langsung sehingga setiap sesi tidak kaku",
@@ -34794,6 +34884,60 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "Otiska Ramadani",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "cukup",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Fairuz Athiyyah Salsabila",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "tidak ada,semua sudah jelas",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Rijal Fikri M",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "sangat pengen tau proses persiapannya yang sangat matang ini karena sangat kagum dengan isi acaranya",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Muhd Ikram Habibi",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "kalo bisa, bantu kami disetiap wilayah untuk mengkoordinir dan melaksanakan program lanjutan dari lestara ini, sebab kalo per individu ataupun per regional mungkin cukup sulit untuk kami melaksanakannya",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Prima Putra Pratama",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Terimaakasih banyak untuk kakak\" panitia, kakak\" fasilitator untuk 5 hari ini, dan terimakasih untuk temen\" peserta?? Kegiatan ini sangat sangatt bermanfaat",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Nuril Fathia Maulidiyah",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Terima kasih sudah memberikan kesempatan untuk mengikuti kegiatan LESTARA. Semoga kegiatan seperti ini bisa terus dilaksanakan dan menjangkau lebih banyak pelajar agar semakin banyak anak muda yang peduli dan berani mengambil peran dalam menjaga lingkungan",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Fathanmuhammad Azzaini",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Apakah kedepannya bisa berkolaborasi dengan kakak kakak aktivasia untuk di wilayah kami",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "M. Adri Ramadhan",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Apakah masih ada kemungkinan aku bergabung menjadi bagian dari gerakan seperti ini?",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Muhammad Farhan Alfar",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Tantangan terbesar apa yang dihadapi sebagai seorang fasilitator?\nDan bagaimana caranya mengatasinya",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Hanania Rahima Putrina K",
             "training_name": "Belantara Lestara 2026",
             "testimonial": "Pelatihannya sangat menyenangkan, terimakasih sudah menemani proses betumbuh saya ??",
@@ -35596,7 +35740,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Unknown": 9,
+            "Unknown": 19,
             "Female": 642,
             "Male": 1051,
             "Laki-laki": 1,
@@ -35607,7 +35751,7 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 930,
+            "Unknown": 940,
             "18-24": 187,
             "25-34": 472,
             "45+": 21,
@@ -35615,7 +35759,7 @@
             "35-44": 100
           },
           "by_region": {
-            "Unknown": 140,
+            "Unknown": 150,
             "Jalan M. Said": 1,
             "Desa Panaragan Sukamaju.Kec. Tulang Bawang Tengah.Kab. Tulang Bawang Barat.Prov Lampung": 1,
             "Bandar Lampung": 10,
@@ -36764,7 +36908,7 @@
           "target_activities": 9,
           "actual_activities": 1,
           "target_participants": 0,
-          "actual_participants": 4,
+          "actual_participants": 14,
           "rows": [
             {
               "plan_title": null,
@@ -36774,7 +36918,7 @@
               "actual_title": "Belantara Lestara 2026",
               "actual_date": "2026-11-10",
               "actual_end_date": "2026-11-14",
-              "actual_participants": 4,
+              "actual_participants": 14,
               "status": "Completed"
             },
             {
@@ -44255,8 +44399,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3823,
-        "total_graduates": 1807
+        "total_applicants": 3833,
+        "total_graduates": 1817
       },
       "per_country": {
         "PK": {
@@ -44272,8 +44416,8 @@
           "total_graduates": 183
         },
         "ID": {
-          "total_applicants": 1721,
-          "total_graduates": 741
+          "total_applicants": 1731,
+          "total_graduates": 751
         }
       }
     }
