@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T04:28:10",
+  "generated_at": "2026-11-17T06:13:39",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -18752,13 +18752,13 @@
     "ID": {
       "portal": "ID",
       "report_1_overview": {
-        "total_applicants": 1731,
-        "total_graduates": 751,
+        "total_applicants": 1734,
+        "total_graduates": 755,
         "total_ongoing": 0,
         "application_funnel": {
-          "total_applicants": 1731,
-          "attended_training": 751,
-          "graduated": 751,
+          "total_applicants": 1734,
+          "attended_training": 755,
+          "graduated": 755,
           "impact_evaluation_completed": 20
         },
         "yoy_trend": [
@@ -18789,7 +18789,7 @@
           },
           {
             "year": "2024",
-            "applicants": 550,
+            "applicants": 549,
             "graduates": 143
           },
           {
@@ -18799,8 +18799,8 @@
           },
           {
             "year": "2026",
-            "applicants": 81,
-            "graduates": 72
+            "applicants": 85,
+            "graduates": 76
           }
         ],
         "community_impact": 14605,
@@ -18812,8 +18812,8 @@
               "type": "Foundational",
               "start_date": "2026-11-10",
               "end_date": "2026-11-14",
-              "applicants": 14,
-              "graduates": 14
+              "applicants": 18,
+              "graduates": 18
             },
             {
               "name": "Semesta",
@@ -19295,8 +19295,8 @@
             "type": "Foundational",
             "date": "2026-11-10",
             "end_date": "2026-11-14",
-            "applicants": 14,
-            "graduates": 14,
+            "applicants": 18,
+            "graduates": 18,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -19519,7 +19519,7 @@
             "type": "Training of Trainers",
             "date": "2024-07-10",
             "end_date": "2024-07-13",
-            "applicants": 152,
+            "applicants": 151,
             "graduates": 25,
             "status": "Completed",
             "pre_app_link": "",
@@ -23409,7 +23409,7 @@
             "training_type": "Training of Trainers",
             "year": "2024",
             "total_impact": 0,
-            "applicant_count": 3,
+            "applicant_count": 2,
             "graduate_count": 0
           },
           {
@@ -23420,6 +23420,15 @@
             "total_impact": 0,
             "applicant_count": 2,
             "graduate_count": 2
+          },
+          {
+            "name": "Ikatan Pelajar Muhammadiyah (IPM) - Lampung",
+            "training": "Belantara Lestara 2026",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 1
           },
           {
             "name": "Ikatan Pelajar Muhammadiyah (IPM) - Nunukan",
@@ -31234,11 +31243,11 @@
             "graduate_count": 1
           }
         ],
-        "unattributed_applicants": 37,
+        "unattributed_applicants": 40,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Unknown": 19,
+            "Unknown": 22,
             "Female": 642,
             "Male": 1051,
             "Laki-laki": 1,
@@ -31249,7 +31258,7 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 940,
+            "Unknown": 943,
             "18-24": 187,
             "25-34": 472,
             "45+": 21,
@@ -31315,22 +31324,22 @@
             "likert": {
               "strategy_tactics": {
                 "pre": null,
-                "post": 5.93,
+                "post": 5.89,
                 "6m": null
               },
               "communication_strategy": {
                 "pre": null,
-                "post": 5.93,
+                "post": 6.06,
                 "6m": null
               },
               "facilitating_workshop": {
                 "pre": null,
-                "post": 5.79,
+                "post": 6.0,
                 "6m": null
               },
               "building_connection": {
                 "pre": null,
-                "post": 5.5,
+                "post": 5.67,
                 "6m": null
               }
             }
@@ -32640,6 +32649,24 @@
             "training_name": "Belantara Lestara 2026",
             "responses": [
               {
+                "what_went_well": "metode fasilitasi",
+                "sum_up_learning": "kegiatn ini menyadarkan saya bahwa anak muda bukan sekadar penerima dampak krisis iklim, tetapi juga aktor perubahan yang memiliki kapasitas untuk memimpin, mengadvokasi, dan menawarkan solusi",
+                "action_plan": "1. berjejaring dengan mitra potensial \n2. menyusun konsep kampanye",
+                "improvement_suggestion": "pendekatan secara emosional dengan peserta diluar forum dan membuat safe guarding yang mengutamakan kenyamanan dan kesehatan peserta",
+                "next_workshop_suggestion": "banyak hal berkesan yang saya dapatkan selama mengikuti kegiatan ini. salah satunya adalah metode pembelajaran yang interaktif dan menyenangkan. walaupun materi yang dibahas cukup berat, para fasilitator mampu mengemasnya dengan cara yang menarik sehingga lebih mudah dipahami dan tidak terasa membosankan. saya juga merasa mendapat banyak kesempatan untuk belajar langsung dari orang-orang yang memang ahli dan kompeten di bidangnya. menariknya, ilmu yang saya dapatkan bukan hanya dari materi, tetapi juga dari cara para fasilitator membangun suasana, mengelola diskusi, dan melibatkan peserta. karena saya juga sedang berproses menjadi fasilitator, saya banyak mengamati dan mengambil pelajaran dari teknik-teknik yang mereka gunakan untuk nantinya saya terapkan dalam kegiatan lainnya",
+                "testimonial": "bisakah fasilitator memberikan daftar rekomendasi mitra potensial yang bisa menjadi partnership dalam kegiatan lanjutan eco smart school",
+                "applicant_name": "Dewi Sartika"
+              },
+              {
+                "what_went_well": "Kolaboratif",
+                "sum_up_learning": "Memperoleh wawasan baru",
+                "action_plan": "Knowledge sharing dengan teman2 LH Jateng dan menyusun tindakan nyata",
+                "improvement_suggestion": "Fasilitas",
+                "next_workshop_suggestion": "Menambah wawasan, keterampilan dan pengalaman baru. Jadi banyak \"ohh ternyata seperti ini, ternyata seperti itu\"",
+                "testimonial": "Terimakasih kakak fasilitator, sehat selalu kak",
+                "applicant_name": "Alizah Rimanan Attaudy"
+              },
+              {
                 "what_went_well": "penyampaian materi yang sangat baik dengan berbagai metode menyenangkan, kegiatan hal baru seperti maskeran bersama dan masih banyak lagi",
                 "sum_up_learning": "menyenangkan berasa belajar sambil healing.",
                 "action_plan": "aku akan menganalisa sekolah mana yang cocok untuk aku terapkan eco smart school, habis itu merancang seluruh hal untuk pelatihan tersebut",
@@ -32683,6 +32710,15 @@
                 "next_workshop_suggestion": "Pelatihan LESTARA sangat bermanfaat bagi saya karena memberikan pengetahuan dan pengalaman baru tentang lingkungan, transisi energi, kampanye, keteraampilan fasilitator da materi lain nya, pelatihan ini juga memperluas jaringan bisa kenal dengan temen\" dri berbagai wilayah yg ada di Indonesia, membangun semangat kolaborasi, serta meningkatkan kepercayaan diri saya. Dan materi\" nya memiliki korelasi erat dengaan kehidupan sehari hari saya.",
                 "testimonial": "Terimaakasih banyak untuk kakak\" panitia, kakak\" fasilitator untuk 5 hari ini, dan terimakasih untuk temen\" peserta?? Kegiatan ini sangat sangatt bermanfaat",
                 "applicant_name": "Prima Putra Pratama"
+              },
+              {
+                "what_went_well": "Momen bersama teman teman dan model pelatihannya yang pertama kali melakukan nya",
+                "sum_up_learning": "Sayaa mempelajari metode pelatihan yang sangatt menyenangkan dan mudahh di pahami untuk audien",
+                "action_plan": "Merencanakan untuk membuat kegiatan dengan metode yang telah di pelajari selama pelatihan",
+                "improvement_suggestion": "Untuk waktu",
+                "next_workshop_suggestion": "Sangat bermanfaat karena dari pelatihan saya mendapatkan pemahaman baruu untuk menjadi fasilitator yang baik",
+                "testimonial": "Sangat kerenn semogaa bisaaa mengikuti kegiatan lainya nya dengan kalian",
+                "applicant_name": "Andre Agtasya Clenanda"
               },
               {
                 "what_went_well": "semua nya terbaik",
@@ -32764,6 +32800,15 @@
                 "next_workshop_suggestion": "Karna pelatihan ini menggunakan sistem terbuka, bebas, dan menarik untuk di implementasi di daerah saya.",
                 "testimonial": "-",
                 "applicant_name": "Ayu Syafitri"
+              },
+              {
+                "what_went_well": "Perancangan game yang membuat kita mudah memahami materi",
+                "sum_up_learning": "Aku sangat suka saat kendali dipegang oleh AA, selebihnya mungkin dapat diperbaiki cara penyampaiannya agar kami dapat memahami dengan mudah",
+                "action_plan": "Melakukan aksi lingkungan yang mengajak orang banyak, dan ngejak mereka untuk membentuk sebuah campaign",
+                "improvement_suggestion": "Nggak ada, kecuali 2 hari pertama yang sangat berbeda dari pelatihan hari ke 3 - 5",
+                "next_workshop_suggestion": "Membuka fikiran akan pentingnya menjaga ekosistem dan menikmati apa itu hidup",
+                "testimonial": "Aku mau punya juga lingkungan yang bisa buat aku menikmati hidup, namun itu juga adalah pekerjaanku",
+                "applicant_name": "Salman Amar Raif"
               }
             ]
           },
@@ -34884,6 +34929,18 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "Dewi Sartika",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "bisakah fasilitator memberikan daftar rekomendasi mitra potensial yang bisa menjadi partnership dalam kegiatan lanjutan eco smart school",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Alizah Rimanan Attaudy",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Terimakasih kakak fasilitator, sehat selalu kak",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Otiska Ramadani",
             "training_name": "Belantara Lestara 2026",
             "testimonial": "cukup",
@@ -34911,6 +34968,12 @@
             "applicant_name": "Prima Putra Pratama",
             "training_name": "Belantara Lestara 2026",
             "testimonial": "Terimaakasih banyak untuk kakak\" panitia, kakak\" fasilitator untuk 5 hari ini, dan terimakasih untuk temen\" peserta?? Kegiatan ini sangat sangatt bermanfaat",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Andre Agtasya Clenanda",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Sangat kerenn semogaa bisaaa mengikuti kegiatan lainya nya dengan kalian",
             "source": "Post-survey"
           },
           {
@@ -34953,6 +35016,12 @@
             "applicant_name": "Ayu Syafitri",
             "training_name": "Belantara Lestara 2026",
             "testimonial": "-",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Salman Amar Raif",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Aku mau punya juga lingkungan yang bisa buat aku menikmati hidup, namun itu juga adalah pekerjaanku",
             "source": "Post-survey"
           },
           {
@@ -35740,7 +35809,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Unknown": 19,
+            "Unknown": 22,
             "Female": 642,
             "Male": 1051,
             "Laki-laki": 1,
@@ -35751,7 +35820,7 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 940,
+            "Unknown": 943,
             "18-24": 187,
             "25-34": 472,
             "45+": 21,
@@ -35759,7 +35828,7 @@
             "35-44": 100
           },
           "by_region": {
-            "Unknown": 150,
+            "Unknown": 153,
             "Jalan M. Said": 1,
             "Desa Panaragan Sukamaju.Kec. Tulang Bawang Tengah.Kab. Tulang Bawang Barat.Prov Lampung": 1,
             "Bandar Lampung": 10,
@@ -36908,7 +36977,7 @@
           "target_activities": 9,
           "actual_activities": 1,
           "target_participants": 0,
-          "actual_participants": 14,
+          "actual_participants": 18,
           "rows": [
             {
               "plan_title": null,
@@ -36918,7 +36987,7 @@
               "actual_title": "Belantara Lestara 2026",
               "actual_date": "2026-11-10",
               "actual_end_date": "2026-11-14",
-              "actual_participants": 14,
+              "actual_participants": 18,
               "status": "Completed"
             },
             {
@@ -44399,8 +44468,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3833,
-        "total_graduates": 1817
+        "total_applicants": 3836,
+        "total_graduates": 1821
       },
       "per_country": {
         "PK": {
@@ -44416,8 +44485,8 @@
           "total_graduates": 183
         },
         "ID": {
-          "total_applicants": 1731,
-          "total_graduates": 751
+          "total_applicants": 1734,
+          "total_graduates": 755
         }
       }
     }
