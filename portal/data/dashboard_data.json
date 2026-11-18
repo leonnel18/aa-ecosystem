@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T06:13:39",
+  "generated_at": "2026-11-18T05:41:43",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -18752,13 +18752,13 @@
     "ID": {
       "portal": "ID",
       "report_1_overview": {
-        "total_applicants": 1734,
-        "total_graduates": 755,
+        "total_applicants": 1735,
+        "total_graduates": 756,
         "total_ongoing": 0,
         "application_funnel": {
-          "total_applicants": 1734,
-          "attended_training": 755,
-          "graduated": 755,
+          "total_applicants": 1735,
+          "attended_training": 756,
+          "graduated": 756,
           "impact_evaluation_completed": 20
         },
         "yoy_trend": [
@@ -18799,8 +18799,8 @@
           },
           {
             "year": "2026",
-            "applicants": 85,
-            "graduates": 76
+            "applicants": 86,
+            "graduates": 77
           }
         ],
         "community_impact": 14605,
@@ -18812,8 +18812,8 @@
               "type": "Foundational",
               "start_date": "2026-11-10",
               "end_date": "2026-11-14",
-              "applicants": 18,
-              "graduates": 18
+              "applicants": 19,
+              "graduates": 19
             },
             {
               "name": "Semesta",
@@ -19295,8 +19295,8 @@
             "type": "Foundational",
             "date": "2026-11-10",
             "end_date": "2026-11-14",
-            "applicants": 18,
-            "graduates": 18,
+            "applicants": 19,
+            "graduates": 19,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -31243,11 +31243,11 @@
             "graduate_count": 1
           }
         ],
-        "unattributed_applicants": 40,
+        "unattributed_applicants": 41,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Unknown": 22,
+            "Unknown": 23,
             "Female": 642,
             "Male": 1051,
             "Laki-laki": 1,
@@ -31258,7 +31258,7 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 943,
+            "Unknown": 944,
             "18-24": 187,
             "25-34": 472,
             "45+": 21,
@@ -31329,7 +31329,7 @@
               },
               "communication_strategy": {
                 "pre": null,
-                "post": 6.06,
+                "post": 6.05,
                 "6m": null
               },
               "facilitating_workshop": {
@@ -31339,7 +31339,7 @@
               },
               "building_connection": {
                 "pre": null,
-                "post": 5.67,
+                "post": 5.68,
                 "6m": null
               }
             }
@@ -32656,6 +32656,15 @@
                 "next_workshop_suggestion": "banyak hal berkesan yang saya dapatkan selama mengikuti kegiatan ini. salah satunya adalah metode pembelajaran yang interaktif dan menyenangkan. walaupun materi yang dibahas cukup berat, para fasilitator mampu mengemasnya dengan cara yang menarik sehingga lebih mudah dipahami dan tidak terasa membosankan. saya juga merasa mendapat banyak kesempatan untuk belajar langsung dari orang-orang yang memang ahli dan kompeten di bidangnya. menariknya, ilmu yang saya dapatkan bukan hanya dari materi, tetapi juga dari cara para fasilitator membangun suasana, mengelola diskusi, dan melibatkan peserta. karena saya juga sedang berproses menjadi fasilitator, saya banyak mengamati dan mengambil pelajaran dari teknik-teknik yang mereka gunakan untuk nantinya saya terapkan dalam kegiatan lainnya",
                 "testimonial": "bisakah fasilitator memberikan daftar rekomendasi mitra potensial yang bisa menjadi partnership dalam kegiatan lanjutan eco smart school",
                 "applicant_name": "Dewi Sartika"
+              },
+              {
+                "what_went_well": "Metide, komsep, setas semua aspen sangat bagus dan selalu membuat penasaran",
+                "sum_up_learning": "Ibaratkan dilan ketemu milea\u2026senang bisa belajar degan kaka kaka fasil yg jago jago disetiap bidangnya, bahagia ketemu taman2!  kalau bisa PP IPM HARUS ADAKAN BEKC 2",
+                "action_plan": "Merancang konsep pelatihan eco cultural expedition..",
+                "improvement_suggestion": "Evaluation atau simulasi fasilitator terkesan terburu buru\u2026",
+                "next_workshop_suggestion": null,
+                "testimonial": "Terkesan..",
+                "applicant_name": "Usril"
               },
               {
                 "what_went_well": "Kolaboratif",
@@ -34935,6 +34944,12 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "Usril",
+            "training_name": "Belantara Lestara 2026",
+            "testimonial": "Terkesan..",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Alizah Rimanan Attaudy",
             "training_name": "Belantara Lestara 2026",
             "testimonial": "Terimakasih kakak fasilitator, sehat selalu kak",
@@ -35809,7 +35824,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Unknown": 22,
+            "Unknown": 23,
             "Female": 642,
             "Male": 1051,
             "Laki-laki": 1,
@@ -35820,7 +35835,7 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 943,
+            "Unknown": 944,
             "18-24": 187,
             "25-34": 472,
             "45+": 21,
@@ -35828,7 +35843,7 @@
             "35-44": 100
           },
           "by_region": {
-            "Unknown": 153,
+            "Unknown": 154,
             "Jalan M. Said": 1,
             "Desa Panaragan Sukamaju.Kec. Tulang Bawang Tengah.Kab. Tulang Bawang Barat.Prov Lampung": 1,
             "Bandar Lampung": 10,
@@ -36977,7 +36992,7 @@
           "target_activities": 9,
           "actual_activities": 1,
           "target_participants": 0,
-          "actual_participants": 18,
+          "actual_participants": 19,
           "rows": [
             {
               "plan_title": null,
@@ -36987,7 +37002,7 @@
               "actual_title": "Belantara Lestara 2026",
               "actual_date": "2026-11-10",
               "actual_end_date": "2026-11-14",
-              "actual_participants": 18,
+              "actual_participants": 19,
               "status": "Completed"
             },
             {
@@ -44468,8 +44483,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3836,
-        "total_graduates": 1821
+        "total_applicants": 3837,
+        "total_graduates": 1822
       },
       "per_country": {
         "PK": {
@@ -44485,8 +44500,8 @@
           "total_graduates": 183
         },
         "ID": {
-          "total_applicants": 1734,
-          "total_graduates": 755
+          "total_applicants": 1735,
+          "total_graduates": 756
         }
       }
     }
