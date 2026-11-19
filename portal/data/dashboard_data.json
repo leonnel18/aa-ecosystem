@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T05:41:43",
+  "generated_at": "2026-11-19T05:40:20",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -14072,11 +14072,11 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 225,
+        "total_applicants": 224,
         "total_graduates": 183,
-        "total_ongoing": 4,
+        "total_ongoing": 3,
         "application_funnel": {
-          "total_applicants": 225,
+          "total_applicants": 224,
           "attended_training": 183,
           "graduated": 183,
           "impact_evaluation_completed": 16
@@ -14089,7 +14089,7 @@
           },
           {
             "year": "2023",
-            "applicants": 35,
+            "applicants": 34,
             "graduates": 33
           },
           {
@@ -14827,7 +14827,7 @@
             "type": "Foundational",
             "date": "2023-07-08",
             "end_date": "2023-11-08",
-            "applicants": 35,
+            "applicants": 34,
             "graduates": 33,
             "status": "Completed",
             "pre_app_link": "https://docs.google.com/forms/d/e/1FAIpQLScZTHEh9HKysR5ppfYOAH3G5AUAeOAmBot0qdXyhe2AxrR0zw/viewform?usp=sharing - Location: Google drive",
@@ -15147,7 +15147,7 @@
             "training_type": "Foundational",
             "year": "2023",
             "total_impact": 0,
-            "applicant_count": 3,
+            "applicant_count": 2,
             "graduate_count": 1
           },
           {
@@ -15804,7 +15804,7 @@
         "demographics": {
           "by_gender": {
             "Female": 137,
-            "Unknown": 14,
+            "Unknown": 13,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -15814,7 +15814,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 147,
+            "Unknown": 146,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -17996,7 +17996,7 @@
         "demographics": {
           "by_gender": {
             "Female": 137,
-            "Unknown": 14,
+            "Unknown": 13,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -18006,7 +18006,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 147,
+            "Unknown": 146,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -18016,7 +18016,7 @@
             "\ub355\ud48d\ub0a8\ub85c 11": 1,
             "\uc11c\uc6b8\uc2dc": 25,
             "\uc5f0\ub0a8\ub3d9": 1,
-            "Unknown": 47,
+            "Unknown": 46,
             "\uc774\ubb38\ub3d9": 1,
             "\uae40\ud3ec\uc2dc \uace0\ucd0c\uc74d \uc218\uae30\ub85c": 1,
             "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 6,
@@ -37647,13 +37647,13 @@
     "backbone": {
       "portal": "backbone",
       "report_1_overview": {
-        "total_applicants": 613,
-        "total_graduates": 264,
+        "total_applicants": 614,
+        "total_graduates": 265,
         "total_ongoing": 155,
         "application_funnel": {
-          "total_applicants": 613,
-          "attended_training": 264,
-          "graduated": 264,
+          "total_applicants": 614,
+          "attended_training": 265,
+          "graduated": 265,
           "impact_evaluation_completed": 12
         },
         "yoy_trend": [
@@ -37689,8 +37689,8 @@
           },
           {
             "year": "2026",
-            "applicants": 336,
-            "graduates": 74
+            "applicants": 337,
+            "graduates": 75
           }
         ],
         "community_impact": 1047,
@@ -37702,8 +37702,8 @@
               "type": "Foundational",
               "start_date": "2026-10-12",
               "end_date": "2026-10-17",
-              "applicants": 89,
-              "graduates": 24
+              "applicants": 90,
+              "graduates": 25
             },
             {
               "name": "Climate Finance Training",
@@ -38022,8 +38022,8 @@
             "type": "Foundational",
             "date": "2026-10-12",
             "end_date": "2026-10-17",
-            "applicants": 89,
-            "graduates": 24,
+            "applicants": 90,
+            "graduates": 25,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -39661,6 +39661,15 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 5,
+            "graduate_count": 1
+          },
+          {
+            "name": "Individual Contributor/No Organization",
+            "training": "PowerShift Asia",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
             "graduate_count": 1
           },
           {
@@ -41414,7 +41423,7 @@
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Unknown": 209,
+            "Unknown": 210,
             "Female": 259,
             "Male": 134,
             "Non-binary": 6,
@@ -41422,7 +41431,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "Unknown": 337,
+            "Unknown": 338,
             "18-24": 28,
             "25-34": 135,
             "35-44": 73,
@@ -42363,6 +42372,15 @@
                 "next_workshop_suggestion": "Any successful campaigner who have experience of doing movement against can be a guest speaker.",
                 "testimonial": "Because I'm an energy campaigner and this training gives me many point of views  that I never imagined before.",
                 "applicant_name": "Sadia Rowshon Adhora"
+              },
+              {
+                "what_went_well": "Xxx",
+                "sum_up_learning": null,
+                "action_plan": null,
+                "improvement_suggestion": null,
+                "next_workshop_suggestion": null,
+                "testimonial": "Xxx",
+                "applicant_name": "Cut Nurul Aidha"
               }
             ]
           },
@@ -43396,6 +43414,12 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "Cut Nurul Aidha",
+            "training_name": "PowerShift Asia",
+            "testimonial": "Xxx",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Elaine Joyce Borejon",
             "training_name": "Regional Campaign Strategy and Organising Training (CSO)",
             "testimonial": "Yes, in general, AktivAsia\u2019s training has been valuable for me because i am being enabled to be more strategic and purposive in campaigns. :)",
@@ -43694,7 +43718,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Unknown": 209,
+            "Unknown": 210,
             "Female": 259,
             "Male": 134,
             "Non-binary": 6,
@@ -43702,7 +43726,7 @@
             "Prefer not to answer": 4
           },
           "by_age_group": {
-            "Unknown": 337,
+            "Unknown": 338,
             "18-24": 28,
             "25-34": 135,
             "35-44": 73,
@@ -43710,7 +43734,7 @@
             "45+": 35
           },
           "by_region": {
-            "Unknown": 199,
+            "Unknown": 200,
             "Jalan Tebet Timur Dalam 14b, Tebet, Jakarta Selatan, Dki Jakarta": 1,
             "Depok": 4,
             "Seoul": 8,
@@ -44128,7 +44152,7 @@
           "target_activities": 0,
           "actual_activities": 4,
           "target_participants": 0,
-          "actual_participants": 24,
+          "actual_participants": 25,
           "rows": [
             {
               "plan_title": null,
@@ -44160,7 +44184,7 @@
               "actual_title": "PowerShift Asia",
               "actual_date": "2026-10-12",
               "actual_end_date": "2026-10-17",
-              "actual_participants": 24,
+              "actual_participants": 25,
               "status": "Completed"
             },
             {
@@ -44483,7 +44507,7 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3837,
+        "total_applicants": 3836,
         "total_graduates": 1822
       },
       "per_country": {
@@ -44496,7 +44520,7 @@
           "total_graduates": 602
         },
         "KR": {
-          "total_applicants": 225,
+          "total_applicants": 224,
           "total_graduates": 183
         },
         "ID": {
