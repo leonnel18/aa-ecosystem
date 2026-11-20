@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T05:40:20",
+  "generated_at": "2026-11-20T05:28:47",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -10206,8 +10206,8 @@
           },
           "by_age_group": {
             "Unknown": 451,
-            "18-24": 107,
-            "25-34": 143,
+            "18-24": 106,
+            "25-34": 144,
             "<18": 8,
             "45+": 28,
             "35-44": 43
@@ -13084,8 +13084,8 @@
           },
           "by_age_group": {
             "Unknown": 451,
-            "18-24": 107,
-            "25-34": 143,
+            "18-24": 106,
+            "25-34": 144,
             "<18": 8,
             "45+": 28,
             "35-44": 43
@@ -42167,7 +42167,7 @@
                 "applicant_name": "Yedan Li (Ginger)"
               },
               {
-                "what_went_well": "My roommate",
+                "what_went_well": "More explanations on the financial links behind a project and on what the stages of team development refer to.",
                 "sum_up_learning": "This training helped clarify climate finance campaign terms and I learned about the 4 countries.",
                 "action_plan": "Sharing session with SFOC. Sharing about the training with my Unit and managers. Follow-up on relevant tools learned.",
                 "improvement_suggestion": "More knowledge sharing from the facilitators and correcting exercises",
