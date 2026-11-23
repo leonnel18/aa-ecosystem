@@ -5,7 +5,7 @@
 "use strict";
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const PROXY_BASE = "https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy";
+const PROXY_BASE = "/api";
 
 // Training-type slug → display name (Foundational only for Regional)
 const TYPE_LABELS = {

@@ -1,2 +1,5 @@
 /data/dashboard_data.json
   Cache-Control: no-cache, must-revalidate
+
+/api/*
+  Cache-Control: no-store

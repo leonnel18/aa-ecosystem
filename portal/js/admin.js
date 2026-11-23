@@ -1,7 +1,7 @@
 "use strict";
 
-const PROXY_BASE  = "https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy";
-const PORTAL_BASE = "https://aktivasia-portal.pages.dev";
+const PROXY_BASE  = "/api";
+const PORTAL_BASE = "https://portal.aktivasia.org";
 
 const params      = new URLSearchParams(window.location.search);
 const TRAINING_ID = params.get("training_id") ?? "";

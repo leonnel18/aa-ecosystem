@@ -2,12 +2,9 @@
  * app.js — AktivAsia Team Portal
  */
 
-// Primary: the copy deployed alongside the portal, refreshed daily by the
-// GitHub Actions pipeline (.github/workflows/daily-deploy.yml).
-// Fallback: the Catalyst File Store copy served by crm-proxy, which depends
-// on pipeline-job running on Catalyst.
+// Deployed alongside the portal and refreshed daily by the GitHub Actions
+// pipeline (.github/workflows/daily-deploy.yml).
 const DATA_URL = 'data/dashboard_data.json';
-const DATA_URL_FALLBACK = 'https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy/dashboard-data';
 
 const FLAG_URLS = {
   PH: 'https://flagcdn.com/w80/ph.png',
@@ -53,17 +50,10 @@ let _data = null;
 
 async function loadData() {
   if (_data) return _data;
-  for (const url of [DATA_URL, DATA_URL_FALLBACK]) {
-    try {
-      const resp = await fetch(url);
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      _data = await resp.json();
-      return _data;
-    } catch (err) {
-      console.warn(`Failed loading ${url}: ${err.message}`);
-    }
-  }
-  throw new Error(`Could not load dashboard data from ${DATA_URL} or ${DATA_URL_FALLBACK}`);
+  const resp = await fetch(DATA_URL);
+  if (!resp.ok) throw new Error(`Could not load dashboard data (HTTP ${resp.status})`);
+  _data = await resp.json();
+  return _data;
 }
 
 function getPortalParam() {
@@ -1368,7 +1358,7 @@ if (document.readyState === 'loading') {
 
 // ── Edit modal — constants ─────────────────────────────────────────────────
 
-const EDIT_PROXY = 'https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy';
+const EDIT_PROXY = '/api';
 
 const EDIT_FIELDS = [
   'Solution_Title','Training_Title_Plan','Training_Type','Organised_By','Format',

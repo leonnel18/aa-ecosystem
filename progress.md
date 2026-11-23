@@ -2830,3 +2830,15 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-23 05:25:23 UTC]   dashboard_data.json written (2127.6 KB)
 [2026-11-23 05:25:23 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-23 05:25:23 UTC] Pipeline complete in 48s
+
+[2026-11-23 UTC] Migration to Cloudflare-only (portal.aktivasia.org) — step 1: API moved.
+  - Added portal/_worker.js (Cloudflare Pages advanced-mode worker): serves /api/* as the CRM proxy
+    (all routes of the old Catalyst crm-proxy, incl. /deals/:id/files upload) and passes everything else to static assets.
+  - Same-origin: all 15 portal scripts now use PROXY_BASE="/api" (was the Catalyst URL). app.js no longer falls back to Catalyst.
+  - PORTAL_BASE (admin.js, create-training.js) -> https://portal.aktivasia.org.
+  - Removed portal/workers/ (old standalone Worker + wrangler.toml; was being served publicly).
+  - Writes on non-GET are rejected when the Origin header is a different site.
+  - Tested with a stubbed Zoho (12 checks pass). NOT yet tested against live CRM: no credentials in this session.
+  - Pending (Gino): add domain in Cloudflare/Porkbun; set Pages secrets ZOHO_CLIENT_ID / ZOHO_CLIENT_SECRET / ZOHO_REFRESH_TOKEN
+    (write-scoped token needed for create/edit/stage/apply routes; Catalyst notes say the old token was read-only).
+  - Pending (Claude): port monitor-job + reminder-job to scheduled GitHub Actions; retire Catalyst functions; update CLAUDE.md.

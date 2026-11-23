@@ -1,4 +1,4 @@
-const PROXY_BASE       = "https://zoho-solution-60079085181.development.catalystserverless.in/server/crm-proxy";
+const PROXY_BASE       = "/api";
 const GELP_TRAINING_ID = "773031000008276089";
 const GELP_STAGES = new Set([
   "Selected",
