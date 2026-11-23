@@ -2892,3 +2892,6 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-23 22:00:58 UTC]   dashboard_data.json written (2207.9 KB)
 [2026-11-23 22:00:58 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-23 22:00:58 UTC] Pipeline complete in 47s
+
+[2026-11-24 UTC] standing.html redesign (branch only, not yet deployed): SVG icon/ring KPI tiles; barometer split into Trainings (main) vs Other (name rule OTHER_RE — Zoho has no field that separates them: every plan is Activity Type "Training", none has a Training Type);
+  graduates = attended (Zoho "Attended Training" or later) so Attended/Still-to-graduate columns removed; sticky region filter + plan kind filter (?region=&kind=); gauge cards click-to-filter.
