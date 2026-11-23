@@ -2900,3 +2900,8 @@ Restore by removing the inline style once those survey pages exist.
   - Solutions.Training_Title_Plan: Belantara Lestara 2026 -> Belantara 7 (8108152); Youth Leadership Training (PH, 23-24 Oct) -> AA Young Women's Leadership YR 1 - May-26 (8108194).
   - Training_Plans.Status -> Completed on those two plans (AA Young Women's was Postponed).
   - PENDING Gino: which Belantara plan for Belantara x Rhizoma (Jul 14) and Semesta (Jul 22). Karachi Foundational: 27 applications but only 1 at "Attended Training" (19 Still in Applied, 7 Selected) — stages not updated.
+
+[2026-11-24 UTC] CRM WRITES (approved by Gino: "make them all graduated"), triggers off, all SUCCESS, read back and verified:
+  - Deals.Stage -> "Graduated or Post Evaluation Completed" for all 27 applications of "Foundational Training in Karachi 2026" (was 19 Still in Applied, 7 Selected, 1 Attended).
+  - Deals.Stage -> "Graduated or Post Evaluation Completed" for the 30 applications that were "Attended Training" in "2026 Pakistan Foundational Traning". The 31 "Rejected or Not Attended" and 1 "Still in Applied" were NOT changed.
+  - Graduate_Date was NOT set on these 57 Deals (reminder-job P1/P2 and monitor-job key off Graduate_Date; tools/backfill_graduate_date.py would fill it from Training.End_Date).
