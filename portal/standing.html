@@ -23,6 +23,17 @@
     .year-switch a { padding:4px 14px; border-radius:9999px; border:1px solid rgba(255,255,255,.5); color:#fff; text-decoration:none; font-size:.85rem; font-weight:600; }
     .year-switch a.on { background:#fff; color:var(--brand); }
     .empty { padding:18px; color:var(--text-meta); }
+    .gauges { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:16px; margin-top:12px; }
+    .gauge { background:#fff; border:1px solid var(--border); border-radius:16px; padding:16px 14px 14px; text-align:center; box-shadow:var(--shadow); }
+    .gauge.overall { grid-column:1 / -1; display:grid; grid-template-columns:minmax(220px,300px) 1fr; gap:8px 28px; align-items:center; text-align:left; }
+    .gauge h3 { font-size:1rem; margin-bottom:2px; color:var(--text); }
+    .gauge svg { width:100%; max-width:230px; height:auto; display:block; margin:0 auto; }
+    .gauge .verdict { display:inline-block; font-weight:800; font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; padding:3px 12px; border-radius:9999px; margin:2px 0 8px; }
+    .verdict.green { background:#dcfce7; color:#166534; } .verdict.amber { background:#fef3c7; color:#92400e; }
+    .verdict.red { background:#fee2e2; color:#991b1b; } .verdict.grey { background:#f3f4f6; color:#374151; }
+    .gauge dl { display:grid; grid-template-columns:1fr auto; gap:3px 12px; font-size:.82rem; text-align:left; margin-top:4px; }
+    .gauge dt { color:var(--text-meta); } .gauge dd { font-weight:700; font-variant-numeric:tabular-nums; text-align:right; }
+    @media (max-width:640px) { .gauge.overall { grid-template-columns:1fr; text-align:center; } }
   </style>
 </head>
 <body data-page="standing">
@@ -46,6 +57,14 @@
     <div id="error" class="empty" hidden></div>
 
     <div class="st-kpis" id="kpis"></div>
+
+    <section class="st-section">
+      <div class="section-header"><h2>Are we on track?</h2></div>
+      <div class="gauges" id="gauges"></div>
+      <p class="st-note">Needle = share of <strong>plans that should be done by now</strong> (planned month reached, not cancelled) that are delivered.
+        <strong>On track</strong> 80%+ · <strong>At risk</strong> 50–79% · <strong>Behind</strong> under 50%. Postponed plans count as not delivered.
+        Participation compares attended with target for delivered plans that have a target and a linked training.</p>
+    </section>
 
     <section class="st-section">
       <div class="section-header"><h2>By region</h2></div>
@@ -149,6 +168,44 @@
         tot.trainings += ts.length; tot.apps += apps; tot.atts += atts; tot.grads += grads; tot.sessions += sessions[r[0]] || 0;
         return { code: r[0], name: r[1], n: ts.length, done: done, open: open, apps: apps, atts: atts, grads: grads, plans: pl.length, plOpen: plOpen, sess: sessions[r[0]] || 0 };
       });
+
+      // ---- On-track barometer (per region + overall), from plan states in Zoho
+      var thisMonth = today.slice(0, 7);
+      function health(list) {
+        var live = list.filter(function (t) { return planState(t) !== 'Cancelled'; });
+        var due = live.filter(function (t) { return (t.start_date || '').slice(0, 7) && (t.start_date || '').slice(0, 7) <= thisMonth; });
+        var done = live.filter(function (t) { return planState(t) === 'Done'; });
+        var denom = Math.max(due.length, done.length);
+        var pctDone = denom ? Math.round(100 * done.length / denom) : null;
+        var withNums = done.filter(function (t) { return t.target && (t.actuals || []).length; });
+        var tgt = withNums.reduce(function (a, t) { return a + t.target; }, 0);
+        var atn = withNums.reduce(function (a, t) { return a + sum(t.actuals, 'attended'); }, 0);
+        var grad = withNums.reduce(function (a, t) { return a + sum(t.actuals, 'graduates'); }, 0);
+        return { due: denom, done: done.length, pct: pctDone, tgt: tgt, atn: atn, grad: grad, partPct: tgt ? Math.round(100 * atn / tgt) : null };
+      }
+      function verdict(pc) { return pc == null ? ['No plans due', 'grey'] : pc >= 80 ? ['On track', 'green'] : pc >= 50 ? ['At risk', 'amber'] : ['Behind', 'red']; }
+      function gaugeSvg(pc) {
+        var cx = 100, cy = 100, r = 80;
+        function pt(v, rad) { var a = Math.PI * (1 - v / 100); return [cx + rad * Math.cos(a), cy - rad * Math.sin(a)]; }
+        function arc(a, b, col) { var p1 = pt(a, r), p2 = pt(b, r); return '<path d="M' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + ' A' + r + ' ' + r + ' 0 0 1 ' + p2[0].toFixed(1) + ' ' + p2[1].toFixed(1) + '" stroke="' + col + '" stroke-width="16" fill="none"/>'; }
+        var v = pc == null ? 0 : Math.max(0, Math.min(100, pc)), tip = pt(v, 66);
+        return '<svg viewBox="0 0 200 134" role="img" aria-label="' + (pc == null ? 'no plans due yet' : pc + ' percent of due plans delivered') + '">' +
+          arc(0, 50, '#e8a0a0') + arc(50, 80, '#f3d27a') + arc(80, 100, '#86c79a') +
+          '<line x1="100" y1="100" x2="' + tip[0].toFixed(1) + '" y2="' + tip[1].toFixed(1) + '" stroke="#131625" stroke-width="3.5" stroke-linecap="round"/>' +
+          '<circle cx="100" cy="100" r="6" fill="#131625"/>' +
+          '<text x="100" y="130" text-anchor="middle" font-size="15" font-weight="800" fill="#131625">' + (pc == null ? '—' : pc + '%') + '</text></svg>';
+      }
+      function gaugeCard(title, h, cls) {
+        var vd = verdict(h.pct);
+        return '<div class="gauge ' + cls + '"><div>' + (cls ? '' : '<h3>' + esc(title) + '</h3>') + gaugeSvg(h.pct) + '</div><div>' + (cls ? '<h3>' + esc(title) + '</h3>' : '') +
+          '<span class="verdict ' + vd[1] + '">' + vd[0] + '</span><dl>' +
+          '<dt>Plans delivered</dt><dd>' + h.done + ' of ' + h.due + ' due</dd>' +
+          '<dt>Attended vs target</dt><dd>' + (h.partPct == null ? '—' : h.atn + ' of ' + h.tgt + ' (' + h.partPct + '%)') + '</dd>' +
+          '<dt>Graduated of attended</dt><dd>' + (h.atn ? pct(h.grad, h.atn) + '%' : '—') + '</dd></dl></div></div>';
+      }
+      var gHtml = gaugeCard('All regions · ' + YEAR, health(plans), 'overall');
+      REGIONS.forEach(function (r) { gHtml += gaugeCard(r[1], health(plans.filter(function (t) { return t.code === r[0]; })), ''); });
+      document.getElementById('gauges').innerHTML = gHtml;
 
       document.getElementById('kpis').innerHTML = [
         [tot.trainings, 'Trainings', 'started in ' + YEAR],
