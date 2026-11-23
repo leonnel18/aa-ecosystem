@@ -2862,3 +2862,18 @@ Restore by removing the inline style once those survey pages exist.
   - Training_Plans.Status set on 35 plans (source: ALL TEAMS Calendar sheet + Zoho trainings that have ended): 30 Completed, 4 Postponed
     (AA Young Women's YR1, AA Pamitinan YR1, AA Sanayan YR1 -> postponed to Year 2; CSO training for KFEM Y2 #2 Jun-26 -> postponed to October), 1 Cancelled (Belantara 4).
   - NOT written: Belantara Lestara 2026 -> Belantara 7 (medium confidence), Pagbirik Bicol -> Pandayan Bespoke 4 (low); 8 sheet actuals with no Zoho Training record (Kapihan 1, KBF conference, PLS #1 follow-up, Tagpuan 2026, CGC planning, PILCD/CYDO, Strategic meeting, PPF6 workshop).
+[2026-11-23 21:19:05 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-23 21:19:43 UTC]   Extracted Deals: 4469 records
+[2026-11-23 21:19:43 UTC]   Extracted Solutions: 136 records
+[2026-11-23 21:19:43 UTC]   Extracted Products: 4 records
+[2026-11-23 21:19:43 UTC]   Extracted Accounts: 2383 records
+[2026-11-23 21:19:43 UTC]   Extracted Forms: 24 records
+[2026-11-23 21:19:43 UTC]   Extracted Training_Plans: 167 records
+[2026-11-23 21:19:43 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-23 21:19:43 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-11-23 21:19:43 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-23 21:19:43 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-23 21:19:43 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-23 21:19:44 UTC]   dashboard_data.json written (2152.6 KB)
+[2026-11-23 21:19:44 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-23 21:19:44 UTC] Pipeline complete in 38s
