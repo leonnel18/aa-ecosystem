@@ -500,17 +500,71 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
 
     # Training Plans filtered by portal
     portal_plans = [p for p in (training_plans or []) if ORG_TO_PORTAL.get(p.get("Organised_By", "")) == portal]
-    plans_list = [{
-        "name": p.get("Name", ""),
-        "type": p.get("Activity_Type", ""),
-        "start_date": p.get("Start_Date") or "",
-        "end_date": p.get("End_Date") or "",
-        "status": p.get("Status") or "",
-        "organised_by": p.get("Organised_By", ""),
-    } for p in portal_plans]
+
+    # Plan <-> actual links, from Zoho only. Solutions.Training_Title_Plan is the primary link
+    # (many trainings can share one plan); Training_Plans.Training_Title_Actual is used for any
+    # training that has no link of its own.
+    today_iso = date.today().isoformat()
+    all_solutions_by_id = {s_["id"]: s_ for s_ in solutions}
+    sol_plan = {}
+    plan_actual_ids = defaultdict(list)
+    for s_ in solutions:
+        pid = _lookup_id(s_.get("Training_Title_Plan"))
+        if pid:
+            sol_plan[s_["id"]] = pid
+            plan_actual_ids[pid].append(s_["id"])
+    for p_ in (training_plans or []):
+        aid = _lookup_id(p_.get("Training_Title_Actual"))
+        if aid and aid in all_solutions_by_id and aid not in sol_plan:
+            sol_plan[aid] = p_["id"]
+            plan_actual_ids[p_["id"]].append(aid)
+    plan_names = {p_["id"]: p_.get("Name", "") for p_ in (training_plans or [])}
+    for at in actual_trainings:
+        pid = sol_plan.get(at["id"])
+        at["plan_id"] = pid or ""
+        at["plan_name"] = plan_names.get(pid, "") if pid else ""
+
+    def _actual_summary(sid):
+        s_ = all_solutions_by_id[sid]
+        dc_ = deal_counts.get(sid, {"applicants": 0, "attended": 0, "graduates": 0})
+        return {
+            "id": sid, "name": s_.get("Solution_Title", ""),
+            "date": s_.get("Start_Date") or "", "end_date": s_.get("End_Date") or s_.get("Start_Date") or "",
+            "applicants": dc_["applicants"], "attended": dc_["attended"], "graduates": dc_["graduates"],
+        }
+
+    def _plan_state(p_, actuals):
+        status = (p_.get("Status") or "").strip()
+        if actuals:
+            return "Done" if any((a["end_date"] or "9999") < today_iso for a in actuals) else "Scheduled"
+        if status == "Cancelled":
+            return "Cancelled"
+        if status == "Completed":
+            return "Done"
+        if status == "Postponed":
+            return "Postponed"
+        start = p_.get("Start_Date") or ""
+        if start and start[:7] < today_iso[:7]:
+            return "Overdue"
+        return "Scheduled" if status in ("Scheduled", "In Progress") else "Planned"
+
+    plans_list = []
+    for p in portal_plans:
+        acts = [_actual_summary(sid) for sid in plan_actual_ids.get(p["id"], []) if sid in all_solutions_by_id]
+        plans_list.append({
+            "id": p.get("id", ""),
+            "name": p.get("Name", ""),
+            "type": p.get("Activity_Type", ""),
+            "start_date": p.get("Start_Date") or "",
+            "end_date": p.get("End_Date") or "",
+            "status": p.get("Status") or "",
+            "organised_by": p.get("Organised_By", ""),
+            "target": p.get("Target_Participants"),
+            "state": _plan_state(p, acts),
+            "actuals": acts,
+        })
 
     # Completed vs planned by year
-    today_iso = date.today().isoformat()
     cpby = {}
     for yr in ["2024", "2025", "2026"]:
         yr_plans = [p for p in portal_plans if (p.get("Start_Date") or "")[:4] == yr]

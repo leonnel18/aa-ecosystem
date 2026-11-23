@@ -91,7 +91,7 @@ ACCOUNTS_FIELDS = ",".join([
 
 FORMS_FIELDS = ",".join(["id", "Name", "Created_Time", "Owner"])
 
-TRAINING_PLANS_FIELDS = ",".join(["id", "Name", "Start_Date", "End_Date", "Organised_By", "Activity_Type", "Status", "Target_Participants"])
+TRAINING_PLANS_FIELDS = ",".join(["id", "Name", "Start_Date", "End_Date", "Organised_By", "Activity_Type", "Status", "Target_Participants", "Training_Title_Actual"])
 
 MODULE_CONFIG = {
     "Deals":          DEALS_FIELDS,

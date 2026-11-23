@@ -55,10 +55,20 @@
     </section>
 
     <section class="st-section">
+      <div class="section-header"><h2>Plan vs actual</h2></div>
+      <div class="table-wrap"><table id="t-planactual"></table></div>
+      <p class="st-note">Every training plan for the year, matched to the actual training(s) linked to it in Zoho (<em>Training Title Plan</em> on the training).
+        Done = a linked training has ended, or the plan is marked Completed. Overdue = planned month has passed and nothing is linked yet.
+        Attended vs target compares people who attended with the plan’s target participants.</p>
+      <h3 style="margin:28px 0 0">Trainings with no plan in Zoho</h3>
+      <div class="table-wrap"><table id="t-unplanned"></table></div>
+    </section>
+
+    <section class="st-section">
       <div class="section-header"><h2>Still to complete</h2></div>
       <h3 style="margin:14px 0 0">Upcoming and ongoing trainings</h3>
       <div class="table-wrap"><table id="t-upcoming"></table></div>
-      <h3 style="margin:28px 0 0">Planned trainings not yet marked complete</h3>
+      <h3 style="margin:28px 0 0">Plans still to deliver</h3>
       <div class="table-wrap"><table id="t-plans"></table></div>
       <h3 style="margin:28px 0 0">Attended but not yet marked Graduated</h3>
       <div class="table-wrap"><table id="t-pending"></table></div>
@@ -77,6 +87,12 @@
     var YEAR = params.get('year') || '2026';
 
     function esc(v) { var d = document.createElement('div'); d.textContent = v == null ? '' : String(v); return d.innerHTML; }
+    function planState(t) {
+      if (t.state) return t.state;
+      return t.status === 'Completed' ? 'Done' : (t.status === 'Cancelled' ? 'Cancelled' : (t.status === 'Postponed' ? 'Postponed' : 'Planned'));
+    }
+    var STATE_BADGE = { Done: 'completed', Scheduled: 'in-progress', Planned: 'upcoming', Overdue: 'missed', Postponed: 'postponed', Cancelled: 'cancelled' };
+    function stateBadge(st) { return '<span class="badge badge-' + (STATE_BADGE[st] || 'on-hold') + '">' + esc(st) + '</span>'; }
     function pct(a, b) { return b ? Math.round(100 * a / b) : 0; }
     function fmt(d) { return d ? d.slice(0, 10) : '—'; }
     function badge(s) {
@@ -113,7 +129,10 @@
           if ((t.date || '').slice(0, 4) === YEAR) all.push(Object.assign({ region: r[1], code: r[0] }, t));
         });
         (rep.training_plans || []).forEach(function (t) {
-          if ((t.start_date || '').slice(0, 4) === YEAR) plans.push(Object.assign({ region: r[1], code: r[0] }, t));
+          var inYear = (t.start_date || '').slice(0, 4) === YEAR ||
+            (t.actuals || []).some(function (a) { return (a.date || '').slice(0, 4) === YEAR; }) ||
+            (!t.start_date && (t.name || '').indexOf(YEAR) !== -1);
+          if (inYear) plans.push(Object.assign({ region: r[1], code: r[0] }, t));
         });
       });
 
@@ -126,7 +145,7 @@
         var done = ts.filter(function (t) { return t.status === 'Completed'; }).length;
         var open = ts.length - done;
         var pl = plans.filter(function (t) { return t.code === r[0]; });
-        var plOpen = pl.filter(function (t) { return t.status !== 'Completed' && t.status !== 'Cancelled'; }).length;
+        var plOpen = pl.filter(function (t) { return planState(t) === 'Done'; }).length;
         tot.trainings += ts.length; tot.apps += apps; tot.atts += atts; tot.grads += grads; tot.sessions += sessions[r[0]] || 0;
         return { code: r[0], name: r[1], n: ts.length, done: done, open: open, apps: apps, atts: atts, grads: grads, plans: pl.length, plOpen: plOpen, sess: sessions[r[0]] || 0 };
       });
@@ -142,7 +161,7 @@
         return '<div class="card"><div class="card-value">' + esc(k[0]) + '</div><div class="card-label">' + esc(k[1]) + '</div><div class="card-sub">' + esc(k[2]) + '</div></div>';
       }).join('');
 
-      table('t-region', [['Region'], ['Trainings', 1], ['Completed', 1], ['Upcoming / ongoing', 1], ['Applicants', 1], ['Attended', 1], ['Graduated', 1], ['Graduated of attended'], ['Still to graduate', 1], ['Plans open', 1], ['Practice sessions', 1]],
+      table('t-region', [['Region'], ['Trainings', 1], ['Completed', 1], ['Upcoming / ongoing', 1], ['Applicants', 1], ['Attended', 1], ['Graduated', 1], ['Graduated of attended'], ['Still to graduate', 1], ['Plans done', 1], ['Practice sessions', 1]],
         regionRows.map(function (r) {
           var p = pct(r.grads, r.atts);
           return '<tr><td><strong>' + esc(r.name) + '</strong></td><td class="num">' + r.n + '</td><td class="num">' + r.done + '</td><td class="num">' + r.open +
@@ -160,12 +179,31 @@
           return '<tr><td>' + esc(t.region) + '</td><td>' + esc(t.name) + '</td><td>' + esc(t.type) + '</td><td>' + fmt(t.date) + ' → ' + fmt(t.end_date) + '</td><td>' + badge(t.status) + '</td></tr>';
         }), 'Nothing upcoming or ongoing in ' + YEAR + '.');
 
-      var openPlans = plans.filter(function (t) { return t.status !== 'Completed' && t.status !== 'Cancelled'; })
-        .sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); });
-      table('t-plans', [['Region'], ['Plan'], ['Type'], ['Planned dates'], ['Status in CRM']],
+      function sum(list, k) { return (list || []).reduce(function (a, x) { return a + (k === 'attended' ? att(x) : (x[k] || 0)); }, 0); }
+      var byPlan = plans.slice().sort(function (a, b) {
+        return (a.region || '').localeCompare(b.region || '') || (a.start_date || '9').localeCompare(b.start_date || '9');
+      });
+      table('t-planactual', [['Region'], ['Plan'], ['Planned'], ['Target', 1], ['State'], ['Actual training'], ['Attended', 1], ['Graduated', 1], ['Attended vs target']],
+        byPlan.map(function (t) {
+          var acts = t.actuals || [], st = planState(t), a = sum(acts, 'attended'), g = sum(acts, 'graduates');
+          var names = acts.map(function (x) { return esc(x.name) + ' <span style="color:var(--text-meta)">(' + fmt(x.date) + ')</span>'; }).join('<br>') ||
+            '<span style="color:var(--text-meta)">—</span>';
+          var vs = t.target && acts.length ? pct(a, t.target) + '%' : '';
+          return '<tr><td>' + esc(t.region) + '</td><td>' + esc(t.name) + '</td><td>' + ((t.start_date || '').slice(0, 7) || '—') + '</td><td class="num">' + (t.target || '') +
+            '</td><td>' + stateBadge(st) + '</td><td>' + names + '</td><td class="num">' + (acts.length ? a : '') + '</td><td class="num">' + (acts.length ? g : '') + '</td><td>' + vs + '</td></tr>';
+        }), 'No training plans found for ' + YEAR + '.');
+
+      var unplanned = all.filter(function (t) { return !t.plan_id; }).sort(function (a, b) { return (a.date || '').localeCompare(b.date || ''); });
+      table('t-unplanned', [['Region'], ['Training'], ['Dates'], ['Attended', 1], ['Graduated', 1]],
+        unplanned.map(function (t) {
+          return '<tr><td>' + esc(t.region) + '</td><td>' + esc(t.name) + '</td><td>' + fmt(t.date) + ' → ' + fmt(t.end_date) + '</td><td class="num">' + att(t) + '</td><td class="num">' + (t.graduates || 0) + '</td></tr>';
+        }), 'Every training in ' + YEAR + ' is linked to a plan.');
+
+      var openPlans = byPlan.filter(function (t) { var st = planState(t); return st !== 'Done' && st !== 'Cancelled'; });
+      table('t-plans', [['Region'], ['Plan'], ['Planned'], ['Target', 1], ['State']],
         openPlans.map(function (t) {
-          return '<tr><td>' + esc(t.region) + '</td><td>' + esc(t.name) + '</td><td>' + esc(t.type) + '</td><td>' + fmt(t.start_date) + ' → ' + fmt(t.end_date) + '</td><td>' + badge(t.status) + '</td></tr>';
-        }), 'Every plan for ' + YEAR + ' is marked complete or cancelled.');
+          return '<tr><td>' + esc(t.region) + '</td><td>' + esc(t.name) + '</td><td>' + ((t.start_date || '').slice(0, 7) || '—') + '</td><td class="num">' + (t.target || '') + '</td><td>' + stateBadge(planState(t)) + '</td></tr>';
+        }), 'Every plan for ' + YEAR + ' has been delivered or cancelled.');
 
       var pending = all.filter(function (t) { return att(t) - (t.graduates || 0) > 0; })
         .sort(function (a, b) { return ((att(b) - b.graduates) - (att(a) - a.graduates)); });

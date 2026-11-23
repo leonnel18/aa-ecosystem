@@ -2856,3 +2856,9 @@ Restore by removing the inline style once those survey pages exist.
   - Pado Power Fellowship Batch 6 (773031000011136001) -> Pado Power Fellowship #6 - Jun-26 (773031000008108175)
   - 2026 Pakistan Foundational Traning (773031000010976120) -> Foundational 1.1 (773031000008108186)
   Remaining 5 suggestions in docs/plan-actual-link-updates.csv are NOT applied (awaiting approval).
+
+[2026-11-24 UTC] CRM WRITES (approved by Gino: "update the Zoho base, not the sheet"). Workflow triggers disabled. All returned SUCCESS.
+  - Solutions.Training_Title_Plan set on 3 trainings: Facilitation skill workshop PPF7 -> PPF7 - Oct-26; 녹색철강 (GreenSteel) -> Coalition collaboration Y2 GreenSteel Oct-26; Pado Power Fellowship Batch 7 -> #7 - Nov-26.
+  - Training_Plans.Status set on 35 plans (source: ALL TEAMS Calendar sheet + Zoho trainings that have ended): 30 Completed, 4 Postponed
+    (AA Young Women's YR1, AA Pamitinan YR1, AA Sanayan YR1 -> postponed to Year 2; CSO training for KFEM Y2 #2 Jun-26 -> postponed to October), 1 Cancelled (Belantara 4).
+  - NOT written: Belantara Lestara 2026 -> Belantara 7 (medium confidence), Pagbirik Bicol -> Pandayan Bespoke 4 (low); 8 sheet actuals with no Zoho Training record (Kapihan 1, KBF conference, PLS #1 follow-up, Tagpuan 2026, CGC planning, PILCD/CYDO, Strategic meeting, PPF6 workshop).
