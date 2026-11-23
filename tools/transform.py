@@ -30,14 +30,16 @@ PORTAL_TO_ORG = {
     "backbone": "Regional",
 }
 ORG_TO_PORTAL = {v: k for k, v in PORTAL_TO_ORG.items()}
+ORG_TO_PORTAL["Phillippines"] = "PH"   # CRM typo in the Training Plans "Organised By" picklist
 ALL_PORTALS = list(PORTAL_TO_ORG.keys())
 
 # ── Stage constants (confirmed from CRM data 2026-03-18) ────────────────────
 # CRM uses compound stage values, not the individual ones documented in claude.md
 STAGE_SELECTED   = "Selected"
-STAGE_ATTENDED   = "Attended Traning"          # NB: CRM typo — "Traning" not "Training"
+STAGE_ATTENDED   = "Attended Training"         # corrected in CRM 2026-05-04 (was the typo "Attended Traning")
+STAGE_ATTENDED_OLD = "Attended Traning"        # legacy spelling, kept so older records still count
 STAGE_GRADUATED  = "Graduated or Post Evaluation Completed"
-STAGES_ATTENDED  = {STAGE_ATTENDED, STAGE_GRADUATED}
+STAGES_ATTENDED  = {STAGE_ATTENDED, STAGE_ATTENDED_OLD, STAGE_GRADUATED}
 STAGES_GRADUATED = {STAGE_GRADUATED}
 
 # ── Likert field map ────────────────────────────────────────────────────────
@@ -363,11 +365,13 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
                         if ORG_TO_PORTAL.get(s.get("Organised_By", "")) == portal]
 
     portal_deals = [d for d in deals if _deal_portal(d, solutions_by_id) == portal]
-    deal_counts = defaultdict(lambda: {"applicants": 0, "graduates": 0})
+    deal_counts = defaultdict(lambda: {"applicants": 0, "attended": 0, "graduates": 0})
     for deal in portal_deals:
         sol_id = _lookup_id(deal.get("Training_Applied"))
         if sol_id:
             deal_counts[sol_id]["applicants"] += 1
+            if deal.get("Stage") in STAGES_ATTENDED:
+                deal_counts[sol_id]["attended"] += 1
             if deal.get("Stage") in STAGES_GRADUATED:
                 deal_counts[sol_id]["graduates"] += 1
 
@@ -473,6 +477,7 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
             "date":       start,
             "end_date":   end,
             "applicants": deal_counts[sol_id]["applicants"],
+            "attended":   deal_counts[sol_id]["attended"],
             "graduates":  deal_counts[sol_id]["graduates"],
             "status":     "Completed" if is_completed else "Upcoming",
             # Training Automation form links + date windows
@@ -774,11 +779,13 @@ def transform(portals: list = None) -> dict:
 
         # Build deal_counts per solution for reuse in report_1
         portal_deals_for_counts = [d for d in deals if _deal_portal(d, solutions_by_id) == portal]
-        deal_counts = defaultdict(lambda: {"applicants": 0, "graduates": 0})
+        deal_counts = defaultdict(lambda: {"applicants": 0, "attended": 0, "graduates": 0})
         for deal in portal_deals_for_counts:
             sol_id = _lookup_id(deal.get("Training_Applied"))
             if sol_id:
                 deal_counts[sol_id]["applicants"] += 1
+                if deal.get("Stage") in STAGES_ATTENDED:
+                    deal_counts[sol_id]["attended"] += 1
                 if deal.get("Stage") in STAGES_GRADUATED:
                     deal_counts[sol_id]["graduates"] += 1
 

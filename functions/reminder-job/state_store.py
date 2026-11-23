@@ -1,48 +1,46 @@
 """
-state_store.py — Load/save reminder-job run state via Catalyst Data Store
+state_store.py — Load/save reminder run state as a JSON file
 
-Copied and adapted from functions/monitor-job/state_store.py (same table
-pattern, same ~10,000-char truncation gotcha — see that file's docstring for
-the full discovery story). This function's table is separate from
-monitor-job's so the two crons never contend for the same row.
+Replaces the Catalyst Data Store table "reminder_state". The GitHub Actions workflow
+(.github/workflows/reminder.yml) checks out the `bot-state` branch into ./_state
+before the run, points STATE_FILE at _state/reminder_state.json, and commits the
+file back after a successful run — so state survives between runs without any
+database.
 
-One-time manual setup required in the Catalyst console (Cloud Scale > Data
-Store) before first deploy:
-  1. Create a table named "reminder_state" (TABLE_NAME below).
-  2. Add one column: "state_json" (type: Large Text / CLOB).
-Nothing else needs seeding — the first real run creates the one row itself.
+Local runs default to .tmp/reminder_state.json (.tmp/ is ephemeral and
+git-ignored).
 
 State shape (all keys optional/absent until first populated):
 {
-  "last_run_at": "2026-08-10T07:00:00+08:00",
+  "last_run_at": "2026-08-10T09:00:00+08:00",
   "c1_last_sent_month": "2026-08",
-  "c2_sent_training_ids": ["<id>", ...],   (pruned once Start_Date passes)
-  "c3_sent_training_ids": ["<id>", ...],   (pruned once Start_Date passes)
-  "c4_last_sent": {"<training_id>": "YYYY-MM-DD"},  (pruned once Start_Date passes)
-  "c5_sent_training_ids": ["<id>", ...],   (pruned once well past End_Date)
-  "c6_sent_training_ids": ["<id>", ...],   (pruned once well past End_Date)
-  "p_last_sent": {"<deal_id>": "YYYY-MM-DD"}  (pruned on submission)
+  "c2_sent_training_ids": ["<id>", ...],
+  "c3_sent_training_ids": ["<id>", ...],
+  "c4_last_sent": {"<training_id>": "YYYY-MM-DD"},
+  "c5_sent_training_ids": ["<id>", ...],
+  "c6_sent_training_ids": ["<id>", ...],
+  "p_last_sent": {"<deal_id>": "YYYY-MM-DD"}
 }
 
-IMPORTANT — every value stored here MUST stay small and bounded (per-Training
-/ per-Deal "last sent" markers that get pruned once no longer relevant), never
-a list that only ever grows. See functions/monitor-job/state_store.py's
-docstring for what happens when that discipline slips (silent truncation ->
-invalid JSON -> state silently resets to baseline). save_state() below
-hard-asserts the same safety margin.
+Keep every value small and bounded (per-record "last seen/sent" markers that
+get pruned once no longer relevant) — never a list that only ever grows. The
+Catalyst column used to truncate silently at ~10,000 chars; a file has no such
+limit, but unbounded state still means slow runs and noisy commits, so
+save_state() refuses to write anything over MAX_STATE_JSON_CHARS.
+
+The (state, row_id) return shape and save_state(state, row_id) signature are
+kept from the Catalyst version so callers did not need to change; row_id is
+always None now.
 """
 
 import json
+import os
 
-import zcatalyst_sdk
+_DEFAULT_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "..", ".tmp", "reminder_state.json"
+)
 
-TABLE_NAME = "reminder_state"
-COLUMN_NAME = "state_json"
-
-# Catalyst Data Store's Large Text column truncates at ~10,000 chars
-# (confirmed empirically on monitor-job, 2026-08-10). Leave headroom below
-# the real limit.
-MAX_STATE_JSON_CHARS = 9000
+MAX_STATE_JSON_CHARS = 200_000
 
 _EMPTY_STATE = {
     "last_run_at": None,
@@ -56,72 +54,39 @@ _EMPTY_STATE = {
 }
 
 
-def _get_table():
-    app = zcatalyst_sdk.initialize()
-    return app.datastore().table(TABLE_NAME)
+def _path() -> str:
+    return os.environ.get("STATE_FILE") or os.path.normpath(_DEFAULT_PATH)
 
 
-def load_state() -> tuple[dict, str]:
-    """
-    Return (state_dict, row_id_or_none). row_id is None on the very first
-    run (no row exists yet) — save_state() uses it to decide insert vs.
-    update. Falls back to a fresh empty state if the table is empty or the
-    stored JSON can't be parsed.
-    """
-    table = _get_table()
-    rows = list(table.get_iterable_rows())
-
-    if not rows:
-        return dict(_EMPTY_STATE), None
-
-    row = rows[0]  # table holds exactly one row by design
-    row_id = row.get("ROWID")
-    raw = row.get(COLUMN_NAME)
-
-    if not raw:
-        return dict(_EMPTY_STATE), row_id
-
+def load_state() -> tuple[dict, None]:
+    """Return (state_dict, None). A missing file is a normal first run; an
+    unreadable one is reported loudly and treated as empty."""
+    path = _path()
+    if not os.path.exists(path):
+        print(f"  state_store: no state file at {path} — starting from empty state.")
+        return json.loads(json.dumps(_EMPTY_STATE)), None
     try:
-        data = json.loads(raw)
-    except (ValueError, TypeError) as e:
-        # Most likely cause: a prior save_state() wrote a payload that got
-        # silently truncated by the column (see module docstring). Falling
-        # back to empty state here is a safe recovery, but it does mean a
-        # baseline-run reset just happened — logged loudly, not swallowed.
-        print(f"  [WARN] state_store: stored state_json failed to parse ({e}); "
-              f"resetting to empty state. Raw length was {len(raw)} chars.")
-        return dict(_EMPTY_STATE), row_id
-
-    merged = dict(_EMPTY_STATE)
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except (ValueError, OSError) as e:
+        print(f"  [WARN] state_store: could not read {path} ({e}); starting from empty state.")
+        return json.loads(json.dumps(_EMPTY_STATE)), None
+    merged = json.loads(json.dumps(_EMPTY_STATE))
     merged.update(data)
-    return merged, row_id
+    return merged, None
 
 
-def save_state(state: dict, row_id: str = None) -> None:
-    """
-    Persist state. Inserts the one-and-only row on first run (row_id is
-    None), updates it by ROWID on every subsequent run. Called only after a
-    run completes (see reminder.py) so a failed send never marks things as
-    "already reported."
-
-    Raises if the serialized payload would exceed the column's known
-    truncation point — a hard safety net against silently corrupting all
-    stored state (see module docstring). Better to fail this run loudly
-    (state stays at its last-good value, since nothing gets written) than to
-    write a silently-truncated blob that resets everything on the next read.
-    """
-    table = _get_table()
-    payload = json.dumps(state)
-
+def save_state(state: dict, row_id=None) -> None:
+    """Persist state atomically (write temp file, then rename)."""
+    payload = json.dumps(state, indent=2, sort_keys=True)
     if len(payload) > MAX_STATE_JSON_CHARS:
         raise ValueError(
-            f"state_json payload is {len(payload)} chars, over the "
-            f"{MAX_STATE_JSON_CHARS}-char safety limit (real column limit is "
-            f"~10,000 and truncates silently). Refusing to write — a check's "
-            f"state has grown unbounded again; see state_store.py docstring."
+            f"state is {len(payload)} chars, over the {MAX_STATE_JSON_CHARS} limit — "
+            f"something is growing unbounded; see state_store.py docstring."
         )
-
-    if row_id:
-        table.update_row({"ROWID": row_id, COLUMN_NAME: payload})
-    else:
-        table.insert_row({COLUMN_NAME: payload})
+    path = _path()
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write(payload)
+    os.replace(tmp, path)

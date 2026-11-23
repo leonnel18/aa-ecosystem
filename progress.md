@@ -2842,3 +2842,11 @@ Restore by removing the inline style once those survey pages exist.
   - Pending (Gino): add domain in Cloudflare/Porkbun; set Pages secrets ZOHO_CLIENT_ID / ZOHO_CLIENT_SECRET / ZOHO_REFRESH_TOKEN
     (write-scoped token needed for create/edit/stage/apply routes; Catalyst notes say the old token was read-only).
   - Pending (Claude): port monitor-job + reminder-job to scheduled GitHub Actions; retire Catalyst functions; update CLAUDE.md.
+
+[2026-11-23 UTC] 2026 standing page + plan/actual connection analysis.
+  - Added portal/standing.html (reads data/dashboard_data.json; per-region trainings, applicants, attended, graduated, open plans; linked from index.html).
+  - tools/transform.py: (a) STAGES_ATTENDED now includes "Attended Training" (CRM corrected the typo on 2026-05-04; old spelling kept) — funnel "attended" was under-counted;
+    (b) "Phillippines" (CRM Training Plans picklist typo) now maps to PH — all PH plans were being dropped; (c) per-training "attended" added to actual_trainings.
+  - Found: Solutions.Training_Title_Plan is a lookup to Training_Plans (CLAUDE.md said text) and Training_Plans.Training_Title_Actual is a separate lookup to Solutions. Only 20/136 trainings linked.
+  - Read-only analysis vs ALL TEAMS Calendar sheet -> docs/plan-actual-linking-2026.md and docs/plan-actual-link-updates.csv. NO CRM writes performed.
+  - Monitor/reminder job port to file-based state (no Catalyst) is code-complete and smoke-tested with stubs but has NO workflow yet (paused at Gino's request).

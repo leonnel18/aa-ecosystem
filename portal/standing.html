@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standing — AktivAsia Team Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .st-kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:16px; margin:28px 0 8px; }
+    .st-kpis .card { text-align:center; padding:20px 12px; }
+    .st-section { margin-top:40px; }
+    .st-note { font-size:.82rem; color:var(--text-meta); margin-top:8px; }
+    .num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+    th.num { text-align:right; }
+    .bar { height:8px; background:var(--border); border-radius:9999px; min-width:80px; overflow:hidden; }
+    .bar > i { display:block; height:100%; background:linear-gradient(90deg,var(--grad-start),var(--grad-end)); }
+    .warn { color:#c2410c; font-weight:700; }
+    .ok { color:#166534; font-weight:700; }
+    .tot td { font-weight:800; background:var(--bg-alt); }
+    .year-switch { display:inline-flex; gap:6px; margin-top:12px; }
+    .year-switch a { padding:4px 14px; border-radius:9999px; border:1px solid rgba(255,255,255,.5); color:#fff; text-decoration:none; font-size:.85rem; font-weight:600; }
+    .year-switch a.on { background:#fff; color:var(--brand); }
+    .empty { padding:18px; color:var(--text-meta); }
+  </style>
+</head>
+<body data-page="standing">
+
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html" style="text-decoration:none">Aktiv<span>Asia</span></a>
+      <span class="header-meta" id="generated-at"></span>
+    </div>
+  </header>
+
+  <section class="impact-hero">
+    <div class="container" style="text-align:center">
+      <h1 id="title">Standing</h1>
+      <p class="subtitle">What has been done, who has graduated per region, and what is still to complete</p>
+      <div class="year-switch" id="years"></div>
+    </div>
+  </section>
+
+  <main class="container">
+    <div id="error" class="empty" hidden></div>
+
+    <div class="st-kpis" id="kpis"></div>
+
+    <section class="st-section">
+      <div class="section-header"><h2>By region</h2></div>
+      <div class="table-wrap"><table id="t-region"></table></div>
+      <p class="st-note">Counts are trainings that <em>started</em> in the selected year, from the CRM Trainings and Applications records.
+        Attended = stage “Attended Training” or later. “Still to graduate” = people who attended but whose stage is not yet “Graduated” in the CRM.</p>
+    </section>
+
+    <section class="st-section">
+      <div class="section-header"><h2>Still to complete</h2></div>
+      <h3 style="margin:14px 0 0">Upcoming and ongoing trainings</h3>
+      <div class="table-wrap"><table id="t-upcoming"></table></div>
+      <h3 style="margin:28px 0 0">Planned trainings not yet marked complete</h3>
+      <div class="table-wrap"><table id="t-plans"></table></div>
+      <h3 style="margin:28px 0 0">Attended but not yet marked Graduated</h3>
+      <div class="table-wrap"><table id="t-pending"></table></div>
+    </section>
+
+    <section class="st-section">
+      <div class="section-header"><h2>All trainings</h2></div>
+      <div class="table-wrap"><table id="t-all"></table></div>
+    </section>
+  </main>
+
+  <script>
+  (function () {
+    var REGIONS = [['PH','Philippines'],['PK','Pakistan'],['KR','Korea'],['ID','Indonesia'],['backbone','Regional']];
+    var params = new URLSearchParams(location.search);
+    var YEAR = params.get('year') || '2026';
+
+    function esc(v) { var d = document.createElement('div'); d.textContent = v == null ? '' : String(v); return d.innerHTML; }
+    function pct(a, b) { return b ? Math.round(100 * a / b) : 0; }
+    function fmt(d) { return d ? d.slice(0, 10) : '—'; }
+    function badge(s) {
+      var k = (s || 'Not marked').toLowerCase().replace(/\s+/g, '-');
+      return '<span class="badge badge-' + esc(k) + '">' + esc(s || 'Not marked') + '</span>';
+    }
+    function table(id, head, rows, emptyMsg) {
+      var el = document.getElementById(id);
+      if (!rows.length) { el.innerHTML = '<tbody><tr><td class="empty">' + esc(emptyMsg) + '</td></tr></tbody>'; return; }
+      el.innerHTML = '<thead><tr>' + head.map(function (h) {
+        return '<th' + (h[1] ? ' class="num"' : '') + '>' + esc(h[0]) + '</th>';
+      }).join('') + '</tr></thead><tbody>' + rows.join('') + '</tbody>';
+    }
+
+    fetch('data/dashboard_data.json').then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function (data) {
+      document.getElementById('title').textContent = YEAR + ' Standing';
+      document.title = YEAR + ' Standing — AktivAsia Team Portal';
+      document.getElementById('generated-at').textContent = 'Data as of ' + (data.generated_at || '').replace('T', ' ').slice(0, 16);
+      document.getElementById('years').innerHTML = ['2025', '2026'].map(function (y) {
+        return '<a href="?year=' + y + '" class="' + (y === YEAR ? 'on' : '') + '">' + y + '</a>';
+      }).join('');
+
+      var today = new Date().toISOString().slice(0, 10);
+      var all = [], plans = [], sessions = {};
+      function att(t) { return t.attended != null ? t.attended : (t.graduates || 0); }
+      REGIONS.forEach(function (r) {
+        var p = data.portals[r[0]]; if (!p) return;
+        var rep = p.report_2_training_plan || {};
+        sessions[r[0]] = ((rep.practice_sessions || {}).sessions || []).filter(function (s) { return (s.date || '').slice(0, 4) === YEAR; }).length;
+        (rep.actual_trainings || []).forEach(function (t) {
+          if ((t.date || '').slice(0, 4) === YEAR) all.push(Object.assign({ region: r[1], code: r[0] }, t));
+        });
+        (rep.training_plans || []).forEach(function (t) {
+          if ((t.start_date || '').slice(0, 4) === YEAR) plans.push(Object.assign({ region: r[1], code: r[0] }, t));
+        });
+      });
+
+      var tot = { trainings: 0, apps: 0, atts: 0, grads: 0, sessions: 0 };
+      var regionRows = REGIONS.map(function (r) {
+        var ts = all.filter(function (t) { return t.code === r[0]; });
+        var apps = ts.reduce(function (a, t) { return a + (t.applicants || 0); }, 0);
+        var grads = ts.reduce(function (a, t) { return a + (t.graduates || 0); }, 0);
+        var atts = ts.reduce(function (a, t) { return a + att(t); }, 0);
+        var done = ts.filter(function (t) { return t.status === 'Completed'; }).length;
+        var open = ts.length - done;
+        var pl = plans.filter(function (t) { return t.code === r[0]; });
+        var plOpen = pl.filter(function (t) { return t.status !== 'Completed' && t.status !== 'Cancelled'; }).length;
+        tot.trainings += ts.length; tot.apps += apps; tot.atts += atts; tot.grads += grads; tot.sessions += sessions[r[0]] || 0;
+        return { code: r[0], name: r[1], n: ts.length, done: done, open: open, apps: apps, atts: atts, grads: grads, plans: pl.length, plOpen: plOpen, sess: sessions[r[0]] || 0 };
+      });
+
+      document.getElementById('kpis').innerHTML = [
+        [tot.trainings, 'Trainings', 'started in ' + YEAR],
+        [tot.apps, 'Applicants', 'enrolled in those trainings'],
+        [tot.atts, 'Attended', pct(tot.atts, tot.apps) + '% of applicants'],
+        [tot.grads, 'Graduated', pct(tot.grads, tot.atts) + '% of those who attended'],
+        [tot.atts - tot.grads, 'Still to graduate', 'attended, stage not yet Graduated'],
+        [tot.sessions, 'Practice sessions', 'held in ' + YEAR]
+      ].map(function (k) {
+        return '<div class="card"><div class="card-value">' + esc(k[0]) + '</div><div class="card-label">' + esc(k[1]) + '</div><div class="card-sub">' + esc(k[2]) + '</div></div>';
+      }).join('');
+
+      table('t-region', [['Region'], ['Trainings', 1], ['Completed', 1], ['Upcoming / ongoing', 1], ['Applicants', 1], ['Attended', 1], ['Graduated', 1], ['Graduated of attended'], ['Still to graduate', 1], ['Plans open', 1], ['Practice sessions', 1]],
+        regionRows.map(function (r) {
+          var p = pct(r.grads, r.atts);
+          return '<tr><td><strong>' + esc(r.name) + '</strong></td><td class="num">' + r.n + '</td><td class="num">' + r.done + '</td><td class="num">' + r.open +
+            '</td><td class="num">' + r.apps + '</td><td class="num">' + r.atts + '</td><td class="num">' + r.grads + '</td><td><div class="bar"><i style="width:' + p + '%"></i></div>' + p + '%</td><td class="num ' +
+            (r.atts - r.grads > 0 ? 'warn' : 'ok') + '">' + (r.atts - r.grads) + '</td><td class="num">' + r.plOpen + ' of ' + r.plans + '</td><td class="num">' + r.sess + '</td></tr>';
+        }).concat(['<tr class="tot"><td>All regions</td><td class="num">' + tot.trainings + '</td><td class="num">' + regionRows.reduce(function (a, r) { return a + r.done; }, 0) +
+          '</td><td class="num">' + regionRows.reduce(function (a, r) { return a + r.open; }, 0) + '</td><td class="num">' + tot.apps + '</td><td class="num">' + tot.atts + '</td><td class="num">' + tot.grads +
+          '</td><td>' + pct(tot.grads, tot.atts) + '%</td><td class="num">' + (tot.atts - tot.grads) + '</td><td class="num">' + regionRows.reduce(function (a, r) { return a + r.plOpen; }, 0) +
+          ' of ' + regionRows.reduce(function (a, r) { return a + r.plans; }, 0) + '</td><td class="num">' + tot.sessions + '</td></tr>']), 'No data.');
+
+      var upcoming = all.filter(function (t) { return t.status !== 'Completed' || (t.end_date || t.date) >= today; })
+        .sort(function (a, b) { return (a.date || '').localeCompare(b.date || ''); });
+      table('t-upcoming', [['Region'], ['Training'], ['Type'], ['Dates'], ['Status']],
+        upcoming.map(function (t) {
+          return '<tr><td>' + esc(t.region) + '</td><td>' + esc(t.name) + '</td><td>' + esc(t.type) + '</td><td>' + fmt(t.date) + ' → ' + fmt(t.end_date) + '</td><td>' + badge(t.status) + '</td></tr>';
+        }), 'Nothing upcoming or ongoing in ' + YEAR + '.');
+
+      var openPlans = plans.filter(function (t) { return t.status !== 'Completed' && t.status !== 'Cancelled'; })
+        .sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); });
+      table('t-plans', [['Region'], ['Plan'], ['Type'], ['Planned dates'], ['Status in CRM']],
+        openPlans.map(function (t) {
+          return '<tr><td>' + esc(t.region) + '</td><td>' + esc(t.name) + '</td><td>' + esc(t.type) + '</td><td>' + fmt(t.start_date) + ' → ' + fmt(t.end_date) + '</td><td>' + badge(t.status) + '</td></tr>';
+        }), 'Every plan for ' + YEAR + ' is marked complete or cancelled.');
+
+      var pending = all.filter(function (t) { return att(t) - (t.graduates || 0) > 0; })
+        .sort(function (a, b) { return ((att(b) - b.graduates) - (att(a) - a.graduates)); });
+      table('t-pending', [['Region'], ['Training'], ['Dates'], ['Attended', 1], ['Graduated', 1], ['Still to graduate', 1]],
+        pending.map(function (t) {
+          return '<tr><td>' + esc(t.region) + '</td><td>' + esc(t.name) + '</td><td>' + fmt(t.date) + '</td><td class="num">' + att(t) + '</td><td class="num">' + t.graduates +
+            '</td><td class="num warn">' + (att(t) - t.graduates) + '</td></tr>';
+        }), 'Everyone who attended has graduated.');
+
+      table('t-all', [['Region'], ['Training'], ['Type'], ['Dates'], ['Applicants', 1], ['Attended', 1], ['Graduates', 1], ['Status']],
+        all.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); }).map(function (t) {
+          return '<tr><td>' + esc(t.region) + '</td><td>' + esc(t.name) + '</td><td>' + esc(t.type) + '</td><td>' + fmt(t.date) + ' → ' + fmt(t.end_date) + '</td><td class="num">' + t.applicants +
+            '</td><td class="num">' + att(t) + '</td><td class="num">' + t.graduates + '</td><td>' + badge(t.status) + '</td></tr>';
+        }), 'No trainings started in ' + YEAR + '.');
+    }).catch(function (e) {
+      var el = document.getElementById('error'); el.hidden = false;
+      el.textContent = 'Could not load the data (' + e.message + ').';
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -1,13 +1,12 @@
 """
-monitor.py — Daily CRM Monitor orchestrator (Catalyst cron function copy)
+monitor.py — Daily CRM Monitor orchestrator (runs from GitHub Actions)
 
 Runs the 4 checks in sequence, builds one digest email, sends it, then
 persists updated state — in that order, and state is only saved after the
 email send succeeds, so a failed send never marks things as "already
 reported" (see state_store.py / checks/*.py).
 
-Timezone: pinned to Asia/Manila throughout (matches .catalystrc's project
-timezone) to avoid off-by-one-day flapping at midnight boundaries, since
+Timezone: pinned to Asia/Manila throughout to avoid off-by-one-day flapping at midnight boundaries, since
 items 3 and 4 do date-difference math. Manila has no DST and a fixed
 UTC+8 offset, so a fixed-offset timezone is used instead of
 zoneinfo.ZoneInfo("Asia/Manila") — stdlib zoneinfo depends on an IANA tzdata
@@ -19,7 +18,14 @@ needs no external database and can't have this failure mode.
 """
 
 import os
+import sys
 from datetime import datetime, date, timezone, timedelta
+
+# crm_auth.py reads ZOHO_CRM_* at import time, so .env (local runs) must load
+# before `import crm_fetch`. In GitHub Actions there is no .env; the secrets
+# are already in the environment and this is a no-op.
+from dotenv import load_dotenv
+load_dotenv()
 
 import crm_fetch
 import state_store
@@ -51,10 +57,14 @@ def _run_check(label: str, fn, *args, **kwargs):
         return e
 
 
-def run() -> dict:
+def run(dry_run: bool = False) -> dict:
+    """dry_run=True does everything except send the email and save state: it
+    reads the real stored state, runs all checks against live CRM data, and
+    writes the digest HTML to .tmp/monitor_digest_preview.html instead."""
     today = _today_manila()
     print("=" * 55)
-    print(f"  monitor-job — Daily CRM Monitor — {today.isoformat()} (Asia/Manila)")
+    print(f"  monitor-job — Daily CRM Monitor — {today.isoformat()} (Asia/Manila)"
+          f"{'  [DRY RUN]' if dry_run else ''}")
     print("=" * 55)
 
     state, row_id = state_store.load_state()
@@ -104,9 +114,17 @@ def run() -> dict:
     }
     subject, html_body = email_report.build_digest(results_for_email, today.isoformat(), is_baseline_run)
 
-    print(f"-- Sending digest to {RECIPIENT} --")
-    gmail_sender.send_email(to=[RECIPIENT], cc=[], subject=subject, html_body=html_body)
-    print("  Digest sent.")
+    if dry_run:
+        preview = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".tmp", "monitor_digest_preview.html")
+        preview = os.path.normpath(preview)
+        os.makedirs(os.path.dirname(preview), exist_ok=True)
+        with open(preview, "w", encoding="utf-8") as f:
+            f.write(html_body)
+        print(f"-- DRY RUN: not sending. Subject: {subject!r}. Preview written to {preview}")
+    else:
+        print(f"-- Sending digest to {RECIPIENT} --")
+        gmail_sender.send_email(to=[RECIPIENT], cc=[], subject=subject, html_body=html_body)
+        print("  Digest sent.")
 
     # ── Persist state only after the send succeeds ──────────────────────────
     new_state = dict(state)
@@ -115,8 +133,11 @@ def run() -> dict:
     new_state["deal_email_seen"] = updated_deal_email_seen
     new_state["graduate_check_watermark"] = updated_graduate_watermark
 
-    state_store.save_state(new_state, row_id)
-    print("\n[DONE] monitor-job run complete. State saved.")
+    if dry_run:
+        print("\n[DONE] monitor-job dry run complete. State NOT saved.")
+    else:
+        state_store.save_state(new_state, row_id)
+        print("\n[DONE] monitor-job run complete. State saved.")
 
     new_records_count = sum(len(v.get("new", [])) for v in nr_report.values()) if isinstance(nr_report, dict) else 0
     return {
@@ -127,3 +148,8 @@ def run() -> dict:
         "graduate_baseline_seeded": gm_report.get("baseline_seeded_count", 0) if isinstance(gm_report, dict) else 0,
         "six_month_due_count": len(sm_report) if isinstance(sm_report, list) else 0,
     }
+
+
+if __name__ == "__main__":
+    # python monitor.py [--dry-run]
+    print(run(dry_run="--dry-run" in sys.argv))

@@ -1,5 +1,5 @@
 """
-reminder.py — Reminder-job orchestrator (Catalyst cron function copy)
+reminder.py — Reminder-job orchestrator (runs from GitHub Actions)
 
 Unlike monitor-job (one digest email per run), this job sends many
 individual emails — one per due Training/country (C1-C6) or per due Deal
@@ -24,8 +24,8 @@ from datetime import datetime, date, timezone, timedelta
 # time (module-level constants), and the `import crm_fetch` below transitively
 # imports crm_auth — so .env must be loaded before that import happens, not
 # later in __main__ (too late; the constants would already be None/"COM").
-# Under the real Catalyst runtime this load_dotenv() is a harmless no-op
-# (no .env file there; env vars are pre-populated by the platform itself).
+# In GitHub Actions this load_dotenv() is a harmless no-op (no .env file;
+# the secrets are already in the environment).
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -40,6 +40,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "checks"))
 
 import crm_fetch
 import gmail_sender
+import state_store
 import email_templates
 from checks import (
     c1_training_plan, c2_applications_open, c3_seven_day,
@@ -65,23 +66,6 @@ PARTICIPANT_GMAIL_SENDER = os.environ.get("GMAIL_SENDER_PARTICIPANT", "regional@
 # email_templates.py's LOGO_CONTENT_ID / read_logo_bytes() docstring for why
 # this is a local copy inside functions/reminder-job/, not portal/img/.
 _LOGO_BYTES = email_templates.read_logo_bytes()
-
-# Mirrors state_store._EMPTY_STATE. Duplicated (not imported) so dry-run mode
-# never needs to import state_store at all — that module imports
-# zcatalyst_sdk at the top level, which is only installed inside the
-# Catalyst runtime and isn't available for a local `python reminder.py
-# --dry-run` run. Keep in sync with state_store.py's _EMPTY_STATE if that
-# shape changes.
-_DRY_RUN_EMPTY_STATE = {
-    "last_run_at": None,
-    "c1_last_sent_month": None,
-    "c2_sent_training_ids": [],
-    "c3_sent_training_ids": [],
-    "c4_last_sent": {},
-    "c5_sent_training_ids": [],
-    "c6_sent_training_ids": [],
-    "p_last_sent": {},
-}
 
 
 def _today_manila() -> date:
@@ -138,18 +122,16 @@ def run(dry_run: bool = False) -> dict:
     (loads/evaluates against a fresh empty state each time) — for sanity-
     checking the milestone math against live CRM data locally, per the
     reminder-job design doc's verification steps. Not used by the deployed
-    Catalyst cron path (main.py always calls run() with dry_run=False)."""
+    scheduled workflow path (which always calls run() with dry_run=False)."""
     today = _today_manila()
     print("=" * 55)
     print(f"  reminder-job — Daily Reminder Engine — {today.isoformat()} (Asia/Manila)"
           f"{'  [DRY RUN]' if dry_run else ''}")
     print("=" * 55)
 
-    if dry_run:
-        state, row_id = dict(_DRY_RUN_EMPTY_STATE), None
-    else:
-        import state_store  # lazy: only needed (and only importable) in the real Catalyst run
-        state, row_id = state_store.load_state()
+    # A dry run reads the REAL stored state (so it shows exactly what would be
+    # sent today, minus what was already sent) but never sends or saves.
+    state, row_id = state_store.load_state()
     config = _load_email_config()
 
     print("\n-- Fetching CRM data --")
@@ -262,7 +244,6 @@ def run(dry_run: bool = False) -> dict:
     if dry_run:
         print("\n[DONE] reminder-job dry run complete. State NOT saved (dry-run).")
     else:
-        import state_store  # lazy: see the load_state() call above for why
         state_store.save_state(state, row_id)
         print("\n[DONE] reminder-job run complete. State saved.")
     print(f"  Sent counts: {sent_counts}")
@@ -271,15 +252,5 @@ def run(dry_run: bool = False) -> dict:
 
 
 if __name__ == "__main__":
-    # Local dry-run entrypoint: `python reminder.py [--dry-run]`. .env is
-    # already loaded at module import time above (needed before `import
-    # crm_fetch` pulls in crm_auth.py's module-level env reads). state_store.py's
-    # zcatalyst_sdk calls only work inside Catalyst, so this path is
-    # dry-run-only by construction; it does not support a real send locally.
-    if "--dry-run" not in sys.argv:
-        print("Local runs only support --dry-run (state_store/gmail_sender "
-              "require the Catalyst runtime and real OAuth secrets).")
-        print("Usage: python reminder.py --dry-run")
-        sys.exit(1)
-
-    run(dry_run=True)
+    # python reminder.py [--dry-run]   (without --dry-run it really sends)
+    run(dry_run="--dry-run" in sys.argv)
