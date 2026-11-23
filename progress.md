@@ -2895,3 +2895,8 @@ Restore by removing the inline style once those survey pages exist.
 
 [2026-11-24 UTC] standing.html redesign (branch only, not yet deployed): SVG icon/ring KPI tiles; barometer split into Trainings (main) vs Other (name rule OTHER_RE — Zoho has no field that separates them: every plan is Activity Type "Training", none has a Training Type);
   graduates = attended (Zoho "Attended Training" or later) so Attended/Still-to-graduate columns removed; sticky region filter + plan kind filter (?region=&kind=); gauge cards click-to-filter.
+
+[2026-11-24 UTC] CRM WRITES (approved by Gino, triggers off, all SUCCESS):
+  - Solutions.Training_Title_Plan: Belantara Lestara 2026 -> Belantara 7 (8108152); Youth Leadership Training (PH, 23-24 Oct) -> AA Young Women's Leadership YR 1 - May-26 (8108194).
+  - Training_Plans.Status -> Completed on those two plans (AA Young Women's was Postponed).
+  - PENDING Gino: which Belantara plan for Belantara x Rhizoma (Jul 14) and Semesta (Jul 22). Karachi Foundational: 27 applications but only 1 at "Attended Training" (19 Still in Applied, 7 Selected) — stages not updated.
