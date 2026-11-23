@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-11-23T22:12:54",
+  "generated_at": "2026-11-23T22:29:21",
   "portals": {
     "PK": {
       "portal": "PK",
       "report_1_overview": {
         "total_applicants": 1097,
-        "total_graduates": 281,
-        "total_ongoing": 7,
+        "total_graduates": 338,
+        "total_ongoing": 0,
         "application_funnel": {
           "total_applicants": 1097,
-          "attended_training": 313,
-          "graduated": 281,
+          "attended_training": 339,
+          "graduated": 338,
           "impact_evaluation_completed": 2
         },
         "yoy_trend": [
@@ -37,7 +37,7 @@
           {
             "year": "2026",
             "applicants": 89,
-            "graduates": 0
+            "graduates": 57
           }
         ],
         "community_impact": 114,
@@ -50,7 +50,7 @@
               "start_date": "2026-05-14",
               "end_date": "2026-05-17",
               "applicants": 62,
-              "graduates": 0
+              "graduates": 30
             },
             {
               "name": "1 day dialogue/workshop for cross-movement solidarity on Climate Justice",
@@ -66,7 +66,7 @@
               "start_date": "2026-01-02",
               "end_date": "2026-01-04",
               "applicants": 27,
-              "graduates": 0
+              "graduates": 27
             }
           ],
           "ongoing": [],
@@ -212,7 +212,7 @@
                 "end_date": "2026-05-17",
                 "applicants": 62,
                 "attended": 30,
-                "graduates": 0
+                "graduates": 30
               }
             ]
           },
@@ -255,8 +255,8 @@
                 "date": "2026-01-02",
                 "end_date": "2026-01-04",
                 "applicants": 27,
-                "attended": 1,
-                "graduates": 0
+                "attended": 27,
+                "graduates": 27
               },
               {
                 "id": "773031000009793085",
@@ -527,7 +527,7 @@
             "end_date": "2026-05-17",
             "applicants": 62,
             "attended": 30,
-            "graduates": 0,
+            "graduates": 30,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -564,8 +564,8 @@
             "date": "2026-01-02",
             "end_date": "2026-01-04",
             "applicants": 27,
-            "attended": 1,
-            "graduates": 0,
+            "attended": 27,
+            "graduates": 27,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -840,7 +840,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Aain Foundation",
@@ -903,7 +903,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "All Students Action Committee (ASAC) - Quetta",
@@ -1110,7 +1110,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Badin Volunteers Group (BVG) - Badin",
@@ -1254,7 +1254,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Civil Society Support Program (CSSP)",
@@ -1263,7 +1263,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Civil Society Support Program (CSSP) - Karachi",
@@ -1290,7 +1290,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Climate Action Center, Karachi",
@@ -1299,7 +1299,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Climate Forward Pakistan (CFP) - Islamabad",
@@ -1650,7 +1650,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Gilgit-Baltistan Beekeepers Education and Economic Society (GBBEES) - Gilgit",
@@ -1821,7 +1821,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "HER Pakistan (HER) - Karachi",
@@ -1956,7 +1956,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 2,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "IDSP Pakistan",
@@ -1965,7 +1965,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Icon Organization (Icon) - Quetta",
@@ -2001,7 +2001,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Illuminate Impact Foundation (IIF) - Pakistan",
@@ -2019,7 +2019,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Independent Urdu (Independent Urdu) - Islamabad",
@@ -2190,7 +2190,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Institute for Development Studies and Practices (IDSP) - Quetta",
@@ -2235,7 +2235,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Institute of Regional Studies (IRS) - Islamabad",
@@ -2298,7 +2298,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "K-Electric (KE) - Karachi",
@@ -2658,7 +2658,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Pabuhar Youth Forum (PYF) - Tharparkar",
@@ -2766,7 +2766,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Pakistan Red Crescent Society (PRCS) - Islamabad",
@@ -2856,7 +2856,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Policy Research Institute for Equitable Development (PRIED) - Islamabad",
@@ -2973,7 +2973,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 3,
-            "graduate_count": 0
+            "graduate_count": 2
           },
           {
             "name": "Qomi awami tehreek",
@@ -2982,7 +2982,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Quaid E Azam Rangers School and College",
@@ -3531,7 +3531,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "The Citizens Foundation (TCF) - Karachi",
@@ -3567,7 +3567,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 2,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "The Lyceum (Lyceum) - Karachi",
@@ -3657,7 +3657,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "University of Turbat (UoT) - Turbat",
@@ -3684,7 +3684,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Usman Law Association (ULA) - Pakistan",
@@ -3783,7 +3783,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Welfare Association for New Generation (WANG) - Lasbela",
@@ -3972,7 +3972,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "student",
@@ -3999,7 +3999,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "\u06a9\u0644\u0627\u0626\u0645\u06cc\u0679 \u0627\u06cc\u06a9\u0634\u0646 \u0645\u0648\u0624\u0645\u0646\u0679 \u0633\u0646\u062f\u06c1",
@@ -4008,7 +4008,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           }
         ],
         "unattributed_applicants": 27,
@@ -5292,7 +5292,7 @@
           "target_activities": 4,
           "actual_activities": 3,
           "target_participants": 0,
-          "actual_participants": 0,
+          "actual_participants": 57,
           "rows": [
             {
               "plan_title": null,
@@ -5302,7 +5302,7 @@
               "actual_title": "Foundational Training in Karachi 2026",
               "actual_date": "2026-01-02",
               "actual_end_date": "2026-01-04",
-              "actual_participants": 0,
+              "actual_participants": 27,
               "status": "Completed"
             },
             {
@@ -5324,7 +5324,7 @@
               "actual_title": "2026 Pakistan Foundational Traning",
               "actual_date": "2026-05-14",
               "actual_end_date": "2026-05-17",
-              "actual_participants": 0,
+              "actual_participants": 30,
               "status": "Completed"
             },
             {
@@ -6250,11 +6250,21 @@
             "type": "Training",
             "start_date": "2026-05-01",
             "end_date": "2026-04-30",
-            "status": "Postponed",
+            "status": "Completed",
             "organised_by": "Phillippines",
             "target": null,
-            "state": "Postponed",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000014649001",
+                "name": "Youth Leadership Training for Active Citizen Science on Sustainable Transport",
+                "date": "2026-10-23",
+                "end_date": "2026-10-24",
+                "applicants": 11,
+                "attended": 11,
+                "graduates": 11
+              }
+            ]
           },
           {
             "id": "773031000008108193",
@@ -6782,8 +6792,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000008108194",
+            "plan_name": "AA Young Women's Leadership YR 1 (15 participants) - May-26"
           },
           {
             "id": "773031000013632023",
@@ -20804,11 +20814,21 @@
             "type": "Training",
             "start_date": "2026-11-01",
             "end_date": "2026-10-31",
-            "status": "",
+            "status": "Completed",
             "organised_by": "Indonesia",
             "target": 25,
-            "state": "Planned",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000015296023",
+                "name": "Belantara Lestara 2026",
+                "date": "2026-11-10",
+                "end_date": "2026-11-14",
+                "applicants": 19,
+                "attended": 19,
+                "graduates": 19
+              }
+            ]
           },
           {
             "id": "773031000008108151",
@@ -21330,8 +21350,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000008108152",
+            "plan_name": "Belantara 7"
           },
           {
             "id": "773031000012179005",
@@ -46870,12 +46890,12 @@
       },
       "aggregate": {
         "total_applicants": 3836,
-        "total_graduates": 1822
+        "total_graduates": 1879
       },
       "per_country": {
         "PK": {
           "total_applicants": 1097,
-          "total_graduates": 281
+          "total_graduates": 338
         },
         "PH": {
           "total_applicants": 780,
