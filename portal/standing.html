@@ -108,7 +108,7 @@
         <span><i style="background:#86c79a"></i>On track · 80%+</span>
         <span><i style="background:#f3d27a"></i>At risk · 50–79%</span>
         <span><i style="background:#e8a0a0"></i>Behind · under 50%</span>
-        <span>Needle = plans delivered ÷ plans due by now · click a card to filter the tables</span>
+        <span>Needle = <strong>training plans</strong> delivered ÷ due by now · “of target” = <strong>participants</strong> · click a card to filter</span>
       </div>
       <p class="st-note" style="margin-top:8px"><strong>Trainings</strong> is the main gauge. <strong>Other</strong> = knowledge &amp; skill-share sessions, gatherings, meetings, advisory groups, movement-building events and unfunded extras (Kapihan, Campaign Strategy Projects, regional events).</p>
       <div class="gauges" id="gauges"></div>
@@ -252,7 +252,8 @@
         var tgt = withT.reduce(function (a, t) { return a + t.target; }, 0);
         var gT = withT.reduce(function (a, t) { return a + sum(t.actuals, 'graduates'); }, 0);
         var gAll = done.reduce(function (a, t) { return a + sum(t.actuals, 'graduates'); }, 0);
-        return { due: denom, done: done.length, pct: denom ? Math.round(100 * done.length / denom) : null, gAll: gAll, tgtPct: tgt ? Math.round(100 * gT / tgt) : null };
+        var yearTgt = live.reduce(function (a, t) { return a + (t.target || 0); }, 0);
+        return { due: denom, done: done.length, pct: denom ? Math.round(100 * done.length / denom) : null, gAll: gAll, tgt: tgt, gT: gT, yearTgt: yearTgt, tgtPct: tgt ? Math.round(100 * gT / tgt) : null };
       }
       function verdict(pc) { return pc == null ? ['No plans due', 'grey'] : pc >= 80 ? ['On track', 'green'] : pc >= 50 ? ['At risk', 'amber'] : ['Behind', 'red']; }
       var VCOL = { green: '#86c79a', amber: '#f3d27a', red: '#e8a0a0', grey: '#d1d5db' };
@@ -270,14 +271,15 @@
       function pill(h) { var vd = verdict(h.pct); return '<span class="verdict ' + vd[1] + '">' + vd[0] + '</span>'; }
       function chips(h) {
         return '<div class="chips">' +
-          '<div class="chip"><div class="v">' + h.done + '/' + h.due + '</div><div class="l">Delivered</div></div>' +
-          '<div class="chip"><div class="v">' + h.gAll + '</div><div class="l">Graduates</div></div>' +
-          '<div class="chip"><div class="v">' + (h.tgtPct == null ? '—' : h.tgtPct + '%') + '</div><div class="l">Of target</div></div></div>';
+          '<div class="chip" title="Training plans delivered ÷ plans due by now"><div class="v">' + h.done + '/' + h.due + '</div><div class="l">Plans delivered</div></div>' +
+          '<div class="chip" title="People who attended (graduates) across delivered plans"><div class="v">' + h.gAll + '</div><div class="l">Graduates</div></div>' +
+          '<div class="chip" title="Graduates ÷ target participants, for delivered plans that have a target and a linked training"><div class="v">' + (h.tgtPct == null ? '—' : h.tgtPct + '%') +
+          '</div><div class="l">' + (h.tgt ? 'of ' + h.tgt + ' target' : 'Of target') + '</div></div></div>';
       }
       function gaugeCard(code, title, hT, hO, cls) {
         var sel = (code === region && code !== 'all' ? ' sel' : ''), attrs = ' data-region="' + code + '" role="button" tabindex="0" aria-label="Filter tables: ' + esc(title) + '"';
         if (cls) {
-          return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair"><div><h3>' + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '</div>' +
+          return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair"><div><h3>' + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="st-note" style="margin-top:10px">Target for the year: <strong>' + hT.yearTgt + ' participants</strong> · ' + hT.gAll + ' graduated so far</div></div>' +
             '<div class="side"><h4>Other activities</h4>' + gaugeSvg(hO.pct) + pill(hO) + '<div class="st-note" style="margin-top:6px">' + hO.done + ' of ' + hO.due + ' delivered</div></div></div></div>';
         }
         var vo = verdict(hO.pct);
