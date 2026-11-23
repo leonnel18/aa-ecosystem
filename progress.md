@@ -2905,3 +2905,18 @@ Restore by removing the inline style once those survey pages exist.
   - Deals.Stage -> "Graduated or Post Evaluation Completed" for all 27 applications of "Foundational Training in Karachi 2026" (was 19 Still in Applied, 7 Selected, 1 Attended).
   - Deals.Stage -> "Graduated or Post Evaluation Completed" for the 30 applications that were "Attended Training" in "2026 Pakistan Foundational Traning". The 31 "Rejected or Not Attended" and 1 "Still in Applied" were NOT changed.
   - Graduate_Date was NOT set on these 57 Deals (reminder-job P1/P2 and monitor-job key off Graduate_Date; tools/backfill_graduate_date.py would fill it from Training.End_Date).
+[2026-11-23 22:12:07 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-23 22:12:54 UTC]   Extracted Deals: 4469 records
+[2026-11-23 22:12:54 UTC]   Extracted Solutions: 136 records
+[2026-11-23 22:12:54 UTC]   Extracted Products: 4 records
+[2026-11-23 22:12:54 UTC]   Extracted Accounts: 2383 records
+[2026-11-23 22:12:54 UTC]   Extracted Forms: 24 records
+[2026-11-23 22:12:54 UTC]   Extracted Training_Plans: 167 records
+[2026-11-23 22:12:54 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-23 22:12:54 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-11-23 22:12:54 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-23 22:12:54 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-23 22:12:54 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-23 22:12:54 UTC]   dashboard_data.json written (2207.9 KB)
+[2026-11-23 22:12:54 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-23 22:12:54 UTC] Pipeline complete in 46s
