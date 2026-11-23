@@ -2924,3 +2924,33 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 UTC] CRM WRITES (approved by Gino), triggers off, all SUCCESS:
   - Solutions.Training_Title_Plan: Belantara x Rhizoma (14-18 Jul) and Semesta (22-26 Jul) -> Belantara 5 (8108150, Oct-26), the nearest still-planned Belantara plan (Belantara 4 / Jun-26 is Cancelled). Training_Plans.Status of Belantara 5 -> Completed.
   - Deals.Graduate_Date set for the 57 Pakistan graduates: Karachi (27) = 2026-01-04, May Foundational (30) = 2026-05-17 (= each training's End_Date, same rule as tools/backfill_graduate_date.py). No existing Graduate_Date was overwritten (checked first).
+[2026-11-23 22:28:40 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-23 22:29:21 UTC]   Extracted Deals: 4469 records
+[2026-11-23 22:29:21 UTC]   Extracted Solutions: 136 records
+[2026-11-23 22:29:21 UTC]   Extracted Products: 4 records
+[2026-11-23 22:29:21 UTC]   Extracted Accounts: 2383 records
+[2026-11-23 22:29:21 UTC]   Extracted Forms: 24 records
+[2026-11-23 22:29:21 UTC]   Extracted Training_Plans: 167 records
+[2026-11-23 22:29:21 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-23 22:29:21 UTC]   Transformed PK: applicants=1097 graduates=338
+[2026-11-23 22:29:21 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-23 22:29:21 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-23 22:29:21 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-23 22:29:21 UTC]   dashboard_data.json written (2208.6 KB)
+[2026-11-23 22:29:21 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-23 22:29:21 UTC] Pipeline complete in 41s
+[2026-11-23 22:36:43 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-23 22:37:30 UTC]   Extracted Deals: 4469 records
+[2026-11-23 22:37:30 UTC]   Extracted Solutions: 136 records
+[2026-11-23 22:37:30 UTC]   Extracted Products: 4 records
+[2026-11-23 22:37:30 UTC]   Extracted Accounts: 2383 records
+[2026-11-23 22:37:30 UTC]   Extracted Forms: 24 records
+[2026-11-23 22:37:30 UTC]   Extracted Training_Plans: 167 records
+[2026-11-23 22:37:31 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-23 22:37:31 UTC]   Transformed PK: applicants=1097 graduates=338
+[2026-11-23 22:37:31 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-23 22:37:31 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-23 22:37:31 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-23 22:37:31 UTC]   dashboard_data.json written (2209.3 KB)
+[2026-11-23 22:37:31 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-23 22:37:31 UTC] Pipeline complete in 47s
