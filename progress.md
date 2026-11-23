@@ -2920,3 +2920,7 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-23 22:12:54 UTC]   dashboard_data.json written (2207.9 KB)
 [2026-11-23 22:12:54 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-23 22:12:54 UTC] Pipeline complete in 46s
+
+[2026-11-24 UTC] CRM WRITES (approved by Gino), triggers off, all SUCCESS:
+  - Solutions.Training_Title_Plan: Belantara x Rhizoma (14-18 Jul) and Semesta (22-26 Jul) -> Belantara 5 (8108150, Oct-26), the nearest still-planned Belantara plan (Belantara 4 / Jun-26 is Cancelled). Training_Plans.Status of Belantara 5 -> Completed.
+  - Deals.Graduate_Date set for the 57 Pakistan graduates: Karachi (27) = 2026-01-04, May Foundational (30) = 2026-05-17 (= each training's End_Date, same rule as tools/backfill_graduate_date.py). No existing Graduate_Date was overwritten (checked first).
