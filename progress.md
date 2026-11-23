@@ -2856,3 +2856,18 @@ Restore by removing the inline style once those survey pages exist.
   - Pado Power Fellowship Batch 6 (773031000011136001) -> Pado Power Fellowship #6 - Jun-26 (773031000008108175)
   - 2026 Pakistan Foundational Traning (773031000010976120) -> Foundational 1.1 (773031000008108186)
   Remaining 5 suggestions in docs/plan-actual-link-updates.csv are NOT applied (awaiting approval).
+[2026-11-23 21:19:05 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-23 21:19:43 UTC]   Extracted Deals: 4469 records
+[2026-11-23 21:19:43 UTC]   Extracted Solutions: 136 records
+[2026-11-23 21:19:43 UTC]   Extracted Products: 4 records
+[2026-11-23 21:19:43 UTC]   Extracted Accounts: 2383 records
+[2026-11-23 21:19:43 UTC]   Extracted Forms: 24 records
+[2026-11-23 21:19:43 UTC]   Extracted Training_Plans: 167 records
+[2026-11-23 21:19:43 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-23 21:19:43 UTC]   Transformed PK: applicants=1097 graduates=281
+[2026-11-23 21:19:43 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-23 21:19:43 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-23 21:19:43 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-23 21:19:44 UTC]   dashboard_data.json written (2152.6 KB)
+[2026-11-23 21:19:44 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-23 21:19:44 UTC] Pipeline complete in 38s
