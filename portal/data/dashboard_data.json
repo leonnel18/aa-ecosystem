@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T22:29:21",
+  "generated_at": "2026-11-23T22:37:31",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -20848,11 +20848,30 @@
             "type": "Training",
             "start_date": "2026-10-01",
             "end_date": "2026-09-30",
-            "status": "",
+            "status": "Completed",
             "organised_by": "Indonesia",
             "target": 25,
-            "state": "Overdue",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000012179005",
+                "name": "Semesta",
+                "date": "2026-07-22",
+                "end_date": "2026-07-26",
+                "applicants": 30,
+                "attended": 27,
+                "graduates": 27
+              },
+              {
+                "id": "773031000012134012",
+                "name": "Belantara x Rhizoma",
+                "date": "2026-07-14",
+                "end_date": "2026-07-18",
+                "applicants": 19,
+                "attended": 13,
+                "graduates": 13
+              }
+            ]
           },
           {
             "id": "773031000008108149",
@@ -21369,8 +21388,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000008108150",
+            "plan_name": "Belantara 5"
           },
           {
             "id": "773031000012134012",
@@ -21388,8 +21407,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000008108150",
+            "plan_name": "Belantara 5"
           },
           {
             "id": "773031000010630002",
