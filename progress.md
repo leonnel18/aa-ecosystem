@@ -3195,3 +3195,5 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:40:16 UTC]   dashboard_data.json written (2211.7 KB)
 [2026-11-24 02:40:16 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-24 02:40:16 UTC] Pipeline complete in 40s
+
+- 2026-11-24 02:45Z — standing.html: removed the "Target for the year" line from the All regions and Regional cards (confusing next to "of target").
