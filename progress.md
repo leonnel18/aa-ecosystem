@@ -3029,3 +3029,18 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 UTC] standing.html: Applicants tile now says "applied to those trainings" (not "enrolled"); barometer leaves Postponed plans out of plans-due and target totals and adds a note under each gauge ("3 left: 1 overdue · 2 postponed (not counted)"). Branch only until approved.
 
 [2026-11-24 UTC] standing.html (branch only): removed the misleading graduation rate (graduates ÷ applicants) — Graduates tile and By-region table now show graduates vs target for delivered plans; BKKCAW (event, not a training) is excluded from trainings/applicants/graduates and shown as a note ("+152 added participants") under the tiles and on the Regional card. EVENT_RE in the page lists what counts as an event.
+[2026-11-24 02:01:03 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-24 02:01:50 UTC]   Extracted Deals: 4469 records
+[2026-11-24 02:01:50 UTC]   Extracted Solutions: 136 records
+[2026-11-24 02:01:50 UTC]   Extracted Products: 4 records
+[2026-11-24 02:01:50 UTC]   Extracted Accounts: 2383 records
+[2026-11-24 02:01:50 UTC]   Extracted Forms: 24 records
+[2026-11-24 02:01:50 UTC]   Extracted Training_Plans: 167 records
+[2026-11-24 02:01:50 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-24 02:01:50 UTC]   Transformed PK: applicants=1097 graduates=338
+[2026-11-24 02:01:50 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-24 02:01:50 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-24 02:01:50 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-24 02:01:51 UTC]   dashboard_data.json written (2209.0 KB)
+[2026-11-24 02:01:51 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-24 02:01:51 UTC] Pipeline complete in 47s
