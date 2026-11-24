@@ -3027,3 +3027,5 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 01:26:58 UTC] Pipeline complete in 40s
 
 [2026-11-24 UTC] standing.html: Applicants tile now says "applied to those trainings" (not "enrolled"); barometer leaves Postponed plans out of plans-due and target totals and adds a note under each gauge ("3 left: 1 overdue · 2 postponed (not counted)"). Branch only until approved.
+
+[2026-11-24 UTC] standing.html (branch only): removed the misleading graduation rate (graduates ÷ applicants) — Graduates tile and By-region table now show graduates vs target for delivered plans; BKKCAW (event, not a training) is excluded from trainings/applicants/graduates and shown as a note ("+152 added participants") under the tiles and on the Regional card. EVENT_RE in the page lists what counts as an event.

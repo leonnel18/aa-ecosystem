@@ -111,6 +111,7 @@
     <div id="error" class="empty" hidden></div>
 
     <div class="kpis" id="kpis"></div>
+    <p class="st-note" id="events-note" hidden></p>
 
     <section class="st-section" style="margin-top:64px">
       <div class="section-header"><h2>Are we on track?</h2></div>
@@ -165,6 +166,8 @@
     // Zoho has no field that separates trainings from other activities (every plan is Activity Type "Training"),
     // so "Other" is decided by the plan name. Edit this one list to change what counts as Other.
     var OTHER_RE = /alumni gathering|advisory group|peer learning|kapihan|campaign strategy project|regional events|strategic team meeting|team planning|tagpuan|movement building event|training and development|pilot new region|internship/i;
+    // Events that are NOT trainings: kept out of the applicant / graduate counts and shown as a note (“added participants”).
+    var EVENT_RE = /bkkcaw|bangkok climate action week/i;
     function kindOf(t) { return OTHER_RE.test(t.name || '') ? 'other' : 'training'; }
     if (!REGIONS.some(function (r) { return r[0] === region; })) region = 'all';
 
@@ -230,7 +233,7 @@
       }).join('');
 
       var today = new Date().toISOString().slice(0, 10);
-      var all = [], plans = [], sessions = {};
+      var all = [], plans = [], sessions = {}, events = [];
       // Graduates = everyone who attended (Zoho "Attended Training" or later). Falls back to the Graduated stage count on older data files.
       function att(t) { return t.attended != null ? t.attended : (t.graduates || 0); }
       function grads(t) { return att(t); }
@@ -240,7 +243,9 @@
         var rep = p.report_2_training_plan || {};
         sessions[r[0]] = ((rep.practice_sessions || {}).sessions || []).filter(function (s) { return (s.date || '').slice(0, 4) === YEAR; }).length;
         (rep.actual_trainings || []).forEach(function (t) {
-          if ((t.date || '').slice(0, 4) === YEAR) all.push(Object.assign({ region: r[1], code: r[0] }, t));
+          if ((t.date || '').slice(0, 4) !== YEAR) return;
+          var row = Object.assign({ region: r[1], code: r[0] }, t);
+          if (EVENT_RE.test(t.name || '')) events.push(row); else all.push(row);
         });
         (rep.training_plans || []).forEach(function (t) {
           var inYear = (t.start_date || '').slice(0, 4) === YEAR ||
@@ -307,6 +312,13 @@
         if (h.postponed) t += (parts.length ? ' · ' : ': ') + h.postponed + ' postponed (not counted)';
         return t;
       }
+      function evNote(code) {
+        if (code === 'all') return '';   // the all-regions view shows it once, under the top tiles
+        var list = events.filter(function (e) { return e.code === code; });
+        if (!list.length) return '';
+        var n = list.reduce(function (a, e) { return a + Math.max(e.applicants || 0, att(e)); }, 0);
+        return '<div class="gnote">+' + n + ' added participants · ' + list.map(function (e) { return esc(e.name); }).join(', ') + ' (event, not counted as a training)</div>';
+      }
       function pill(h) { var vd = verdict(h.pct); return '<span class="verdict ' + vd[1] + '">' + vd[0] + '</span>'; }
       function chips(h) {
         return '<div class="chips">' +
@@ -318,7 +330,7 @@
       function gaugeCard(code, title, hT, hO, cls) {
         var sel = (code === region && code !== 'all' ? ' sel' : ''), attrs = ' data-region="' + code + '" role="button" tabindex="0" aria-label="Filter tables: ' + esc(title) + '"';
         if (cls) {
-          return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair"><div><h3>' + (code === 'all' ? '' : flag(code)) + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="gnote">' + leftNote(hT) + '</div><div class="st-note" style="margin-top:6px">Target for the year: <strong>' + hT.yearTgt + ' participants</strong> · ' + hT.gAll + ' graduated so far</div></div>' +
+          return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair"><div><h3>' + (code === 'all' ? '' : flag(code)) + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="gnote">' + leftNote(hT) + '</div>' + evNote(code) + '<div class="st-note" style="margin-top:6px">Target for the year: <strong>' + hT.yearTgt + ' participants</strong> · ' + hT.gAll + ' graduated so far</div></div>' +
             '<div class="side"><h4>Other activities</h4>' + gaugeSvg(hO.pct) + pill(hO) + '<div class="st-note" style="margin-top:6px">' + hO.done + ' of ' + hO.due + ' delivered</div><div class="gnote">' + leftNote(hO) + '</div></div></div></div>';
         }
         var vo = verdict(hO.pct);
@@ -337,12 +349,21 @@
       document.getElementById('kpis').innerHTML = [
         ['cal',   tot.trainings, 'Trainings',         'started in ' + YEAR,                         null, BR],
         ['users', tot.apps,      'Applicants',        'applied to those trainings',                null, BR],
-        ['cap',   tot.grads,     'Graduates',         pct(tot.grads, tot.apps) + '% of applicants', tot.apps ? tot.grads / tot.apps : 0, '#15803d'],
+        ['cap',   tot.grads,     'Graduates',         hAllT.tgtPct == null ? 'attended or graduated' : hAllT.tgtPct + '% of ' + hAllT.tgt + ' target', hAllT.tgtPct == null ? null : Math.min(1, hAllT.tgtPct / 100), '#15803d'],
         ['check', hAllT.done + '/' + hAllT.due, 'Training plans delivered', 'planned by now',       hAllT.pct == null ? 0 : hAllT.pct / 100, BR],
         ['clip',  tot.sessions,  'Practice sessions', 'held in ' + YEAR,                            null, BR]
       ].map(function (k) {
         return '<div class="kpi">' + tileSvg(k[0], k[4], k[5]) + '<div><div class="v">' + esc(k[1]) + '</div><div class="l">' + esc(k[2]) + '</div><div class="s">' + esc(k[3]) + '</div></div></div>';
       }).join('');
+
+      (function () {
+        var n = document.getElementById('events-note');
+        if (!events.length) { n.hidden = true; return; }
+        var add = events.reduce(function (a, e) { return a + Math.max(e.applicants || 0, att(e)); }, 0);
+        n.hidden = false;
+        n.innerHTML = '<strong>+' + add + ' added participants</strong> from ' + events.map(function (e) { return esc(e.name) + ' (' + esc(e.region) + ', ' + fmt(e.date) + ')'; }).join(', ') +
+          ' — an event, not a training, so it is not counted in the applicant or graduate numbers above.';
+      })();
 
       // ── Filters: region (all tables) + kind (plan tables) ─────────────
       var fb = document.getElementById('filterbar');
@@ -389,18 +410,18 @@
 
         var rr = region === 'all' ? regionRows : regionRows.filter(function (r) { return r.code === region; });
         var rowsHtml = rr.map(function (r) {
-          var p = pct(r.grads, r.apps);
+          var hh = health(planList(r.code, 'training'), r.code), tp = hh.tgtPct;
           return '<tr><td><strong>' + esc(r.name) + '</strong></td><td class="num">' + r.n + '</td><td class="num">' + r.done + '</td><td class="num">' + r.open +
-            '</td><td class="num">' + r.apps + '</td><td class="num">' + r.grads + '</td><td><div class="bar"><i style="width:' + p + '%"></i></div>' + p + '%</td>' +
+            '</td><td class="num">' + r.apps + '</td><td class="num">' + r.grads + '</td><td>' + (tp == null ? '—' : '<div class="bar"><i style="width:' + Math.min(100, tp) + '%"></i></div>' + tp + '% of ' + hh.tgt) + '</td>' +
             '<td class="num">' + r.trDone + ' of ' + r.trPlans + '</td><td class="num">' + r.otDone + ' of ' + r.otPlans + '</td><td class="num">' + r.sess + '</td></tr>';
         });
         if (region === 'all') {
           var sm = function (k) { return regionRows.reduce(function (a, r) { return a + r[k]; }, 0); };
           rowsHtml.push('<tr class="tot"><td>All regions</td><td class="num">' + tot.trainings + '</td><td class="num">' + sm('done') + '</td><td class="num">' + sm('open') +
-            '</td><td class="num">' + tot.apps + '</td><td class="num">' + tot.grads + '</td><td>' + pct(tot.grads, tot.apps) + '%</td><td class="num">' + sm('trDone') + ' of ' + sm('trPlans') +
+            '</td><td class="num">' + tot.apps + '</td><td class="num">' + tot.grads + '</td><td>' + (hAllT.tgtPct == null ? '—' : hAllT.tgtPct + '% of ' + hAllT.tgt) + '</td><td class="num">' + sm('trDone') + ' of ' + sm('trPlans') +
             '</td><td class="num">' + sm('otDone') + ' of ' + sm('otPlans') + '</td><td class="num">' + tot.sessions + '</td></tr>');
         }
-        table('t-region', [['Region'], ['Trainings', 1], ['Completed', 1], ['Upcoming', 1], ['Applicants', 1], ['Graduates', 1], ['Graduation rate'], ['Training plans done', 1], ['Other done', 1], ['Practice sessions', 1]], rowsHtml, 'No data.');
+        table('t-region', [['Region'], ['Trainings', 1], ['Completed', 1], ['Upcoming', 1], ['Applicants', 1], ['Graduates', 1], ['Of target'], ['Training plans done', 1], ['Other done', 1], ['Practice sessions', 1]], rowsHtml, 'No data.');
 
         var byPlan = P.slice().sort(function (a, b) { return (a.region || '').localeCompare(b.region || '') || (a.start_date || '9').localeCompare(b.start_date || '9'); });
         table('t-planactual', [['Region'], ['Plan'], ['Type'], ['Planned'], ['Target', 1], ['State'], ['Actual training'], ['Graduates', 1], ['Of target']],
