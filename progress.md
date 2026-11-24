@@ -3212,3 +3212,5 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:42:31 UTC]   dashboard_data.json written (2211.7 KB)
 [2026-11-24 02:42:31 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-24 02:42:31 UTC] Pipeline complete in 43s
+
+- 2026-11-24 02:45Z — standing.html: instead of dropping it, the year-target line now reads "Total 2026 target: N participants, including trainings still to be delivered" (All regions 458, Regional 75).

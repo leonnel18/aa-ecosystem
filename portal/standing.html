@@ -348,10 +348,10 @@
           // Regional: same thin "Other" line as the country cards instead of a second gauge
           var voR = verdict(hO.pct);
           return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair" style="grid-template-columns:1fr"><div><h3>' + flag(code) + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="gnote">' + leftNote(hT) + '</div>' + evNote(code) +
-            '<div class="other" style="max-width:420px"><span class="t">Other activities</span><span class="m"><i style="width:' + (hO.pct || 0) + '%;background:' + VCOL[voR[1]] + '"></i></span><span class="x">' + hO.done + '/' + hO.due + '</span></div>' + (hO.postponed ? '<div class="gnote">' + hO.postponed + ' postponed (not counted)</div>' : '') + '</div></div></div>';
+            '<div class="other" style="max-width:420px"><span class="t">Other activities</span><span class="m"><i style="width:' + (hO.pct || 0) + '%;background:' + VCOL[voR[1]] + '"></i></span><span class="x">' + hO.done + '/' + hO.due + '</span></div>' + (hO.postponed ? '<div class="gnote">' + hO.postponed + ' postponed (not counted)</div>' : '') + '<div class="st-note" style="margin-top:6px">Total 2026 target: <strong>' + hT.yearTgt + ' participants</strong>, including trainings still to be delivered</div>' + '</div></div></div>';
         }
         if (cls) {
-          return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair"><div><h3>' + (code === 'all' ? '' : flag(code)) + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="gnote">' + leftNote(hT) + '</div>' + evNote(code) + '</div>' +
+          return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair"><div><h3>' + (code === 'all' ? '' : flag(code)) + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="gnote">' + leftNote(hT) + '</div>' + evNote(code) + '<div class="st-note" style="margin-top:6px">Total 2026 target: <strong>' + hT.yearTgt + ' participants</strong>, including trainings still to be delivered</div>' + '</div>' +
             '<div class="side"><h4>Other activities</h4>' + gaugeSvg(hO.pct) + pill(hO) + '<div class="st-note" style="margin-top:6px">' + hO.done + ' of ' + hO.due + ' delivered</div><div class="gnote">' + leftNote(hO) + '</div></div></div></div>';
         }
         var vo = verdict(hO.pct);
