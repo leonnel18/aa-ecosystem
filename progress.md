@@ -3142,3 +3142,5 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:31:35 UTC]   dashboard_data.json written (2211.7 KB)
 [2026-11-24 02:31:35 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-24 02:31:35 UTC] Pipeline complete in 44s
+
+- 2026-11-24 02:35Z — standing.html: a delivered plan with no target of its own now uses the targets of the trainings held under it (Regional CSO / Taiwan CSO Fellowship plans: 10 + 10), so Regional reads 75 of 75 instead of 54 of 55. Committed on main, pushed with the next deploy.

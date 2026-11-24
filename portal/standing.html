@@ -280,8 +280,16 @@
         var inYear = function (x) { return (x.date || '').slice(0, 4) === YEAR; };
         var gAll = all.filter(function (a) { return code === 'all' || a.code === code; }).reduce(function (n, a) { return n + grads(a); }, 0);
         // "Of target": delivered plans with a target, counting only the trainings held in that year
-        var withT = done.filter(function (t) { return t.target && (t.actuals || []).some(inYear); });
-        var tgt = withT.reduce(function (a, t) { return a + t.target; }, 0);
+        // A plan without its own target falls back to the targets of the trainings delivered under it.
+        var planTgt = function (t) {
+          if (t.target) return t.target;
+          return (t.actuals || []).filter(inYear).reduce(function (n, x) {
+            var full = all.filter(function (a) { return a.id === x.id; })[0];
+            return n + ((full && full.target) || 0);
+          }, 0);
+        };
+        var withT = done.filter(function (t) { return planTgt(t) && (t.actuals || []).some(inYear); });
+        var tgt = withT.reduce(function (a, t) { return a + planTgt(t); }, 0);
         var gT = withT.reduce(function (a, t) { return a + sum((t.actuals || []).filter(inYear), 'graduates'); }, 0);
         var yearTgt = live.reduce(function (a, t) { return a + (t.target || 0); }, 0);
         // Trainings that have no plan (e.g. PowerShift Asia) still count: their own target and graduates are added.
