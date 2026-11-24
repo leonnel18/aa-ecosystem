@@ -3214,3 +3214,18 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:42:31 UTC] Pipeline complete in 43s
 
 - 2026-11-24 02:45Z — standing.html: instead of dropping it, the year-target line now reads "Total 2026 target: N participants, including trainings still to be delivered" (All regions 458, Regional 75).
+[2026-11-24 02:45:38 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-24 02:46:19 UTC]   Extracted Deals: 4469 records
+[2026-11-24 02:46:19 UTC]   Extracted Solutions: 134 records
+[2026-11-24 02:46:19 UTC]   Extracted Products: 4 records
+[2026-11-24 02:46:19 UTC]   Extracted Accounts: 2383 records
+[2026-11-24 02:46:19 UTC]   Extracted Forms: 24 records
+[2026-11-24 02:46:19 UTC]   Extracted Training_Plans: 166 records
+[2026-11-24 02:46:19 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-24 02:46:19 UTC]   Transformed PK: applicants=1097 graduates=338
+[2026-11-24 02:46:19 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-24 02:46:19 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-24 02:46:19 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-24 02:46:19 UTC]   dashboard_data.json written (2211.7 KB)
+[2026-11-24 02:46:19 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-24 02:46:19 UTC] Pipeline complete in 41s
