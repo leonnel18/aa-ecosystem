@@ -3059,3 +3059,5 @@ Restore by removing the inline style once those survey pages exist.
 
 [2026-11-24 UTC] CRM WRITE (approved by Gino: "Okay, delete"), SUCCESS: deleted duplicate plan "Feminist Leadership 2026" (773031000008108223); nothing linked to it (GELP training -> GELP plan 773031000008495037, target 30).
   tools/transform.py: actual_trainings now carry "target" (the training's own Target_Participants) so trainings without a plan (e.g. PowerShift Asia, 25) can count toward the barometer target. Page change pending test on refreshed data. Branch only.
+
+[2026-11-24 UTC] CRM WRITE (approved by Gino), triggers off, SUCCESS — Pakistan plan dates fixed to match the action-plan sheet: Foundational 0.1 -> Dec 2025 (Karachi held Jan 2026 is linked), Foundational 1.1 -> Aug 2026 (May 2026 training linked), Foundational 2.0 -> Feb 2027, Foundational 2.1 -> Jul 2027 (both were wrongly dated 2026). Links verified: Karachi -> 0.1, 2026 Pakistan Foundational -> 1.1.
