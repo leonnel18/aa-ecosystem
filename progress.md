@@ -3010,3 +3010,18 @@ Restore by removing the inline style once those survey pages exist.
   - Training_Plans.End_Date set to the last day of the start month for 77 plans that followed the "starts on the 1st, ends the day before" placeholder pattern (e.g. 2026-04-01 -> 2026-04-30). Left alone: PCC 2024 - Immersive (2024-05-28 -> 2024-05-05).
   - Solutions "Pandayan Foundational Campaign Training (Move as One)" End_Date 2025-03-06 -> 2025-04-06.
   - Earlier today: plan dates Belantara 1 (JAVA) -> Oct-25, TOT 1 (KALIMANTAN) -> Sep-25; removed Training_Title_Plan on UN Women Pandayan, Move as One, and "2025 Pakistan Foundational Training".
+[2026-11-24 01:26:18 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-24 01:26:58 UTC]   Extracted Deals: 4469 records
+[2026-11-24 01:26:58 UTC]   Extracted Solutions: 136 records
+[2026-11-24 01:26:58 UTC]   Extracted Products: 4 records
+[2026-11-24 01:26:58 UTC]   Extracted Accounts: 2383 records
+[2026-11-24 01:26:58 UTC]   Extracted Forms: 24 records
+[2026-11-24 01:26:58 UTC]   Extracted Training_Plans: 167 records
+[2026-11-24 01:26:58 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-24 01:26:58 UTC]   Transformed PK: applicants=1097 graduates=338
+[2026-11-24 01:26:58 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-24 01:26:58 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-24 01:26:58 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-24 01:26:58 UTC]   dashboard_data.json written (2209.3 KB)
+[2026-11-24 01:26:58 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-24 01:26:58 UTC] Pipeline complete in 40s
