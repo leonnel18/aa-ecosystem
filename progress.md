@@ -2990,3 +2990,18 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-23 22:45:19 UTC] Pipeline complete in 48s
 
 [2026-11-24 UTC] standing.html: barometer "Graduates" chip now uses the same basis as the top tile (graduates of trainings that STARTED in the selected year, planned or not) — previously it summed actuals linked to 2026-dated plans (347 = 234 held in 2026 + 113 held in 2025, missing 30 from trainings with no plan). All three places now show 264. "Of target" counts only trainings held in the selected year.
+[2026-11-24 01:21:56 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-24 01:22:38 UTC]   Extracted Deals: 4469 records
+[2026-11-24 01:22:38 UTC]   Extracted Solutions: 136 records
+[2026-11-24 01:22:38 UTC]   Extracted Products: 4 records
+[2026-11-24 01:22:38 UTC]   Extracted Accounts: 2383 records
+[2026-11-24 01:22:38 UTC]   Extracted Forms: 24 records
+[2026-11-24 01:22:38 UTC]   Extracted Training_Plans: 167 records
+[2026-11-24 01:22:38 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-24 01:22:38 UTC]   Transformed PK: applicants=1097 graduates=338
+[2026-11-24 01:22:38 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-24 01:22:38 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-24 01:22:38 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-24 01:22:39 UTC]   dashboard_data.json written (2209.3 KB)
+[2026-11-24 01:22:39 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-24 01:22:39 UTC] Pipeline complete in 42s
