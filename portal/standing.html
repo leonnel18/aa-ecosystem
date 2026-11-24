@@ -40,7 +40,6 @@
     .gauge h3 .flag { width:34px; margin-right:10px; vertical-align:-8px; }
     .gauge h3 svg.globe { display:inline-block; width:30px; max-width:none; height:30px; margin:0 10px 0 0; vertical-align:-8px; }
     .fchip .flag { width:20px; margin-right:7px; vertical-align:-4px; }
-    td .flag { width:20px; margin-right:7px; vertical-align:-4px; }
     .globe { width:22px; height:22px; vertical-align:-5px; margin-right:7px; color:var(--brand); }
     .gauge:not(.overall) .chips { gap:6px; }
     .gauge:not(.overall) .chip { padding:10px 2px 8px; }
@@ -198,7 +197,7 @@
       return c ? '<img class="flag" src="https://flagcdn.com/w80/' + c + '.png" srcset="https://flagcdn.com/w160/' + c + '.png 2x" alt="" loading="lazy">' : '';
     }
     document.addEventListener('error', function (e) { if (e.target && e.target.classList && e.target.classList.contains('flag')) e.target.style.display = 'none'; }, true);
-    function rc(t) { return flag(t.code) + esc(t.region); }
+    function rc(t) { return esc(t.region); }   // tables show the name only; flags are on the barometer and filter buttons
 
     // ── SVG helpers ───────────────────────────────────────────────────────
     var ICON = {
@@ -371,7 +370,7 @@
         var rr = region === 'all' ? regionRows : regionRows.filter(function (r) { return r.code === region; });
         var rowsHtml = rr.map(function (r) {
           var p = pct(r.grads, r.apps);
-          return '<tr><td><strong>' + flag(r.code) + esc(r.name) + '</strong></td><td class="num">' + r.n + '</td><td class="num">' + r.done + '</td><td class="num">' + r.open +
+          return '<tr><td><strong>' + esc(r.name) + '</strong></td><td class="num">' + r.n + '</td><td class="num">' + r.done + '</td><td class="num">' + r.open +
             '</td><td class="num">' + r.apps + '</td><td class="num">' + r.grads + '</td><td><div class="bar"><i style="width:' + p + '%"></i></div>' + p + '%</td>' +
             '<td class="num">' + r.trDone + ' of ' + r.trPlans + '</td><td class="num">' + r.otDone + ' of ' + r.otPlans + '</td><td class="num">' + r.sess + '</td></tr>';
         });

@@ -2969,3 +2969,7 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-23 22:42:35 UTC]   dashboard_data.json written (2209.3 KB)
 [2026-11-23 22:42:35 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-23 22:42:35 UTC] Pipeline complete in 43s
+
+[2026-11-24 UTC] CRM WRITES (approved by Gino: "Semesta and Belantara x Rhizoma are two different Belantaras, connect the Rhizomas in Belantara 4"), triggers off, SUCCESS:
+  - Solutions.Training_Title_Plan: Belantara x Rhizoma (773031000012134012) -> Belantara 4 (773031000008108148); Training_Plans.Status of Belantara 4 Cancelled -> Completed. Semesta stays on Belantara 5.
+  standing.html: flags now only on barometer titles + region filter buttons (removed from tables).
