@@ -3005,3 +3005,8 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 01:22:39 UTC]   dashboard_data.json written (2209.3 KB)
 [2026-11-24 01:22:39 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-24 01:22:39 UTC] Pipeline complete in 42s
+
+[2026-11-24 UTC] CRM WRITES (approved by Gino), triggers off, all SUCCESS, read back and verified:
+  - Training_Plans.End_Date set to the last day of the start month for 77 plans that followed the "starts on the 1st, ends the day before" placeholder pattern (e.g. 2026-04-01 -> 2026-04-30). Left alone: PCC 2024 - Immersive (2024-05-28 -> 2024-05-05).
+  - Solutions "Pandayan Foundational Campaign Training (Move as One)" End_Date 2025-03-06 -> 2025-04-06.
+  - Earlier today: plan dates Belantara 1 (JAVA) -> Oct-25, TOT 1 (KALIMANTAN) -> Sep-25; removed Training_Title_Plan on UN Women Pandayan, Move as One, and "2025 Pakistan Foundational Training".
