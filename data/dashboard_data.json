@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T22:45:19",
+  "generated_at": "2026-11-24T01:22:38",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -20861,15 +20861,6 @@
                 "applicants": 30,
                 "attended": 27,
                 "graduates": 27
-              },
-              {
-                "id": "773031000012134012",
-                "name": "Belantara x Rhizoma",
-                "date": "2026-07-14",
-                "end_date": "2026-07-18",
-                "applicants": 19,
-                "attended": 13,
-                "graduates": 13
               }
             ]
           },
@@ -20891,11 +20882,21 @@
             "type": "Training",
             "start_date": "2026-06-01",
             "end_date": "2026-05-31",
-            "status": "Cancelled",
+            "status": "Completed",
             "organised_by": "Indonesia",
             "target": 25,
-            "state": "Cancelled",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000012134012",
+                "name": "Belantara x Rhizoma",
+                "date": "2026-07-14",
+                "end_date": "2026-07-18",
+                "applicants": 19,
+                "attended": 13,
+                "graduates": 13
+              }
+            ]
           },
           {
             "id": "773031000008108147",
@@ -21407,8 +21408,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "773031000008108150",
-            "plan_name": "Belantara 5"
+            "plan_id": "773031000008108148",
+            "plan_name": "Belantara 4"
           },
           {
             "id": "773031000010630002",
