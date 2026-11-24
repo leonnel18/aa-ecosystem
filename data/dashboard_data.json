@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T02:16:34",
+  "generated_at": "2026-11-24T02:23:04",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -162,20 +162,20 @@
             "id": "773031000008108189",
             "name": "Foundational 2.1",
             "type": "Training",
-            "start_date": "2026-05-01",
-            "end_date": "2026-05-31",
+            "start_date": "2027-07-01",
+            "end_date": "2027-07-31",
             "status": "",
             "organised_by": "Pakistan",
             "target": 30,
-            "state": "Overdue",
+            "state": "Planned",
             "actuals": []
           },
           {
             "id": "773031000008108188",
             "name": "Foundational 2.0",
             "type": "Training",
-            "start_date": "2026-12-01",
-            "end_date": "2026-12-31",
+            "start_date": "2027-02-01",
+            "end_date": "2027-02-28",
             "status": "",
             "organised_by": "Pakistan",
             "target": 30,
@@ -198,8 +198,8 @@
             "id": "773031000008108186",
             "name": "Foundational 1.1",
             "type": "Training",
-            "start_date": "2026-05-01",
-            "end_date": "2026-05-31",
+            "start_date": "2026-08-01",
+            "end_date": "2026-08-31",
             "status": "Completed",
             "organised_by": "Pakistan",
             "target": 25,
@@ -242,8 +242,8 @@
             "id": "773031000008108184",
             "name": "Foundational 0.1",
             "type": "Training",
-            "start_date": "2026-12-01",
-            "end_date": "2026-12-31",
+            "start_date": "2025-12-01",
+            "end_date": "2025-12-31",
             "status": "Completed",
             "organised_by": "Pakistan",
             "target": 25,
@@ -501,11 +501,11 @@
             "conducted": 6
           },
           "2025": {
-            "planned": 2,
+            "planned": 3,
             "conducted": 2
           },
           "2026": {
-            "planned": 6,
+            "planned": 3,
             "conducted": 3
           }
         },
@@ -5319,31 +5319,20 @@
               "status": "Completed"
             },
             {
+              "plan_title": "Foundational 0.1",
+              "plan_date": "2025-12-01",
+              "plan_end_date": "2025-12-31",
+              "target_participants": null,
+              "actual_title": null,
+              "actual_date": null,
+              "actual_end_date": null,
+              "actual_participants": null,
+              "status": "Missed"
+            },
+            {
               "plan_title": "Movement Building event - Oct-25",
               "plan_date": "2026-01-01",
               "plan_end_date": "2026-01-31",
-              "target_participants": null,
-              "actual_title": null,
-              "actual_date": null,
-              "actual_end_date": null,
-              "actual_participants": null,
-              "status": "Missed"
-            },
-            {
-              "plan_title": "Foundational 2.1",
-              "plan_date": "2026-05-01",
-              "plan_end_date": "2026-05-31",
-              "target_participants": null,
-              "actual_title": null,
-              "actual_date": null,
-              "actual_end_date": null,
-              "actual_participants": null,
-              "status": "Missed"
-            },
-            {
-              "plan_title": "Foundational 1.1",
-              "plan_date": "2026-05-01",
-              "plan_end_date": "2026-05-31",
               "target_participants": null,
               "actual_title": null,
               "actual_date": null,
@@ -5361,6 +5350,17 @@
               "actual_end_date": null,
               "actual_participants": null,
               "status": "Missed"
+            },
+            {
+              "plan_title": "Foundational 1.1",
+              "plan_date": "2026-08-01",
+              "plan_end_date": "2026-08-31",
+              "target_participants": null,
+              "actual_title": null,
+              "actual_date": null,
+              "actual_end_date": null,
+              "actual_participants": null,
+              "status": "Missed"
             }
           ]
         },
@@ -5372,8 +5372,8 @@
           "rows": [
             {
               "plan_title": "Foundational 2.0",
-              "plan_date": "2026-12-01",
-              "plan_end_date": "2026-12-31",
+              "plan_date": "2027-02-01",
+              "plan_end_date": "2027-02-28",
               "target_participants": null,
               "actual_title": null,
               "actual_date": null,
@@ -5382,9 +5382,9 @@
               "status": "Upcoming"
             },
             {
-              "plan_title": "Foundational 0.1",
-              "plan_date": "2026-12-01",
-              "plan_end_date": "2026-12-31",
+              "plan_title": "Foundational 2.1",
+              "plan_date": "2027-07-01",
+              "plan_end_date": "2027-07-31",
               "target_participants": null,
               "actual_title": null,
               "actual_date": null,
