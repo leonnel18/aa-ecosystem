@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T02:31:35",
+  "generated_at": "2026-11-24T02:33:53",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5958,7 +5958,7 @@
             "end_date": "2027-09-30",
             "status": "",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Planned",
             "actuals": []
           },
@@ -5970,7 +5970,7 @@
             "end_date": "2026-09-30",
             "status": "Completed",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Done",
             "actuals": [
               {
@@ -5992,7 +5992,7 @@
             "end_date": "2027-08-31",
             "status": "",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Planned",
             "actuals": []
           },
@@ -6004,7 +6004,7 @@
             "end_date": "2026-08-31",
             "status": "Completed",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Done",
             "actuals": [
               {
@@ -6026,7 +6026,7 @@
             "end_date": "2027-04-30",
             "status": "",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Planned",
             "actuals": []
           },
@@ -6038,7 +6038,7 @@
             "end_date": "2026-04-30",
             "status": "Completed",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Done",
             "actuals": [
               {
@@ -6060,7 +6060,7 @@
             "end_date": "2027-03-31",
             "status": "",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Planned",
             "actuals": []
           },
@@ -6072,7 +6072,7 @@
             "end_date": "2026-03-31",
             "status": "Completed",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Done",
             "actuals": [
               {
@@ -6118,7 +6118,7 @@
             "end_date": "2026-11-30",
             "status": "",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Planned",
             "actuals": []
           },
@@ -6154,7 +6154,7 @@
             "end_date": "2025-11-30",
             "status": "Completed",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Done",
             "actuals": []
           },
@@ -6214,7 +6214,7 @@
             "end_date": "2027-02-28",
             "status": "",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Planned",
             "actuals": []
           },
@@ -6226,7 +6226,7 @@
             "end_date": "2026-02-28",
             "status": "Completed",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Done",
             "actuals": []
           },
@@ -6238,7 +6238,7 @@
             "end_date": "2027-05-31",
             "status": "",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Planned",
             "actuals": []
           },
@@ -6250,7 +6250,7 @@
             "end_date": "2026-05-31",
             "status": "Completed",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Done",
             "actuals": [
               {
@@ -6272,7 +6272,7 @@
             "end_date": "2027-07-31",
             "status": "",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 10,
             "state": "Planned",
             "actuals": []
           },
@@ -6284,7 +6284,7 @@
             "end_date": "2026-07-31",
             "status": "Postponed",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 10,
             "state": "Postponed",
             "actuals": []
           },
@@ -6296,7 +6296,7 @@
             "end_date": "2027-06-30",
             "status": "",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Planned",
             "actuals": []
           },
@@ -6308,7 +6308,7 @@
             "end_date": "2026-06-30",
             "status": "Postponed",
             "organised_by": "Phillippines",
-            "target": null,
+            "target": 15,
             "state": "Postponed",
             "actuals": []
           },
