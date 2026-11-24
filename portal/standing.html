@@ -262,15 +262,18 @@
 
       // ── Barometer maths ────────────────────────────────────────────────
       var thisMonth = today.slice(0, 7);
-      function health(list) {
+      function health(list, code) {
         var live = list.filter(function (t) { return planState(t) !== 'Cancelled'; });
         var due = live.filter(function (t) { var m = (t.start_date || '').slice(0, 7); return m && m <= thisMonth; });
         var done = live.filter(function (t) { return planState(t) === 'Done'; });
         var denom = Math.max(due.length, done.length);
-        var withT = done.filter(function (t) { return t.target && (t.actuals || []).length; });
+        // Participants use the same basis as the top tile: trainings that STARTED in the selected year (all kinds, planned or not).
+        var inYear = function (x) { return (x.date || '').slice(0, 4) === YEAR; };
+        var gAll = all.filter(function (a) { return code === 'all' || a.code === code; }).reduce(function (n, a) { return n + grads(a); }, 0);
+        // "Of target": delivered plans with a target, counting only the trainings held in that year
+        var withT = done.filter(function (t) { return t.target && (t.actuals || []).some(inYear); });
         var tgt = withT.reduce(function (a, t) { return a + t.target; }, 0);
-        var gT = withT.reduce(function (a, t) { return a + sum(t.actuals, 'graduates'); }, 0);
-        var gAll = done.reduce(function (a, t) { return a + sum(t.actuals, 'graduates'); }, 0);
+        var gT = withT.reduce(function (a, t) { return a + sum((t.actuals || []).filter(inYear), 'graduates'); }, 0);
         var yearTgt = live.reduce(function (a, t) { return a + (t.target || 0); }, 0);
         return { due: denom, done: done.length, pct: denom ? Math.round(100 * done.length / denom) : null, gAll: gAll, tgt: tgt, gT: gT, yearTgt: yearTgt, tgtPct: tgt ? Math.round(100 * gT / tgt) : null };
       }
@@ -291,7 +294,7 @@
       function chips(h) {
         return '<div class="chips">' +
           '<div class="chip" title="Training plans delivered ÷ plans due by now"><div class="v">' + h.done + '/' + h.due + '</div><div class="l">Plans delivered</div></div>' +
-          '<div class="chip" title="People who attended (graduates) across delivered plans"><div class="v">' + h.gAll + '</div><div class="l">Graduates</div></div>' +
+          '<div class="chip" title="Graduates of trainings that started in this year (same basis as the top tile)"><div class="v">' + h.gAll + '</div><div class="l">Graduates</div></div>' +
           '<div class="chip" title="Graduates ÷ target participants, for delivered plans that have a target and a linked training"><div class="v">' + (h.tgtPct == null ? '—' : h.tgtPct + '%') +
           '</div><div class="l">' + (h.tgt ? 'of ' + h.tgt + ' target' : 'Of target') + '</div></div></div>';
       }
@@ -307,13 +310,13 @@
       }
       function planList(code, k) { return plans.filter(function (t) { return (code === 'all' || t.code === code) && t.kind === k; }); }
       // Row 1: all regions · Row 2: Regional · Row 3: the four countries
-      var gHtml = gaugeCard('all', 'All regions', health(planList('all', 'training')), health(planList('all', 'other')), true);
-      gHtml += gaugeCard('backbone', 'Regional', health(planList('backbone', 'training')), health(planList('backbone', 'other')), true);
-      REGIONS.filter(function (r) { return r[0] !== 'backbone'; }).forEach(function (r) { gHtml += gaugeCard(r[0], r[1], health(planList(r[0], 'training')), health(planList(r[0], 'other')), false); });
+      var gHtml = gaugeCard('all', 'All regions', health(planList('all', 'training'), 'all'), health(planList('all', 'other'), 'all'), true);
+      gHtml += gaugeCard('backbone', 'Regional', health(planList('backbone', 'training'), 'backbone'), health(planList('backbone', 'other'), 'backbone'), true);
+      REGIONS.filter(function (r) { return r[0] !== 'backbone'; }).forEach(function (r) { gHtml += gaugeCard(r[0], r[1], health(planList(r[0], 'training'), r[0]), health(planList(r[0], 'other'), r[0]), false); });
       document.getElementById('gauges').innerHTML = gHtml;
 
       // ── Top numbers ────────────────────────────────────────────────────
-      var hAllT = health(planList('all', 'training')), BR = '#821545';
+      var hAllT = health(planList('all', 'training'), 'all'), BR = '#821545';
       document.getElementById('kpis').innerHTML = [
         ['cal',   tot.trainings, 'Trainings',         'started in ' + YEAR,                         null, BR],
         ['users', tot.apps,      'Applicants',        'enrolled in those trainings',                null, BR],
