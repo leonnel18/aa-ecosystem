@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T02:50:50",
+  "generated_at": "2026-11-24T08:04:46",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -15510,13 +15510,13 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 224,
-        "total_graduates": 183,
+        "total_applicants": 225,
+        "total_graduates": 184,
         "total_ongoing": 3,
         "application_funnel": {
-          "total_applicants": 224,
-          "attended_training": 183,
-          "graduated": 183,
+          "total_applicants": 225,
+          "attended_training": 184,
+          "graduated": 184,
           "impact_evaluation_completed": 16
         },
         "yoy_trend": [
@@ -15542,8 +15542,8 @@
           },
           {
             "year": "2026",
-            "applicants": 39,
-            "graduates": 19
+            "applicants": 40,
+            "graduates": 20
           }
         ],
         "community_impact": 159,
@@ -15863,9 +15863,9 @@
                 "name": "Facilitation skill workshop PPF7",
                 "date": "2026-10-23",
                 "end_date": "2026-10-23",
-                "applicants": 0,
-                "attended": 0,
-                "graduates": 0
+                "applicants": 2,
+                "attended": 2,
+                "graduates": 2
               }
             ]
           },
@@ -15999,9 +15999,9 @@
                 "name": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
                 "date": "2026-10-21",
                 "end_date": "2026-10-21",
-                "applicants": 9,
-                "attended": 9,
-                "graduates": 9
+                "applicants": 8,
+                "attended": 8,
+                "graduates": 8
               }
             ]
           },
@@ -16411,9 +16411,9 @@
             "type": "Training of Trainers",
             "date": "2026-10-23",
             "end_date": "2026-10-23",
-            "applicants": 0,
-            "attended": 0,
-            "graduates": 0,
+            "applicants": 2,
+            "attended": 2,
+            "graduates": 2,
             "target": 4,
             "status": "Completed",
             "pre_app_link": "",
@@ -16431,9 +16431,9 @@
             "type": "Foundational",
             "date": "2026-10-21",
             "end_date": "2026-10-21",
-            "applicants": 9,
-            "attended": 9,
-            "graduates": 9,
+            "applicants": 8,
+            "attended": 8,
+            "graduates": 8,
             "target": 15,
             "status": "Completed",
             "pre_app_link": "",
@@ -17635,12 +17635,12 @@
             "graduate_count": 0
           }
         ],
-        "unattributed_applicants": 7,
+        "unattributed_applicants": 8,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
+            "Unknown": 14,
             "Female": 137,
-            "Unknown": 13,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -17650,7 +17650,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 146,
+            "Unknown": 147,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -17666,6 +17666,31 @@
               "strategy_tactics": {
                 "pre": 4.0,
                 "post": 6.0,
+                "6m": null
+              },
+              "communication_strategy": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "facilitating_workshop": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "building_connection": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              }
+            }
+          },
+          {
+            "training_name": "Facilitation skill workshop PPF7",
+            "likert": {
+              "strategy_tactics": {
+                "pre": null,
+                "post": null,
                 "6m": null
               },
               "communication_strategy": {
@@ -18050,6 +18075,20 @@
                 "next_workshop_suggestion": null,
                 "testimonial": "\ub124",
                 "applicant_name": "Jieon Lee"
+              }
+            ]
+          },
+          {
+            "training_name": "Facilitation skill workshop PPF7",
+            "responses": [
+              {
+                "what_went_well": "\ucc38\uac00\uc790 \uac04 \uc758\uacac \uad50\ud658",
+                "sum_up_learning": "\uc608\ubc29\uc8fc\uc0ac",
+                "action_plan": "\ud30c\ub3c4\ud30c\uc6cc\ud3a0\ub85c\uc6b0\uc2ed \ubfd0 \uc544\ub2c8\ub77c \uc870\uc9c1 \ub0b4\ubd80 \uc6cc\ud06c\uc20d\uc5d0 \ud65c\uc6a9",
+                "improvement_suggestion": "\uc880 \ub354 \uc2dc\uac04\uc774 \uc788\uc5c8\uc73c\uba74 \ud558\ub294 \ubc14\ub78c\uc785\ub2c8\ub2e4!",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "\uae40\ubbfc"
               }
             ]
           },
@@ -18910,15 +18949,6 @@
                 "next_workshop_suggestion": null,
                 "testimonial": "\uac70\ub300 \ub2f4\ub860\uc73c\ub85c \uc774\uc5b4\uc9c0\uae30 \uc26c\uc6b4 \uae30\ud6c4\uc704\uae30 \ub300\uc751 \ubb38\uc81c\ub97c \u2018\uc774\uc288 \ucabc\uac1c\uae30\u2019\ub77c\ub294 \uc194\ub8e8\uc158 \u2192 \uad6c\uccb4\uc801\uc778 to-do list\ub85c \uc774\uc5b4\uc9c8 \uc218 \uc788\ub3c4\ub85d \uad6c\uc131\ud574\uc8fc\uc2e0 \uac8c \ub3c4\uc6c0\uc774 \ub418\uc5c8\uc2b5\ub2c8\ub2e4. \ub610, \uc124\uba85\uc5d0 \uadf8\uce58\uc9c0 \uc54a\uace0 \uc608\uc2dc(\uaca8\uc6b8\uc5d0 \uc9d1\uc774 \ub108\ubb34 \ucda5\ub2e4\u2026)\ub85c \ubcf4\uc5ec\uc8fc\uc2e0 \uc810, \ud3ec\uc2a4\ud2b8\uc787 \uc0c9\uae54\ubcc4 \uad6c\ubd84, \uac01 \uc870\ubcc4 \ud37c\uc2e4\ub9ac\ud14c\uc774\ud130 \ubc30\uce58 \ub4f1\ub3c4 \uc6d0\ud65c\ud55c \ud2b8\ub808\uc774\ub2dd\uc5d0 \ud070 \ub3c4\uc6c0\uc774 \ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
                 "applicant_name": "\uae40\uc2b9\uc5f0"
-              },
-              {
-                "what_went_well": "\ucc38\uac00\uc790 \uac04 \uc758\uacac \uad50\ud658",
-                "sum_up_learning": "\uacf5\ub3d9\uc758 \uc5f0\ub300\uc640 \uac00\ub2a5\uc131",
-                "action_plan": "\ub179\ucca0\ub137\uc5d0\uc11c\uc758 \uacf5\ub3d9 \ucea0\ud398\uc778 \uae30\ud68d \ubc0f \ucd94\uc9c4(\ucca0\uac15 \uc5c5\uc885 \ud0c4\uc18c \uac10\ucd95\ubaa9\ud45c \uacf5\uac1c \uc694\uad6c \ucea0\ud398\uc778)",
-                "improvement_suggestion": "\uc880 \ub354 \uc2dc\uac04\uc774 \uc788\uc5c8\uc73c\uba74 \ud558\ub294 \ubc14\ub78c\uc785\ub2c8\ub2e4!",
-                "next_workshop_suggestion": null,
-                "testimonial": null,
-                "applicant_name": "\uae40\ubbfc"
               },
               {
                 "what_went_well": "\ubaa8\ub460\ubcc4 \ub17c\uc758",
@@ -19831,8 +19861,8 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
+            "Unknown": 14,
             "Female": 137,
-            "Unknown": 13,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
             "\uc5ec\uc131": 16,
@@ -19842,17 +19872,17 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 146,
+            "Unknown": 147,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
             "18-24": 4
           },
           "by_region": {
+            "Unknown": 47,
             "\ub355\ud48d\ub0a8\ub85c 11": 1,
             "\uc11c\uc6b8\uc2dc": 25,
             "\uc5f0\ub0a8\ub3d9": 1,
-            "Unknown": 46,
             "\uc774\ubb38\ub3d9": 1,
             "\uae40\ud3ec\uc2dc \uace0\ucd0c\uc74d \uc218\uae30\ub85c": 1,
             "\uc11c\uc6b8\ud2b9\ubcc4\uc2dc": 6,
@@ -20164,7 +20194,7 @@
           "target_activities": 13,
           "actual_activities": 7,
           "target_participants": 0,
-          "actual_participants": 9,
+          "actual_participants": 10,
           "rows": [
             {
               "plan_title": null,
@@ -20174,7 +20204,7 @@
               "actual_title": "\ub179\uc0c9\ucca0\uac15\ub124\ud2b8\uc6cc\ud06c \uc6cc\ud06c\uc20d (Coalition collaboration training - GreenSteelNetwork)",
               "actual_date": "2026-10-21",
               "actual_end_date": "2026-10-21",
-              "actual_participants": 9,
+              "actual_participants": 8,
               "status": "Completed"
             },
             {
@@ -20185,7 +20215,7 @@
               "actual_title": "Facilitation skill workshop PPF7",
               "actual_date": "2026-10-23",
               "actual_end_date": "2026-10-23",
-              "actual_participants": 0,
+              "actual_participants": 2,
               "status": "Completed"
             },
             {
@@ -20630,13 +20660,13 @@
           },
           {
             "year": "2025",
-            "applicants": 448,
-            "graduates": 155
+            "applicants": 432,
+            "graduates": 140
           },
           {
             "year": "2026",
-            "applicants": 86,
-            "graduates": 77
+            "applicants": 102,
+            "graduates": 92
           }
         ],
         "community_impact": 14605,
@@ -20763,11 +20793,6 @@
               "type": "Training of Trainers",
               "conducted": 3,
               "total_planned": 3
-            },
-            {
-              "type": "Unknown",
-              "conducted": 1,
-              "total_planned": 1
             }
           ],
           "2026": [
@@ -20778,8 +20803,8 @@
             },
             {
               "type": "Unknown",
-              "conducted": 1,
-              "total_planned": 1
+              "conducted": 2,
+              "total_planned": 2
             }
           ]
         },
@@ -20827,8 +20852,8 @@
               {
                 "id": "773031000010630003",
                 "name": "Temu Bumi with Pundi Asa",
-                "date": "2025-12-17",
-                "end_date": "2025-12-18",
+                "date": "2026-01-17",
+                "end_date": "2026-01-18",
                 "applicants": 16,
                 "attended": 15,
                 "graduates": 15
@@ -21465,11 +21490,11 @@
           },
           "2025": {
             "planned": 17,
-            "conducted": 9
+            "conducted": 8
           },
           "2026": {
             "planned": 8,
-            "conducted": 4
+            "conducted": 5
           }
         },
         "actual_trainings": [
@@ -21557,8 +21582,8 @@
             "id": "773031000010630003",
             "name": "Temu Bumi with Pundi Asa",
             "type": "Unknown",
-            "date": "2025-12-17",
-            "end_date": "2025-12-18",
+            "date": "2026-01-17",
+            "end_date": "2026-01-18",
             "applicants": 16,
             "attended": 15,
             "graduates": 15,
@@ -22479,7 +22504,7 @@
             "name": "AktivAsia LTD.",
             "training": "Temu Bumi with Pundi Asa",
             "training_type": "",
-            "year": "2025",
+            "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 0
@@ -39164,8 +39189,8 @@
               "plan_end_date": null,
               "target_participants": null,
               "actual_title": "Temu Bumi with Pundi Asa",
-              "actual_date": "2025-12-17",
-              "actual_end_date": "2025-12-18",
+              "actual_date": "2026-01-17",
+              "actual_end_date": "2026-01-18",
               "actual_participants": 15,
               "status": "Completed"
             },
@@ -47004,8 +47029,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3836,
-        "total_graduates": 1879
+        "total_applicants": 3837,
+        "total_graduates": 1880
       },
       "per_country": {
         "PK": {
@@ -47017,8 +47042,8 @@
           "total_graduates": 602
         },
         "KR": {
-          "total_applicants": 224,
-          "total_graduates": 183
+          "total_applicants": 225,
+          "total_graduates": 184
         },
         "ID": {
           "total_applicants": 1735,
