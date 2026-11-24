@@ -33,6 +33,8 @@
     .kpi .s { margin-top:2px; font-size:.82rem; color:var(--text-meta); }
 
     /* ── Barometer ──────────────────────────────────────────────────── */
+    .gnote { margin-top:12px; font-size:.78rem; line-height:1.4; color:var(--text-meta); font-weight:600; }
+    .gauge:not(.overall) .gnote { text-align:center; }
     .legend { display:flex; flex-wrap:wrap; gap:8px 22px; margin:16px 0 0; font-size:.82rem; color:var(--text-meta); }
     .legend i { display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:7px; vertical-align:-1px; }
     .gauges { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:20px; }
@@ -116,7 +118,7 @@
         <span><i style="background:#86c79a"></i>On track · 80%+</span>
         <span><i style="background:#f3d27a"></i>At risk · 50–79%</span>
         <span><i style="background:#e8a0a0"></i>Behind · under 50%</span>
-        <span>Needle = <strong>training plans</strong> delivered ÷ due by now · “of target” = <strong>participants</strong> · click a card to filter</span>
+        <span>Needle = <strong>training plans</strong> delivered ÷ due by now · “of target” = <strong>participants</strong> · <strong>postponed plans are left out</strong> and noted under each gauge · click a card to filter</span>
       </div>
       <p class="st-note" style="margin-top:8px"><strong>Trainings</strong> is the main gauge. <strong>Other</strong> = knowledge &amp; skill-share sessions, gatherings, meetings, advisory groups, movement-building events and unfunded extras (Kapihan, Campaign Strategy Projects, regional events).</p>
       <div class="gauges" id="gauges"></div>
@@ -263,7 +265,9 @@
       // ── Barometer maths ────────────────────────────────────────────────
       var thisMonth = today.slice(0, 7);
       function health(list, code) {
-        var live = list.filter(function (t) { return planState(t) !== 'Cancelled'; });
+        var postponedN = list.filter(function (t) { return planState(t) === 'Postponed'; }).length;
+        // Cancelled and Postponed plans are left out of the totals (postponed ones are noted under the gauge)
+        var live = list.filter(function (t) { var st = planState(t); return st !== 'Cancelled' && st !== 'Postponed'; });
         var due = live.filter(function (t) { var m = (t.start_date || '').slice(0, 7); return m && m <= thisMonth; });
         var done = live.filter(function (t) { return planState(t) === 'Done'; });
         var denom = Math.max(due.length, done.length);
@@ -275,7 +279,8 @@
         var tgt = withT.reduce(function (a, t) { return a + t.target; }, 0);
         var gT = withT.reduce(function (a, t) { return a + sum((t.actuals || []).filter(inYear), 'graduates'); }, 0);
         var yearTgt = live.reduce(function (a, t) { return a + (t.target || 0); }, 0);
-        return { due: denom, done: done.length, pct: denom ? Math.round(100 * done.length / denom) : null, gAll: gAll, tgt: tgt, gT: gT, yearTgt: yearTgt, tgtPct: tgt ? Math.round(100 * gT / tgt) : null };
+        var cnt = function (st) { return live.filter(function (t) { return planState(t) === st; }).length; };
+        return { overdue: cnt('Overdue'), planned: cnt('Planned'), scheduled: cnt('Scheduled'), postponed: postponedN, due: denom, done: done.length, pct: denom ? Math.round(100 * done.length / denom) : null, gAll: gAll, tgt: tgt, gT: gT, yearTgt: yearTgt, tgtPct: tgt ? Math.round(100 * gT / tgt) : null };
       }
       function verdict(pc) { return pc == null ? ['No plans due', 'grey'] : pc >= 80 ? ['On track', 'green'] : pc >= 50 ? ['At risk', 'amber'] : ['Behind', 'red']; }
       var VCOL = { green: '#86c79a', amber: '#f3d27a', red: '#e8a0a0', grey: '#d1d5db' };
@@ -290,6 +295,18 @@
           '<circle cx="100" cy="100" r="6" fill="#131625"/>' +
           '<text x="100" y="136" text-anchor="middle" font-size="' + (big ? 22 : 22) + '" font-weight="900" fill="#131625">' + (pc == null ? '—' : pc + '%') + '</text></svg>';
       }
+      // "3 left: 1 overdue · 2 postponed (not counted)"
+      function leftNote(h) {
+        var parts = [];
+        if (h.overdue) parts.push(h.overdue + ' overdue');
+        if (h.planned) parts.push(h.planned + ' planned');
+        if (h.scheduled) parts.push(h.scheduled + ' scheduled');
+        var left = h.overdue + h.planned + h.scheduled + h.postponed;
+        if (!left) return 'All plans delivered';
+        var t = left + ' left' + (parts.length ? ': ' + parts.join(', ') : '');
+        if (h.postponed) t += (parts.length ? ' · ' : ': ') + h.postponed + ' postponed (not counted)';
+        return t;
+      }
       function pill(h) { var vd = verdict(h.pct); return '<span class="verdict ' + vd[1] + '">' + vd[0] + '</span>'; }
       function chips(h) {
         return '<div class="chips">' +
@@ -301,12 +318,12 @@
       function gaugeCard(code, title, hT, hO, cls) {
         var sel = (code === region && code !== 'all' ? ' sel' : ''), attrs = ' data-region="' + code + '" role="button" tabindex="0" aria-label="Filter tables: ' + esc(title) + '"';
         if (cls) {
-          return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair"><div><h3>' + (code === 'all' ? '' : flag(code)) + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="st-note" style="margin-top:10px">Target for the year: <strong>' + hT.yearTgt + ' participants</strong> · ' + hT.gAll + ' graduated so far</div></div>' +
-            '<div class="side"><h4>Other activities</h4>' + gaugeSvg(hO.pct) + pill(hO) + '<div class="st-note" style="margin-top:6px">' + hO.done + ' of ' + hO.due + ' delivered</div></div></div></div>';
+          return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair"><div><h3>' + (code === 'all' ? '' : flag(code)) + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="gnote">' + leftNote(hT) + '</div><div class="st-note" style="margin-top:6px">Target for the year: <strong>' + hT.yearTgt + ' participants</strong> · ' + hT.gAll + ' graduated so far</div></div>' +
+            '<div class="side"><h4>Other activities</h4>' + gaugeSvg(hO.pct) + pill(hO) + '<div class="st-note" style="margin-top:6px">' + hO.done + ' of ' + hO.due + ' delivered</div><div class="gnote">' + leftNote(hO) + '</div></div></div></div>';
         }
         var vo = verdict(hO.pct);
-        return '<div class="gauge' + sel + '"' + attrs + '><h3>' + flag(code) + esc(title) + '</h3>' + gaugeSvg(hT.pct) + pill(hT) + chips(hT) +
-          '<div class="other"><span class="t">Other</span><span class="m"><i style="width:' + (hO.pct || 0) + '%;background:' + VCOL[vo[1]] + '"></i></span><span class="x">' + hO.done + '/' + hO.due + '</span></div></div>';
+        return '<div class="gauge' + sel + '"' + attrs + '><h3>' + flag(code) + esc(title) + '</h3>' + gaugeSvg(hT.pct) + pill(hT) + chips(hT) + '<div class="gnote">' + leftNote(hT) + '</div>' +
+          '<div class="other"><span class="t">Other</span><span class="m"><i style="width:' + (hO.pct || 0) + '%;background:' + VCOL[vo[1]] + '"></i></span><span class="x">' + hO.done + '/' + hO.due + '</span></div>' + (hO.postponed ? '<div class="gnote" style="margin-top:6px">Other: ' + hO.postponed + ' postponed (not counted)</div>' : '') + '</div>';
       }
       function planList(code, k) { return plans.filter(function (t) { return (code === 'all' || t.code === code) && t.kind === k; }); }
       // Row 1: all regions · Row 2: Regional · Row 3: the four countries
@@ -319,7 +336,7 @@
       var hAllT = health(planList('all', 'training'), 'all'), BR = '#821545';
       document.getElementById('kpis').innerHTML = [
         ['cal',   tot.trainings, 'Trainings',         'started in ' + YEAR,                         null, BR],
-        ['users', tot.apps,      'Applicants',        'enrolled in those trainings',                null, BR],
+        ['users', tot.apps,      'Applicants',        'applied to those trainings',                null, BR],
         ['cap',   tot.grads,     'Graduates',         pct(tot.grads, tot.apps) + '% of applicants', tot.apps ? tot.grads / tot.apps : 0, '#15803d'],
         ['check', hAllT.done + '/' + hAllT.due, 'Training plans delivered', 'planned by now',       hAllT.pct == null ? 0 : hAllT.pct / 100, BR],
         ['clip',  tot.sessions,  'Practice sessions', 'held in ' + YEAR,                            null, BR]
