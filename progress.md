@@ -3146,3 +3146,18 @@ Restore by removing the inline style once those survey pages exist.
 - 2026-11-24 02:35Z — standing.html: a delivered plan with no target of its own now uses the targets of the trainings held under it (Regional CSO / Taiwan CSO Fellowship plans: 10 + 10), so Regional reads 75 of 75 instead of 54 of 55. Committed on main, pushed with the next deploy.
 
 - 2026-11-24 02:36Z — CRM WRITE (approved by Gino): Training_Plans.Target_Participants = 15 on Pandayan Bespoke Training 3 & 4 (YR1 + YR2).
+[2026-11-24 02:33:06 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-24 02:33:53 UTC]   Extracted Deals: 4469 records
+[2026-11-24 02:33:53 UTC]   Extracted Solutions: 134 records
+[2026-11-24 02:33:53 UTC]   Extracted Products: 4 records
+[2026-11-24 02:33:53 UTC]   Extracted Accounts: 2383 records
+[2026-11-24 02:33:53 UTC]   Extracted Forms: 24 records
+[2026-11-24 02:33:53 UTC]   Extracted Training_Plans: 166 records
+[2026-11-24 02:33:53 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-24 02:33:53 UTC]   Transformed PK: applicants=1097 graduates=338
+[2026-11-24 02:33:53 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-24 02:33:53 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-24 02:33:53 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-24 02:33:53 UTC]   dashboard_data.json written (2211.7 KB)
+[2026-11-24 02:33:53 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-24 02:33:53 UTC] Pipeline complete in 47s
