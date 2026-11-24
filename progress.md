@@ -2973,3 +2973,18 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 UTC] CRM WRITES (approved by Gino: "Semesta and Belantara x Rhizoma are two different Belantaras, connect the Rhizomas in Belantara 4"), triggers off, SUCCESS:
   - Solutions.Training_Title_Plan: Belantara x Rhizoma (773031000012134012) -> Belantara 4 (773031000008108148); Training_Plans.Status of Belantara 4 Cancelled -> Completed. Semesta stays on Belantara 5.
   standing.html: flags now only on barometer titles + region filter buttons (removed from tables).
+[2026-11-23 22:44:31 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-23 22:45:19 UTC]   Extracted Deals: 4469 records
+[2026-11-23 22:45:19 UTC]   Extracted Solutions: 136 records
+[2026-11-23 22:45:19 UTC]   Extracted Products: 4 records
+[2026-11-23 22:45:19 UTC]   Extracted Accounts: 2383 records
+[2026-11-23 22:45:19 UTC]   Extracted Forms: 24 records
+[2026-11-23 22:45:19 UTC]   Extracted Training_Plans: 167 records
+[2026-11-23 22:45:19 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-23 22:45:19 UTC]   Transformed PK: applicants=1097 graduates=338
+[2026-11-23 22:45:19 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-23 22:45:19 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-23 22:45:19 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-23 22:45:19 UTC]   dashboard_data.json written (2209.3 KB)
+[2026-11-23 22:45:19 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-23 22:45:19 UTC] Pipeline complete in 48s
