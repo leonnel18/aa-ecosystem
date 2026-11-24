@@ -3125,3 +3125,18 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:25:49 UTC] Pipeline complete in 41s
 
 - 2026-11-24 02:29Z — standing.html: postponed plans no longer counted in "left"; shown on their own line "N postponed (not counted)". Not yet merged to main.
+[2026-11-24 02:30:50 UTC] Pipeline started. portal=ALL skip_extract=False
+[2026-11-24 02:31:34 UTC]   Extracted Deals: 4469 records
+[2026-11-24 02:31:34 UTC]   Extracted Solutions: 134 records
+[2026-11-24 02:31:34 UTC]   Extracted Products: 4 records
+[2026-11-24 02:31:34 UTC]   Extracted Accounts: 2383 records
+[2026-11-24 02:31:34 UTC]   Extracted Forms: 24 records
+[2026-11-24 02:31:34 UTC]   Extracted Training_Plans: 166 records
+[2026-11-24 02:31:35 UTC]   Transformed PH: applicants=780 graduates=602
+[2026-11-24 02:31:35 UTC]   Transformed PK: applicants=1097 graduates=338
+[2026-11-24 02:31:35 UTC]   Transformed KR: applicants=224 graduates=183
+[2026-11-24 02:31:35 UTC]   Transformed ID: applicants=1735 graduates=756
+[2026-11-24 02:31:35 UTC]   Transformed backbone: applicants=614 graduates=265
+[2026-11-24 02:31:35 UTC]   dashboard_data.json written (2211.7 KB)
+[2026-11-24 02:31:35 UTC]   dashboard_data.json synced to portal/data/
+[2026-11-24 02:31:35 UTC] Pipeline complete in 44s
