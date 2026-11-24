@@ -479,6 +479,7 @@ def build_report_2(deals: list, solutions: list, solutions_by_id: dict,
             "applicants": deal_counts[sol_id]["applicants"],
             "attended":   deal_counts[sol_id]["attended"],
             "graduates":  deal_counts[sol_id]["graduates"],
+            "target":     sol.get("Target_Participants"),   # the training's own target (used for trainings that have no plan)
             "status":     "Completed" if is_completed else "Upcoming",
             # Training Automation form links + date windows
             "pre_app_link":    sol.get("Application_Form") or "",

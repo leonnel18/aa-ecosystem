@@ -3056,3 +3056,6 @@ Restore by removing the inline style once those survey pages exist.
   - OPEN: delete duplicate plan "Feminist Leadership 2026" (773031000008108223) now that GELP training points to the GELP plan — awaiting OK. OPEN: unplanned trainings (e.g. PowerShift Asia, own Target_Participants 25) vs barometer "of target" — awaiting Gino's clarification.
 
 [2026-11-24 UTC] CRM WRITE (approved by Gino), triggers off, SUCCESS: "Pagbirik: Bicol Youth Campaigner's Training" (773031000013632023) -> plan "Pandayan Bespoke Training 4 YR 1 (15 participants) - Sep-26" (773031000008108214); plan Status -> Completed.
+
+[2026-11-24 UTC] CRM WRITE (approved by Gino: "Okay, delete"), SUCCESS: deleted duplicate plan "Feminist Leadership 2026" (773031000008108223); nothing linked to it (GELP training -> GELP plan 773031000008495037, target 30).
+  tools/transform.py: actual_trainings now carry "target" (the training's own Target_Participants) so trainings without a plan (e.g. PowerShift Asia, 25) can count toward the barometer target. Page change pending test on refreshed data. Branch only.
