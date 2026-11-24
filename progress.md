@@ -3061,3 +3061,5 @@ Restore by removing the inline style once those survey pages exist.
   tools/transform.py: actual_trainings now carry "target" (the training's own Target_Participants) so trainings without a plan (e.g. PowerShift Asia, 25) can count toward the barometer target. Page change pending test on refreshed data. Branch only.
 
 [2026-11-24 UTC] CRM WRITE (approved by Gino), triggers off, SUCCESS — Pakistan plan dates fixed to match the action-plan sheet: Foundational 0.1 -> Dec 2025 (Karachi held Jan 2026 is linked), Foundational 1.1 -> Aug 2026 (May 2026 training linked), Foundational 2.0 -> Feb 2027, Foundational 2.1 -> Jul 2027 (both were wrongly dated 2026). Links verified: Karachi -> 0.1, 2026 Pakistan Foundational -> 1.1.
+
+[2026-11-24 UTC] standing.html: trainings with no plan (e.g. PowerShift Asia, own target 25) now count toward the barometer "of target" and "target for the year" using the training's own Target_Participants (needs the pipeline "target" field, tools/transform.py). On today's data only Regional moves: 97% of 30 -> 98% of 55; All regions 83% -> 85% of 243.
