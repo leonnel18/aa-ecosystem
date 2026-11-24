@@ -291,7 +291,7 @@
         var withT = done.filter(function (t) { return planTgt(t) && (t.actuals || []).some(inYear); });
         var tgt = withT.reduce(function (a, t) { return a + planTgt(t); }, 0);
         var gT = withT.reduce(function (a, t) { return a + sum((t.actuals || []).filter(inYear), 'graduates'); }, 0);
-        var yearTgt = live.reduce(function (a, t) { return a + (t.target || 0); }, 0);
+        var yearTgt = live.reduce(function (a, t) { return a + planTgt(t); }, 0);
         // Trainings that have no plan (e.g. PowerShift Asia) still count: their own target and graduates are added.
         // Graduates can therefore pass the target.
         var extra = all.filter(function (a) { return (code === 'all' || a.code === code) && !a.plan_id && a.target && kindOf(a) === k; });
@@ -343,6 +343,13 @@
       }
       function gaugeCard(code, title, hT, hO, cls) {
         var sel = (code === region && code !== 'all' ? ' sel' : ''), attrs = ' data-region="' + code + '" role="button" tabindex="0" aria-label="Filter tables: ' + esc(title) + '"';
+        if (cls && code === 'backbone') {
+          // Regional: same thin "Other" line as the country cards instead of a second gauge
+          var voR = verdict(hO.pct);
+          return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair" style="grid-template-columns:1fr"><div><h3>' + flag(code) + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="gnote">' + leftNote(hT) + '</div>' + evNote(code) +
+            '<div class="other" style="max-width:420px"><span class="t">Other activities</span><span class="m"><i style="width:' + (hO.pct || 0) + '%;background:' + VCOL[voR[1]] + '"></i></span><span class="x">' + hO.done + '/' + hO.due + '</span></div>' + (hO.postponed ? '<div class="gnote">' + hO.postponed + ' postponed (not counted)</div>' : '') +
+            '<div class="st-note" style="margin-top:6px">Target for the year: <strong>' + hT.yearTgt + ' participants</strong> · ' + hT.gAll + ' graduated so far</div></div></div></div>';
+        }
         if (cls) {
           return '<div class="gauge overall' + sel + '"' + attrs + '><div>' + gaugeSvg(hT.pct) + '</div><div class="pair"><div><h3>' + (code === 'all' ? '' : flag(code)) + esc(title) + ' · Trainings</h3>' + pill(hT) + chips(hT) + '<div class="gnote">' + leftNote(hT) + '</div>' + evNote(code) + '<div class="st-note" style="margin-top:6px">Target for the year: <strong>' + hT.yearTgt + ' participants</strong> · ' + hT.gAll + ' graduated so far</div></div>' +
             '<div class="side"><h4>Other activities</h4>' + gaugeSvg(hO.pct) + pill(hO) + '<div class="st-note" style="margin-top:6px">' + hO.done + ' of ' + hO.due + ' delivered</div><div class="gnote">' + leftNote(hO) + '</div></div></div></div>';

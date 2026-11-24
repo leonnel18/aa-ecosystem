@@ -3161,3 +3161,5 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:33:53 UTC]   dashboard_data.json written (2211.7 KB)
 [2026-11-24 02:33:53 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-24 02:33:53 UTC] Pipeline complete in 47s
+
+- 2026-11-24 02:37Z — standing.html: Regional card drops the second "Other activities" gauge and uses the same thin Other line as the country cards; "Target for the year" now also uses the trainings' own targets when a plan has none.
