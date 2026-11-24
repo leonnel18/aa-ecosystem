@@ -3108,3 +3108,5 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:23:04 UTC]   dashboard_data.json written (2208.3 KB)
 [2026-11-24 02:23:04 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-24 02:23:04 UTC] Pipeline complete in 42s
+
+- 2026-11-24 02:29Z — standing.html: postponed plans no longer counted in "left"; shown on their own line "N postponed (not counted)". Not yet merged to main.

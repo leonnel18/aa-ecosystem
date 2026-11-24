@@ -311,10 +311,11 @@
         if (h.overdue) parts.push(h.overdue + ' overdue');
         if (h.planned) parts.push(h.planned + ' planned');
         if (h.scheduled) parts.push(h.scheduled + ' scheduled');
-        var left = h.overdue + h.planned + h.scheduled + h.postponed;
-        if (!left) return 'All plans delivered';
-        var t = left + ' left' + (parts.length ? ': ' + parts.join(', ') : '');
-        if (h.postponed) t += (parts.length ? ' · ' : ': ') + h.postponed + ' postponed (not counted)';
+        var left = h.overdue + h.planned + h.scheduled;
+        var post = h.postponed ? h.postponed + ' postponed (not counted)' : '';
+        if (!left && !post) return 'All plans delivered';
+        var t = left ? left + ' left: ' + parts.join(', ') : '';
+        if (post) t += (t ? '<br>' : '') + post;
         return t;
       }
       function evNote(code) {
