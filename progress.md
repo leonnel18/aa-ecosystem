@@ -3178,3 +3178,5 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:37:12 UTC]   dashboard_data.json written (2211.7 KB)
 [2026-11-24 02:37:12 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-24 02:37:12 UTC] Pipeline complete in 48s
+
+- 2026-11-24 02:39Z — standing.html: "Target for the year" = targets of trainings held this year (same basis as "of target") + plans still to deliver; trainings delivered in earlier years (e.g. GreenUnited, Pandayan 1 Baguio) no longer inflate it. All regions: 323 held + still-to-do plans.
