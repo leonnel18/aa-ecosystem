@@ -3125,3 +3125,5 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:25:49 UTC] Pipeline complete in 41s
 
 - 2026-11-24 02:29Z — standing.html: postponed plans no longer counted in "left"; shown on their own line "N postponed (not counted)". Not yet merged to main.
+
+- 2026-11-24 02:32Z — CRM WRITE (approved by Gino): set Training_Plans.Target_Participants on 14 Philippines plans from the ALL TEAMS Calendar sheet (Tara 25-27 Action Plan): Kapihan 1/4, Tagpuan YR1/YR2, Pandayan Bespoke 1 & 2 (YR1/YR2), YWL YR1/YR2, Pamitinan YR1/YR2 = 15; Sanayan YR1/YR2 = 10. Left blank (blank in sheet): Pandayan Bespoke 3 & 4 (both years), Kapihan 2/3/5/6, Campaign Strategy Projects, Regional events.
