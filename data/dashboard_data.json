@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T02:07:08",
+  "generated_at": "2026-11-24T02:16:34",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5953,11 +5953,21 @@
             "type": "Training",
             "start_date": "2026-09-01",
             "end_date": "2026-09-30",
-            "status": "",
+            "status": "Completed",
             "organised_by": "Phillippines",
             "target": null,
-            "state": "Overdue",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000013632023",
+                "name": "Pagbirik: Bicol Youth Campaigner's Training",
+                "date": "2026-10-01",
+                "end_date": "2026-10-04",
+                "applicants": 21,
+                "attended": 5,
+                "graduates": 5
+              }
+            ]
           },
           {
             "id": "773031000008108213",
@@ -6804,8 +6814,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000008108214",
+            "plan_name": "Pandayan Bespoke Training 4 YR 1 (15 participants) - Sep-26"
           },
           {
             "id": "773031000009937009",
@@ -15651,11 +15661,21 @@
             "type": "Training",
             "start_date": "2026-07-01",
             "end_date": "2026-07-31",
-            "status": "",
+            "status": "Completed",
             "organised_by": "Korea",
             "target": 15,
-            "state": "Overdue",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000015463002",
+                "name": "Peer Learning Session \ubc30\uc6c0\ub098\ub214\ud130 \uc138\uc158 \ud53c\ub4dc\ubc31",
+                "date": "2026-11-06",
+                "end_date": "2026-11-06",
+                "applicants": 0,
+                "attended": 0,
+                "graduates": 0
+              }
+            ]
           },
           {
             "id": "773031000008108179",
@@ -15803,7 +15823,17 @@
             "organised_by": "Korea",
             "target": 4,
             "state": "Done",
-            "actuals": []
+            "actuals": [
+              {
+                "id": "773031000015392009",
+                "name": "Campaign Clinic for YSHS KFEM (PPF6 Follow up Workshop)",
+                "date": "2026-11-10",
+                "end_date": "2026-11-10",
+                "applicants": 0,
+                "attended": 0,
+                "graduates": 0
+              }
+            ]
           },
           {
             "id": "773031000008108170",
@@ -15937,11 +15967,21 @@
             "type": "Training",
             "start_date": "2026-08-01",
             "end_date": "2026-08-31",
-            "status": "",
+            "status": "Completed",
             "organised_by": "Korea",
             "target": 25,
-            "state": "Overdue",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000015367008",
+                "name": "Campaign Clinic for IGT (PPF6 Follow up Workshop)",
+                "date": "2026-11-05",
+                "end_date": "2026-11-05",
+                "applicants": 0,
+                "attended": 0,
+                "graduates": 0
+              }
+            ]
           },
           {
             "id": "773031000008108161",
@@ -15973,11 +16013,21 @@
             "type": "Training",
             "start_date": "2026-10-01",
             "end_date": "2026-10-31",
-            "status": "",
+            "status": "Completed",
             "organised_by": "Korea",
             "target": 0,
-            "state": "Overdue",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000015363009",
+                "name": "Campaign Clinic for Climate Action NOW (PPF6 Follow up Workshop)",
+                "date": "2026-10-30",
+                "end_date": "2026-10-30",
+                "applicants": 0,
+                "attended": 0,
+                "graduates": 0
+              }
+            ]
           },
           {
             "id": "773031000008108158",
@@ -16234,8 +16284,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000008108171",
+            "plan_name": "Facilitation skill workshop PPF6 - May-26"
           },
           {
             "id": "773031000015463002",
@@ -16253,8 +16303,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000008108180",
+            "plan_name": "Peer Learning Session #3 - Jul-26"
           },
           {
             "id": "773031000015367008",
@@ -16272,8 +16322,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000008108162",
+            "plan_name": "Alumni Gathering Y2 - Aug-26"
           },
           {
             "id": "773031000015363009",
@@ -16291,8 +16341,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000008108159",
+            "plan_name": "Advisory group meeting Y2 #3 - Oct-26"
           },
           {
             "id": "773031000014651039",
@@ -39887,20 +39937,20 @@
               "graduates": 25
             },
             {
-              "name": "Climate Finance Training",
-              "type": "Foundational",
-              "start_date": "2026-10-12",
-              "end_date": "2026-10-16",
-              "applicants": 0,
-              "graduates": 0
-            },
-            {
               "name": "Bangkok Climate Action Week 2026 (BKKCAW)",
               "type": "Unknown",
               "start_date": "2026-10-07",
               "end_date": "2026-10-08",
               "applicants": 152,
               "graduates": 0
+            },
+            {
+              "name": "2026 Taiwan Campaign Strategy and Organising Fellowship - Refresher",
+              "type": "Foundational",
+              "start_date": "2026-06-12",
+              "end_date": "2026-06-12",
+              "applicants": 11,
+              "graduates": 8
             }
           ],
           "ongoing": [],
@@ -39911,13 +39961,13 @@
         "trainings_by_type": [
           {
             "type": "Feminist Leadership",
-            "conducted": 4,
-            "total_planned": 4
+            "conducted": 3,
+            "total_planned": 3
           },
           {
             "type": "Foundational",
-            "conducted": 14,
-            "total_planned": 14
+            "conducted": 13,
+            "total_planned": 13
           },
           {
             "type": "Unknown",
@@ -39976,13 +40026,13 @@
           "2026": [
             {
               "type": "Feminist Leadership",
-              "conducted": 2,
-              "total_planned": 2
+              "conducted": 1,
+              "total_planned": 1
             },
             {
               "type": "Foundational",
-              "conducted": 4,
-              "total_planned": 4
+              "conducted": 3,
+              "total_planned": 3
             },
             {
               "type": "Unknown",
@@ -40015,7 +40065,17 @@
             "organised_by": "Regional",
             "target": 30,
             "state": "Done",
-            "actuals": []
+            "actuals": [
+              {
+                "id": "773031000008276089",
+                "name": "Gender Equity Leadership Program",
+                "date": "2026-04-14",
+                "end_date": "2026-04-16",
+                "applicants": 67,
+                "attended": 29,
+                "graduates": 29
+              }
+            ]
           },
           {
             "id": "773031000008108233",
@@ -40083,11 +40143,21 @@
             "type": "Training",
             "start_date": "",
             "end_date": "",
-            "status": "",
+            "status": "Completed",
             "organised_by": "Regional",
             "target": null,
-            "state": "Planned",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000010976024",
+                "name": "2026 Taiwan Campaign Strategy and Organising Fellowship - Refresher",
+                "date": "2026-06-12",
+                "end_date": "2026-06-12",
+                "applicants": 11,
+                "attended": 8,
+                "graduates": 8
+              }
+            ]
           },
           {
             "id": "773031000008108227",
@@ -40108,15 +40178,6 @@
                 "applicants": 17,
                 "attended": 13,
                 "graduates": 13
-              },
-              {
-                "id": "773031000010976024",
-                "name": "2026 Taiwan Campaign Strategy and Organising Fellowship - Refresher",
-                "date": "2026-06-12",
-                "end_date": "2026-06-12",
-                "applicants": 11,
-                "attended": 8,
-                "graduates": 8
               }
             ]
           },
@@ -40155,28 +40216,6 @@
             "target": null,
             "state": "Planned",
             "actuals": []
-          },
-          {
-            "id": "773031000008108223",
-            "name": "Feminist Leadership 2026",
-            "type": "Training",
-            "start_date": "2026-04-01",
-            "end_date": "2026-04-30",
-            "status": "Completed",
-            "organised_by": "Regional",
-            "target": 30,
-            "state": "Done",
-            "actuals": [
-              {
-                "id": "773031000008276089",
-                "name": "Gender Equity Leadership Program",
-                "date": "2026-04-14",
-                "end_date": "2026-04-16",
-                "applicants": 67,
-                "attended": 29,
-                "graduates": 29
-              }
-            ]
           },
           {
             "id": "773031000008108222",
@@ -40349,8 +40388,8 @@
             "conducted": 4
           },
           "2026": {
-            "planned": 4,
-            "conducted": 7
+            "planned": 3,
+            "conducted": 5
           }
         },
         "actual_trainings": [
@@ -40363,25 +40402,6 @@
             "applicants": 90,
             "attended": 25,
             "graduates": 25,
-            "status": "Completed",
-            "pre_app_link": "",
-            "post_app_link": "",
-            "app_open_date": "",
-            "app_close_date": "",
-            "post_open_date": "",
-            "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
-          },
-          {
-            "id": "773031000012687024",
-            "name": "Climate Finance Training",
-            "type": "Foundational",
-            "date": "2026-10-12",
-            "end_date": "2026-10-16",
-            "applicants": 0,
-            "attended": 0,
-            "graduates": 0,
             "status": "Completed",
             "pre_app_link": "",
             "post_app_link": "",
@@ -40412,25 +40432,6 @@
             "plan_name": ""
           },
           {
-            "id": "773031000013599001",
-            "name": "Gender Equity Leadership Program - Symposium",
-            "type": "Feminist Leadership",
-            "date": "2026-09-09",
-            "end_date": "2026-09-11",
-            "applicants": 0,
-            "attended": 0,
-            "graduates": 0,
-            "status": "Completed",
-            "pre_app_link": "",
-            "post_app_link": "",
-            "app_open_date": "",
-            "app_close_date": "",
-            "post_open_date": "",
-            "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
-          },
-          {
             "id": "773031000010976024",
             "name": "2026 Taiwan Campaign Strategy and Organising Fellowship - Refresher",
             "type": "Foundational",
@@ -40446,8 +40447,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "773031000008108227",
-            "plan_name": "Taiwan CSO Fellowship 2026"
+            "plan_id": "773031000008108228",
+            "plan_name": "Regional CSO Fellowship 2026"
           },
           {
             "id": "773031000011220001",
@@ -40484,8 +40485,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "773031000008108223",
-            "plan_name": "Feminist Leadership 2026"
+            "plan_id": "773031000008495037",
+            "plan_name": "Gender Equity Leadership Program (GELP)"
           },
           {
             "id": "773031000008138041",
@@ -46426,7 +46427,7 @@
       },
       "training_plan_summary": {
         "year_1": {
-          "target_activities": 5,
+          "target_activities": 4,
           "actual_activities": 5,
           "target_participants": 0,
           "actual_participants": 71,
@@ -46509,17 +46510,6 @@
               "status": "Missed"
             },
             {
-              "plan_title": "Feminist Leadership 2026",
-              "plan_date": "2026-04-01",
-              "plan_end_date": "2026-04-30",
-              "target_participants": null,
-              "actual_title": null,
-              "actual_date": null,
-              "actual_end_date": null,
-              "actual_participants": null,
-              "status": "Missed"
-            },
-            {
               "plan_title": "Training of Trainers Regional (July 2025 - TBC)",
               "plan_date": "2026-04-06",
               "plan_end_date": "2026-04-10",
@@ -46545,21 +46535,10 @@
         },
         "year_2": {
           "target_activities": 0,
-          "actual_activities": 4,
+          "actual_activities": 2,
           "target_participants": 0,
           "actual_participants": 25,
           "rows": [
-            {
-              "plan_title": null,
-              "plan_date": null,
-              "plan_end_date": null,
-              "target_participants": null,
-              "actual_title": "Gender Equity Leadership Program - Symposium",
-              "actual_date": "2026-09-09",
-              "actual_end_date": "2026-09-11",
-              "actual_participants": 0,
-              "status": "Completed"
-            },
             {
               "plan_title": null,
               "plan_date": null,
@@ -46580,17 +46559,6 @@
               "actual_date": "2026-10-12",
               "actual_end_date": "2026-10-17",
               "actual_participants": 25,
-              "status": "Completed"
-            },
-            {
-              "plan_title": null,
-              "plan_date": null,
-              "plan_end_date": null,
-              "target_participants": null,
-              "actual_title": "Climate Finance Training",
-              "actual_date": "2026-10-12",
-              "actual_end_date": "2026-10-16",
-              "actual_participants": 0,
               "status": "Completed"
             }
           ]
