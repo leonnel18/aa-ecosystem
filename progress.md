@@ -3044,3 +3044,7 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-24 02:01:51 UTC]   dashboard_data.json written (2209.0 KB)
 [2026-11-24 02:01:51 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-24 02:01:51 UTC] Pipeline complete in 47s
+
+[2026-11-24 UTC] CRM WRITES (approved by Gino), triggers off, SUCCESS:
+  - Taiwan fellowship split: "2026 Taiwan Campaign Strategy and Organising Fellowship - Refresher" (773031000010976024) -> plan Regional CSO Fellowship 2026 (773031000008108228, Status -> Completed); the Workshop (773031000011220001) stays on Taiwan CSO Fellowship 2026 (773031000008108227).
+  - Merging "Feminist Leadership 2026" into "Gender Equity Leadership Program (GELP)": GELP training (773031000008276089) Training_Title_Plan -> GELP plan (773031000008495037). The duplicate plan "Feminist Leadership 2026" (773031000008108223) is NOT yet removed — awaiting Gino's OK to delete (Zoho Recycle Bin).
