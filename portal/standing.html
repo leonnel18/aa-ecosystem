@@ -165,7 +165,7 @@
     if (['all', 'training', 'other'].indexOf(kind) < 0) kind = 'all';
     // Zoho has no field that separates trainings from other activities (every plan is Activity Type "Training"),
     // so "Other" is decided by the plan name. Edit this one list to change what counts as Other.
-    var OTHER_RE = /alumni gathering|advisory group|peer learning|kapihan|campaign strategy project|regional events|strategic team meeting|team planning|tagpuan|movement building event|training and development|pilot new region|internship/i;
+    var OTHER_RE = /alumni gathering|advisory group|peer learning|kapihan|sanlat|campaign strategy project|regional events|strategic team meeting|team planning|tagpuan|movement building event|training and development|pilot new region|internship/i;
     // Events that are NOT trainings: kept out of the applicant / graduate counts and shown as a note (“added participants”).
     var EVENT_RE = /bkkcaw|bangkok climate action week/i;
     function kindOf(t) { return OTHER_RE.test(t.name || '') ? 'other' : 'training'; }
