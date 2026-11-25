@@ -3290,3 +3290,5 @@ Restore by removing the inline style once those survey pages exist.
   - Created plan "Sanlat BHI (Pesantren Kilat) - knowledge/skill share" (773031000016143033; Indonesia, Mar-26, target 20, Completed) and linked the existing Practice Session "SANLAT (pesantren kilat) of BHI" (Forms 773031000010976047, date set to 2026-03-11) to it. The Training "Sanlat BHI" (773031000016141002) is still linked to Belantara 2 - awaiting user's call on whether to move it to the new plan.
   - Kapihan 2/3/4: no Practice Session records exist (only Kapihan 1, which has 2 duplicate Forms records, 5 participants logged).
   portal/standing.html: added "sanlat" to OTHER_RE so the Sanlat plan shows as Other (branch only until merged to main).
+
+[2026-11-26 UTC] CRM WRITES (approved by user: "remove it in Belantara 2, create a new one where it is Other"), triggers off, SUCCESS: Solutions "Sanlat BHI" (773031000016141002) Training_Title_Plan Belantara 2 -> "Sanlat BHI (Pesantren Kilat) - knowledge/skill share" (773031000016143033); Belantara 2 (773031000008108145) Status cleared (back to unmarked/Planned, no actual linked).
