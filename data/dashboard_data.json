@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T21:36:19",
+  "generated_at": "2026-11-25T21:48:17",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5687,12 +5687,12 @@
       "portal": "PH",
       "report_1_overview": {
         "total_applicants": 780,
-        "total_graduates": 602,
+        "total_graduates": 618,
         "total_ongoing": 0,
         "application_funnel": {
           "total_applicants": 780,
-          "attended_training": 605,
-          "graduated": 602,
+          "attended_training": 621,
+          "graduated": 618,
           "impact_evaluation_completed": 5
         },
         "yoy_trend": [
@@ -5724,7 +5724,7 @@
           {
             "year": "2026",
             "applicants": 76,
-            "graduates": 36
+            "graduates": 52
           }
         ],
         "community_impact": 1067,
@@ -5753,7 +5753,7 @@
               "start_date": "2026-04-24",
               "end_date": "2026-04-26",
               "applicants": 22,
-              "graduates": 5
+              "graduates": 21
             }
           ],
           "ongoing": [],
@@ -6047,8 +6047,8 @@
                 "date": "2026-04-24",
                 "end_date": "2026-04-26",
                 "applicants": 22,
-                "attended": 5,
-                "graduates": 5
+                "attended": 21,
+                "graduates": 21
               }
             ]
           },
@@ -6841,8 +6841,8 @@
             "date": "2026-04-24",
             "end_date": "2026-04-26",
             "applicants": 22,
-            "attended": 5,
-            "graduates": 5,
+            "attended": 21,
+            "graduates": 21,
             "target": 25,
             "status": "Completed",
             "pre_app_link": "",
@@ -8145,7 +8145,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "CAMP",
@@ -9720,7 +9720,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Lucnab Person's with disability organization (LUCPEDO)",
@@ -9882,7 +9882,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Naga City person with Disability youth association",
@@ -10251,7 +10251,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "REBOOT PH- ADNU Student Chapter",
@@ -10260,7 +10260,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "REBOOT PHILIPPINES - BISCAST Chapter",
@@ -10269,7 +10269,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "REBOOT PHILIPPINES BISCAST Chapter",
@@ -10287,7 +10287,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "RPC-one Baguio-Benguet",
@@ -10440,7 +10440,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 4,
-            "graduate_count": 1
+            "graduate_count": 4
           },
           {
             "name": "Reboot Ph ADNU Chapter",
@@ -10449,7 +10449,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Reboot Philippines",
@@ -10476,7 +10476,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Red Cross Youth - Camarines Norte Chapter (RCY)",
@@ -10539,7 +10539,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "STOP-KASAKBAYAN",
@@ -10728,7 +10728,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Supreme Students Council Federation (SSCF)",
@@ -11016,7 +11016,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 2,
-            "graduate_count": 0
+            "graduate_count": 2
           },
           {
             "name": "UP Cebu Center for Environmental Informatics (CENVI)",
@@ -14451,7 +14451,7 @@
           "target_activities": 14,
           "actual_activities": 4,
           "target_participants": 0,
-          "actual_participants": 76,
+          "actual_participants": 92,
           "rows": [
             {
               "plan_title": null,
@@ -14494,7 +14494,7 @@
               "actual_title": "KASARIG: Strengthening Youth Participation and Campaigns",
               "actual_date": "2026-04-24",
               "actual_end_date": "2026-04-26",
-              "actual_participants": 5,
+              "actual_participants": 21,
               "status": "Completed"
             },
             {
@@ -47657,7 +47657,7 @@
       },
       "aggregate": {
         "total_applicants": 3878,
-        "total_graduates": 1918
+        "total_graduates": 1934
       },
       "per_country": {
         "PK": {
@@ -47666,7 +47666,7 @@
         },
         "PH": {
           "total_applicants": 780,
-          "total_graduates": 602
+          "total_graduates": 618
         },
         "KR": {
           "total_applicants": 225,
