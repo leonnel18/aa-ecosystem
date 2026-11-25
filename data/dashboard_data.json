@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T21:09:02",
+  "generated_at": "2026-11-25T21:36:19",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -20839,6 +20839,28 @@
         },
         "training_plans": [
           {
+            "id": "773031000016143033",
+            "name": "Sanlat BHI (Pesantren Kilat) - knowledge/skill share",
+            "type": "Training",
+            "start_date": "2026-03-01",
+            "end_date": "2026-03-31",
+            "status": "Completed",
+            "organised_by": "Indonesia",
+            "target": 20,
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000016141002",
+                "name": "Sanlat BHI",
+                "date": "2026-03-11",
+                "end_date": "2026-03-11",
+                "applicants": 10,
+                "attended": 10,
+                "graduates": 10
+              }
+            ]
+          },
+          {
             "id": "773031000010627003",
             "name": "Temu Bumi with Pundi Asa",
             "type": "Training",
@@ -20980,10 +21002,10 @@
             "type": "Training",
             "start_date": "2026-09-01",
             "end_date": "2026-09-30",
-            "status": "",
+            "status": "Postponed",
             "organised_by": "Indonesia",
             "target": 20,
-            "state": "Overdue",
+            "state": "Postponed",
             "actuals": []
           },
           {
@@ -21014,10 +21036,10 @@
             "type": "Training",
             "start_date": "2026-08-01",
             "end_date": "2026-08-31",
-            "status": "",
+            "status": "Postponed",
             "organised_by": "Indonesia",
             "target": 50,
-            "state": "Overdue",
+            "state": "Postponed",
             "actuals": []
           },
           {
@@ -21092,21 +21114,11 @@
             "type": "Training",
             "start_date": "2026-01-01",
             "end_date": "2026-01-31",
-            "status": "Completed",
+            "status": "",
             "organised_by": "Indonesia",
             "target": 25,
-            "state": "Done",
-            "actuals": [
-              {
-                "id": "773031000016141002",
-                "name": "Sanlat BHI",
-                "date": "2026-03-11",
-                "end_date": "2026-03-11",
-                "applicants": 10,
-                "attended": 10,
-                "graduates": 10
-              }
-            ]
+            "state": "Overdue",
+            "actuals": []
           },
           {
             "id": "773031000008108144",
@@ -21513,7 +21525,7 @@
             "conducted": 8
           },
           "2026": {
-            "planned": 8,
+            "planned": 9,
             "conducted": 7
           }
         },
@@ -21635,8 +21647,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "773031000008108145",
-            "plan_name": "Belantara 2"
+            "plan_id": "773031000016143033",
+            "plan_name": "Sanlat BHI (Pesantren Kilat) - knowledge/skill share"
           },
           {
             "id": "773031000010630003",
@@ -39683,7 +39695,7 @@
       },
       "training_plan_summary": {
         "year_1": {
-          "target_activities": 14,
+          "target_activities": 15,
           "actual_activities": 10,
           "target_participants": 0,
           "actual_participants": 186,
@@ -39901,6 +39913,17 @@
               "plan_title": "Belantara 2",
               "plan_date": "2026-01-01",
               "plan_end_date": "2026-01-31",
+              "target_participants": null,
+              "actual_title": null,
+              "actual_date": null,
+              "actual_end_date": null,
+              "actual_participants": null,
+              "status": "Missed"
+            },
+            {
+              "plan_title": "Sanlat BHI (Pesantren Kilat) - knowledge/skill share",
+              "plan_date": "2026-03-01",
+              "plan_end_date": "2026-03-31",
               "target_participants": null,
               "actual_title": null,
               "actual_date": null,
@@ -40769,6 +40792,28 @@
         },
         "training_plans": [
           {
+            "id": "773031000016143031",
+            "name": "PowerShift Asia",
+            "type": "Training",
+            "start_date": "2026-10-01",
+            "end_date": "2027-02-28",
+            "status": "Completed",
+            "organised_by": "Regional",
+            "target": 25,
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000012995021",
+                "name": "PowerShift Asia",
+                "date": "2026-10-12",
+                "end_date": "2026-10-17",
+                "applicants": 90,
+                "attended": 25,
+                "graduates": 25
+              }
+            ]
+          },
+          {
             "id": "773031000008495037",
             "name": "Gender Equity Leadership Program (GELP)",
             "type": "Training",
@@ -40844,10 +40889,10 @@
             "type": "Training",
             "start_date": "",
             "end_date": "",
-            "status": "",
+            "status": "Postponed",
             "organised_by": "Regional",
             "target": null,
-            "state": "Planned",
+            "state": "Postponed",
             "actuals": []
           },
           {
@@ -40880,7 +40925,7 @@
             "end_date": "",
             "status": "Completed",
             "organised_by": "Regional",
-            "target": null,
+            "target": 30,
             "state": "Done",
             "actuals": [
               {
@@ -41101,7 +41146,7 @@
             "conducted": 4
           },
           "2026": {
-            "planned": 3,
+            "planned": 4,
             "conducted": 5
           }
         },
@@ -41123,8 +41168,8 @@
             "app_close_date": "",
             "post_open_date": "",
             "post_close_date": "",
-            "plan_id": "",
-            "plan_name": ""
+            "plan_id": "773031000016143031",
+            "plan_name": "PowerShift Asia"
           },
           {
             "id": "773031000014581001",
@@ -47264,7 +47309,7 @@
           ]
         },
         "year_2": {
-          "target_activities": 0,
+          "target_activities": 1,
           "actual_activities": 2,
           "target_participants": 0,
           "actual_participants": 25,
@@ -47290,6 +47335,17 @@
               "actual_end_date": "2026-10-17",
               "actual_participants": 25,
               "status": "Completed"
+            },
+            {
+              "plan_title": "PowerShift Asia",
+              "plan_date": "2026-10-01",
+              "plan_end_date": "2027-02-28",
+              "target_participants": null,
+              "actual_title": null,
+              "actual_date": null,
+              "actual_end_date": null,
+              "actual_participants": null,
+              "status": "Ongoing"
             }
           ]
         },
