@@ -3274,3 +3274,11 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-25 06:42:38 UTC]   dashboard_data.json written (2212.2 KB)
 [2026-11-25 06:42:38 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-25 06:42:38 UTC] Pipeline complete in 45s
+
+[2026-11-26 UTC] CRM WRITES (approved by user: "add these three Indonesia files", triggers off, all SUCCESS, read back and verified by COQL):
+  - Solutions created: "Time to Resist" (773031000016141001, 2026-06-25..28, Indonesia, Foundational, target 25) -> Training_Title_Plan Belantara 3 (773031000008108147);
+    "Sanlat BHI" (773031000016141002, 2026-03-11, Indonesia, Foundational, target 20; source file "Pesantren Kilat Ramadhan") -> Belantara 2 (773031000008108145).
+  - Training_Plans.Status of Belantara 2 and Belantara 3 -> Completed.
+  - Deals created: 31 for Time to Resist (28 Graduated + Graduate_Date 2026-06-28 = those who submitted the post form; 3 "Rejected or Not Attended": Fauzi, Adam Azlan, Wilma Chrysanti) and 10 for Sanlat BHI (all Graduated, Graduate_Date 2026-03-11).
+  - Survey ratings stored as-is on the 1-7 scale in the Deals rating picklists (Did_the_Training_meet_your_expectations, Topic_1..6 / Topic_1+4 for Sanlat, facilitator/instruction/venue/food/coordination fields). The post-form columns have no 1-5 Likert pre/post equivalents, so Report 3 Likert averages are unaffected.
+  - Notes: no Contacts/Accounts created (only Dinul, Nuris, Abie linked to existing ones); Time to Resist has only an age-range, so it is appended to Reason_for_Applying as "[Age range on application form: ...]" (no DOB/Year_of_Birth); post-form fields with no Deal field (overall organisation rating, recommendations, other comments) went into Anything_you_would_like_to_share_or_ask. One post-form respondent used a different email (qqsakmar@greenpeace.org) and was matched to Qistina by name. Some source forms' pronoun/gender answers were copied verbatim.
