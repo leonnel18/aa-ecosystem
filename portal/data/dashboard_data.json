@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T06:42:38",
+  "generated_at": "2026-11-25T21:09:02",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -20618,13 +20618,13 @@
     "ID": {
       "portal": "ID",
       "report_1_overview": {
-        "total_applicants": 1735,
-        "total_graduates": 756,
+        "total_applicants": 1776,
+        "total_graduates": 794,
         "total_ongoing": 0,
         "application_funnel": {
-          "total_applicants": 1735,
-          "attended_training": 756,
-          "graduated": 756,
+          "total_applicants": 1776,
+          "attended_training": 794,
+          "graduated": 794,
           "impact_evaluation_completed": 20
         },
         "yoy_trend": [
@@ -20665,12 +20665,12 @@
           },
           {
             "year": "2026",
-            "applicants": 102,
-            "graduates": 92
+            "applicants": 143,
+            "graduates": 130
           }
         ],
         "community_impact": 14605,
-        "touched_organizations": 965,
+        "touched_organizations": 966,
         "training_categories": {
           "completed": [
             {
@@ -20706,8 +20706,8 @@
         "trainings_by_type": [
           {
             "type": "Foundational",
-            "conducted": 29,
-            "total_planned": 29
+            "conducted": 31,
+            "total_planned": 31
           },
           {
             "type": "Training of Trainers",
@@ -20798,8 +20798,8 @@
           "2026": [
             {
               "type": "Foundational",
-              "conducted": 3,
-              "total_planned": 3
+              "conducted": 5,
+              "total_planned": 5
             },
             {
               "type": "Unknown",
@@ -21048,11 +21048,21 @@
             "type": "Training",
             "start_date": "2026-04-01",
             "end_date": "2026-04-30",
-            "status": "",
+            "status": "Completed",
             "organised_by": "Indonesia",
             "target": 25,
-            "state": "Overdue",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000016141001",
+                "name": "Time to Resist",
+                "date": "2026-06-25",
+                "end_date": "2026-06-28",
+                "applicants": 31,
+                "attended": 28,
+                "graduates": 28
+              }
+            ]
           },
           {
             "id": "773031000008108146",
@@ -21082,11 +21092,21 @@
             "type": "Training",
             "start_date": "2026-01-01",
             "end_date": "2026-01-31",
-            "status": "",
+            "status": "Completed",
             "organised_by": "Indonesia",
             "target": 25,
-            "state": "Overdue",
-            "actuals": []
+            "state": "Done",
+            "actuals": [
+              {
+                "id": "773031000016141002",
+                "name": "Sanlat BHI",
+                "date": "2026-03-11",
+                "end_date": "2026-03-11",
+                "applicants": 10,
+                "attended": 10,
+                "graduates": 10
+              }
+            ]
           },
           {
             "id": "773031000008108144",
@@ -21494,7 +21514,7 @@
           },
           "2026": {
             "planned": 8,
-            "conducted": 5
+            "conducted": 7
           }
         },
         "actual_trainings": [
@@ -21559,6 +21579,26 @@
             "plan_name": "Belantara 4"
           },
           {
+            "id": "773031000016141001",
+            "name": "Time to Resist",
+            "type": "Foundational",
+            "date": "2026-06-25",
+            "end_date": "2026-06-28",
+            "applicants": 31,
+            "attended": 28,
+            "graduates": 28,
+            "target": 25,
+            "status": "Completed",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": "",
+            "plan_id": "773031000008108147",
+            "plan_name": "Belantara 3"
+          },
+          {
             "id": "773031000010630002",
             "name": "TOT 2 (SULAWESI)",
             "type": "Unknown",
@@ -21577,6 +21617,26 @@
             "post_close_date": "",
             "plan_id": "773031000008108146",
             "plan_name": "TOT 2 (SULAWESI)"
+          },
+          {
+            "id": "773031000016141002",
+            "name": "Sanlat BHI",
+            "type": "Foundational",
+            "date": "2026-03-11",
+            "end_date": "2026-03-11",
+            "applicants": 10,
+            "attended": 10,
+            "graduates": 10,
+            "target": 20,
+            "status": "Completed",
+            "pre_app_link": "",
+            "post_app_link": "",
+            "app_open_date": "",
+            "app_close_date": "",
+            "post_open_date": "",
+            "post_close_date": "",
+            "plan_id": "773031000008108145",
+            "plan_name": "Belantara 2"
           },
           {
             "id": "773031000010630003",
@@ -26947,6 +27007,15 @@
             "graduate_count": 0
           },
           {
+            "name": "Kader Hijau Muhammadiyah",
+            "training": "Time to Resist",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 1
+          },
+          {
             "name": "Kader Hijau Muhammadiyah (KHM)",
             "training": "Bengkel Hijrah Iklim",
             "training_type": "Foundational",
@@ -30997,6 +31066,15 @@
             "graduate_count": 0
           },
           {
+            "name": "Rumah Baca Komunitas - Yogyakarta",
+            "training": "Time to Resist",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 1
+          },
+          {
             "name": "Rumah Baca Perisai Pena",
             "training": "Bengkel Hijrah Iklim - Islam Youth for Climate Training Camp and Incubation Program",
             "training_type": "Foundational",
@@ -32039,6 +32117,15 @@
             "total_impact": 0,
             "applicant_count": 1,
             "graduate_count": 0
+          },
+          {
+            "name": "Surabaya Next Leader - Surabaya",
+            "training": "Sanlat BHI",
+            "training_type": "Foundational",
+            "year": "2026",
+            "total_impact": 0,
+            "applicant_count": 1,
+            "graduate_count": 1
           },
           {
             "name": "Swara Akar Papua (SWAP) - Papua",
@@ -33616,13 +33703,13 @@
             "graduate_count": 1
           }
         ],
-        "unattributed_applicants": 41,
+        "unattributed_applicants": 79,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
+            "Male": 1068,
+            "Female": 666,
             "Unknown": 23,
-            "Female": 642,
-            "Male": 1051,
             "Laki-laki": 1,
             "Laki laki": 1,
             "Other": 3,
@@ -33631,9 +33718,9 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 944,
-            "18-24": 187,
-            "25-34": 472,
+            "Unknown": 975,
+            "18-24": 191,
+            "25-34": 478,
             "45+": 21,
             "<18": 11,
             "35-44": 100
@@ -34268,6 +34355,31 @@
             }
           },
           {
+            "training_name": "Sanlat BHI",
+            "likert": {
+              "strategy_tactics": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "communication_strategy": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "facilitating_workshop": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "building_connection": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              }
+            }
+          },
+          {
             "training_name": "Sekolah Riset Jailolo",
             "likert": {
               "strategy_tactics": {
@@ -34544,6 +34656,31 @@
           },
           {
             "training_name": "Temu Bumi with Pundi Asa",
+            "likert": {
+              "strategy_tactics": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "communication_strategy": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "facilitating_workshop": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              },
+              "building_connection": {
+                "pre": null,
+                "post": null,
+                "6m": null
+              }
+            }
+          },
+          {
+            "training_name": "Time to Resist",
             "likert": {
               "strategy_tactics": {
                 "pre": null,
@@ -36098,6 +36235,101 @@
             ]
           },
           {
+            "training_name": "Sanlat BHI",
+            "responses": [
+              {
+                "what_went_well": "Materi interaktif dan jelas",
+                "sum_up_learning": "Bermanfaat untuk gerak saya ke depan nanti",
+                "action_plan": "Melakukan dan berlatih bernarasi di masyarakat",
+                "improvement_suggestion": "- waktunya aja yg emg kurang lama",
+                "next_workshop_suggestion": null,
+                "testimonial": "Seru, ingin belajar bareng lagi kalau ada kesempatan lain.",
+                "applicant_name": "Rahmi Najwa Rabbil Izzati"
+              },
+              {
+                "what_went_well": "Membuat kolase dari buku bekas yang menarasikan diri sendiri",
+                "sum_up_learning": "Kegiatan interaksi dan menyenangkan dalam menjelaskan materi baik tentang kampanye ataupun narasi.",
+                "action_plan": "Membuat kampanye dan narasi dalam isu lingkungan melalui ilmu yang sudah didapatkan di sosial media",
+                "improvement_suggestion": "Sesi menarasikan diri sendiri waktu nya bisa ditambahkan lagi, karena kemarin dalam satu kelompok belum semua menarasikan masing-masing anggota",
+                "next_workshop_suggestion": null,
+                "testimonial": "Kegiatan interaksi dan menyenangkan baik dalam forum kecil ataupun besar tetap bisa menerima materi dengan baik dan diskusi yang komprehensif dalam kelompok",
+                "applicant_name": "Nuris Shobah"
+              },
+              {
+                "what_went_well": "Semua terlalu daging ?",
+                "sum_up_learning": "Menyusun narasi tentang krisis iklim secara tepat agar isu lingkungan bisa lebih mudah dipahami dan menggerakkan lebih banyak orang untuk peduli merupakan hal yang penting.",
+                "action_plan": "Dalam tiga bulan ke depan, saya ingin mulai menerapkan yang saya pelajari dengan mencoba menyusun dan menyebarkan narasi tentang isu krisis iklim melalui tulisan dan diskusi sederhana, agar lebih banyak orang memahami bahwa persoalan lingkungan dekat dengan kehidupan sehari-hari.",
+                "improvement_suggestion": "Waktunya diperpanjang yaa Kak, kemarin singkat sekali",
+                "next_workshop_suggestion": null,
+                "testimonial": "Sesi AktivAsia membuat saya sadar bahwa cara kita membingkai dan menyampaikan isu krisis iklim sangat menentukan apakah orang akan peduli atau justru mengabaikannya.",
+                "applicant_name": "Dewi Fitriyanti Sulistyaningrum"
+              },
+              {
+                "what_went_well": "Materi",
+                "sum_up_learning": "Pembelajaran yang interaktif",
+                "action_plan": "Melihat pola dalam membangun narasi dan kampanye terhadap hal kecil atau melihat narasi/kampaye orang lain melalui kacamata dari mater AktivAsia",
+                "improvement_suggestion": "Materi yang lebih mendetail lagi",
+                "next_workshop_suggestion": null,
+                "testimonial": "Sangat bagus meskipun dengan keterbatasan waktu, materi yang disampaikan jelas dan bagus.",
+                "applicant_name": "Muhammad Tsaqif Asyadzili"
+              },
+              {
+                "what_went_well": "tetap efektif mefasilitasi materi dalam durasi sesi yang singkat. bentuknya paling interaktif dari semua sesi lainnya",
+                "sum_up_learning": "belajar beberapa trik fasilitasi, misalnya menggunakan tumpukan dus dan gambar ombak sebagai analogi konsep",
+                "action_plan": "mencoba menerapkan di kesempatan-kesempatan berkelompok",
+                "improvement_suggestion": "memberikan contoh kampanye atau topik kampanye. karena pada akhirnya sesi bergulir jadi cerita personal para peserta, bukan untuk campaign isu sesuatu",
+                "next_workshop_suggestion": null,
+                "testimonial": "menarik!",
+                "applicant_name": "dhika"
+              },
+              {
+                "what_went_well": "Pematerian mengenai alur narasi oleh Pak Didit.",
+                "sum_up_learning": "Semua perlu direncanakan dengan melihat kondisi realita agar hasilnya optimal.",
+                "action_plan": "Berpikir terstruktur, berhati hati dalam bercerita karena bisa menjafi salah satu cara membangun persepsi,",
+                "improvement_suggestion": "Waktunya dipanjangin, mau belajar lagi biar bisa menggaungkan gagasan yang selama ini cuma di kepala.",
+                "next_workshop_suggestion": null,
+                "testimonial": "Jujur waktunya kalau bisa ditambahin lagi kaaa, soalnya cara penyampaiannya bukan sekedar interaktif - informatif, tapi membangun kesadaran juga.",
+                "applicant_name": "Rahiella Syahidah"
+              },
+              {
+                "what_went_well": "ketika ada sesi yang sangat interactive seperti saat seluruh peserta membuat journaling kehidupan , menyusun alur kampanye yang baik, juga membuat contoh dari kampanye dari barang yang merepresentasikan diri kita.",
+                "sum_up_learning": "interactive",
+                "action_plan": "jangan malu untuk menyuarakan isu isu lingkungan baik di sosmed atau kehidupan nyata, jangan fokus pada seberapa audiens karena menyuarakan kebenaran tidak harus dimulai dari masa yang banyak.",
+                "improvement_suggestion": "mungkin bisa di adakan sesi praktik nyata, sederhana saja konsep nya misal aktivasia membuat satu folder atau akun sosmed khusus untuk pengumpulan project peserta saat ditugaskan membuat kampanye seusuai alur kampanye yang baik dan benar, nanti peserta mengumpulkan hasil narasi kampanye nya dalam bentuk poster. hal ini selain bisa menjadi arsip untuk aktivasia dalam mengukur seberapa jauh pemahaman peserta terhadap materi secara pengaplikasian, juga memicu ke kreativitasan peserta dalam membuat narasi dan infografis yang menarik.",
+                "next_workshop_suggestion": null,
+                "testimonial": "sangat detail dalam menjelaskan, materi yang di bawakan juga terstruktur, sehingga yang belum sama sekali punya pemahaman seperti saya bisa memahami dengan baik, dan yang paling saya suka metode interaktif melibatkan peserta.",
+                "applicant_name": "AYUNDA FADILAH W. A"
+              },
+              {
+                "what_went_well": "Materi dan penyampaiannya clear, penjelasannya mudah dipahami, ditambah praktiknya semakin memudahkan untuk dilakukan.",
+                "sum_up_learning": "Reconnect.",
+                "action_plan": "Kita coba praktikkan secara langsung bersama anak-anak di desa saya dalam orasi peduli lingkungan.",
+                "improvement_suggestion": "Ditambah lagi waktunya, karena jujur sekali waktu kemarin terasa singkat sekali dan akhirnya mungkin kurang lebih pelan-pelan menelaah materinya.",
+                "next_workshop_suggestion": null,
+                "testimonial": "Saya berterimakasih banyak kepada AktivAsia sudah menyampaikan materi sebagus itu, kami rasa ini menjadi begitu penting dalam peran mendukung edukasi lingkungan.",
+                "applicant_name": "Riki Afrizal"
+              },
+              {
+                "what_went_well": "Sesi diskusi bersama teman serta penggunaan analogi dalam pemberian materi kampanye maupun narasi",
+                "sum_up_learning": "Pemahaman seputar kampanye dan narasi penting dipelajari agar pesan maupun informasi yang kita berikan dapat tepat sasaran dan mudah diterima dan diingat oleh audiens kita.",
+                "action_plan": "Saya ingin menerapkan ilmu yang saya dapat dalam penulisan konten edukasi lingkungan melewati media sosial Instagram di komunitas yang sedang saya ikuti. Saya juga ingin menerapkan ilmu ini untuk bercerita di media sosial tentang diri saya dan perjalanan saya untuk menginspirasi orang.",
+                "improvement_suggestion": "Sudah cukup baik",
+                "next_workshop_suggestion": null,
+                "testimonial": "Pelatihannya seru, interaktif, kreatif, berkesan, dan insightfull.",
+                "applicant_name": "Ryutari Yasya"
+              },
+              {
+                "what_went_well": "Pematerian",
+                "sum_up_learning": "singkat padat jelas",
+                "action_plan": "mencoba metode kampanye narasi yang sudah di pelajari sebelumnya untuk di media instagram maupun secara langsung",
+                "improvement_suggestion": "Penambahan real praktik yang sudah di lakukan ketika menjelaskan bahan ajar",
+                "next_workshop_suggestion": null,
+                "testimonial": "Cukup baik dengan waktu yang ada semuanya begitu padat ringkas dan mudah di pahami dan tersampaikan",
+                "applicant_name": "Fajar Surya Gumilang"
+              }
+            ]
+          },
+          {
             "training_name": "Semesta",
             "responses": [
               {
@@ -36559,6 +36791,263 @@
                 "next_workshop_suggestion": null,
                 "testimonial": "Pelatihan ini sangat membantu saya dalam meningkatkan cara saya dalam memfasilitasi",
                 "applicant_name": "Muhammad Alief Abdussalam"
+              }
+            ]
+          },
+          {
+            "training_name": "Time to Resist",
+            "responses": [
+              {
+                "what_went_well": "acara sangat seru dan happy \npemateri pembawaannya cukup jelas, \nlangsung implementasikan ke game.\nbanyak transfer knowledge bagi saya.\nkarena saya juga belum banyak belajar.",
+                "sum_up_learning": "berjuang",
+                "action_plan": "banyak sih, cuma aku jelaskan singkat ajaa\nmulai dari organisir",
+                "improvement_suggestion": "ada beberapa peserta yang mendominasi \nmenyebabkan egosentris untuk dirinya sendiri, \n kurang memberikan ke pada peserta yang masih belajar dan berkembang.",
+                "next_workshop_suggestion": "tetap semangat yaa, istirahat yang cukup. jangan berhenti berjuang untuk terus melawan, terima kasih banget sudah menyelegarakan acara ini dengan baik dengan asik banget seruuu.",
+                "testimonial": null,
+                "applicant_name": "RIZKI PADLI"
+              },
+              {
+                "what_went_well": "Pemateri juga waktu bersama teman teman baru",
+                "sum_up_learning": "Seperti sedang mengisi ulang baterai semangat yang sempat lowbate",
+                "action_plan": "Tetap terhubung dengan kawan-kawan di sini",
+                "improvement_suggestion": "waktu, karna kegiatannya sangat padat jadi di beberapa hari saat ada pembahasan yg cukup berat tetap waktunya tidak banyak",
+                "next_workshop_suggestion": "Metode yang digunakan sangat asik, karna banyak kerja kelompok dan diskusi yang dilakukan dengan cara fun",
+                "testimonial": null,
+                "applicant_name": "Feliana Fauziyyah Nugraha"
+              },
+              {
+                "what_went_well": "I would say that the holistic activities were important to ensure that work was not just based on outcomes but also relied on our creative inputs. Examples include the collage exercise and the 3D mapping of our shared traumatic experience in resistance movements.",
+                "sum_up_learning": "I can sum it up by saying that I was mainly just observing and listening. I think it was important for someone like me from Malaysia to understand what my fellow activists in Indonesia are facing and how they continuously demonstrated resilience. I believe there should be a continuous effort of bringing regional partners to Indonesia and learn.",
+                "action_plan": "I will definitely start with applying the exercises and sessions into my community work, particularly for Greenpeace Malaysia's climate and energy campaign efforts. I think the lessons would be relevant in addressing extractive industries, exclusionary policy processes and mass mobilisation.",
+                "improvement_suggestion": "I believe there needs to be presentations from the participants on their work for community organising, non-violent direction action, etc. Would love to learn more from them!",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "Aidil Iman Aidid"
+              },
+              {
+                "what_went_well": "Semua aspek mantep pokok e, keren poll, perbaikan mentalnya bagus banget",
+                "sum_up_learning": "Luar biasa",
+                "action_plan": "Membangun ulang strategi dan juga menyiapkan keperluan tempur dilapangan",
+                "improvement_suggestion": "Aturannya dong, digitalisasi bagi pesertanya, agak keganggu fokusku semua materi media ada di alat, otakku masih dalam proses melepas kecanduan obat obatan",
+                "next_workshop_suggestion": "The perfect, sarannya waktunya terlalu singkat, mungkin bisa seminggu full atau lebih, kayaknya akan lebih siap untuk menyatukan persepsi lagi",
+                "testimonial": null,
+                "applicant_name": "Rizki Agus Patimura"
+              },
+              {
+                "what_went_well": "Good food,  good people",
+                "sum_up_learning": "Organise",
+                "action_plan": "Reflect, share and make a guide",
+                "improvement_suggestion": "More time. The music too loud sometimes. Very distracting and we can't hear each other.",
+                "next_workshop_suggestion": "Villa floor is dirty even in the living area upstairs.",
+                "testimonial": null,
+                "applicant_name": "Nur Sakeenah binti Omar"
+              },
+              {
+                "what_went_well": "Materi! I was looking for method to organize movement and I got a lot of it here both from facilitator and other participants. Plus point is network (jejaring) and the warm temporary family I have here",
+                "sum_up_learning": "refreshing",
+                "action_plan": "berjejaring, designing program or protest through my organization, sharing it to other participants",
+                "improvement_suggestion": "Mungkin lebih banyak materi dan substansi instead of focus more on making it fun hiks karna it's already so fun with the crowd, thankyou so muchh",
+                "next_workshop_suggestion": "Just a thankyou so muchh karna this is a benchmark of how a good facilitator and a design of event should be, thankyou for letting me experience all the events!",
+                "testimonial": null,
+                "applicant_name": "Nirmana Artistika De La Rantow"
+              },
+              {
+                "what_went_well": "Forum berbagi pemikiran dan pengalaman yang variatif",
+                "sum_up_learning": "Saya bisa bangkit kembali",
+                "action_plan": "Membagi ilmu dengan tim komunitas serta menerapkannya dalam perencanaan peta jalan komunitas",
+                "improvement_suggestion": "Time management",
+                "next_workshop_suggestion": "Terimakasih sudah membersamai dalam perjalanan ini",
+                "testimonial": null,
+                "applicant_name": "Zahra Fadia Siti Haliza"
+              },
+              {
+                "what_went_well": "Materi bersama kawan GP Rumania",
+                "sum_up_learning": "Menarik juga",
+                "action_plan": "Pingin mengajak warga berlawan  dari berbagai tapak untuk skillshare",
+                "improvement_suggestion": "Fokus ke perumusan gerakan bersama musti diintensifkan dan lebih lama durasinya. Jangan terlalu kebanyakan bermain",
+                "next_workshop_suggestion": "(1) Lebih banyak lagi melibatkan warga berlawan. (2) Berikan waktu yang lebih panjang mereka bercerita tentang perlawanan mereka. (3) Pembahasan perumusan strategi aksi bersama lebih intens dan durasinya lebih lama. (4) Bermainnya dikurangi.",
+                "testimonial": null,
+                "applicant_name": "A. Syatori"
+              },
+              {
+                "what_went_well": "Materi dan waktu bersama teman-teman",
+                "sum_up_learning": "Menyenangkan dan memberi pengalaman baru",
+                "action_plan": "Saya akan berbagi pengalaman dan melakukan pembelajaran bersama dengan teman-teman di komunitas saya",
+                "improvement_suggestion": "Sesi terakhir dalam sehari tidak terlalu malam, supaya lebih banyak waktu untuk nongkrong dan ngobrol dengan kawan-kawan. Menurut saya ini penting, karena dalam momen-momen itu pembicaraan bisa lebih mendalam",
+                "next_workshop_suggestion": "Pelatihan ini adalah pengalaman penting bagi saya. Terima kasih, teman-teman panitia!",
+                "testimonial": null,
+                "applicant_name": "Eka Dharma"
+              },
+              {
+                "what_went_well": "waktu bersama teman bicara tentang pengalaman dan kesulitan masing-masing",
+                "sum_up_learning": "gokil",
+                "action_plan": "membentuk jejaring, membagikan pembelajaran ke teman teman organisasi, dan meemperbaiki sistem pergerakan dari inspirasi yang didapat di sini.",
+                "improvement_suggestion": "waktu yang lebih direnggangkan",
+                "next_workshop_suggestion": "ya memang sibuk sih panitia, tapi besar harapan bisa berinteraksi dengan peserta di luar forum",
+                "testimonial": null,
+                "applicant_name": "Romual Panjohan Simbolon"
+              },
+              {
+                "what_went_well": "Aspek terbaik ketika bisa sharing banyak sekali pengalaman dan berita berita yang belum pernah di dengar sebelum. Materi dan alur acara juga sangat menyenangkan dan benar benar menambah banyak wawasan.",
+                "sum_up_learning": "Semua lapisan maupun struktur sosial di dunia ini pasti ada campur tangan politik.",
+                "action_plan": "Sharing ke teman teman di volunteer base bandung, tetap follow up dengan kawan kawan lainnya, dan terus diperbaharui lagi materi materi yang sudah didapatkan.",
+                "improvement_suggestion": "Menurutku sendiri yang baru pertama kali ikut skill share seperti ini, saya merasa puas.",
+                "next_workshop_suggestion": "Terima kasih untuk seluruh panitia yang sudah menyelenggarakan acara ini. Semoga ke depannya bisa terus berkembang untuk acara acara berikutnya",
+                "testimonial": null,
+                "applicant_name": "Salsabila hasna Kushanna"
+              },
+              {
+                "what_went_well": "Semuanya",
+                "sum_up_learning": "Happy dan enjoy",
+                "action_plan": "Memanfaatkan jejaring untuk perlawanan",
+                "improvement_suggestion": "Mungkin lebih ke materinya diupgrade lagi",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "Dinul Qoyimah"
+              },
+              {
+                "what_went_well": "Materi 80% fresh",
+                "sum_up_learning": "Mendapatkan insight baru, mendapat pandangan metode pendekatan pembelajaran yang menyenangkan.",
+                "action_plan": "Lebih bersyukur lagi sudah ada di titik ini. Punya motibasi baru untuk bergerak tapi tidak lupa rehat",
+                "improvement_suggestion": "Bonding dg teman-teman selain sobat kental, jadi sesi tersendiri",
+                "next_workshop_suggestion": "Memastikan betul untuk peserta yg datang dari luar jabodetabek untuk akomodasi, keberangkatan, dan kepulang supaya tidak ada miskomunikasi",
+                "testimonial": null,
+                "applicant_name": "Amalia Zulfa Pritasari"
+              },
+              {
+                "what_went_well": "Kolaborasi",
+                "sum_up_learning": "Semacam menjahit benang benang atau simpul simpul untuk membangun keterhubungan",
+                "action_plan": "Komunikasi rutin, update kondisi kawan kawan, mencoba membangun jaringan media",
+                "improvement_suggestion": "Keterlibatan aktif teman teman",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "M. Rizieq Aditya R."
+              },
+              {
+                "what_went_well": "Interactive, run mostly on time, buddy time",
+                "sum_up_learning": "Solidariti",
+                "action_plan": "Brainstorm with the team and look back into past protest/action done",
+                "improvement_suggestion": "Contrast between aktivasisa session and GPI, GP ID",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "Albert Bansa"
+              },
+              {
+                "what_went_well": "waktu bersama teman-teman,yang saling berbagi hal-hal baru",
+                "sum_up_learning": "memahami suatu kondisi yang bisa di bawakan ke daerah",
+                "action_plan": "banyak metode yang harus di bahas di organisasi dan metode\"diberikan akan di realisasikan seperti konsolidasi,aksi kecil\"an lewat medsos,dan menambah kekuatan\"yg sepemikiran dengan kita",
+                "improvement_suggestion": "hal baru dan materi baru yg bisa membangkitkan anak muda lebih kritis dan berpotensi,mungkin kayak beda dari sebelum -sebelumnya",
+                "next_workshop_suggestion": "sangat memberikan banyak pengalaman dan materi yang bisa di berikan di daerah,sangat menyenangkan dan semoga kedepan bisa ada pelatihan\"seperti ini dengan metode yg berbeda",
+                "testimonial": null,
+                "applicant_name": "Deysintha Merry Christiani Manapode"
+              },
+              {
+                "what_went_well": "Aspek terbaik adalah kerja sama tim yang dibagi secara random, menjadikan mengenal satu sama lain dan bertukar fikiran dan pendapat",
+                "sum_up_learning": "Selama saya mengikuti skillshare saya jadi paham teori dasar aktivism, belajar kritis dengan kondisi saat ini, dan belajar bagaimana melakukan aksi.",
+                "action_plan": "Saya akan mengusahakan menjadi aktivis disabilitas yg memperjuangkan hak2 disabilitas melalui advokasi agar peraturan perundang2an disabiltas tetap dijalankan dan aksesibilitas tercapai disegala sektor",
+                "improvement_suggestion": "Mungkin satu hal yg bisa ditingkatkan lebih dalam lagi mengenai aktivism",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "Riska nursila effendi"
+              },
+              {
+                "what_went_well": "Waktu bareng\u00b2 sih, penyampaian latihan cukup menarik jadi ga boring",
+                "sum_up_learning": "Burung yang habis mandi dan berusaha mengepakan sayap untuk terbang.",
+                "action_plan": "Sharing, FGD dengan comunity pribadi sembari berkonsol",
+                "improvement_suggestion": "Lamain lagi waktunya kali yak",
+                "next_workshop_suggestion": "Jejaring masyarakat yang terdampak atau punya isu",
+                "testimonial": null,
+                "applicant_name": "Akhmad Syaroni"
+              },
+              {
+                "what_went_well": "Banyak pengalaman baru skill baru untuk aksi di daerah yg saya dapatkan bisa saya bagikan ke teman*",
+                "sum_up_learning": "Luar biasa semangat",
+                "action_plan": "berbagi pengalaman yang saya dapatkan disini kepada kawan* gerakan di daerah",
+                "improvement_suggestion": "Yang bisa saya tinggalkan ada persoalan isu lokal Daerah kepada teman* lain dan itu jga ygsaya dapatkan dari kawan* Malaysia dls",
+                "next_workshop_suggestion": "Setiap sesi nya menarik namun keterbatasan waktu",
+                "testimonial": null,
+                "applicant_name": "Aksa Hamadi"
+              },
+              {
+                "what_went_well": "Diskusi kelompok ngobrolin rangkaian perencanaan, SOP aksi dan mitigasinya",
+                "sum_up_learning": "Fun, bonding, insightful activities for activists (sorry I don\u2019t consider myself as one and never did, then after hearing all stories about other people\u2019s activism I felt like an impostor)",
+                "action_plan": "Honestly, I would just reach out to other orgs (with similar views and purposes) that are based in Jabodetabek to talk about our tactics moving forwards, reach out to orgs that are able to have fulltimers and learn more from them how to get funding and stuff, maybe try to collaborate with other orgs and support their campaigns if we have the resources (time and people) such as labtanya",
+                "improvement_suggestion": "Lebih banyak diskusi/sharing yg serius tanpa terlalu dikejar waktu dgn agenda lain yg sebenernya ga perlu-perlu amat. Selain itu rangkaian kegiatannya terlalu panjang (8.00-21.00) itu exhausting bgt, meskipun banyak kegiatan \u201casik\u201d-nya. Kerja aja cuman 8,5 jam ?\u270b sebagai pasien rawat jalan, susah bgt adjust waktu istirahat. Ada beberapa kegiatan yg juga bikin overstimulated terus jeder lagu (yg asing buatku) diputer bgt jadi panik + bingung. Terus ada peserta yg lowkey homophobic pas lagi nongkrong tapi males call out jadi yaudeh aja, males ribet",
+                "next_workshop_suggestion": "do not take grown people\u2019s phones away cause we\u2019re all adults and it\u2019s not like we\u2019re gonna doom scroll my way out of each session; more serious talk, less \u201cfun\u201d activities cause honestly it feels so draining- like, dipadetin aja bagian pentingnya gitu biar acaranya ga >12 jam bange meskipun ada istirahat tapi ya kan ga bisa proper rest juga, sebenernya I was very excited to hear from other organizers about their experiences and to learn from them tapi again kaya semuanya diburu buru (sorry kalau kesannya im such a snob but I\u2019m stressed as hell during the fun part). Terus I was kinda confused knp tbtb ada 6 pilar kekuasaan (my bad for being late, but it confused me the most- I thought everyone was marxist ??\u270b\u270b\u270b SORRY again for sounding like a snob). BUT ANYWAY thank you for introducing me to so many people, I still did end up learning something new from a few people that I have talked to",
+                "testimonial": null,
+                "applicant_name": "Agnes Martha"
+              },
+              {
+                "what_went_well": "kegiatan games yang nyambung dengan realita",
+                "sum_up_learning": "sangat refresh gerakan",
+                "action_plan": "membuat pelatihan di tingkat anak anak",
+                "improvement_suggestion": "isu lingkungannya dikuatkan atau ham nya",
+                "next_workshop_suggestion": "ada tindak lanjut yang dimonitori",
+                "testimonial": null,
+                "applicant_name": "Lidwina nathania sasmaya"
+              },
+              {
+                "what_went_well": "Bermain irama drum.",
+                "sum_up_learning": "bintang yang banyak, namun hanya beberapa bintang yg b\nbersinar.",
+                "action_plan": "menganalisis krisis dan berkonsolidasi dengan jaringan untuk melakukan protes",
+                "improvement_suggestion": "waktunya karena terlalu padat, dan merasa bahwa tidak sesuai dengan apa yg diharapkan seperti pelatihan dalam menghadapi krisis, ternyata tida ada",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "Ardhyansyah"
+              },
+              {
+                "what_went_well": "The participants involves",
+                "sum_up_learning": "berbagi",
+                "action_plan": "use what i learn in skillshare to apply to direct action in Malaysia",
+                "improvement_suggestion": "I would suggest to have more sharing between the participants instead from the facilitators",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "QISTINA QAISARA BINTI SYAHRIL AKMAR"
+              },
+              {
+                "what_went_well": "Pemateri, pengemasan materi yang dikombinasikan dengan praktik, melibatkan macam\u00b2 sensory, dan cara yang menyenangkan.",
+                "sum_up_learning": "Belajar banyak, agak overload, tapi senang and feeling have more powers from other participants",
+                "action_plan": "Terhubung dengan yang lain",
+                "improvement_suggestion": "Lain waktu, semoga ada lebih banyak waktu untuk masing\u00b2 peserta berbagi isu daerah dan strategi mereka melawan penindasan. Kali ini agak terlalu banyak membahas krisis yang cukup menguras energi tapi tidak cukup waktu untuk membahas empowerment things. Juga, ada baiknya jika di antara pengelompokkan ada yang dibagi sesuai dengan isu masing\u00b2 (tidak random saja), misalnya kelompok banjir/reforma agraria/tambang/dll, supaya ada sesi berbagi strategi sesuai konteks dan membawa pulang strategi itu ke kelompok masing\u00b2.",
+                "next_workshop_suggestion": "Makasiiiiihhhhhh, ini agenda paling menyenangkan yang pernah saya ikuti. Really appreciate your efforts to make all the tools for the event. And thank you so much for making a safe space for us.. big luuuvvv... Sehat-sehatt panitiaaa...",
+                "testimonial": null,
+                "applicant_name": "Safinatun Nikmah"
+              },
+              {
+                "what_went_well": "Kolaborasi",
+                "sum_up_learning": "saya belajar bahwa perubahan bisa dimulai dari berbagi pengetahuan, mendengarkan pengalaman, dan bergerak bersama.",
+                "action_plan": "* Saya akan mulai menerapkannya dalam kegiatan komunitas saya.\n* Saya akan membagikan ilmu yang saya pelajari kepada teman-teman.\n* Saya akan mempraktikkan langsung apa yang saya pelajari.",
+                "improvement_suggestion": "bisa lebih aktif lagi dalam forum",
+                "next_workshop_suggestion": null,
+                "testimonial": null,
+                "applicant_name": "Ahmad Syaifullah"
+              },
+              {
+                "what_went_well": "Strategi mengemas topik dengan cara-cara yang menyenangkan dan menarik namun tetap mendalam. Waktu istirahat juga sangat cukup.",
+                "sum_up_learning": "Strategi unik dan deep",
+                "action_plan": "Mendesain forum dengan meniru strategi fasilitasi. Dan membagikan hasil skillshare ke tim.",
+                "improvement_suggestion": "Strategi kampanye dan teknik fasilitasi.",
+                "next_workshop_suggestion": "Berkelanjutan, dan pembagian kelompok berdasar pada isu yg didampingi organisasi atau yg sedang dibutuhkan organisasi / individu peserta. Untuk lebih memudahkan dalam penguatan strategi secara spesifik dan bisa applicable. Meski mungkin cukup sulit jika kaitannya dengan membagi kelompok secara merata, tapi barangkali bisa dipertimbangkan saat penyaringan peserta. Namun di sisi lain, tetap ada juga sesi2 yang melibatkan sharing secara umum dan crosstopik.",
+                "testimonial": null,
+                "applicant_name": "Maryam NH"
+              },
+              {
+                "what_went_well": "Latihan tertentu dan waktu bersama teman",
+                "sum_up_learning": "Mendapatkan banyak insight terutama mengenai metodologi pelatihan yang digunakan sangat menyenangkan, aman dan seru.",
+                "action_plan": "Berkomunikasi dengan teman-teman gerakan, membaca situasi ekonomi politik hari ini, dan membuat aksi bersama",
+                "improvement_suggestion": "Mengelola kesehatan mental dalam melawan",
+                "next_workshop_suggestion": "Menurut saya skill share ini sangat menarik. Dalam penyelenggaraannya juga berjalan dengan lancar dan baik. Maka saya kasih nilai 85 atau A",
+                "testimonial": null,
+                "applicant_name": "Abie Dhimas Alqoni Fatarrudin"
+              },
+              {
+                "what_went_well": "Pemateri",
+                "sum_up_learning": "Suasana,dan keaktifan peserta yg menyenangkan karena fasilitator nya keren",
+                "action_plan": "Sharing ilmu yg didapat ke kawan2 pengurus dan mulai memetakan rencana kegiatan mana yg akan didahulukan",
+                "improvement_suggestion": "Waktu",
+                "next_workshop_suggestion": "Sangat baik",
+                "testimonial": null,
+                "applicant_name": "Eny Rochayati"
               }
             ]
           }
@@ -37815,6 +38304,66 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "Rahmi Najwa Rabbil Izzati",
+            "training_name": "Sanlat BHI",
+            "testimonial": "Seru, ingin belajar bareng lagi kalau ada kesempatan lain.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Nuris Shobah",
+            "training_name": "Sanlat BHI",
+            "testimonial": "Kegiatan interaksi dan menyenangkan baik dalam forum kecil ataupun besar tetap bisa menerima materi dengan baik dan diskusi yang komprehensif dalam kelompok",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Dewi Fitriyanti Sulistyaningrum",
+            "training_name": "Sanlat BHI",
+            "testimonial": "Sesi AktivAsia membuat saya sadar bahwa cara kita membingkai dan menyampaikan isu krisis iklim sangat menentukan apakah orang akan peduli atau justru mengabaikannya.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Muhammad Tsaqif Asyadzili",
+            "training_name": "Sanlat BHI",
+            "testimonial": "Sangat bagus meskipun dengan keterbatasan waktu, materi yang disampaikan jelas dan bagus.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "dhika",
+            "training_name": "Sanlat BHI",
+            "testimonial": "menarik!",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Rahiella Syahidah",
+            "training_name": "Sanlat BHI",
+            "testimonial": "Jujur waktunya kalau bisa ditambahin lagi kaaa, soalnya cara penyampaiannya bukan sekedar interaktif - informatif, tapi membangun kesadaran juga.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "AYUNDA FADILAH W. A",
+            "training_name": "Sanlat BHI",
+            "testimonial": "sangat detail dalam menjelaskan, materi yang di bawakan juga terstruktur, sehingga yang belum sama sekali punya pemahaman seperti saya bisa memahami dengan baik, dan yang paling saya suka metode interaktif melibatkan peserta.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Riki Afrizal",
+            "training_name": "Sanlat BHI",
+            "testimonial": "Saya berterimakasih banyak kepada AktivAsia sudah menyampaikan materi sebagus itu, kami rasa ini menjadi begitu penting dalam peran mendukung edukasi lingkungan.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Ryutari Yasya",
+            "training_name": "Sanlat BHI",
+            "testimonial": "Pelatihannya seru, interaktif, kreatif, berkesan, dan insightfull.",
+            "source": "Post-survey"
+          },
+          {
+            "applicant_name": "Fajar Surya Gumilang",
+            "training_name": "Sanlat BHI",
+            "testimonial": "Cukup baik dengan waktu yang ada semuanya begitu padat ringkas dan mudah di pahami dan tersampaikan",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "Puji Sinta Sari",
             "training_name": "Semesta",
             "testimonial": "Saya berharap bisa lebih baik lagi setelah pelatihan ini dan bisa menerapkan nya dan untuk tim yang terlibat sukses selalu",
@@ -38197,9 +38746,9 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
+            "Male": 1068,
+            "Female": 666,
             "Unknown": 23,
-            "Female": 642,
-            "Male": 1051,
             "Laki-laki": 1,
             "Laki laki": 1,
             "Other": 3,
@@ -38208,15 +38757,15 @@
             "Transgender": 2
           },
           "by_age_group": {
-            "Unknown": 944,
-            "18-24": 187,
-            "25-34": 472,
+            "Unknown": 975,
+            "18-24": 191,
+            "25-34": 478,
             "45+": 21,
             "<18": 11,
             "35-44": 100
           },
           "by_region": {
-            "Unknown": 154,
+            "Unknown": 195,
             "Jalan M. Said": 1,
             "Desa Panaragan Sukamaju.Kec. Tulang Bawang Tengah.Kab. Tulang Bawang Barat.Prov Lampung": 1,
             "Bandar Lampung": 10,
@@ -39135,9 +39684,9 @@
       "training_plan_summary": {
         "year_1": {
           "target_activities": 14,
-          "actual_activities": 8,
+          "actual_activities": 10,
           "target_participants": 0,
-          "actual_participants": 148,
+          "actual_participants": 186,
           "rows": [
             {
               "plan_title": null,
@@ -39199,10 +39748,32 @@
               "plan_date": null,
               "plan_end_date": null,
               "target_participants": null,
+              "actual_title": "Sanlat BHI",
+              "actual_date": "2026-03-11",
+              "actual_end_date": "2026-03-11",
+              "actual_participants": 10,
+              "status": "Completed"
+            },
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
               "actual_title": "TOT 2 (SULAWESI)",
               "actual_date": "2026-05-04",
               "actual_end_date": "2026-05-08",
               "actual_participants": 18,
+              "status": "Completed"
+            },
+            {
+              "plan_title": null,
+              "plan_date": null,
+              "plan_end_date": null,
+              "target_participants": null,
+              "actual_title": "Time to Resist",
+              "actual_date": "2026-06-25",
+              "actual_end_date": "2026-06-28",
+              "actual_participants": 28,
               "status": "Completed"
             },
             {
@@ -47029,8 +47600,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3837,
-        "total_graduates": 1880
+        "total_applicants": 3878,
+        "total_graduates": 1918
       },
       "per_country": {
         "PK": {
@@ -47046,8 +47617,8 @@
           "total_graduates": 184
         },
         "ID": {
-          "total_applicants": 1735,
-          "total_graduates": 756
+          "total_applicants": 1776,
+          "total_graduates": 794
         }
       }
     }
