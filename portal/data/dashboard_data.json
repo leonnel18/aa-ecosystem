@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T21:48:17",
+  "generated_at": "2026-11-25T21:50:32",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -5687,12 +5687,12 @@
       "portal": "PH",
       "report_1_overview": {
         "total_applicants": 780,
-        "total_graduates": 618,
+        "total_graduates": 634,
         "total_ongoing": 0,
         "application_funnel": {
           "total_applicants": 780,
-          "attended_training": 621,
-          "graduated": 618,
+          "attended_training": 637,
+          "graduated": 634,
           "impact_evaluation_completed": 5
         },
         "yoy_trend": [
@@ -5724,7 +5724,7 @@
           {
             "year": "2026",
             "applicants": 76,
-            "graduates": 52
+            "graduates": 68
           }
         ],
         "community_impact": 1067,
@@ -5745,7 +5745,7 @@
               "start_date": "2026-10-01",
               "end_date": "2026-10-04",
               "applicants": 21,
-              "graduates": 5
+              "graduates": 21
             },
             {
               "name": "KASARIG: Strengthening Youth Participation and Campaigns",
@@ -5979,8 +5979,8 @@
                 "date": "2026-10-01",
                 "end_date": "2026-10-04",
                 "applicants": 21,
-                "attended": 5,
-                "graduates": 5
+                "attended": 21,
+                "graduates": 21
               }
             ]
           },
@@ -6821,8 +6821,8 @@
             "date": "2026-10-01",
             "end_date": "2026-10-04",
             "applicants": 21,
-            "attended": 5,
-            "graduates": 5,
+            "attended": 21,
+            "graduates": 21,
             "target": 30,
             "status": "Completed",
             "pre_app_link": "",
@@ -7740,7 +7740,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Administration of City Local Environment and Natural Resources Office (CLENRO)",
@@ -7821,7 +7821,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Angat Buhay - San Rafael",
@@ -7902,7 +7902,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 2,
-            "graduate_count": 1
+            "graduate_count": 2
           },
           {
             "name": "Aquinian Herals",
@@ -7911,7 +7911,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Association of Young Environmental Journalists (AYEJ) - Dumaguete",
@@ -9360,7 +9360,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 5,
-            "graduate_count": 2
+            "graduate_count": 5
           },
           {
             "name": "Juan Health PH",
@@ -9504,7 +9504,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Kidlikasan.Kabataan.Kalikasan.",
@@ -10629,7 +10629,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "Society of Sustainability Practitioners Philippines (SSP)",
@@ -10665,7 +10665,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "St. Expeditus Medical Emergency Response Services, Inc. (SEMERS)",
@@ -10674,7 +10674,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 1,
-            "graduate_count": 0
+            "graduate_count": 1
           },
           {
             "name": "St. Isidore Parish Youth Ministry (SIPYM )",
@@ -10971,7 +10971,7 @@
             "year": "2026",
             "total_impact": 0,
             "applicant_count": 4,
-            "graduate_count": 0
+            "graduate_count": 4
           },
           {
             "name": "The United Nations Population Fun (UNIFPA)",
@@ -14657,7 +14657,7 @@
           "target_activities": 15,
           "actual_activities": 2,
           "target_participants": 0,
-          "actual_participants": 16,
+          "actual_participants": 32,
           "rows": [
             {
               "plan_title": null,
@@ -14667,7 +14667,7 @@
               "actual_title": "Pagbirik: Bicol Youth Campaigner's Training",
               "actual_date": "2026-10-01",
               "actual_end_date": "2026-10-04",
-              "actual_participants": 5,
+              "actual_participants": 21,
               "status": "Completed"
             },
             {
@@ -47657,7 +47657,7 @@
       },
       "aggregate": {
         "total_applicants": 3878,
-        "total_graduates": 1934
+        "total_graduates": 1950
       },
       "per_country": {
         "PK": {
@@ -47666,7 +47666,7 @@
         },
         "PH": {
           "total_applicants": 780,
-          "total_graduates": 618
+          "total_graduates": 634
         },
         "KR": {
           "total_applicants": 225,
