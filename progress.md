@@ -3356,3 +3356,5 @@ Restore by removing the inline style once those survey pages exist.
 [2026-11-25 21:50:32 UTC]   dashboard_data.json written (2253.1 KB)
 [2026-11-25 21:50:32 UTC]   dashboard_data.json synced to portal/data/
 [2026-11-25 21:50:32 UTC] Pipeline complete in 39s
+
+[2026-11-26 UTC] portal/standing.html: added a 2027 year tab (hardcoded year list was ['2025','2026']); "Total 2026 target" labels now follow the selected year. Tested locally with Playwright on ?year=2027 (all regions: 21 plans planned, total 2027 target 319; no JS errors). Branch claude/wizardly-knuth-si1a4o only - not on main yet, so not live. Also on this branch: "sanlat" added to OTHER_RE.
