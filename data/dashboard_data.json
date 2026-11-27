@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T06:33:53",
+  "generated_at": "2026-11-27T06:24:07",
   "portals": {
     "PK": {
       "portal": "PK",
@@ -15510,13 +15510,13 @@
     "KR": {
       "portal": "KR",
       "report_1_overview": {
-        "total_applicants": 225,
-        "total_graduates": 184,
+        "total_applicants": 226,
+        "total_graduates": 185,
         "total_ongoing": 3,
         "application_funnel": {
-          "total_applicants": 225,
-          "attended_training": 184,
-          "graduated": 184,
+          "total_applicants": 226,
+          "attended_training": 185,
+          "graduated": 185,
           "impact_evaluation_completed": 16
         },
         "yoy_trend": [
@@ -15542,8 +15542,8 @@
           },
           {
             "year": "2026",
-            "applicants": 40,
-            "graduates": 20
+            "applicants": 41,
+            "graduates": 21
           }
         ],
         "community_impact": 159,
@@ -15863,9 +15863,9 @@
                 "name": "Facilitation skill workshop PPF7",
                 "date": "2026-10-23",
                 "end_date": "2026-10-23",
-                "applicants": 2,
-                "attended": 2,
-                "graduates": 2
+                "applicants": 3,
+                "attended": 3,
+                "graduates": 3
               }
             ]
           },
@@ -16411,9 +16411,9 @@
             "type": "Training of Trainers",
             "date": "2026-10-23",
             "end_date": "2026-10-23",
-            "applicants": 2,
-            "attended": 2,
-            "graduates": 2,
+            "applicants": 3,
+            "attended": 3,
+            "graduates": 3,
             "target": 4,
             "status": "Completed",
             "pre_app_link": "",
@@ -17635,11 +17635,11 @@
             "graduate_count": 0
           }
         ],
-        "unattributed_applicants": 8,
+        "unattributed_applicants": 9,
         "unattributed_impact": 0,
         "demographics": {
           "by_gender": {
-            "Unknown": 14,
+            "Unknown": 15,
             "Female": 137,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -17650,7 +17650,7 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 147,
+            "Unknown": 148,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
@@ -18081,6 +18081,15 @@
           {
             "training_name": "Facilitation skill workshop PPF7",
             "responses": [
+              {
+                "what_went_well": null,
+                "sum_up_learning": "\ubd80\ub4dc\ub7fd\uace0 \ud3ec\uc6a9\uc801\uc77c \uc218 \uc788\ub294 \ubc95 \uc775\ud788\uae30",
+                "action_plan": "\ub0b4\ubd80 \uc804\ub7b5 \uc218\ub9bd \uc138\uc158 \ud639\uc740 \uc678\ubd80 \uac15\uc758\uc5d0\uc11c \ud65c\uc6a9\ud558\ub824 \ud569\ub2c8\ub2e4.",
+                "improvement_suggestion": null,
+                "next_workshop_suggestion": null,
+                "testimonial": "\uc138\uc158\uc744 \uc900\ube44\ud558\ub294 \uacfc\uc815\uc5d0 \uc5bc\ub9c8\ub098 \ub9ce\uc740 \ub178\ub825\uc774 \ub4e4\uc5b4\uac00\ub294\uc9c0 \uc54c\uac8c \ub418\uc5c8\uc2b5\ub2c8\ub2e4. \uac12\uc9c4 \uc2dc\uac04 \uac10\uc0ac\ud569\ub2c8\ub2e4.",
+                "applicant_name": "\uae40\uc138\uc6dc"
+              },
               {
                 "what_went_well": "\ucc38\uac00\uc790 \uac04 \uc758\uacac \uad50\ud658",
                 "sum_up_learning": "\uc608\ubc29\uc8fc\uc0ac",
@@ -19371,6 +19380,12 @@
             "source": "Post-survey"
           },
           {
+            "applicant_name": "\uae40\uc138\uc6dc",
+            "training_name": "Facilitation skill workshop PPF7",
+            "testimonial": "\uc138\uc158\uc744 \uc900\ube44\ud558\ub294 \uacfc\uc815\uc5d0 \uc5bc\ub9c8\ub098 \ub9ce\uc740 \ub178\ub825\uc774 \ub4e4\uc5b4\uac00\ub294\uc9c0 \uc54c\uac8c \ub418\uc5c8\uc2b5\ub2c8\ub2e4. \uac12\uc9c4 \uc2dc\uac04 \uac10\uc0ac\ud569\ub2c8\ub2e4.",
+            "source": "Post-survey"
+          },
+          {
             "applicant_name": "\ucd5c\uc704\ud658",
             "training_name": "GreenKoreaUnited Campaign Strategy Workshop",
             "testimonial": "\uae30\uc874  \uad00\uc131\uc801\uc778  \uacc4\ud68d\uc218\ub9bd\uc744 \ub2e4\uc2dc \ud55c\ubc88  \uc0dd\uac01\ud574\ubcfc\uc218  \uc788\ub294 \uae30\ud68c\uac00  \ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
@@ -19861,7 +19876,7 @@
       "report_4_impact_quantitative": {
         "demographics": {
           "by_gender": {
-            "Unknown": 14,
+            "Unknown": 15,
             "Female": 137,
             "Male": 51,
             "\uc751\ub2f5\uac70\ubd80 Prefer not to answer": 1,
@@ -19872,14 +19887,14 @@
             "Prefer not to answer": 2
           },
           "by_age_group": {
-            "Unknown": 147,
+            "Unknown": 148,
             "45+": 13,
             "35-44": 18,
             "25-34": 43,
             "18-24": 4
           },
           "by_region": {
-            "Unknown": 47,
+            "Unknown": 48,
             "\ub355\ud48d\ub0a8\ub85c 11": 1,
             "\uc11c\uc6b8\uc2dc": 25,
             "\uc5f0\ub0a8\ub3d9": 1,
@@ -20194,7 +20209,7 @@
           "target_activities": 13,
           "actual_activities": 7,
           "target_participants": 0,
-          "actual_participants": 10,
+          "actual_participants": 11,
           "rows": [
             {
               "plan_title": null,
@@ -20215,7 +20230,7 @@
               "actual_title": "Facilitation skill workshop PPF7",
               "actual_date": "2026-10-23",
               "actual_end_date": "2026-10-23",
-              "actual_participants": 2,
+              "actual_participants": 3,
               "status": "Completed"
             },
             {
@@ -33731,8 +33746,8 @@
           },
           "by_age_group": {
             "Unknown": 975,
-            "18-24": 191,
-            "25-34": 478,
+            "18-24": 190,
+            "25-34": 479,
             "45+": 21,
             "<18": 11,
             "35-44": 100
@@ -38770,8 +38785,8 @@
           },
           "by_age_group": {
             "Unknown": 975,
-            "18-24": 191,
-            "25-34": 478,
+            "18-24": 190,
+            "25-34": 479,
             "45+": 21,
             "<18": 11,
             "35-44": 100
@@ -47656,8 +47671,8 @@
         }
       },
       "aggregate": {
-        "total_applicants": 3878,
-        "total_graduates": 1950
+        "total_applicants": 3879,
+        "total_graduates": 1951
       },
       "per_country": {
         "PK": {
@@ -47669,8 +47684,8 @@
           "total_graduates": 634
         },
         "KR": {
-          "total_applicants": 225,
-          "total_graduates": 184
+          "total_applicants": 226,
+          "total_graduates": 185
         },
         "ID": {
           "total_applicants": 1776,
